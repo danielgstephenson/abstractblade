@@ -63,10 +63,12 @@ export class Fighter extends Actor {
         this.body.setLinearVelocity(this.velocity)
         return
       }
-      const reverse = Vec2.mul(this.velocity, -5)
-      this.moveDir = normalize(reverse)
+      const reverse = normalize(Vec2.mul(this.velocity, -5))
+      const force = Vec2.mul(this.movePower, reverse)
+      this.body.applyForce(force, this.body.getPosition())
+      return
     }
-    const force = Vec2.mul(this.moveDir, this.movePower)
+    const force = Vec2.mul(this.movePower, this.moveDir)
     this.body.applyForce(force, this.body.getPosition())
   }
 
@@ -78,7 +80,9 @@ export class Fighter extends Actor {
         this.body.setAngularVelocity(this.spin)
         return
       }
-      this.swingSign = -Math.sign(this.spin)
+      const reverse = -Math.sign(this.spin)
+      this.body.applyTorque(this.swingPower * reverse)
+      return
     }
     this.body.applyTorque(this.swingPower * this.swingSign)
   }
