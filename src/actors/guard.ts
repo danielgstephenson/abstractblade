@@ -37,7 +37,6 @@ export class Guard extends Fighter {
 
   postStep (): void {
     super.postStep()
-    console.log('guard swingSign', this.swingSign)
     const player = this.getNearestPlayer()
     if (player == null) return
     const playerDistance = Vec2.distance(this.spawnPoint, player.position)

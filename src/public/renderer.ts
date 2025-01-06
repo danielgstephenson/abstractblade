@@ -116,7 +116,7 @@ export class Renderer {
   drawBlade (fighter: FighterSummary): void {
     if (fighter.dead) return
     this.resetContext()
-    this.context.fillStyle = 'hsl(0 0 100)'
+    this.context.fillStyle = 'hsl(0 0 90)'
     this.context.translate(fighter.position.x, fighter.position.y)
     this.context.rotate(fighter.angle)
     this.context.beginPath()
