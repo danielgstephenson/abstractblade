@@ -7,8 +7,8 @@ import { dirFromTo, getAngleDiff, rotate, twoPi, vecToAngle, whichMax, whichMin 
 import { Blade } from '../features/blade'
 export class Guard extends Fighter {
   guardArea: GuardArea
-  safeDistance = 0
-  closeDistance = 0
+  safeDistance: number
+  closeDistance: number
 
   constructor (game: Game, position: Vec2) {
     super(game, position)
@@ -21,7 +21,7 @@ export class Guard extends Fighter {
     })
     if (guardAreas.length === 0) throw new Error(`No guardArea at (${this.spawnPoint.x},${this.spawnPoint.y})`)
     this.guardArea = guardAreas[0]
-    this.safeDistance = Blade.reach + 1
+    this.safeDistance = Blade.reach + 3
     this.closeDistance = Blade.reach - 1
     this.respawn()
   }
