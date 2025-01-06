@@ -33,7 +33,7 @@ export class Collider {
         actorA.spawnPoint = actorB.position
       }
       if (actorA instanceof Player && featureB instanceof GuardArea) {
-        featureB.players.set(actorA.id, actorA)
+        if (featureA instanceof Torso) featureB.players.set(actorA.id, actorA)
       }
     })
   }
@@ -47,7 +47,7 @@ export class Collider {
       const featureB = pair[1]
       const actorA = featureA.actor
       if (actorA instanceof Player && featureB instanceof GuardArea) {
-        featureB.players.delete(actorA.id)
+        if (featureA instanceof Torso) featureB.players.delete(actorA.id)
       }
     })
   }
@@ -73,7 +73,10 @@ export class Collider {
         contact.setEnabled(false)
         return
       }
-      if (featureA instanceof Blade || featureB instanceof Blade) {
+      if (featureA instanceof Blade && !(featureB instanceof Blade)) {
+        contact.setEnabled(false)
+      }
+      if (featureB instanceof Blade && !(featureA instanceof Blade)) {
         contact.setEnabled(false)
       }
       if (featureA instanceof Halo || featureB instanceof Halo) {

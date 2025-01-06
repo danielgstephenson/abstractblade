@@ -3,23 +3,23 @@ import { Game } from '../game'
 import { Actor } from './actor'
 import { Torso } from '../features/torso'
 import { FighterSummary } from '../summaries/fighterSummary'
-import { Weapon } from './weapon'
-import { normalize, rotate } from '../math'
+import { normalize } from '../math'
 import { Blade } from '../features/blade'
 import { Halo } from '../features/halo'
 
 export class Fighter extends Actor {
-  movePower = 10
+  movePower = 20
   maxSpeed = 2
-  move = Vec2(0, 0)
-  spawnPoint = Vec2(0, 0)
-  spawnOffset = 0
+  swingPower = 2
+  maxSpin = 3
+  moveDir = new Vec2(0, 0)
+  swingSign = 0
+  spawnPoint = new Vec2(0, 0)
   dead = false
   team = 1
-  reach: number
   torso: Torso
+  blade: Blade
   halo: Halo
-  weapon: Weapon
 
   constructor (game: Game, position: Vec2) {
     super(game, {
@@ -27,19 +27,19 @@ export class Fighter extends Actor {
       bullet: true,
       linearDamping: 0,
       angularDamping: 0,
-      fixedRotation: true
+      fixedRotation: false
     })
     this.label = 'fighter'
     this.body.setPosition(position)
+    this.body.setAngularVelocity(0)
     this.updateConfiguration()
     this.game.fighters.set(this.id, this)
     this.torso = new Torso(this)
-    this.weapon = new Weapon(this)
-    this.reach = this.weapon.stringLength + Blade.radius + Torso.radius
+    this.blade = new Blade(this)
     this.halo = new Halo(this)
     this.body.setMassData({
       mass: 1,
-      center: Vec2(0, 0),
+      center: new Vec2(0, 0),
       I: 1
     })
   }
@@ -50,12 +50,37 @@ export class Fighter extends Actor {
 
   preStep (): void {
     super.preStep()
-    this.move = normalize(this.move)
-    const stopVector = normalize(Vec2.mul(this.velocity, -1))
-    const moveVector = this.move.length() > 0 ? this.move : stopVector
-    const force = Vec2.mul(moveVector, this.movePower)
-    this.body.applyForce(force, this.body.getPosition())
     this.halo.wallPoints = []
+    this.applyMove()
+    this.applySwing()
+  }
+
+  applyMove (): void {
+    this.moveDir = normalize(this.moveDir)
+    if (this.moveDir.length() === 0) {
+      if (this.velocity.length() < 0.1) {
+        this.velocity = Vec2.zero()
+        this.body.setLinearVelocity(this.velocity)
+        return
+      }
+      const reverse = Vec2.mul(this.velocity, -5)
+      this.moveDir = normalize(reverse)
+    }
+    const force = Vec2.mul(this.moveDir, this.movePower)
+    this.body.applyForce(force, this.body.getPosition())
+  }
+
+  applySwing (): void {
+    this.swingSign = Math.sign(this.swingSign)
+    if (this.swingSign === 0) {
+      if (Math.abs(this.spin) < 0.1) {
+        this.spin = 0
+        this.body.setAngularVelocity(this.spin)
+        return
+      }
+      this.swingSign = -Math.sign(this.spin)
+    }
+    this.body.applyTorque(this.swingPower * this.swingSign)
   }
 
   postStep (): void {
@@ -66,13 +91,10 @@ export class Fighter extends Actor {
   }
 
   respawn (): void {
-    const spawnAngle = Math.random() * 2 * Math.PI
-    const offset = rotate(Vec2(0, this.spawnOffset), spawnAngle)
-    const startPoint = Vec2.add(this.spawnPoint, offset)
-    this.body.setPosition(startPoint)
-    this.body.setLinearVelocity(Vec2(0, 0))
-    this.weapon.body.setPosition(startPoint)
-    this.weapon.body.setLinearVelocity(Vec2(0, 0))
+    this.body.setPosition(this.spawnPoint)
+    this.body.setAngle(Math.random() * 2 * Math.PI)
+    this.body.setLinearVelocity(new Vec2(0, 0))
+    this.body.setAngularVelocity(0)
     this.dead = false
   }
 
@@ -83,7 +105,6 @@ export class Fighter extends Actor {
   remove (): void {
     super.remove()
     this.dead = true
-    this.weapon.remove()
     this.game.fighters.delete(this.id)
   }
 }

@@ -3,6 +3,7 @@ import { Game } from '../game'
 import { Vec2 } from 'planck'
 import { PlayerSummary } from '../summaries/playerSummary'
 import { InputSummary } from '../summaries/inputSummary'
+import { rotate } from '../math'
 
 export class Player extends Fighter {
   spawnOffset = 2
@@ -16,10 +17,19 @@ export class Player extends Fighter {
     this.respawn()
   }
 
+  respawn (): void {
+    super.respawn()
+    const spawnAngle = Math.random() * 2 * Math.PI
+    const offset = rotate(new Vec2(0, this.spawnOffset), spawnAngle)
+    const startPoint = Vec2.add(this.spawnPoint, offset)
+    this.body.setPosition(startPoint)
+  }
+
   handleInput (input: InputSummary): void {
-    const move = input.move ?? Vec2(0, 0)
-    this.move.x = move.x ?? 0
-    this.move.y = move.y ?? 0
+    const move = input.moveDir ?? new Vec2(0, 0)
+    this.moveDir.x = move.x ?? 0
+    this.moveDir.y = move.y ?? 0
+    this.swingSign = input.swingSign ?? 0
   }
 
   getPlayerSummary (): PlayerSummary {

@@ -18,7 +18,7 @@ export class Renderer {
   id: string
   layout?: LayoutSummary
   starVertices: Vec2[]
-  savePoint = Vec2(0, 0)
+  savePoint = new Vec2(0, 0)
 
   backgroundColor = '#242424'
   torsoColor1 = 'rgb(0,000,255)'
@@ -44,13 +44,10 @@ export class Renderer {
     this.drawGaps()
     this.drawSavePoints()
     this.fighters.forEach(fighter => {
-      this.drawString(fighter)
+      this.drawBlade(fighter)
     })
     this.fighters.forEach(fighter => {
       this.drawTorso(fighter)
-    })
-    this.fighters.forEach(fighter => {
-      this.drawBlade(fighter)
     })
   }
 
@@ -119,25 +116,15 @@ export class Renderer {
   drawBlade (fighter: FighterSummary): void {
     if (fighter.dead) return
     this.resetContext()
-    this.context.fillStyle = fighter.team === 1 ? this.bladeColor1 : this.bladeColor2
+    this.context.fillStyle = 'hsl(0 0 100)'
+    this.context.translate(fighter.position.x, fighter.position.y)
+    this.context.rotate(fighter.angle)
     this.context.beginPath()
-    this.context.arc(
-      fighter.bladePosition.x,
-      fighter.bladePosition.y,
-      Blade.radius, 0, 2 * Math.PI
-    )
+    Blade.vertices.forEach((vertex, i) => {
+      if (i === 0) this.context.moveTo(vertex.x, vertex.y)
+      else this.context.lineTo(vertex.x, vertex.y)
+    })
     this.context.fill()
-  }
-
-  drawString (fighter: FighterSummary): void {
-    if (fighter.dead) return
-    this.resetContext()
-    this.context.strokeStyle = fighter.team === 1 ? this.bladeColor1 : this.bladeColor2
-    this.context.lineWidth = 0.2
-    this.context.beginPath()
-    this.context.moveTo(fighter.position.x, fighter.position.y)
-    this.context.lineTo(fighter.bladePosition.x, fighter.bladePosition.y)
-    this.context.stroke()
   }
 
   drawRay (ray: Vec2[]): void {
