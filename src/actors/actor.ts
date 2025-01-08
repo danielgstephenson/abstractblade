@@ -13,6 +13,7 @@ export class Actor {
   maxSpin = Infinity
   position = new Vec2(0, 0)
   velocity = new Vec2(0, 0)
+  angle = 0
   spin = 0
 
   constructor (game: Game, bodyDef: BodyDef) {
@@ -51,6 +52,7 @@ export class Actor {
     this.position = this.body.getPosition()
     this.velocity = clampVec(this.body.getLinearVelocity(), this.maxSpeed)
     this.body.setLinearVelocity(this.velocity)
+    this.angle = this.body.getAngle()
     this.spin = clamp(-this.maxSpin, this.maxSpin, this.body.getAngularVelocity())
     this.body.setAngularVelocity(this.spin)
   }

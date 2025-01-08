@@ -3,7 +3,7 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { dirFromTo, getAngleDiff, rotate, twoPi, vecToAngle, whichMax, whichMin } from '../math'
+import { angleToDir, dirFromTo, getAngleDiff, rotate, twoPi, vecToAngle, whichMax, whichMin } from '../math'
 import { Blade } from '../features/blade'
 export class Guard extends Fighter {
   guardArea: GuardArea
@@ -43,10 +43,28 @@ export class Guard extends Fighter {
     if (this.dead && this.guardArea.players.size === 0 && playerDistance > 10) {
       this.respawn()
     }
-    this.moveDir = this.getMove()
+    this.moveDir = this.getMoveDir()
+    this.swingSign = this.getSwingSign()
   }
 
-  getMove (): Vec2 {
+  getSwingSign (): number {
+    if (this.dead) return 0
+    const player = this.getTargetPlayer()
+    if (player == null) return 0
+    const playerAimDir = angleToDir(player.angle)
+    const aimTarget = Vec2.combine(1, player.position, 0.9 * Blade.reach, playerAimDir)
+    const targetDir = dirFromTo(this.position, aimTarget)
+    const targetAngle = vecToAngle(targetDir)
+    return this.getAimSwingSign(targetAngle)
+  }
+
+  getAimSwingSign (targetAngle: number): number {
+    const angleDiff = getAngleDiff(targetAngle, this.angle)
+    const targetSpin = this.maxSpin * angleDiff
+    return Math.sign(targetSpin - this.spin)
+  }
+
+  getMoveDir (): Vec2 {
     if (this.dead) return Vec2(0, 0)
     const player = this.getTargetPlayer()
     const wallAwayDir = this.getWallAwayDir()
@@ -56,7 +74,7 @@ export class Guard extends Fighter {
       if (open) return homeMove
       return this.getWallSlideDir(wallAwayDir, homeMove)
     }
-    const distanceMove = this.getDistanceMove(player, this.safeDistance)
+    const distanceMove = this.getDistanceMove(player, this.closeDistance)
     const open = Vec2.dot(distanceMove, wallAwayDir) >= 0
     if (open) return distanceMove
     const playerAwayDir = dirFromTo(player.position, this.position)
