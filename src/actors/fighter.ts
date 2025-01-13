@@ -8,10 +8,10 @@ import { Blade } from '../features/blade'
 import { Halo } from '../features/halo'
 
 export class Fighter extends Actor {
-  movePower = 6
+  movePower = 2
   maxSpeed = 2
-  swingPower = 2
-  maxSpin = 3
+  swingPower = 0.25
+  maxSpin = 2
   moveDir = new Vec2(0, 0)
   swingSign = 0
   spawnPoint = new Vec2(0, 0)
@@ -74,16 +74,6 @@ export class Fighter extends Actor {
 
   applySwing (): void {
     this.swingSign = Math.sign(this.swingSign)
-    if (this.swingSign === 0) {
-      if (Math.abs(this.spin) < 0.1) {
-        this.spin = 0
-        this.body.setAngularVelocity(this.spin)
-        return
-      }
-      const reverse = -Math.sign(this.spin)
-      this.body.applyTorque(this.swingPower * reverse)
-      return
-    }
     this.body.applyTorque(this.swingPower * this.swingSign)
   }
 

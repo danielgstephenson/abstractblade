@@ -51,16 +51,14 @@ export class Guard extends Fighter {
     if (this.dead) return 0
     const player = this.getTargetPlayer()
     if (player == null) return 0
-    const playerAimDir = angleToDir(player.angle)
-    const aimTarget = Vec2.combine(1, player.position, 0.9 * Blade.reach, playerAimDir)
-    const targetDir = dirFromTo(this.position, aimTarget)
-    const targetAngle = vecToAngle(targetDir)
+    const targetDir = dirFromTo(this.position, player.position)
+    const targetAngle = vecToAngle(targetDir) + 0.2 * Math.PI * Math.sign(player.spin)
     return this.getAimSwingSign(targetAngle)
   }
 
   getAimSwingSign (targetAngle: number): number {
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = this.maxSpin * angleDiff
+    const targetSpin = 0.5 * this.maxSpin * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
