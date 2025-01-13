@@ -3,12 +3,14 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { angleToDir, dirFromTo, getAngleDiff, rotate, twoPi, vecToAngle, whichMax, whichMin } from '../math'
+import { dirFromTo, getAngleDiff, rotate, twoPi, vecToAngle, whichMax, whichMin } from '../math'
 import { Blade } from '../features/blade'
+import { Torso } from '../features/torso'
 export class Guard extends Fighter {
   guardArea: GuardArea
   safeDistance: number
   closeDistance: number
+  pullback = Math.PI * 0.5 * Math.random()
 
   constructor (game: Game, position: Vec2) {
     super(game, position)
@@ -28,6 +30,7 @@ export class Guard extends Fighter {
 
   respawn (): void {
     super.respawn()
+    this.pullback = Math.PI * 0.3 * Math.random()
     this.body.setPosition(this.spawnPoint)
   }
 
@@ -51,14 +54,21 @@ export class Guard extends Fighter {
     if (this.dead) return 0
     const player = this.getTargetPlayer()
     if (player == null) return 0
+    const distance = Vec2.distance(this.position, player.position)
+    if (distance < Blade.reach + Torso.radius + 1) {
+      const targetDir = dirFromTo(this.position, player.position)
+      const targetAngle = vecToAngle(targetDir)
+      const angleDiff = getAngleDiff(targetAngle, this.angle)
+      return Math.sign(angleDiff)
+    }
     const targetDir = dirFromTo(this.position, player.position)
-    const targetAngle = vecToAngle(targetDir) + 0.2 * Math.PI * Math.sign(player.spin)
+    const targetAngle = vecToAngle(targetDir) + this.pullback * Math.sign(player.spin)
     return this.getAimSwingSign(targetAngle)
   }
 
   getAimSwingSign (targetAngle: number): number {
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = 0.5 * this.maxSpin * angleDiff
+    const targetSpin = 0.4 * this.maxSpin * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 

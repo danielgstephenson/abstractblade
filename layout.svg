@@ -25,7 +25,7 @@
      units="mm"
      inkscape:zoom="2.932688"
      inkscape:cx="145.42972"
-     inkscape:cy="523.4106"
+     inkscape:cy="168.78713"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -106,11 +106,67 @@
        style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-9-9-5-1"
        cx="52.5"
-       cy="127.5"
+       cy="110"
        inkscape:label="guard"
        r="1">
       <desc
          id="desc18950">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-0"
+       cx="30"
+       cy="85"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-6">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-2"
+       cx="75"
+       cy="60"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-9">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-6"
+       cx="35"
+       cy="40"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-8">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-4"
+       cx="52.5"
+       cy="130"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-905">{
 	&quot;chaos&quot;: 0.2,
 	&quot;aggression&quot;: 0.5,
 	&quot;interval&quot;: 3

@@ -92,7 +92,7 @@ export class Collider {
         const fighterA = featureA.fighter
         const fighterB = featureB.fighter
         if (fighterA.dead || fighterB.dead) return
-        if (fighterA.team !== fighterB.team) {
+        if (fighterA.id !== fighterB.id) {
           fighterB.die()
         }
       }
