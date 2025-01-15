@@ -1,4 +1,4 @@
-import { Vec2 } from 'planck'
+import { Transform, Vec2 } from 'planck'
 import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
@@ -7,7 +7,7 @@ import { dirFromTo, getAngleDiff, rotate, twoPi, vecToAngle, whichMax, whichMin 
 import { Blade } from '../features/blade'
 import { Torso } from '../features/torso'
 export class Guard extends Fighter {
-  guardArea: GuardArea
+  guardAreas: GuardArea[] = []
   safeDistance: number
   closeDistance: number
   pullback = Math.PI * 0.5 * Math.random()
@@ -17,12 +17,6 @@ export class Guard extends Fighter {
     this.game.guards.set(this.id, this)
     this.spawnPoint = position
     this.team = 2
-    const guardAreas = this.game.cavern.guardAreas.filter(guardArea => {
-      const worldTransform = guardArea.actor.body.getTransform()
-      return guardArea.polygon.testPoint(worldTransform, this.spawnPoint)
-    })
-    if (guardAreas.length === 0) throw new Error(`No guardArea at (${this.spawnPoint.x},${this.spawnPoint.y})`)
-    this.guardArea = guardAreas[0]
     this.safeDistance = Blade.reach + 3
     this.closeDistance = Blade.reach - 1
     this.respawn()
@@ -32,6 +26,8 @@ export class Guard extends Fighter {
     super.respawn()
     this.pullback = Math.PI * 0.3 * Math.random()
     this.body.setPosition(this.spawnPoint)
+    this.body.setLinearVelocity(Vec2.zero())
+    this.body.setAngularVelocity(0)
   }
 
   preStep (): void {
@@ -40,14 +36,18 @@ export class Guard extends Fighter {
 
   postStep (): void {
     super.postStep()
-    const player = this.getNearestPlayer()
-    if (player == null) return
-    const playerDistance = Vec2.distance(this.spawnPoint, player.position)
-    if (this.dead && this.guardArea.players.size === 0 && playerDistance > 10) {
-      this.respawn()
+    this.guardAreas = this.getGuardAreas()
+    const targetPlayer = this.getTargetPlayer()
+    if (targetPlayer == null) {
+      if (this.dead) this.respawn()
+      this.moveDir = this.getHomeMove()
+      this.swingSign = 0
+      return
     }
-    this.moveDir = this.getMoveDir()
-    this.swingSign = this.getSwingSign()
+    if (!this.dead) {
+      this.moveDir = this.getMoveDir()
+      this.swingSign = this.getSwingSign()
+    }
   }
 
   getSwingSign (): number {
@@ -80,13 +80,13 @@ export class Guard extends Fighter {
       const homeMove = this.getHomeMove()
       const open = Vec2.dot(homeMove, wallAwayDir) >= 0
       if (open) return homeMove
-      return this.getWallSlideDir(wallAwayDir, homeMove)
+      return this.getWallSlideDir(homeMove)
     }
     const distanceMove = this.getDistanceMove(player, this.closeDistance)
     const open = Vec2.dot(distanceMove, wallAwayDir) >= 0
     if (open) return distanceMove
     const playerAwayDir = dirFromTo(player.position, this.position)
-    return this.getWallSlideDir(wallAwayDir, playerAwayDir)
+    return this.getWallSlideDir(playerAwayDir)
   }
 
   getWallAwayDir (): Vec2 {
@@ -100,10 +100,18 @@ export class Guard extends Fighter {
     return dirFromTo(nearWallPoint, this.position)
   }
 
-  getWallSlideDir (wallAwayDir: Vec2, targetMoveDir: Vec2): Vec2 {
-    const options = [rotate(wallAwayDir, 0.5 * Math.PI), rotate(wallAwayDir, -0.5 * Math.PI)]
-    const dots = options.map(option => Vec2.dot(option, targetMoveDir))
-    return options[whichMax(dots)]
+  getWallSlideDir (targetDir: Vec2): Vec2 {
+    if (this.halo.wallPoints.length === 0) return targetDir
+    const distances = this.halo.wallPoints.map(wallPoint => {
+      return Vec2.distance(this.position, wallPoint)
+    })
+    const nearWallPoint = this.halo.wallPoints[whichMin(distances)]
+    const fromWallDir = dirFromTo(nearWallPoint, this.position)
+    if (Vec2.dot(fromWallDir, targetDir) >= 0) return targetDir
+    const options = [rotate(fromWallDir, 0.5 * Math.PI), rotate(fromWallDir, -0.5 * Math.PI)]
+    const optionDots = options.map(option => Vec2.dot(option, targetDir))
+    const sideDir = options[whichMax(optionDots)]
+    return sideDir
   }
 
   getDistanceMove (player: Player, targetDistance: number): Vec2 {
@@ -141,7 +149,11 @@ export class Guard extends Fighter {
   }
 
   getTargetPlayer (): Player | null {
-    const players = [...this.guardArea.players.values()]
+    const players: Player[] = []
+    this.guardAreas.forEach(guardArea => {
+      const guardAreaPlayers = [...guardArea.players.values()]
+      players.push(...guardAreaPlayers)
+    })
     const livingPlayers = players.filter(player => !player.dead)
     if (livingPlayers.length === 0) return null
     const distances = livingPlayers.map(player => {
@@ -150,7 +162,7 @@ export class Guard extends Fighter {
     return livingPlayers[whichMin(distances)]
   }
 
-  getNearestPlayer (): Player | null {
+  getNearPlayer (): Player | null {
     const players = [...this.game.players.values()]
     const livingPlayers = players.filter(player => !player.dead)
     if (livingPlayers.length === 0) return null
@@ -158,6 +170,14 @@ export class Guard extends Fighter {
       return Vec2.distance(player.position, this.position)
     })
     return livingPlayers[whichMin(distances)]
+  }
+
+  getGuardAreas (): GuardArea[] {
+    const guardAreas = this.game.cavern.guardAreas.filter(guardArea => {
+      // const worldTransform = guardArea.actor.body.getTransform()
+      return guardArea.polygon.testPoint(Transform.identity(), this.position)
+    })
+    return guardAreas
   }
 
   remove (): void {

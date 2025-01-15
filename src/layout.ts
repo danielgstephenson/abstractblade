@@ -92,7 +92,7 @@ export class Layout {
     const actions = parseSvgPath(svgPath)
     const absoluteActions = makeAbsolute(actions)
     const pointActions = absoluteActions.filter(action => action.command !== 'closepath')
-    const points = pointActions.map(action => Vec2(action.x, -action.y))
+    const points = pointActions.map(action => new Vec2(action.x, -action.y))
     return points
   }
 }

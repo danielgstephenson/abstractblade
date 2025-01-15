@@ -32,8 +32,8 @@ export class Collider {
       if (actorA instanceof Player && featureA instanceof Torso && actorB instanceof Star) {
         actorA.spawnPoint = actorB.position
       }
-      if (actorA instanceof Player && featureB instanceof GuardArea) {
-        if (featureA instanceof Torso) featureB.players.set(actorA.id, actorA)
+      if (actorA instanceof Player && featureA instanceof Torso && featureB instanceof GuardArea) {
+        featureB.players.set(actorA.id, actorA)
       }
     })
   }
@@ -46,8 +46,8 @@ export class Collider {
       const featureA = pair[0]
       const featureB = pair[1]
       const actorA = featureA.actor
-      if (actorA instanceof Player && featureB instanceof GuardArea) {
-        if (featureA instanceof Torso) featureB.players.delete(actorA.id)
+      if (actorA instanceof Player && featureA instanceof Torso && featureB instanceof GuardArea) {
+        featureB.players.delete(actorA.id)
       }
     })
   }
@@ -85,7 +85,7 @@ export class Collider {
       if (featureA instanceof Halo && featureB instanceof Boundary) {
         const worldManifold = contact.getWorldManifold(null)
         if (worldManifold == null) return
-        const wallPoint = Vec2(worldManifold.points[0])
+        const wallPoint = new Vec2(worldManifold.points[0])
         featureA.wallPoints.push(wallPoint)
       }
       if (featureA instanceof Blade && featureB instanceof Torso) {

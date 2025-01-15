@@ -10,7 +10,7 @@ import { Halo } from '../features/halo'
 export class Fighter extends Actor {
   movePower = 4
   maxSpeed = 2
-  swingPower = 0.25
+  swingPower = 0.5
   maxSpin = 2
   moveDir = new Vec2(0, 0)
   swingSign = 0
@@ -51,6 +51,12 @@ export class Fighter extends Actor {
   preStep (): void {
     super.preStep()
     this.halo.wallPoints = []
+    if (this.dead) {
+      this.body.setPosition(this.spawnPoint)
+      this.body.setLinearVelocity(Vec2.zero())
+      this.body.setAngularVelocity(0)
+      return
+    }
     this.applyMove()
     this.applySwing()
   }

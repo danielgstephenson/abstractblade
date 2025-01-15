@@ -30,9 +30,7 @@ export class Renderer {
     this.canvas = document.getElementById('canvas') as HTMLCanvasElement
     this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D
     this.id = ''
-    this.client = client
-    this.starVertices = this.getStarVertices()
-    this.draw()
+    this.client = clientsj
   }
 
   draw (): void {
@@ -48,6 +46,22 @@ export class Renderer {
     })
     this.fighters.forEach(fighter => {
       this.drawTorso(fighter)
+    })
+  }
+
+  drawGuardAreas (): void {
+    if (this.layout == null) return
+    this.resetContext()
+    this.context.strokeStyle = 'rgb(0 255 0)'
+    this.context.lineWidth = 0.2
+    this.layout.guardAreas.forEach(guardArea => {
+      this.context.beginPath()
+      guardArea.forEach((vertex, i) => {
+        if (i === 0) this.context.moveTo(vertex.x, vertex.y)
+        else this.context.lineTo(vertex.x, vertex.y)
+      })
+      this.context.closePath()
+      this.context.stroke()
     })
   }
 
