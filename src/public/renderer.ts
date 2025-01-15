@@ -30,7 +30,9 @@ export class Renderer {
     this.canvas = document.getElementById('canvas') as HTMLCanvasElement
     this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D
     this.id = ''
-    this.client = clientsj
+    this.client = client
+    this.starVertices = this.getStarVertices()
+    this.draw()
   }
 
   draw (): void {
