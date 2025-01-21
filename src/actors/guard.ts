@@ -8,6 +8,7 @@ import { Blade } from '../features/blade'
 import { Torso } from '../features/torso'
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
+  reach: number
   safeDistance: number
   closeDistance: number
   pullback = Math.PI * 0.5 * Math.random()
@@ -17,8 +18,9 @@ export class Guard extends Fighter {
     this.game.guards.set(this.id, this)
     this.spawnPoint = position
     this.team = 2
-    this.safeDistance = Blade.reach + 3
-    this.closeDistance = Blade.reach - 1
+    this.reach = Blade.reach + Torso.radius
+    this.safeDistance = 3 * this.reach
+    this.closeDistance = this.reach - 1
     this.respawn()
   }
 
@@ -40,30 +42,32 @@ export class Guard extends Fighter {
     const targetPlayer = this.getTargetPlayer()
     if (targetPlayer == null) {
       if (this.dead) this.respawn()
-      this.moveDir = this.getHomeMove()
       this.swingSign = 0
+      this.moveDir = this.getHomeMove()
       return
     }
     if (!this.dead) {
-      this.moveDir = this.getMoveDir()
       this.swingSign = this.getSwingSign()
+      this.moveDir = this.getMove()
+      const wallAwayDir = this.getWallAwayDir()
+      const open = Vec2.dot(this.moveDir, wallAwayDir) >= 0
+      if (open) return
+      this.moveDir = this.getWallSlideDir(this.moveDir)
     }
   }
 
   getSwingSign (): number {
     if (this.dead) return 0
     const player = this.getTargetPlayer()
-    if (player == null) return 0
+    if (player == null) return 1
     const distance = Vec2.distance(this.position, player.position)
-    if (distance < Blade.reach + Torso.radius + 1) {
-      const targetDir = dirFromTo(this.position, player.position)
-      const targetAngle = vecToAngle(targetDir)
-      const angleDiff = getAngleDiff(targetAngle, this.angle)
-      return Math.sign(angleDiff)
+    const quickSpin = Math.abs(this.spin) < 0.7 * this.maxSpin
+    if (quickSpin || distance > 1.5 * this.reach) {
+      const spinSign = Math.sign(this.spin)
+      return spinSign === 0 ? 1 : spinSign
     }
-    const targetDir = dirFromTo(this.position, player.position)
-    const targetAngle = vecToAngle(targetDir) + this.pullback * Math.sign(player.spin)
-    return this.getAimSwingSign(targetAngle)
+    const angleErrorSign = Math.sign(this.getAngleError(this, player))
+    return angleErrorSign === 0 ? 1 : angleErrorSign
   }
 
   getAimSwingSign (targetAngle: number): number {
@@ -72,58 +76,40 @@ export class Guard extends Fighter {
     return Math.sign(targetSpin - this.spin)
   }
 
-  getMoveDir (): Vec2 {
-    if (this.dead) return Vec2(0, 0)
+  getMove (): Vec2 {
+    if (this.dead) return new Vec2(0, 0)
     const player = this.getTargetPlayer()
-    const wallAwayDir = this.getWallAwayDir()
     if (player == null) {
-      const homeMove = this.getHomeMove()
-      const open = Vec2.dot(homeMove, wallAwayDir) >= 0
-      if (open) return homeMove
-      return this.getWallSlideDir(homeMove)
+      return this.getHomeMove()
     }
-    const distanceMove = this.getDistanceMove(player, this.closeDistance)
-    const open = Vec2.dot(distanceMove, wallAwayDir) >= 0
-    if (open) return distanceMove
-    const playerAwayDir = dirFromTo(player.position, this.position)
-    return this.getWallSlideDir(playerAwayDir)
+    return this.getPlayerMove(player)
   }
 
-  getWallAwayDir (): Vec2 {
-    if (this.halo.wallPoints.length === 0) return new Vec2(0, 0)
-    const distances = this.halo.wallPoints.map(wallPoint => {
-      return Vec2.distance(this.position, wallPoint)
-    })
-    const distance = Math.min(...distances)
-    if (distance > 0.5 * this.safeDistance) return new Vec2(0, 0)
-    const nearWallPoint = this.halo.wallPoints[whichMin(distances)]
-    return dirFromTo(nearWallPoint, this.position)
+  getPlayerMove (player: Fighter): Vec2 {
+    if (this.halo.wallPoints.length > 0) {
+      const dirFromPlayer = dirFromTo(player.position, this.position)
+      return this.getWallSlideDir(dirFromPlayer)
+    }
+    const playerAngleError = this.getAngleError(player, this)
+    const playerAimed = Math.abs(playerAngleError) < 0.3 * Math.PI
+    if (playerAimed) {
+      return this.getDistanceMove(player, 1.5 * Blade.reach)
+    }
+    return this.getDistanceMove(player, 1.5 * Blade.reach)
   }
 
-  getWallSlideDir (targetDir: Vec2): Vec2 {
-    if (this.halo.wallPoints.length === 0) return targetDir
-    const distances = this.halo.wallPoints.map(wallPoint => {
-      return Vec2.distance(this.position, wallPoint)
-    })
-    const nearWallPoint = this.halo.wallPoints[whichMin(distances)]
-    const fromWallDir = dirFromTo(nearWallPoint, this.position)
-    if (Vec2.dot(fromWallDir, targetDir) >= 0) return targetDir
-    const options = [rotate(fromWallDir, 0.5 * Math.PI), rotate(fromWallDir, -0.5 * Math.PI)]
-    const optionDots = options.map(option => Vec2.dot(option, targetDir))
-    const sideDir = options[whichMax(optionDots)]
-    return sideDir
-  }
-
-  getDistanceMove (player: Player, targetDistance: number): Vec2 {
+  getDistanceMove (player: Fighter, targetDistance: number): Vec2 {
     const dirFromPlayer = dirFromTo(player.position, this.position)
-    const distFromPlayer = Vec2.distance(player.position, this.position)
-    if (Math.abs(targetDistance - distFromPlayer) < 0.1) {
-      return Vec2.zero()
-    }
     const targetPosition = Vec2.combine(1, player.position, targetDistance, dirFromPlayer)
     const dirToTarget = dirFromTo(this.position, targetPosition)
-    const targetVelocity = Vec2.combine(0.5, player.velocity, this.maxSpeed, dirToTarget)
+    const targetVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, dirToTarget)
     return dirFromTo(this.velocity, targetVelocity)
+  }
+
+  getCircleMove (player: Fighter, sign: number): Vec2 {
+    const dirToPlayer = dirFromTo(this.position, player.position)
+    const circleDir = rotate(dirToPlayer, -sign * 0.5 * Math.PI)
+    return circleDir
   }
 
   getSwingTimes (fighter: Fighter, other: Fighter): number[] {
@@ -141,10 +127,42 @@ export class Guard extends Fighter {
     return [bigAbsAngleDiff / absSpin, bigAbsAngleDiff + twoPi / absSpin]
   }
 
+  getWallSlideDir (targetDir: Vec2): Vec2 {
+    if (this.halo.wallPoints.length === 0) return targetDir
+    const distances = this.halo.wallPoints.map(wallPoint => {
+      return Vec2.distance(this.position, wallPoint)
+    })
+    const nearWallPoint = this.halo.wallPoints[whichMin(distances)]
+    const fromWallDir = dirFromTo(nearWallPoint, this.position)
+    if (Vec2.dot(fromWallDir, targetDir) >= 0) return targetDir
+    const options = [rotate(fromWallDir, 0.5 * Math.PI), rotate(fromWallDir, -0.5 * Math.PI)]
+    const optionDots = options.map(option => Vec2.dot(option, targetDir))
+    const sideDir = options[whichMax(optionDots)]
+    return sideDir
+  }
+
+  getWallAwayDir (): Vec2 {
+    if (this.halo.wallPoints.length === 0) return new Vec2(0, 0)
+    const distances = this.halo.wallPoints.map(wallPoint => {
+      return Vec2.distance(this.position, wallPoint)
+    })
+    const distance = Math.min(...distances)
+    if (distance > 0.5 * this.safeDistance) return new Vec2(0, 0)
+    const nearWallPoint = this.halo.wallPoints[whichMin(distances)]
+    return dirFromTo(nearWallPoint, this.position)
+  }
+
+  getAngleError (fighter: Fighter, other: Fighter): number {
+    const targetDir = dirFromTo(fighter.position, other.position)
+    const targetAngle = vecToAngle(targetDir)
+    const angleDiff = getAngleDiff(targetAngle, fighter.angle)
+    return angleDiff
+  }
+
   getHomeMove (): Vec2 {
     const distToHome = Vec2.distance(this.position, this.spawnPoint)
     const dirToHome = dirFromTo(this.position, this.spawnPoint)
-    if (distToHome > 1) return dirToHome
+    if (distToHome > 1) return this.getWallSlideDir(dirToHome)
     return new Vec2(0, 0)
   }
 
