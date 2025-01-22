@@ -1,5 +1,14 @@
 import { Vec2 } from 'planck'
 
+export const pi = Math.PI
+
+export const twoPi = 2 * pi
+
+export const compassDirs = range(0, 7).map(i => {
+  const angle = twoPi * i / 8
+  return rotate(new Vec2(1, 0), angle)
+})
+
 export function range (a: number, b: number): number[] {
   return [...Array(b - a + 1).keys()].map(i => a + i)
 }
@@ -46,6 +55,16 @@ export function clamp (a: number, b: number, x: number): number {
   return Math.max(a, Math.min(x, b))
 }
 
+export function round (x: number, digits: number): number {
+  return Number(x.toFixed(digits))
+}
+
+export function roundDir (dir: Vec2): Vec2 {
+  if (dir.length() === 0) return dir
+  const dots = compassDirs.map(compassDir => Vec2.dot(compassDir, dir))
+  return compassDirs[whichMax(dots)]
+}
+
 export function clampVec (vector: Vec2, maxLength: number): Vec2 {
   const length = vector.length()
   if (length < maxLength) return vector
@@ -84,5 +103,3 @@ export function project (a: Vec2, b: Vec2): Vec2 {
 export function reject (a: Vec2, b: Vec2): Vec2 {
   return Vec2.sub(a, project(a, b))
 }
-
-export const twoPi = 2 * Math.PI

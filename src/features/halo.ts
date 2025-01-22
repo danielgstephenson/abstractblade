@@ -9,7 +9,7 @@ export class Halo extends Feature {
 
   constructor (fighter: Fighter) {
     super(fighter, {
-      shape: new Circle(Vec2(0, 0), 3 * Torso.radius),
+      shape: new Circle(new Vec2(0, 0), 4 * Torso.radius),
       density: 1,
       friction: 0,
       restitution: 0

@@ -3,12 +3,12 @@ import { Game } from '../game'
 import { Actor } from './actor'
 import { Torso } from '../features/torso'
 import { FighterSummary } from '../summaries/fighterSummary'
-import { normalize } from '../math'
+import { normalize, roundDir } from '../math'
 import { Blade } from '../features/blade'
 import { Halo } from '../features/halo'
 
 export class Fighter extends Actor {
-  movePower = 4
+  movePower = 10
   maxSpeed = 2
   swingPower = 0.5
   maxSpin = 2
@@ -75,11 +75,12 @@ export class Fighter extends Actor {
       return
     }
     const force = Vec2.mul(this.movePower, this.moveDir)
-    this.body.applyForce(force, this.body.getPosition())
+    this.body.applyForce(roundDir(force), this.body.getPosition())
   }
 
   applySwing (): void {
-    this.swingSign = Math.sign(this.swingSign)
+    const stopSign = Math.abs(this.spin) > 0.001 ? -Math.sign(this.spin) : 0
+    this.swingSign = this.swingSign === 0 ? stopSign : Math.sign(this.swingSign)
     this.body.applyTorque(this.swingPower * this.swingSign)
   }
 
