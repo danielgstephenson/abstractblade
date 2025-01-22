@@ -63,6 +63,7 @@ export class Fighter extends Actor {
 
   applyMove (): void {
     this.moveDir = normalize(this.moveDir)
+    this.moveDir = roundDir(this.moveDir)
     if (this.moveDir.length() === 0) {
       if (this.velocity.length() < 0.1) {
         this.velocity = Vec2.zero()
@@ -75,7 +76,7 @@ export class Fighter extends Actor {
       return
     }
     const force = Vec2.mul(this.movePower, this.moveDir)
-    this.body.applyForce(roundDir(force), this.body.getPosition())
+    this.body.applyForce(force, this.body.getPosition())
   }
 
   applySwing (): void {
