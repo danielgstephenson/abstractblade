@@ -4,11 +4,6 @@ export const pi = Math.PI
 
 export const twoPi = 2 * pi
 
-export const compassDirs = range(0, 7).map(i => {
-  const angle = twoPi * i / 8
-  return rotate(new Vec2(1, 0), angle)
-})
-
 export function range (a: number, b: number): number[] {
   return [...Array(b - a + 1).keys()].map(i => a + i)
 }
@@ -44,11 +39,11 @@ export function getAngleDiff (toAngle: number, fromAngle: number): number {
 export function rotate (vector: Vec2, angle: number): Vec2 {
   const x = vector.x * Math.cos(angle) - vector.y * Math.sin(angle)
   const y = vector.x * Math.sin(angle) + vector.y * Math.cos(angle)
-  return Vec2(x, y)
+  return new Vec2(x, y)
 }
 
 export function randomDir (): Vec2 {
-  return rotate(Vec2(1, 0), 2 * Math.PI * Math.random())
+  return rotate(new Vec2(1, 0), 2 * Math.PI * Math.random())
 }
 
 export function clamp (a: number, b: number, x: number): number {
@@ -60,6 +55,7 @@ export function round (x: number, digits: number): number {
 }
 
 export function roundDir (dir: Vec2): Vec2 {
+  const compassDirs = range(0, 7).map(i => rotate(new Vec2(0, 1), 2 * Math.PI * i / 8))
   if (dir.length() === 0) return dir
   const dots = compassDirs.map(compassDir => Vec2.dot(compassDir, dir))
   return compassDirs[whichMax(dots)]

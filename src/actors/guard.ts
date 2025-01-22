@@ -3,7 +3,7 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { dirFromTo, getAngleDiff, rotate, round, vecToAngle, whichMax, whichMin } from '../math'
+import { dirFromTo, getAngleDiff, rotate, vecToAngle, whichMax, whichMin } from '../math'
 import { Blade } from '../features/blade'
 import { Torso } from '../features/torso'
 export class Guard extends Fighter {
@@ -44,10 +44,6 @@ export class Guard extends Fighter {
     if (!this.dead) {
       this.swingSign = this.getSwingSign()
       this.moveDir = this.getMove()
-      const wallAwayDir = this.getWallAwayDir()
-      const open = Vec2.dot(this.moveDir, wallAwayDir) >= 0
-      if (open) return
-      this.moveDir = this.getWallSlideDir(this.moveDir)
     }
   }
 
@@ -57,7 +53,7 @@ export class Guard extends Fighter {
     if (player == null) return 1
     const distance = Vec2.distance(this.position, player.position)
     const quickSpin = Math.abs(this.spin) > 0.5 * this.maxSpin
-    if (distance > this.reach || quickSpin) {
+    if (distance > 1.2 * this.reach || quickSpin) {
       const spinSign = Math.sign(this.spin)
       return spinSign === 0 ? 1 : spinSign
     }
@@ -77,6 +73,7 @@ export class Guard extends Fighter {
   getPlayerMove (player: Fighter): Vec2 {
     const distance = Vec2.distance(this.position, player.position)
     const fromPlayer = dirFromTo(player.position, this.position)
+    const toPlayer = dirFromTo(this.position, player.position)
     if (this.halo.wallPoints.length > 0) {
       const wallAwayDir = this.getWallAwayDir()
       if (distance > 2 * this.reach) return wallAwayDir
@@ -88,31 +85,33 @@ export class Guard extends Fighter {
     const playerAngleError = this.getAngleError(player, this)
     const advantage =
       aimTime + 0.4 < playerAimTime &&
-      Math.abs(playerAngleError) > Math.min(0.25 * Math.PI, Math.abs(angleError)) &&
-      player.spin * Math.sign(playerAngleError) < 0.2 * this.maxSpin
+      this.spin * Math.sign(angleError) > 0 &&
+      Math.abs(playerAngleError) > Math.min(0.25 * Math.PI, Math.abs(angleError))
     const gap = (distance - this.reach) / this.reach
-    console.log('advantage', round(gap, 2), advantage)
+    console.log('advantage', gap.toFixed(2), advantage)
     if (gap < -0.3) {
       const playerAngleError = this.getAngleError(player, this)
       const circleSign = Math.sign(playerAngleError)
       return this.getCircleMove(player, circleSign)
     }
-    if (gap < 0.3) {
-      if (advantage) return this.getDistanceMove(player, 0.6 * this.reach)
+    if (gap < 0.1) {
+      if (advantage) return toPlayer
       return fromPlayer
     }
-    return this.getDistanceMove(player, this.reach)
+    return toPlayer
   }
 
-  getDistanceMove (player: Fighter, targetDistance: number): Vec2 {
+  getGapMove (player: Fighter, targetGap: number): Vec2 {
     const distance = Vec2.distance(this.position, player.position)
-    if (distance < targetDistance) {
+    const gap = (distance - this.reach) / this.reach
+    console.log('gap', gap.toFixed(2), targetGap.toFixed(2))
+    if (gap < targetGap) {
       const fromPlayer = dirFromTo(player.position, this.position)
       const targetVelocity = Vec2.mul(this.maxSpeed, fromPlayer)
       return dirFromTo(this.velocity, targetVelocity)
     }
     const toPlayer = dirFromTo(this.position, player.position)
-    const targetSpeed = this.maxSpeed // hurry * (distance - targetDistance) / this.reach
+    const targetSpeed = 1.5 * this.maxSpeed // hurry * (distance - targetDistance) / this.reach
     const targetVelocity = Vec2.combine(1, player.velocity, targetSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }
@@ -179,7 +178,7 @@ export class Guard extends Fighter {
   }
 
   getHomeMove (): Vec2 {
-    console.log('home')
+    // console.log('home')
     const distToHome = Vec2.distance(this.position, this.spawnPoint)
     const dirToHome = dirFromTo(this.position, this.spawnPoint)
     if (distToHome > 1) return dirToHome
