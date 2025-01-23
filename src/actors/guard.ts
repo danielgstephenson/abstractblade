@@ -8,7 +8,6 @@ import { Blade } from '../features/blade'
 import { Torso } from '../features/torso'
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
-  reach: number
   safeDistance: number
   closeDistance: number
 
@@ -17,7 +16,6 @@ export class Guard extends Fighter {
     this.game.guards.set(this.id, this)
     this.spawnPoint = position
     this.team = 2
-    this.reach = Blade.reach + Torso.radius
     this.safeDistance = 3 * this.reach
     this.closeDistance = this.reach - 1
     this.respawn()
@@ -76,42 +74,24 @@ export class Guard extends Fighter {
     const toPlayer = dirFromTo(this.position, player.position)
     if (this.halo.wallPoints.length > 0) {
       const wallAwayDir = this.getWallAwayDir()
-      if (distance > 2 * this.reach) return wallAwayDir
+      if (distance > 1.3 * this.reach) return wallAwayDir
       return this.getWallSlideDir(fromPlayer)
     }
-    const aimTime = this.getAimTime(this, player)
-    const playerAimTime = this.getAimTime(player, this)
-    const angleError = this.getAngleError(this, player)
-    const playerAngleError = this.getAngleError(player, this)
-    const advantage =
-      aimTime + 0.4 < playerAimTime &&
-      this.spin * Math.sign(angleError) > 0 &&
-      Math.abs(playerAngleError) > Math.min(0.25 * Math.PI, Math.abs(angleError))
     const gap = (distance - this.reach) / this.reach
-    console.log('advantage', gap.toFixed(2), advantage)
-    if (gap < -0.3) {
-      const playerAngleError = this.getAngleError(player, this)
-      const circleSign = Math.sign(playerAngleError)
-      return this.getCircleMove(player, circleSign)
-    }
-    if (gap < 0.1) {
-      if (advantage) return toPlayer
-      return fromPlayer
-    }
-    return toPlayer
+    console.log('gap', gap.toFixed(2))
+    return this.getGapMove(player, 0.3)
   }
 
   getGapMove (player: Fighter, targetGap: number): Vec2 {
     const distance = Vec2.distance(this.position, player.position)
     const gap = (distance - this.reach) / this.reach
-    console.log('gap', gap.toFixed(2), targetGap.toFixed(2))
     if (gap < targetGap) {
       const fromPlayer = dirFromTo(player.position, this.position)
       const targetVelocity = Vec2.mul(this.maxSpeed, fromPlayer)
       return dirFromTo(this.velocity, targetVelocity)
     }
     const toPlayer = dirFromTo(this.position, player.position)
-    const targetSpeed = 1.5 * this.maxSpeed // hurry * (distance - targetDistance) / this.reach
+    const targetSpeed = 1.5 * (gap - targetGap)
     const targetVelocity = Vec2.combine(1, player.velocity, targetSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }

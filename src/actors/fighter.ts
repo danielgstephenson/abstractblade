@@ -8,7 +8,7 @@ import { Blade } from '../features/blade'
 import { Halo } from '../features/halo'
 
 export class Fighter extends Actor {
-  movePower = 2
+  movePower = 1
   maxSpeed = 2
   swingPower = 0.5
   maxSpin = 2
@@ -20,6 +20,7 @@ export class Fighter extends Actor {
   torso: Torso
   blade: Blade
   halo: Halo
+  reach: number
 
   constructor (game: Game, position: Vec2) {
     super(game, {
@@ -42,6 +43,7 @@ export class Fighter extends Actor {
       center: new Vec2(0, 0),
       I: 1
     })
+    this.reach = Blade.reach + Torso.radius
   }
 
   die (): void {
@@ -64,20 +66,19 @@ export class Fighter extends Actor {
   applyMove (): void {
     this.moveDir = normalize(this.moveDir)
     this.moveDir = roundDir(this.moveDir)
-    // if (this.moveDir.length() === 0) {
-    //   if (this.velocity.length() < 0.01) {
-    //     this.velocity = Vec2.zero()
-    //     this.body.setLinearVelocity(this.velocity)
-    //     return
-    //   }
-    //   const reverse = normalize(Vec2.mul(this.velocity, -5))
-    //   const force = Vec2.mul(this.movePower, reverse)
-    //   this.body.applyForce(force, this.body.getPosition())
-    //   return
-    // }
-    // const force = Vec2.mul(this.movePower, this.moveDir)
-    // this.body.applyForce(force, this.body.getPosition())
-    this.body.setLinearVelocity(Vec2.mul(this.maxSpeed, this.moveDir))
+    if (this.moveDir.length() === 0) {
+      if (this.velocity.length() < 0.01) {
+        this.velocity = Vec2.zero()
+        this.body.setLinearVelocity(this.velocity)
+        return
+      }
+      const reverse = normalize(Vec2.mul(this.velocity, -5))
+      const force = Vec2.mul(this.movePower, reverse)
+      this.body.applyForce(force, this.body.getPosition())
+      return
+    }
+    const force = Vec2.mul(this.movePower, this.moveDir)
+    this.body.applyForce(force, this.body.getPosition())
   }
 
   applySwing (): void {
