@@ -3,9 +3,7 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { dirFromTo, getAngleDiff, rotate, vecToAngle, whichMax, whichMin } from '../math'
-import { Blade } from '../features/blade'
-import { Torso } from '../features/torso'
+import { dirFromTo, getAngleDiff, pi, rotate, vecToAngle, whichMax, whichMin } from '../math'
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   safeDistance: number
@@ -51,7 +49,8 @@ export class Guard extends Fighter {
     if (player == null) return 1
     const distance = Vec2.distance(this.position, player.position)
     const quickSpin = Math.abs(this.spin) > 0.5 * this.maxSpin
-    if (distance > 1.2 * this.reach || quickSpin) {
+    const gap = (distance - this.reach) / this.reach
+    if (gap > 0.05 || quickSpin) {
       const spinSign = Math.sign(this.spin)
       return spinSign === 0 ? 1 : spinSign
     }
@@ -72,14 +71,28 @@ export class Guard extends Fighter {
     const distance = Vec2.distance(this.position, player.position)
     const fromPlayer = dirFromTo(player.position, this.position)
     const toPlayer = dirFromTo(this.position, player.position)
+    const gap = (distance - this.reach) / this.reach
     if (this.halo.wallPoints.length > 0) {
       const wallAwayDir = this.getWallAwayDir()
-      if (distance > 1.3 * this.reach) return wallAwayDir
+      if (gap > 0.5) return wallAwayDir
       return this.getWallSlideDir(fromPlayer)
     }
-    const gap = (distance - this.reach) / this.reach
-    console.log('gap', gap.toFixed(2))
+    const aimTime = this.getAimTime(this, player)
+    const playerAimTime = this.getAimTime(player, this)
+    const angleError = this.getAngleError(this, player)
+    const playerAngleError = this.getAngleError(player, this)
+    const advantage =
+      Math.abs(playerAngleError) > 0.3 * pi &&
+      aimTime + 0.1 < playerAimTime
+    console.log('gap', gap.toFixed(2), advantage, Math.abs(playerAngleError) > 0.3 * pi, aimTime + 0.1 < playerAimTime)
+    if (gap < 0.4 && advantage) return this.getAdvanceMove(player, this.maxSpeed)
     return this.getGapMove(player, 0.3)
+  }
+
+  getAdvanceMove (player: Fighter, speed: number): Vec2 {
+    const toPlayer = dirFromTo(this.position, player.position)
+    const targetVelocity = Vec2.mul(speed, toPlayer)
+    return dirFromTo(this.velocity, targetVelocity)
   }
 
   getGapMove (player: Fighter, targetGap: number): Vec2 {
@@ -87,11 +100,10 @@ export class Guard extends Fighter {
     const gap = (distance - this.reach) / this.reach
     if (gap < targetGap) {
       const fromPlayer = dirFromTo(player.position, this.position)
-      const targetVelocity = Vec2.mul(this.maxSpeed, fromPlayer)
-      return dirFromTo(this.velocity, targetVelocity)
+      return fromPlayer
     }
     const toPlayer = dirFromTo(this.position, player.position)
-    const targetSpeed = 1.5 * (gap - targetGap)
+    const targetSpeed = 5 * (gap - targetGap)
     const targetVelocity = Vec2.combine(1, player.velocity, targetSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }
@@ -115,6 +127,17 @@ export class Guard extends Fighter {
     if (spin * angleDiff > 0) return Math.min(maxTime, absAngleDiff / absSpin)
     const bigAbsAngleDiff = 2 * Math.PI - absAngleDiff
     return Math.min(maxTime, bigAbsAngleDiff / absSpin)
+  }
+
+  getReachTime (fighter: Fighter, other: Fighter): number {
+    const fighterToOther = dirFromTo(fighter.position, other.position)
+    const otherToFighter = dirFromTo(other.position, fighter.position)
+    const fighterSpeed = Vec2.dot(fighter.velocity, fighterToOther)
+    const otherSpeed = Vec2.dot(other.velocity, otherToFighter)
+    const speed = fighterSpeed + otherSpeed
+    const distance = Vec2.distance(fighter.position, other.position)
+    if (speed <= 0) return Infinity * (distance - this.reach)
+    return (distance - this.reach) / speed
   }
 
   getWallSlideDir (targetDir: Vec2): Vec2 {
