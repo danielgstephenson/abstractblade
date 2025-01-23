@@ -50,7 +50,7 @@ export class Guard extends Fighter {
     const distance = Vec2.distance(this.position, player.position)
     const quickSpin = Math.abs(this.spin) > 0.5 * this.maxSpin
     const gap = (distance - this.reach) / this.reach
-    if (gap > 0.05 || quickSpin) {
+    if (gap > 0 || quickSpin) {
       const spinSign = Math.sign(this.spin)
       return spinSign === 0 ? 1 : spinSign
     }
@@ -83,7 +83,21 @@ export class Guard extends Fighter {
       Math.abs(playerAngleError) > 0.3 * pi &&
       aimTime + 0.1 < playerAimTime
     console.log('gap', gap.toFixed(2), advantage, Math.abs(playerAngleError) > 0.3 * pi, aimTime + 0.1 < playerAimTime)
-    if (gap < 0) return this.getCircleMove(player, playerAngleError)
+    if (gap > 0.15 && gap < 0.7 && Math.abs(playerAngleError) < 0.3 * pi) {
+      const circle = this.getCircleMove(player, playerAngleError)
+      const targetVelocity = Vec2.combine(1, player.velocity, 0.5 * this.maxSpeed, circle)
+      return dirFromTo(this.velocity, targetVelocity)
+    }
+    if (gap < 0 && !advantage) {
+      const circle = this.getCircleMove(player, playerAngleError)
+      const targetVelocity = Vec2.mul(this.maxSpeed, circle)
+      return dirFromTo(this.velocity, targetVelocity)
+    }
+    if (gap < 0 && Math.abs(player.spin) < 0.5 * player.maxSpin) {
+      const circle = this.getCircleMove(player, playerAngleError)
+      const targetVelocity = Vec2.mul(this.maxSpeed, circle)
+      return dirFromTo(this.velocity, targetVelocity)
+    }
     if (gap < 0.2 && advantage) return this.getAdvanceMove(player)
     return this.getGapMove(player, 0.15)
   }
@@ -92,7 +106,7 @@ export class Guard extends Fighter {
     const toPlayer = dirFromTo(this.position, player.position)
     const distance = Vec2.distance(this.position, player.position)
     const sign = distance > 0.5 * this.reach ? 1 : -1
-    const targetVelocity = Vec2.mul(sign * this.maxSpeed, toPlayer)
+    const targetVelocity = Vec2.mul(sign * 2 * this.maxSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }
 
