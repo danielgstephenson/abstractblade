@@ -70,7 +70,6 @@ export class Guard extends Fighter {
   getPlayerMove (player: Fighter): Vec2 {
     const distance = Vec2.distance(this.position, player.position)
     const fromPlayer = dirFromTo(player.position, this.position)
-    const toPlayer = dirFromTo(this.position, player.position)
     const gap = (distance - this.reach) / this.reach
     if (this.halo.wallPoints.length > 0) {
       const wallAwayDir = this.getWallAwayDir()
@@ -79,19 +78,21 @@ export class Guard extends Fighter {
     }
     const aimTime = this.getAimTime(this, player)
     const playerAimTime = this.getAimTime(player, this)
-    const angleError = this.getAngleError(this, player)
     const playerAngleError = this.getAngleError(player, this)
     const advantage =
       Math.abs(playerAngleError) > 0.3 * pi &&
       aimTime + 0.1 < playerAimTime
     console.log('gap', gap.toFixed(2), advantage, Math.abs(playerAngleError) > 0.3 * pi, aimTime + 0.1 < playerAimTime)
-    if (gap < 0.4 && advantage) return this.getAdvanceMove(player, this.maxSpeed)
-    return this.getGapMove(player, 0.3)
+    if (gap < 0) return this.getCircleMove(player, playerAngleError)
+    if (gap < 0.2 && advantage) return this.getAdvanceMove(player)
+    return this.getGapMove(player, 0.15)
   }
 
-  getAdvanceMove (player: Fighter, speed: number): Vec2 {
+  getAdvanceMove (player: Fighter): Vec2 {
     const toPlayer = dirFromTo(this.position, player.position)
-    const targetVelocity = Vec2.mul(speed, toPlayer)
+    const distance = Vec2.distance(this.position, player.position)
+    const sign = distance > 0.5 * this.reach ? 1 : -1
+    const targetVelocity = Vec2.mul(sign * this.maxSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }
 
@@ -103,14 +104,14 @@ export class Guard extends Fighter {
       return fromPlayer
     }
     const toPlayer = dirFromTo(this.position, player.position)
-    const targetSpeed = 5 * (gap - targetGap)
+    const targetSpeed = this.maxSpeed * Math.sign(gap - targetGap)
     const targetVelocity = Vec2.combine(1, player.velocity, targetSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }
 
   getCircleMove (player: Fighter, sign: number): Vec2 {
     const dirToPlayer = dirFromTo(this.position, player.position)
-    return rotate(dirToPlayer, -sign * 0.5 * Math.PI)
+    return rotate(dirToPlayer, -Math.sign(sign) * 0.5 * Math.PI)
   }
 
   getAimTime (fighter: Fighter, other: Fighter): number {
