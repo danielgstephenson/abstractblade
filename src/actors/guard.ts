@@ -3,7 +3,7 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { dirFromTo, getAngleDiff, pi, rotate, vecToAngle, whichMax, whichMin } from '../math'
+import { dirFromTo, getAngleDiff, rotate, vecToAngle, whichMax, whichMin } from '../math'
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   safeDistance: number
@@ -48,10 +48,10 @@ export class Guard extends Fighter {
     const player = this.getTargetPlayer()
     if (player == null) return 1
     const distance = Vec2.distance(this.position, player.position)
-    const quickSpin = Math.abs(this.spin) > 0.5 * this.maxSpin
-    const gap = (distance - this.reach) / this.reach
-    if (gap > 0 || quickSpin) {
-      const spinSign = Math.sign(this.spin)
+    const quickSpin = Math.abs(this.spin) > 0.3 * this.maxSpin
+    const gap = distance / this.reach
+    const spinSign = Math.sign(this.spin)
+    if (gap > 1.2 && quickSpin) {
       return spinSign === 0 ? 1 : spinSign
     }
     const angleErrorSign = Math.sign(this.getAngleError(this, player))
@@ -70,62 +70,59 @@ export class Guard extends Fighter {
   getPlayerMove (player: Fighter): Vec2 {
     const distance = Vec2.distance(this.position, player.position)
     const fromPlayer = dirFromTo(player.position, this.position)
-    const gap = (distance - this.reach) / this.reach
+    const gap = distance / this.reach
     if (this.halo.wallPoints.length > 0) {
       const wallAwayDir = this.getWallAwayDir()
-      if (gap > 0.5) return wallAwayDir
+      if (gap > 1.5) return wallAwayDir
       return this.getWallSlideDir(fromPlayer)
     }
     const aimTime = this.getAimTime(this, player)
-    const playerAimTime = this.getAimTime(player, this)
     const playerAngleError = this.getAngleError(player, this)
-    const advantage =
-      Math.abs(playerAngleError) > 0.3 * pi &&
-      aimTime + 0.1 < playerAimTime
-    console.log('gap', gap.toFixed(2), advantage, Math.abs(playerAngleError) > 0.3 * pi, aimTime + 0.1 < playerAimTime)
-    if (gap > 0.15 && gap < 0.7 && Math.abs(playerAngleError) < 0.3 * pi) {
-      const circle = this.getCircleMove(player, playerAngleError)
-      const targetVelocity = Vec2.combine(1, player.velocity, 0.5 * this.maxSpeed, circle)
-      return dirFromTo(this.velocity, targetVelocity)
+    const advantage = aimTime < Math.abs(playerAngleError) / this.maxSpin
+    console.log('gap', gap.toFixed(2), advantage)
+    if (gap < 0.6) {
+      return this.getCircleMove(player)
     }
-    if (gap < 0 && !advantage) {
-      const circle = this.getCircleMove(player, playerAngleError)
-      const targetVelocity = Vec2.mul(this.maxSpeed, circle)
-      return dirFromTo(this.velocity, targetVelocity)
+    if (gap < 1.2 && !advantage) {
+      return this.getRetreatMove(player)
     }
-    if (gap < 0 && Math.abs(player.spin) < 0.5 * player.maxSpin) {
-      const circle = this.getCircleMove(player, playerAngleError)
-      const targetVelocity = Vec2.mul(this.maxSpeed, circle)
-      return dirFromTo(this.velocity, targetVelocity)
+    if (gap < 1.4 && !advantage) {
+      return this.getCircleMove(player)
     }
-    if (gap < 0.2 && advantage) return this.getAdvanceMove(player)
-    return this.getGapMove(player, 0.15)
+    return this.getGapMove(player, 0.99, 1)
   }
 
   getAdvanceMove (player: Fighter): Vec2 {
     const toPlayer = dirFromTo(this.position, player.position)
-    const distance = Vec2.distance(this.position, player.position)
-    const sign = distance > 0.5 * this.reach ? 1 : -1
-    const targetVelocity = Vec2.mul(sign * 2 * this.maxSpeed, toPlayer)
+    const targetVelocity = Vec2.mul(this.maxSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
   }
 
-  getGapMove (player: Fighter, targetGap: number): Vec2 {
+  getRetreatMove (player: Fighter): Vec2 {
+    const fromPlayer = dirFromTo(player.position, this.position)
+    const targetVelocity = Vec2.mul(this.maxSpeed, fromPlayer)
+    return dirFromTo(this.velocity, targetVelocity)
+  }
+
+  getCircleMove (player: Fighter): Vec2 {
+    const sign = -Math.sign(this.getAngleError(player, this))
+    const dirToPlayer = dirFromTo(this.position, player.position)
+    const targetDir = rotate(dirToPlayer, sign * 0.5 * Math.PI)
+    const targetVelocity = Vec2.mul(this.maxSpeed, targetDir)
+    return dirFromTo(this.velocity, targetVelocity)
+  }
+
+  getGapMove (player: Fighter, targetGap: number, hurry: number): Vec2 {
     const distance = Vec2.distance(this.position, player.position)
-    const gap = (distance - this.reach) / this.reach
+    const gap = distance / this.reach
     if (gap < targetGap) {
       const fromPlayer = dirFromTo(player.position, this.position)
       return fromPlayer
     }
     const toPlayer = dirFromTo(this.position, player.position)
-    const targetSpeed = this.maxSpeed * Math.sign(gap - targetGap)
+    const targetSpeed = hurry * this.maxSpeed * Math.sign(gap - targetGap)
     const targetVelocity = Vec2.combine(1, player.velocity, targetSpeed, toPlayer)
     return dirFromTo(this.velocity, targetVelocity)
-  }
-
-  getCircleMove (player: Fighter, sign: number): Vec2 {
-    const dirToPlayer = dirFromTo(this.position, player.position)
-    return rotate(dirToPlayer, -Math.sign(sign) * 0.5 * Math.PI)
   }
 
   getAimTime (fighter: Fighter, other: Fighter): number {
@@ -142,6 +139,14 @@ export class Guard extends Fighter {
     if (spin * angleDiff > 0) return Math.min(maxTime, absAngleDiff / absSpin)
     const bigAbsAngleDiff = 2 * Math.PI - absAngleDiff
     return Math.min(maxTime, bigAbsAngleDiff / absSpin)
+  }
+
+  getConvergeSpeed (fighter: Fighter, other: Fighter): number {
+    const fighterToOther = dirFromTo(fighter.position, other.position)
+    const otherToFighter = dirFromTo(other.position, fighter.position)
+    const fighterSpeed = Vec2.dot(fighter.velocity, fighterToOther)
+    const otherSpeed = Vec2.dot(other.velocity, otherToFighter)
+    return fighterSpeed + otherSpeed
   }
 
   getReachTime (fighter: Fighter, other: Fighter): number {
