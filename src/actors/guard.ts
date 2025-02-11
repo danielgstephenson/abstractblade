@@ -56,7 +56,7 @@ export class Guard extends Fighter {
       const angleError = this.getAngleError(this, player)
       const offset = Math.abs(playerAngleError) > 0.1 * Math.PI
         ? -playerAngleError
-        : -Math.sign(angleError) * 0.1 * Math.PI
+        : -Math.sign(angleError) * 0.0 * Math.PI
       const targetAngle = vecToAngle(toPlayer) + offset
       const angleDiff = getAngleDiff(targetAngle, this.angle)
       const targetSpin = 4 * this.maxSpin * angleDiff / Math.PI
@@ -71,15 +71,11 @@ export class Guard extends Fighter {
     const toPlayer = dirFromTo(this.position, player.position)
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    const chaseVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, toPlayer)
-    const circleVelocity = this.getCircleVelocity(player)
-    if (gap > 2) {
+    if (gap > 0.5) {
+      const chaseVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, toPlayer)
       return dirFromTo(this.velocity, chaseVelocity)
     }
-    if (gap > 0.8) {
-      const targetVelocity = Vec2.combine(1, chaseVelocity, 1, circleVelocity)
-      return dirFromTo(this.velocity, targetVelocity)
-    }
+    const circleVelocity = this.getCircleVelocity(player)
     return circleVelocity
   }
 
