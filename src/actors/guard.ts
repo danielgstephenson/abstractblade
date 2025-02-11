@@ -39,8 +39,13 @@ export class Guard extends Fighter {
       return
     }
     if (player == null) {
-      this.swingSign = 0
       this.moveDir = this.getHomeMove()
+      const nearestPlayer = this.getNearestPlayer()
+      if (nearestPlayer == null) {
+        this.swingSign = 0
+        return
+      }
+      this.swingSign = this.getSwingSign(nearestPlayer)
       return
     }
     this.swingSign = this.getSwingSign(player)
@@ -131,6 +136,16 @@ export class Guard extends Fighter {
       const guardAreaPlayers = [...guardArea.players.values()]
       players.push(...guardAreaPlayers)
     })
+    const livingPlayers = players.filter(player => !player.dead)
+    if (livingPlayers.length === 0) return null
+    const distances = livingPlayers.map(player => {
+      return Vec2.distance(player.position, this.position)
+    })
+    return livingPlayers[whichMin(distances)]
+  }
+
+  getNearestPlayer (): Player | null {
+    const players: Player[] = [...this.game.players.values()]
     const livingPlayers = players.filter(player => !player.dead)
     if (livingPlayers.length === 0) return null
     const distances = livingPlayers.map(player => {
