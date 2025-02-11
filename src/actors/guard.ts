@@ -34,8 +34,8 @@ export class Guard extends Fighter {
     super.postStep()
     this.guardAreas = this.getGuardAreas()
     const player = this.getTargetPlayer()
-    if (this.dead && player == null) {
-      this.respawn()
+    if (this.dead) {
+      if (player == null) this.respawn()
       return
     }
     if (player == null) {
@@ -43,17 +43,15 @@ export class Guard extends Fighter {
       this.moveDir = this.getHomeMove()
       return
     }
-    if (!this.dead) {
-      this.swingSign = this.getSwingSign(player)
-      this.moveDir = this.wallSlide(this.getMove(player))
-    }
+    this.swingSign = this.getSwingSign(player)
+    this.moveDir = this.wallSlide(this.getMove(player))
   }
 
   getSwingSign (player: Fighter): number {
     const toPlayer = dirFromTo(this.position, player.position)
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    if (gap > 1.5) {
+    if (gap > 1) {
       const playerAngleError = this.getAngleError(player, this)
       const angleError = this.getAngleError(this, player)
       const offset = Math.abs(playerAngleError) > 0.1 * Math.PI
