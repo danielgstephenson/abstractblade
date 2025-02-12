@@ -8,8 +8,8 @@ import { Blade } from '../features/blade'
 import { Halo } from '../features/halo'
 
 export class Fighter extends Actor {
-  movePower = 4
-  maxSpeed = 4 // 2
+  movePower = 3
+  maxSpeed = 3 // 2
   maxSpin = 3
   swingPower = 1.5
   moveDir = new Vec2(0, 0)

@@ -8,6 +8,8 @@ export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   safeDistance: number
   closeDistance: number
+  swingGap = 1
+  pullBack = 0.9
 
   constructor (game: Game, position: Vec2) {
     super(game, position)
@@ -24,6 +26,8 @@ export class Guard extends Fighter {
     this.body.setPosition(this.spawnPoint)
     this.body.setLinearVelocity(Vec2.zero())
     this.body.setAngularVelocity(0)
+    this.pullBack = 0.1
+    this.swingGap = 2
   }
 
   preStep (): void {
@@ -55,7 +59,7 @@ export class Guard extends Fighter {
   getSwingSign (player: Fighter): number {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    if (gap < 1.3) {
+    if (gap < this.swingGap) {
       if (Math.abs(this.spin) > 0.5 * this.maxSpin) {
         return Math.sign(this.spin)
       }
@@ -100,9 +104,11 @@ export class Guard extends Fighter {
   getMatchSwingSign (player: Fighter): number {
     const toPlayer = dirFromTo(this.position, player.position)
     const playerAngleError = this.getAngleError(player, this)
-    const targetAngle = vecToAngle(toPlayer) + playerAngleError
+    const angleError = this.getAngleError(this, player)
+    const offset = -this.pullBack * pi * Math.sign(angleError)
+    const targetAngle = vecToAngle(toPlayer) + offset
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = -0.5 * player.spin + 3 * this.maxSpin * angleDiff / pi
+    const targetSpin = -0.1 * player.spin + 3 * this.maxSpin * angleDiff / pi
     return Math.sign(targetSpin - this.spin)
   }
 
@@ -118,11 +124,15 @@ export class Guard extends Fighter {
   }
 
   getCircleMove (player: Fighter): Vec2 {
-    const sign = -Math.sign(this.getAngleError(player, this))
-    const dirToPlayer = dirFromTo(this.position, player.position)
-    const circleDir = rotate(dirToPlayer, sign * 0.5 * Math.PI)
+    const circleDir = this.getCircleDir(player)
     const targetVelocity = Vec2.mul(this.maxSpeed, circleDir)
     return dirFromTo(this.velocity, targetVelocity)
+  }
+
+  getCircleDir (player: Fighter): Vec2 {
+    const sign = -Math.sign(this.getAngleError(player, this))
+    const dirToPlayer = dirFromTo(this.position, player.position)
+    return rotate(dirToPlayer, sign * 0.5 * Math.PI)
   }
 
   wallSlide (targetDir: Vec2): Vec2 {
