@@ -8,8 +8,6 @@ export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   safeDistance: number
   closeDistance: number
-  swingGap = 1
-  pullBack = 0.9
 
   constructor (game: Game, position: Vec2) {
     super(game, position)
@@ -26,8 +24,6 @@ export class Guard extends Fighter {
     this.body.setPosition(this.spawnPoint)
     this.body.setLinearVelocity(Vec2.zero())
     this.body.setAngularVelocity(0)
-    this.pullBack = 0.1
-    this.swingGap = 2
   }
 
   preStep (): void {
@@ -59,10 +55,7 @@ export class Guard extends Fighter {
   getSwingSign (player: Fighter): number {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    if (gap < this.swingGap) {
-      if (Math.abs(this.spin) > 0.5 * this.maxSpin) {
-        return Math.sign(this.spin)
-      }
+    if (gap < 2) {
       return this.getAttackSwingSign(player)
     }
     // const playerAngleError = this.getAngleError(player, this)
@@ -73,7 +66,7 @@ export class Guard extends Fighter {
     // if (Math.abs(player.spin) > 0.5 * player.maxSpin) {
     //   return this.getBlockSwingSign(player)
     // }
-    return this.getMatchSwingSign(player)
+    return this.getDisengageSwingSign(player)
   }
 
   getDeflectSwingSign (player: Fighter): number {
@@ -98,17 +91,17 @@ export class Guard extends Fighter {
     const toPlayer = dirFromTo(this.position, player.position)
     const targetAngle = vecToAngle(toPlayer)
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    return Math.sign(angleDiff)
+    const targetSpin = 10 * angleDiff
+    return Math.sign(targetSpin - this.spin)
   }
 
-  getMatchSwingSign (player: Fighter): number {
+  getDisengageSwingSign (player: Fighter): number {
     const toPlayer = dirFromTo(this.position, player.position)
-    const playerAngleError = this.getAngleError(player, this)
     const angleError = this.getAngleError(this, player)
-    const offset = -this.pullBack * pi * Math.sign(angleError)
+    const offset = -0.6 * pi * Math.sign(angleError)
     const targetAngle = vecToAngle(toPlayer) + offset
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = -0.1 * player.spin + 3 * this.maxSpin * angleDiff / pi
+    const targetSpin = 3 * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
