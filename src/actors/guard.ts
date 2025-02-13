@@ -55,17 +55,9 @@ export class Guard extends Fighter {
   getSwingSign (player: Fighter): number {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    if (gap < 2) {
+    if (gap < 1.9) {
       return this.getAttackSwingSign(player)
     }
-    // const playerAngleError = this.getAngleError(player, this)
-    // const playerSmallError = Math.abs(playerAngleError) < 0.4 * pi
-    // if (gap < 1.5 && playerSmallError) {
-    //   return this.getDeflectSwingSign(player)
-    // }
-    // if (Math.abs(player.spin) > 0.5 * player.maxSpin) {
-    //   return this.getBlockSwingSign(player)
-    // }
     return this.getDisengageSwingSign(player)
   }
 
@@ -98,7 +90,7 @@ export class Guard extends Fighter {
   getDisengageSwingSign (player: Fighter): number {
     const toPlayer = dirFromTo(this.position, player.position)
     const angleError = this.getAngleError(this, player)
-    const offset = -0.6 * pi * Math.sign(angleError)
+    const offset = -0.25 * pi * Math.sign(angleError)
     const targetAngle = vecToAngle(toPlayer) + offset
     const angleDiff = getAngleDiff(targetAngle, this.angle)
     const targetSpin = 3 * angleDiff
