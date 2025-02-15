@@ -3,7 +3,7 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { clamp, dirFromTo, getAngleDiff, pi, rotate, vecToAngle, whichMax, whichMin } from '../math'
+import { angleToDir, clamp, dirFromTo, getAngleDiff, pi, rotate, vecToAngle, whichMax, whichMin } from '../math'
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   safeDistance: number
@@ -60,18 +60,18 @@ export class Guard extends Fighter {
     if (gap < 1) {
       return this.getAttackSwingSign(player)
     }
-    if (gap > 2 && playerInside) {
-      return this.getEngageSwingSign(player)
+    if (gap < 2.2) {
+      return this.getBlockSwingSign(player)
     }
-    return this.getBlockSwingSign(player)
+    return this.getReadySwingSign(player)
   }
 
   getBlockSwingSign (player: Fighter): number {
-    const toPlayer = dirFromTo(this.position, player.position)
-    const clampError = clamp(-0.25 * pi, 0.25 * pi, 0.8 * this.getAngleError(player, this))
-    const targetAngle = vecToAngle(toPlayer) + clampError
-    const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = 100 * angleDiff
+    const playerBladeDir = angleToDir(player.angle)
+    const targetPosition = Vec2.combine(1, player.position, 0.75 * this.reach, playerBladeDir)
+    const blockAngle = vecToAngle(dirFromTo(this.position, targetPosition))
+    const angleDiff = getAngleDiff(blockAngle, this.angle)
+    const targetSpin = 10 * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
@@ -83,12 +83,12 @@ export class Guard extends Fighter {
     return Math.sign(targetSpin - this.spin)
   }
 
-  getEngageSwingSign (player: Fighter): number {
+  getReadySwingSign (player: Fighter): number {
     const toPlayer = dirFromTo(this.position, player.position)
     const angleError = this.getAngleError(this, player)
     const playerAngleError = this.getAngleError(player, this)
-    const pullBack = clamp(0.2 * pi, 0.25 * pi, 0.5 * Math.abs(playerAngleError))
-    const offset = -pullBack * Math.sign(angleError) // * pi
+    const pullBack = clamp(0.2 * pi, 0.2 * pi, Math.sign(playerAngleError))
+    const offset = -pullBack * Math.sign(angleError)
     const targetAngle = vecToAngle(toPlayer) + offset
     const angleDiff = getAngleDiff(targetAngle, this.angle)
     const targetSpin = 4 * angleDiff
@@ -104,7 +104,7 @@ export class Guard extends Fighter {
       return dirFromTo(this.velocity, chaseVelocity)
     }
     const circleDir = this.getCircleDir(player)
-    const targetVelocity = Vec2.combine(0.25 * this.maxSpeed, toPlayer, 0.75 * this.maxSpeed, circleDir)
+    const targetVelocity = Vec2.combine(1.0 * this.maxSpeed, toPlayer, 0.2 * this.maxSpeed, circleDir)
     return dirFromTo(this.velocity, targetVelocity)
   }
 
