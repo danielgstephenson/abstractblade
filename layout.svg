@@ -25,7 +25,7 @@
      units="mm"
      inkscape:zoom="2.932688"
      inkscape:cx="164.35434"
-     inkscape:cy="478.91217"
+     inkscape:cy="233.06264"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -161,6 +161,62 @@
        r="1">
       <desc
          id="desc18950">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-0"
+       cx="30.090218"
+       cy="80"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-9">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-4"
+       cx="75.090218"
+       cy="80"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-8">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-8"
+       cx="30.090218"
+       cy="40"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-2">{
+	&quot;chaos&quot;: 0.2,
+	&quot;aggression&quot;: 0.5,
+	&quot;interval&quot;: 3
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-45"
+       cx="75.090218"
+       cy="40"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-5">{
 	&quot;chaos&quot;: 0.2,
 	&quot;aggression&quot;: 0.5,
 	&quot;interval&quot;: 3

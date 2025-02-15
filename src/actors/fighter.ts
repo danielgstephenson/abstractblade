@@ -11,7 +11,7 @@ export class Fighter extends Actor {
   movePower = 6
   maxSpeed = 6 // 2
   maxSpin = 3
-  swingPower = 10 // 1.5
+  swingPower = 6 // 1.5
   moveDir = new Vec2(0, 0)
   swingSign = 0
   spawnPoint = new Vec2(0, 0)
