@@ -88,12 +88,15 @@ export class Collider {
         const wallPoint = new Vec2(worldManifold.points[0])
         featureA.wallPoints.push(wallPoint)
       }
-      if (featureA instanceof Blade && featureB instanceof Torso) {
+      if (featureA instanceof Blade && featureB instanceof Torso && contact.isTouching()) {
         const fighterA = featureA.fighter
         const fighterB = featureB.fighter
         if (fighterA.dead || fighterB.dead) return
         if (fighterA.id !== fighterB.id) {
-          fighterB.die()
+          const manifold = contact.getWorldManifold(null)
+          if (manifold == null) return
+          const overlap = -Math.min(...manifold.separations)
+          if (overlap > 0.03) fighterB.dying = true
         }
       }
     })

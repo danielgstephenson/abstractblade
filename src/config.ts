@@ -4,7 +4,7 @@ import path from 'path'
 export class Config {
   port = 3000
   secure = false
-  timeScale = 0.5
+  timeScale = 0.25
   bot = true
 
   constructor () {

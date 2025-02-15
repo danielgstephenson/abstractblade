@@ -5,7 +5,7 @@ import { Fighter } from '../actors/fighter'
 export class Blade extends Feature {
   static hy = 0.19
   static start = 0.7
-  static narrow = 4
+  static narrow = 4.3
   static reach = 5
   static vertices = [
     new Vec2(Blade.start, -Blade.hy),

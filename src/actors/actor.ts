@@ -34,9 +34,9 @@ export class Actor {
     return fixtures
   }
 
-  preStep (): void {}
+  preStep (dt: number): void {}
 
-  postStep (): void {
+  postStep (dt: number): void {
     this.updateConfiguration()
     if (this.removed) {
       this.game.world.destroyBody(this.body)

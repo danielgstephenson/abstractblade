@@ -7,6 +7,7 @@ import { rotate } from '../math'
 
 export class Player extends Fighter {
   spawnOffset = 2
+  respawnReady = false
 
   constructor (game: Game) {
     super(game, game.startPoint)
@@ -36,9 +37,9 @@ export class Player extends Fighter {
     return new PlayerSummary(this)
   }
 
-  postStep (): void {
-    super.postStep()
-    if (this.dead) {
+  postStep (dt: number): void {
+    super.postStep(dt)
+    if (this.dead && this.respawnReady) {
       this.respawn()
     }
   }

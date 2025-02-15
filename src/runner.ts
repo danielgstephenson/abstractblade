@@ -16,9 +16,9 @@ export class Runner {
     const oldTime = this.time
     this.time = performance.now()
     const dt = this.timescale * (this.time - oldTime) / 1000
-    this.game.actors.forEach(actor => actor.preStep())
+    this.game.actors.forEach(actor => actor.preStep(dt))
     this.game.world.step(dt)
-    this.game.actors.forEach(actor => actor.postStep())
+    this.game.actors.forEach(actor => actor.postStep(dt))
     this.game.summary = this.game.summarize()
   }
 }
