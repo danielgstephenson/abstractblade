@@ -58,7 +58,7 @@ export class Guard extends Fighter {
   getSwingSign (player: Fighter): number {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    if (gap < 1.2) {
+    if (gap < 1) {
       return this.getAttackSwingSign(player)
     }
     const playerAbsError = Math.abs(this.getAngleError(player, this))
@@ -73,7 +73,7 @@ export class Guard extends Fighter {
 
   getBlockSwingSign (player: Fighter): number {
     const playerBladeDir = angleToDir(player.angle)
-    const targetPosition = Vec2.combine(1, player.position, 0.8 * this.reach, playerBladeDir)
+    const targetPosition = Vec2.combine(1, player.position, 0.9 * this.reach, playerBladeDir)
     const blockAngle = vecToAngle(dirFromTo(this.position, targetPosition))
     const angleDiff = getAngleDiff(blockAngle, this.angle)
     const targetSpin = 10 * angleDiff
@@ -104,17 +104,13 @@ export class Guard extends Fighter {
     const toPlayer = dirFromTo(this.position, player.position)
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    const chaseVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, toPlayer)
-    if (gap > 1.5) {
-      return dirFromTo(this.velocity, chaseVelocity)
-    }
     const circleDir = this.getCircleDir(player)
-    if (gap < 0.5) {
+    if (gap < 0.3) {
       const targetVelocity = Vec2.mul(this.maxSpeed, circleDir)
       return dirFromTo(this.velocity, targetVelocity)
     }
-    const targetVelocity = Vec2.combine(1, chaseVelocity, this.maxSpeed, circleDir)
-    return dirFromTo(this.velocity, targetVelocity)
+    const chaseVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, toPlayer)
+    return dirFromTo(this.velocity, chaseVelocity)
   }
 
   getCircleDir (player: Fighter): Vec2 {
