@@ -62,8 +62,8 @@ export class Guard extends Fighter {
       return this.getAttackSwingSign(player)
     }
     const playerAbsError = Math.abs(this.getAngleError(player, this))
-    const playerInside = playerAbsError < 0.4 * Math.PI
-    const swingDistance = playerInside ? 1.9 : 1.2
+    const playerInside = playerAbsError < 0.2 * Math.PI
+    const swingDistance = playerInside ? 1.7 : 2.2
     if (gap < swingDistance) {
       return this.getBlockSwingSign(player)
     }

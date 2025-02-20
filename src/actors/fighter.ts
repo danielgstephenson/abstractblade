@@ -60,9 +60,7 @@ export class Fighter extends Actor {
     if (this.dead) {
       this.moveDir = Vec2.zero()
       this.swingSign = 0
-      // this.body.setPosition(this.spawnPoint)
-      // this.body.setLinearVelocity(Vec2.zero())
-      // this.body.setAngularVelocity(0)
+      this.body.setLinearVelocity(Vec2.zero())
     }
     this.applyMove()
     this.applySwing()
