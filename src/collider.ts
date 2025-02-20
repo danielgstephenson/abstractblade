@@ -94,7 +94,7 @@ export class Collider {
           const manifold = contact.getWorldManifold(null)
           if (manifold == null) return
           const overlap = -Math.min(...manifold.separations)
-          if (overlap > 0) fighterB.dying = true
+          if (overlap > 0) fighterB.die()
         }
       }
     })

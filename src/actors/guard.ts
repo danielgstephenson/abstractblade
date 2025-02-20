@@ -58,12 +58,12 @@ export class Guard extends Fighter {
   getSwingSign (player: Fighter): number {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    if (gap < 1) {
+    if (gap < 1.2) {
       return this.getAttackSwingSign(player)
     }
     const playerAbsError = Math.abs(this.getAngleError(player, this))
-    const playerInside = playerAbsError < 0.2 * Math.PI
-    const swingDistance = playerInside ? 1.7 : 2.2
+    const playerInside = playerAbsError < 0.1 * Math.PI
+    const swingDistance = playerInside ? 1.5 : 2
     if (gap < swingDistance) {
       return this.getBlockSwingSign(player)
     }
@@ -75,7 +75,7 @@ export class Guard extends Fighter {
     const targetPosition = Vec2.combine(1, player.position, 0.8 * this.reach, playerBladeDir)
     const blockAngle = vecToAngle(dirFromTo(this.position, targetPosition))
     const angleDiff = getAngleDiff(blockAngle, this.angle)
-    const targetSpin = 30 * angleDiff
+    const targetSpin = 10 * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
@@ -104,15 +104,15 @@ export class Guard extends Fighter {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
     const chaseVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, toPlayer)
-    const retreatVelocity = Vec2.combine(1, player.velocity, -this.maxSpeed, toPlayer)
-    if (gap > 3) {
+    if (gap > 1.5) {
       return dirFromTo(this.velocity, chaseVelocity)
     }
-    if (gap < 0.5) {
-      return dirFromTo(this.velocity, retreatVelocity)
-    }
     const circleDir = this.getCircleDir(player)
-    const targetVelocity = Vec2.combine(1 * this.maxSpeed, chaseVelocity, 0.5 * this.maxSpeed, circleDir)
+    if (gap < 0.5) {
+      const targetVelocity = Vec2.mul(this.maxSpeed, circleDir)
+      return dirFromTo(this.velocity, targetVelocity)
+    }
+    const targetVelocity = Vec2.combine(1, chaseVelocity, this.maxSpeed, circleDir)
     return dirFromTo(this.velocity, targetVelocity)
   }
 

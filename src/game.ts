@@ -54,6 +54,11 @@ export class Game {
         console.log('disconnect:', socket.id)
         player.remove()
       })
+      socket.on('keydown', () => {
+        if (player.dead && player.deathTime > 0.1) {
+          player.respawn()
+        }
+      })
     })
   }
 

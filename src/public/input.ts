@@ -23,6 +23,10 @@ export class Input {
   }
 
   onkeydown (event: KeyboardEvent): void {
+    const newKeyDown = !this.isKeyDown(event.code)
+    if (newKeyDown) {
+      this.client.socket.emit('keydown', event)
+    }
     this.keyboard.set(event.code, true)
   }
 

@@ -15,7 +15,6 @@ export class Fighter extends Actor {
   moveDir = new Vec2(0, 0)
   swingSign = 0
   spawnPoint = new Vec2(0, 0)
-  dying = false
   dead = false
   deathTime = 0.1
   deathTimer = 0
@@ -51,7 +50,6 @@ export class Fighter extends Actor {
 
   die (): void {
     this.dead = true
-    this.dying = false
   }
 
   preStep (dt: number): void {
@@ -92,9 +90,6 @@ export class Fighter extends Actor {
 
   postStep (dt: number): void {
     super.postStep(dt)
-    if (this.dying && !this.dead) {
-      this.die()
-    }
     if (this.removed) {
       this.game.fighters.delete(this.id)
     }

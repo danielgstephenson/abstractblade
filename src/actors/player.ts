@@ -7,7 +7,7 @@ import { rotate } from '../math'
 
 export class Player extends Fighter {
   spawnOffset = 2
-  respawnReady = false
+  deathTime = 0
 
   constructor (game: Game) {
     super(game, game.startPoint)
@@ -24,6 +24,7 @@ export class Player extends Fighter {
     const offset = rotate(new Vec2(0, this.spawnOffset), spawnAngle)
     const startPoint = Vec2.add(this.spawnPoint, offset)
     this.body.setPosition(startPoint)
+    this.deathTime = 0
   }
 
   handleInput (input: InputSummary): void {
@@ -39,8 +40,8 @@ export class Player extends Fighter {
 
   postStep (dt: number): void {
     super.postStep(dt)
-    if (this.dead && this.respawnReady) {
-      this.respawn()
+    if (this.dead) {
+      this.deathTime += dt
     }
   }
 
