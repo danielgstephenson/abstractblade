@@ -62,21 +62,27 @@ export class Guard extends Fighter {
       return this.getAttackSwingSign(player)
     }
     const playerAbsError = Math.abs(this.getAngleError(player, this))
-    const playerInside = playerAbsError < 0.1 * Math.PI
+    const playerInside = playerAbsError < 0.05 * Math.PI
+    if (playerInside) {
+      if (gap < 1.7) {
+        return this.getBlockSwingSign(player, 40)
+      }
+      return this.getReadySwingSign(player)
+    }
     const playerPullBack = playerAbsError > 0.5 * Math.PI
-    const swingDistance = playerPullBack ? 1.3 : playerInside ? 1.7 : 2
+    const swingDistance = playerPullBack ? 1.3 : 2.2
     if (gap < swingDistance) {
       return this.getBlockSwingSign(player)
     }
     return this.getReadySwingSign(player)
   }
 
-  getBlockSwingSign (player: Fighter): number {
+  getBlockSwingSign (player: Fighter, power = 10): number {
     const playerBladeDir = angleToDir(player.angle)
-    const targetPosition = Vec2.combine(1, player.position, 0.9 * this.reach, playerBladeDir)
+    const targetPosition = Vec2.combine(1, player.position, 0.8 * this.reach, playerBladeDir)
     const blockAngle = vecToAngle(dirFromTo(this.position, targetPosition))
     const angleDiff = getAngleDiff(blockAngle, this.angle)
-    const targetSpin = 10 * angleDiff
+    const targetSpin = power * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
