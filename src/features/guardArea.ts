@@ -20,8 +20,8 @@ export class GuardArea extends Feature {
   }
 
   preStep (): void {
-    this.players.forEach(player => {
-      if (player.dead) this.players.delete(player.id)
-    })
+    // this.players.forEach(player => {
+    //   if (player.dead) this.players.delete(player.id)
+    // })
   }
 }

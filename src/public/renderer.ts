@@ -117,7 +117,7 @@ export class Renderer {
   }
 
   drawTorso (fighter: FighterSummary): void {
-    if (fighter.dead) return
+    // if (fighter.dead) return
     this.resetContext()
     this.context.fillStyle = fighter.team === 1 ? this.torsoColor1 : this.torsoColor2
     this.context.beginPath()
@@ -130,7 +130,7 @@ export class Renderer {
   }
 
   drawBlade (fighter: FighterSummary): void {
-    if (fighter.dead) return
+    // if (fighter.dead) return
     this.resetContext()
     this.context.fillStyle = 'hsl(0 0 90)'
     this.context.translate(fighter.position.x, fighter.position.y)

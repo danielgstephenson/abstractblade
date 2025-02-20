@@ -46,9 +46,9 @@ export class Game {
       socket.emit('connected', this.layout.summary)
       const player = new Player(this)
       socket.on('input', (input: InputSummary) => {
-        player.handleInput(input)
-        if (player.dead) return
         socket.emit('summary', player.getPlayerSummary())
+        if (player.dead) return
+        player.handleInput(input)
       })
       socket.on('disconnect', () => {
         console.log('disconnect:', socket.id)

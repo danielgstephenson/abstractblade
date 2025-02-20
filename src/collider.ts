@@ -1,7 +1,6 @@
 import { Contact, Vec2 } from 'planck'
 import { Game } from './game'
 import { Feature } from './features/feature'
-import { Fighter } from './actors/fighter'
 import { Star } from './actors/star'
 import { Player } from './actors/player'
 import { Torso } from './features/torso'
@@ -65,14 +64,14 @@ export class Collider {
         contact.setEnabled(false)
         return
       }
-      if (actorA instanceof Fighter && actorA.dead) {
-        contact.setEnabled(false)
-        return
-      }
-      if (actorB instanceof Fighter && actorB.dead) {
-        contact.setEnabled(false)
-        return
-      }
+      // if (actorA instanceof Fighter && actorA.dead) {
+      //   contact.setEnabled(false)
+      //   return
+      // }
+      // if (actorB instanceof Fighter && actorB.dead) {
+      //   contact.setEnabled(false)
+      //   return
+      // }
       if (featureA instanceof Blade && !(featureB instanceof Blade)) {
         contact.setEnabled(false)
       }
@@ -91,12 +90,11 @@ export class Collider {
       if (featureA instanceof Blade && featureB instanceof Torso && contact.isTouching()) {
         const fighterA = featureA.fighter
         const fighterB = featureB.fighter
-        if (fighterA.dead || fighterB.dead) return
         if (fighterA.id !== fighterB.id) {
           const manifold = contact.getWorldManifold(null)
           if (manifold == null) return
           const overlap = -Math.min(...manifold.separations)
-          if (overlap > 0.03) fighterB.dying = true
+          if (overlap > 0) fighterB.dying = true
         }
       }
     })

@@ -33,11 +33,14 @@ export class Guard extends Fighter {
   postStep (dt: number): void {
     super.postStep(dt)
     this.guardAreas = this.getGuardAreas()
-    const targetPlayer = this.getTargetPlayer()
     if (this.dead) {
-      if (targetPlayer == null) this.respawn()
-      return
+      const visiblePlayer = this.getVisiblePlayer()
+      if (visiblePlayer == null) {
+        this.respawn()
+        return
+      }
     }
+    const targetPlayer = this.getTargetPlayer()
     if (targetPlayer == null) {
       this.moveDir = this.getHomeMove()
       const nearestPlayer = this.getNearestPlayer()
@@ -55,12 +58,13 @@ export class Guard extends Fighter {
   getSwingSign (player: Fighter): number {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
-    const playerAbsError = Math.abs(this.getAngleError(player, this))
-    const playerInside = playerAbsError < 0.2 * pi
     if (gap < 1) {
       return this.getAttackSwingSign(player)
     }
-    if (gap < 2.2) {
+    const playerAbsError = Math.abs(this.getAngleError(player, this))
+    const playerInside = playerAbsError < 0.4 * Math.PI
+    const swingDistance = playerInside ? 1.9 : 1.2
+    if (gap < swingDistance) {
       return this.getBlockSwingSign(player)
     }
     return this.getReadySwingSign(player)
@@ -68,10 +72,10 @@ export class Guard extends Fighter {
 
   getBlockSwingSign (player: Fighter): number {
     const playerBladeDir = angleToDir(player.angle)
-    const targetPosition = Vec2.combine(1, player.position, 0.75 * this.reach, playerBladeDir)
+    const targetPosition = Vec2.combine(1, player.position, 0.8 * this.reach, playerBladeDir)
     const blockAngle = vecToAngle(dirFromTo(this.position, targetPosition))
     const angleDiff = getAngleDiff(blockAngle, this.angle)
-    const targetSpin = 10 * angleDiff
+    const targetSpin = 30 * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
@@ -100,11 +104,15 @@ export class Guard extends Fighter {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
     const chaseVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, toPlayer)
-    if (gap > 2) {
+    const retreatVelocity = Vec2.combine(1, player.velocity, -this.maxSpeed, toPlayer)
+    if (gap > 3) {
       return dirFromTo(this.velocity, chaseVelocity)
     }
+    if (gap < 0.5) {
+      return dirFromTo(this.velocity, retreatVelocity)
+    }
     const circleDir = this.getCircleDir(player)
-    const targetVelocity = Vec2.combine(1.0 * this.maxSpeed, toPlayer, 0.2 * this.maxSpeed, circleDir)
+    const targetVelocity = Vec2.combine(1 * this.maxSpeed, chaseVelocity, 0.5 * this.maxSpeed, circleDir)
     return dirFromTo(this.velocity, targetVelocity)
   }
 
@@ -165,6 +173,19 @@ export class Guard extends Fighter {
       return Vec2.distance(player.position, this.position)
     })
     return livingPlayers[whichMin(distances)]
+  }
+
+  getVisiblePlayer (): Player | null {
+    const players: Player[] = []
+    this.guardAreas.forEach(guardArea => {
+      const guardAreaPlayers = [...guardArea.players.values()]
+      players.push(...guardAreaPlayers)
+    })
+    if (players.length === 0) return null
+    const distances = players.map(player => {
+      return Vec2.distance(player.position, this.position)
+    })
+    return players[whichMin(distances)]
   }
 
   getNearestPlayer (): Player | null {
