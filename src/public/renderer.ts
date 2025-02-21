@@ -126,7 +126,7 @@ export class Renderer {
     this.context.beginPath()
     const maxRadius = 1.3 * Torso.radius
     const minRadius = 0.5 * Torso.radius
-    const radius = Math.min(maxRadius, minRadius + 2 * fighter.deathTimer)
+    const radius = Math.min(maxRadius, minRadius + 0.5 * fighter.deathTimer)
     this.context.arc(
       fighter.deathPoint.x,
       fighter.deathPoint.y,
