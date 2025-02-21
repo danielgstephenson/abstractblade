@@ -188,8 +188,8 @@ export class Renderer {
   resetContext (): void {
     this.context.resetTransform()
     this.context.translate(0.5 * this.canvas.width, 0.5 * this.canvas.height)
-    const vmax = Math.max(this.canvas.width, this.canvas.height)
-    this.context.scale(vmax, -vmax)
+    const vmin = Math.min(this.canvas.width, this.canvas.height)
+    this.context.scale(vmin, -vmin)
     this.context.scale(this.camera.scale, this.camera.scale)
     this.context.translate(-this.camera.position.x, -this.camera.position.y)
     this.context.globalAlpha = 1

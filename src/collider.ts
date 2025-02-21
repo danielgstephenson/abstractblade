@@ -96,7 +96,7 @@ export class Collider {
           if (manifold.pointCount === 0) return
           const overlap = -Math.min(...manifold.separations)
           const deathPoint = new Vec2(manifold.points[0])
-          if (overlap > 0.1) fighterB.die(deathPoint)
+          if (overlap > 0) fighterB.die(deathPoint)
         }
       }
     })

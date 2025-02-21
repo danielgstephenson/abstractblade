@@ -9,7 +9,7 @@ import { Halo } from '../features/halo'
 
 export class Fighter extends Actor {
   movePower = 20
-  maxSpeed = 6 // 2
+  maxSpeed = 6 // 6
   maxSpin = 10
   swingPower = 30 // 1.5
   deathPoint = new Vec2(0, 0)

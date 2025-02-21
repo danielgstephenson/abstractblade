@@ -59,28 +59,36 @@ export class Guard extends Fighter {
     const distance = Vec2.distance(this.position, player.position)
     const gap = distance / this.reach
     if (gap < 1) {
-      return this.getAttackSwingSign(player)
+      return this.getAttackSwingSign(player, 100)
     }
-    const playerAbsError = Math.abs(this.getAngleError(player, this))
+    const playerAngleError = this.getAngleError(player, this)
+    const playerAbsError = Math.abs(playerAngleError)
     const playerInside = playerAbsError < 0.1 * Math.PI
     if (playerInside) {
-      if (gap < 1.3) {
-        return this.getBlockSwingSign(player, 40)
+      if (gap < 1.5) {
+        return this.getBlockSwingSign(player, 100)
       }
-      return this.getReadySwingSign(player, 0.1)
+      if (gap < 1.5) {
+        return this.getBlockSwingSign(player, 100)
+      }
+      const pullBack = 0.1 * pi
+      return this.getReadySwingSign(player, pullBack, 20)
     }
-    const swingDistance = 3
-    if (gap < swingDistance) {
-      return this.getBlockSwingSign(player)
+
+    if (playerAbsError > 0.7 * pi && gap < 1.2) {
+      return this.getAttackSwingSign(player, 10)
     }
-    return this.getReadySwingSign(player)
+    if (gap < 3) {
+      return this.getBlockSwingSign(player, 10)
+    }
+    return this.getReadySwingSign(player, 0.2 * Math.PI, 5)
   }
 
   getBlockSwingSign (player: Fighter, power = 10): number {
     const playerAbsSpin = Math.abs(player.spin)
-    if (playerAbsSpin < 0.25 * player.maxSpin) {
+    if (playerAbsSpin < 0.5 * player.maxSpin) {
       const playerBladeDir = angleToDir(player.angle)
-      const targetPosition = Vec2.combine(1, player.position, 0.8 * this.reach, playerBladeDir)
+      const targetPosition = Vec2.combine(1, player.position, 0.9 * this.reach, playerBladeDir)
       const blockAngle = vecToAngle(dirFromTo(this.position, targetPosition))
       const angleDiff = getAngleDiff(blockAngle, this.angle)
       const targetSpin = power * angleDiff
@@ -95,21 +103,31 @@ export class Guard extends Fighter {
     return Math.sign(targetSpin - this.spin)
   }
 
-  getAttackSwingSign (player: Fighter): number {
+  getAttackSwingSign (player: Fighter, power = 100): number {
     const toPlayer = dirFromTo(this.position, player.position)
     const targetAngle = vecToAngle(toPlayer)
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = 100 * angleDiff
+    const targetSpin = power * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
-  getReadySwingSign (player: Fighter, pullBack = 0.25): number {
+  getReadySwingSign (player: Fighter, pullBack = 0.2 * Math.PI, power = 10): number {
     const toPlayer = dirFromTo(this.position, player.position)
     const angleError = this.getAngleError(this, player)
-    const offset = -pullBack * pi * Math.sign(angleError)
+    const offset = -pullBack * Math.sign(angleError)
     const targetAngle = vecToAngle(toPlayer) + offset
     const angleDiff = getAngleDiff(targetAngle, this.angle)
-    const targetSpin = 10 * angleDiff
+    const targetSpin = power * angleDiff
+    return Math.sign(targetSpin - this.spin)
+  }
+
+  getMatchSwingSign (player: Fighter, pullBack = 0.2 * Math.PI, power = 10): number {
+    const toPlayer = dirFromTo(this.position, player.position)
+    const playerAngleError = this.getAngleError(player, this)
+    const offset = -pullBack * Math.sign(playerAngleError)
+    const targetAngle = vecToAngle(toPlayer) + offset
+    const angleDiff = getAngleDiff(targetAngle, this.angle)
+    const targetSpin = power * angleDiff
     return Math.sign(targetSpin - this.spin)
   }
 
