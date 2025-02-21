@@ -42,7 +42,7 @@ export class Renderer {
     this.moveCamera()
     this.drawBoundary()
     this.drawGaps()
-    this.drawSavePoints()
+    this.drawStars()
     this.fighters.forEach(fighter => {
       this.drawBlood(fighter)
     })
@@ -99,12 +99,12 @@ export class Renderer {
     })
   }
 
-  drawSavePoints (): void {
+  drawStars (): void {
     if (this.layout == null) return
     this.resetContext()
-    this.layout.savePoints.forEach(position => {
+    this.layout.stars.forEach(position => {
       if (this.layout == null) return
-      const yellow = 'hsl(51 100 40)'
+      const yellow = 'hsl(51 100 30)'
       const darkYellow = 'hsl(51 100 7)'
       const distance = Vec2.distance(this.savePoint, position)
       this.context.fillStyle = distance < 1 ? yellow : darkYellow

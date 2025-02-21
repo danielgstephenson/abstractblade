@@ -73,10 +73,6 @@ export class Guard extends Fighter {
       }
       return this.getBlockSwingSign(player, 100)
     }
-
-    if (playerAbsError > 0.7 * pi && gap < 1.2) {
-      return this.getAttackSwingSign(player, 10)
-    }
     if (gap < 3) {
       return this.getBlockSwingSign(player, 10)
     }
