@@ -122,9 +122,9 @@ export class Renderer {
   drawBlood (fighter: FighterSummary): void {
     if (!fighter.dead) return
     this.resetContext()
-    this.context.fillStyle = 'red'
+    this.context.fillStyle = 'rgb(170,0,0)'
     this.context.beginPath()
-    const maxRadius = 1 * Torso.radius
+    const maxRadius = 1.3 * Torso.radius
     const minRadius = 0.5 * Torso.radius
     const radius = Math.min(maxRadius, minRadius + 2 * fighter.deathTimer)
     this.context.arc(
