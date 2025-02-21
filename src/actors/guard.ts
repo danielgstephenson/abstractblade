@@ -71,10 +71,7 @@ export class Guard extends Fighter {
       if (gap < 1.5) {
         return this.getBlockSwingSign(player, 100)
       }
-      const pullBack = 0.05 * pi
-      const power = absError < pullBack ? 1 : 100
-      // return this.getReadySwingSign(player, pullBack, power)
-      return this.getBlockSwingSign(player, power)
+      return this.getBlockSwingSign(player, 100)
     }
 
     if (playerAbsError > 0.7 * pi && gap < 1.2) {
