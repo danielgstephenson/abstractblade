@@ -12,11 +12,11 @@ export class Fighter extends Actor {
   maxSpeed = 6 // 2
   maxSpin = 10
   swingPower = 30 // 1.5
+  deathPoint = new Vec2(0, 0)
   moveDir = new Vec2(0, 0)
   swingSign = 0
   spawnPoint = new Vec2(0, 0)
   dead = false
-  deathTime = 0.1
   deathTimer = 0
   team = 1
   torso: Torso
@@ -48,8 +48,12 @@ export class Fighter extends Actor {
     this.reach = Blade.reach + Torso.radius
   }
 
-  die (): void {
-    this.dead = true
+  die (deathPoint: Vec2): void {
+    if (!this.dead) {
+      this.deathPoint = deathPoint
+      this.dead = true
+      this.deathTimer = 0
+    }
   }
 
   preStep (dt: number): void {
@@ -90,6 +94,9 @@ export class Fighter extends Actor {
 
   postStep (dt: number): void {
     super.postStep(dt)
+    if (this.dead) {
+      this.deathTimer += dt
+    }
     if (this.removed) {
       this.game.fighters.delete(this.id)
     }
@@ -100,6 +107,7 @@ export class Fighter extends Actor {
     this.body.setAngle(Math.random() * 2 * Math.PI)
     this.body.setLinearVelocity(new Vec2(0, 0))
     this.body.setAngularVelocity(0)
+    this.deathTimer = 0
     this.dead = false
   }
 

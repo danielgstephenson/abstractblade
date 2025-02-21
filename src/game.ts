@@ -55,7 +55,7 @@ export class Game {
         player.remove()
       })
       socket.on('keydown', () => {
-        if (player.dead && player.deathTime > 0.1) {
+        if (player.dead && player.deathTimer > 0.1) {
           player.respawn()
         }
       })

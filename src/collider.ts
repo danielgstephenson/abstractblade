@@ -93,8 +93,10 @@ export class Collider {
         if (fighterA.id !== fighterB.id) {
           const manifold = contact.getWorldManifold(null)
           if (manifold == null) return
+          if (manifold.pointCount === 0) return
           const overlap = -Math.min(...manifold.separations)
-          if (overlap > 0.1) fighterB.die()
+          const deathPoint = new Vec2(manifold.points[0])
+          if (overlap > 0.1) fighterB.die(deathPoint)
         }
       }
     })

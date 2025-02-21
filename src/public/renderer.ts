@@ -44,6 +44,9 @@ export class Renderer {
     this.drawGaps()
     this.drawSavePoints()
     this.fighters.forEach(fighter => {
+      this.drawBlood(fighter)
+    })
+    this.fighters.forEach(fighter => {
       this.drawBlade(fighter)
     })
     this.fighters.forEach(fighter => {
@@ -114,6 +117,22 @@ export class Renderer {
       this.context.closePath()
       this.context.fill()
     })
+  }
+
+  drawBlood (fighter: FighterSummary): void {
+    if (!fighter.dead) return
+    this.resetContext()
+    this.context.fillStyle = 'red'
+    this.context.beginPath()
+    const maxRadius = 1 * Torso.radius
+    const minRadius = 0.5 * Torso.radius
+    const radius = Math.min(maxRadius, minRadius + 2 * fighter.deathTimer)
+    this.context.arc(
+      fighter.deathPoint.x,
+      fighter.deathPoint.y,
+      radius, 0, 2 * Math.PI
+    )
+    this.context.fill()
   }
 
   drawTorso (fighter: FighterSummary): void {
