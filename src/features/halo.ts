@@ -1,7 +1,6 @@
 import { Circle, Vec2 } from 'planck'
 import { Feature } from './feature'
 import { Fighter } from '../actors/fighter'
-import { Torso } from './torso'
 
 export class Halo extends Feature {
   fighter: Fighter

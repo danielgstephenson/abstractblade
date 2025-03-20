@@ -23,6 +23,7 @@ export class Player extends Fighter {
     const offset = rotate(new Vec2(0, this.spawnOffset), spawnAngle)
     const startPoint = Vec2.add(this.spawnPoint, offset)
     this.body.setPosition(startPoint)
+    this.weapon.body.setPosition(startPoint)
   }
 
   handleInput (input: InputSummary): void {

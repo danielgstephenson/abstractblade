@@ -5,9 +5,9 @@ import { Star } from './actors/star'
 import { Player } from './actors/player'
 import { Torso } from './features/torso'
 import { GuardArea } from './features/guardArea'
-import { Blade } from './features/blade'
 import { Halo } from './features/halo'
 import { Boundary } from './features/boundary'
+import { Blade } from './features/blade'
 
 export class Collider {
   game: Game
@@ -64,20 +64,12 @@ export class Collider {
         contact.setEnabled(false)
         return
       }
-      // if (actorA instanceof Fighter && actorA.dead) {
+      // if (featureA instanceof Blade && !(featureB instanceof Blade)) {
       //   contact.setEnabled(false)
-      //   return
       // }
-      // if (actorB instanceof Fighter && actorB.dead) {
+      // if (featureB instanceof Blade && !(featureA instanceof Blade)) {
       //   contact.setEnabled(false)
-      //   return
       // }
-      if (featureA instanceof Blade && !(featureB instanceof Blade)) {
-        contact.setEnabled(false)
-      }
-      if (featureB instanceof Blade && !(featureA instanceof Blade)) {
-        contact.setEnabled(false)
-      }
       if (featureA instanceof Halo || featureB instanceof Halo) {
         contact.setEnabled(false)
       }
@@ -90,14 +82,16 @@ export class Collider {
       if (featureA instanceof Blade && featureB instanceof Torso && contact.isTouching()) {
         const fighterA = featureA.fighter
         const fighterB = featureB.fighter
-        if (fighterA.id !== fighterB.id) {
-          const manifold = contact.getWorldManifold(null)
-          if (manifold == null) return
-          if (manifold.pointCount === 0) return
-          const overlap = -Math.min(...manifold.separations)
-          const deathPoint = new Vec2(manifold.points[0])
-          if (overlap > 0) fighterB.die(deathPoint)
+        if (fighterA.id === fighterB.id) {
+          contact.setEnabled(false)
+          return
         }
+        const manifold = contact.getWorldManifold(null)
+        if (manifold == null) return
+        if (manifold.pointCount === 0) return
+        const overlap = -Math.min(...manifold.separations)
+        const deathPoint = new Vec2(manifold.points[0])
+        if (overlap > 0) fighterB.die(deathPoint)
       }
     })
   }

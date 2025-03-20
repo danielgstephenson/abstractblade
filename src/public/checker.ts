@@ -9,8 +9,8 @@ export class Checker {
     const size = 10 // must be even
     canvas.width = size
     canvas.height = size
-    const color1 = '#000000'
-    const color2 = '#101010'
+    const color1 = '#060505'
+    const color2 = '#121010'
     context.fillStyle = color1
     context.fillRect(0, 0, size, size)
     context.fillStyle = color2

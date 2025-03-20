@@ -20,7 +20,7 @@ export class Renderer {
   starVertices: Vec2[]
   savePoint = new Vec2(0, 0)
 
-  backgroundColor = '#242424'
+  backgroundColor = '#000000'
   torsoColor1 = 'rgb(0,000,255)'
   bladeColor1 = 'rgb(0,190,255)'
   torsoColor2 = 'rgb(0,120,000)'
@@ -47,10 +47,13 @@ export class Renderer {
       this.drawBlood(fighter)
     })
     this.fighters.forEach(fighter => {
-      this.drawBlade(fighter)
+      this.drawRope(fighter)
     })
     this.fighters.forEach(fighter => {
       this.drawTorso(fighter)
+    })
+    this.fighters.forEach(fighter => {
+      this.drawBlade(fighter)
     })
   }
 
@@ -136,7 +139,6 @@ export class Renderer {
   }
 
   drawTorso (fighter: FighterSummary): void {
-    // if (fighter.dead) return
     this.resetContext()
     this.context.fillStyle = fighter.team === 1 ? this.torsoColor1 : this.torsoColor2
     this.context.beginPath()
@@ -149,17 +151,27 @@ export class Renderer {
   }
 
   drawBlade (fighter: FighterSummary): void {
-    // if (fighter.dead) return
     this.resetContext()
-    this.context.fillStyle = 'hsl(0 0 90)'
-    this.context.translate(fighter.position.x, fighter.position.y)
-    this.context.rotate(fighter.angle)
+    this.context.fillStyle = fighter.team === 1 ? this.bladeColor1 : this.bladeColor2
     this.context.beginPath()
-    Blade.vertices.forEach((vertex, i) => {
-      if (i === 0) this.context.moveTo(vertex.x, vertex.y)
-      else this.context.lineTo(vertex.x, vertex.y)
-    })
+    this.context.arc(
+      fighter.bladePosition.x,
+      fighter.bladePosition.y,
+      Blade.radius, 0, 2 * Math.PI
+    )
     this.context.fill()
+  }
+
+  drawRope (fighter: FighterSummary): void {
+    this.resetContext()
+    this.context.globalAlpha = 0.5
+    this.context.strokeStyle = 'white'
+    this.context.beginPath()
+    this.context.lineWidth = 0.1
+    this.context.beginPath()
+    this.context.moveTo(fighter.position.x, fighter.position.y)
+    this.context.lineTo(fighter.bladePosition.x, fighter.bladePosition.y)
+    this.context.stroke()
   }
 
   drawRay (ray: Vec2[]): void {

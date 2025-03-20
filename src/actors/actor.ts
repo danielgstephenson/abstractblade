@@ -1,6 +1,5 @@
 import { BodyDef, Body, Fixture, Vec2 } from 'planck'
 import { Game } from '../game'
-import { clamp, clampVec } from '../math'
 
 export class Actor {
   static count = 0
@@ -9,8 +8,6 @@ export class Actor {
   id: string
   label = 'actor'
   removed = false
-  maxSpeed = Infinity
-  maxSpin = Infinity
   position = new Vec2(0, 0)
   velocity = new Vec2(0, 0)
   angle = 0
@@ -50,10 +47,9 @@ export class Actor {
 
   updateConfiguration (): void {
     this.position = this.body.getPosition()
-    this.velocity = clampVec(this.body.getLinearVelocity(), this.maxSpeed)
-    this.body.setLinearVelocity(this.velocity)
+    this.velocity = this.body.getLinearVelocity()
     this.angle = this.body.getAngle()
-    this.spin = clamp(-this.maxSpin, this.maxSpin, this.body.getAngularVelocity())
+    this.spin = this.body.getAngularVelocity()
     this.body.setAngularVelocity(this.spin)
   }
 }
