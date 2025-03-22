@@ -19,6 +19,7 @@ export class Renderer {
   layout?: LayoutSummary
   starVertices: Vec2[]
   savePoint = new Vec2(0, 0)
+  stars = [0]
 
   backgroundColor = '#000000'
   torsoColor1 = 'rgb(0,000,255)'
@@ -105,12 +106,11 @@ export class Renderer {
   drawStars (): void {
     if (this.layout == null) return
     this.resetContext()
-    this.layout.stars.forEach(position => {
-      if (this.layout == null) return
-      const yellow = 'hsl(51 100 30)'
+    this.layout.stars.forEach((position, index) => {
+      const brightYellow = 'hsl(51 100 45)'
       const darkYellow = 'hsl(51 100 7)'
       const distance = Vec2.distance(this.savePoint, position)
-      this.context.fillStyle = distance < 1 ? yellow : darkYellow
+      this.context.fillStyle = distance < 1 ? brightYellow : darkYellow
       this.context.beginPath()
       this.starVertices.forEach((vertex, i) => {
         const point = Vec2.add(position, vertex)
@@ -119,6 +119,15 @@ export class Renderer {
       })
       this.context.closePath()
       this.context.fill()
+      this.context.strokeStyle = brightYellow
+      this.context.lineWidth = 0.6
+      console.log(this.stars)
+      if (this.stars.includes(index)) {
+        this.context.save()
+        this.context.clip()
+        this.context.stroke()
+        this.context.restore()
+      }
     })
   }
 
@@ -129,7 +138,7 @@ export class Renderer {
     this.context.beginPath()
     const maxRadius = 1.3 * Torso.radius
     const minRadius = 0.5 * Torso.radius
-    const radius = Math.min(maxRadius, minRadius + 0.5 * fighter.deathTimer)
+    const radius = Math.min(maxRadius, minRadius + 0.1 * fighter.deathTimer)
     this.context.arc(
       fighter.deathPoint.x,
       fighter.deathPoint.y,

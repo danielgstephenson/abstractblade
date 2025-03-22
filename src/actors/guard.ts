@@ -3,7 +3,10 @@ import { Fighter } from './fighter'
 import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
-import { dirFromTo, rotate, whichMax, whichMin } from '../math'
+import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
+import { Torso } from '../features/torso'
+import { Blade } from '../features/blade'
+
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
 
@@ -45,9 +48,45 @@ export class Guard extends Fighter {
   }
 
   getMove (player: Fighter): Vec2 {
-    const toPlayer = dirFromTo(this.position, player.position)
-    const chaseVelocity = Vec2.combine(1, player.velocity, 3, toPlayer)
+    console.log('v', this.weapon.velocity.length().toFixed(2))
+    const chaseMove = this.getChaseMove(player)
+    const swingMove = this.getSwingMove()
+    const playerDist = Vec2.distance(this.position, player.position)
+    const playerBladeDist = Vec2.distance(this.position, player.weapon.position)
+    if (playerDist > this.reach + 4) {
+      return chaseMove
+    }
+    if (playerBladeDist > Blade.radius + Torso.radius + 1) {
+      if (playerDist > this.reach) {
+        return chaseMove
+      }
+      return swingMove
+    }
+    if (playerBladeDist > Blade.radius + Torso.radius + 0.5) {
+      return swingMove
+    }
+    const retreatMove = this.getChaseMove(player, 2 * this.reach)
+    return retreatMove
+  }
+
+  getChaseMove (player: Fighter, targetDist = this.reach - 1): Vec2 {
+    const fromPlayer = dirFromTo(player.position, this.position)
+    const targetPosition = Vec2.combine(1, player.position, targetDist, fromPlayer)
+    const toTarget = dirFromTo(this.position, targetPosition)
+    const distanceToTarget = Vec2.distance(this.position, targetPosition)
+    const chaseSpeed = 0.5 * distanceToTarget
+    const chaseVelocity = Vec2.combine(1, player.velocity, chaseSpeed, toTarget)
     return dirFromTo(this.velocity, chaseVelocity)
+  }
+
+  getSwingMove (): Vec2 {
+    if (this.swing === 0) return randomDir()
+    const position = this.body.getPosition()
+    const bladePosition = this.weapon.body.getPosition()
+    const away = Vec2.sub(bladePosition, position)
+    if (away.length() === 0) return randomDir()
+    const perp = rotate(away, -0.5 * pi * Math.sign(this.swing))
+    return perp
   }
 
   wallSlide (targetDir: Vec2): Vec2 {
@@ -78,8 +117,8 @@ export class Guard extends Fighter {
   getHomeMove (): Vec2 {
     const distToHome = Vec2.distance(this.position, this.spawnPoint)
     const dirToHome = dirFromTo(this.position, this.spawnPoint)
-    if (distToHome > 1) return dirToHome
-    return new Vec2(0, 0)
+    if (distToHome > this.reach) return dirToHome
+    return this.getSwingMove()
   }
 
   getTargetPlayer (): Player | null {

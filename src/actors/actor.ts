@@ -11,7 +11,6 @@ export class Actor {
   position = new Vec2(0, 0)
   velocity = new Vec2(0, 0)
   angle = 0
-  spin = 0
 
   constructor (game: Game, bodyDef: BodyDef) {
     Actor.count += 1
@@ -20,7 +19,6 @@ export class Actor {
     this.body = this.game.world.createBody(bodyDef)
     this.body.setUserData(this)
     this.game.actors.set(this.id, this)
-    this.updateConfiguration()
   }
 
   getFixtures (): Fixture[] {
@@ -49,7 +47,5 @@ export class Actor {
     this.position = this.body.getPosition()
     this.velocity = this.body.getLinearVelocity()
     this.angle = this.body.getAngle()
-    this.spin = this.body.getAngularVelocity()
-    this.body.setAngularVelocity(this.spin)
   }
 }

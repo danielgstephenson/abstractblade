@@ -6,10 +6,12 @@ export class PlayerSummary {
   game: GameSummary
   id: string
   spawnPoint: Vec2
+  stars: number[]
 
   constructor (player: Player) {
     this.game = player.game.summary
     this.id = player.id
     this.spawnPoint = player.spawnPoint
+    this.stars = player.stars
   }
 }

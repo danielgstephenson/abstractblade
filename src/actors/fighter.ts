@@ -3,17 +3,18 @@ import { Game } from '../game'
 import { Actor } from './actor'
 import { Torso } from '../features/torso'
 import { FighterSummary } from '../summaries/fighterSummary'
-import { normalize, roundDir } from '../math'
+import { dirFromTo, getAngleDiff, normalize, rotate, roundDir, vecToAngle } from '../math'
 import { Halo } from '../features/halo'
 import { Weapon } from './weapon'
 import { Blade } from '../features/blade'
 
 export class Fighter extends Actor {
   movePower = 2
-  reach = 2.3
+  reach = 2.8
   deathPoint = new Vec2(0, 0)
   moveDir = new Vec2(0, 0)
-  swingSign = 0
+  swing = 0
+  angle = 0
   spawnPoint = new Vec2(0, 0)
   dead = false
   deathTimer = 0
@@ -32,11 +33,11 @@ export class Fighter extends Actor {
     this.label = 'fighter'
     this.body.setPosition(position)
     this.body.setAngularVelocity(0)
-    this.updateConfiguration()
     this.game.fighters.set(this.id, this)
     this.torso = new Torso(this)
     this.halo = new Halo(this)
     this.weapon = new Weapon(this)
+    this.updateConfiguration()
     this.body.setMassData({
       mass: 1,
       center: new Vec2(0, 0),
@@ -47,7 +48,7 @@ export class Fighter extends Actor {
       bodyB: this.weapon.body,
       localAnchorA: new Vec2(0, 0),
       localAnchorB: new Vec2(0, 0),
-      maxLength: this.reach - Blade.radius,
+      maxLength: this.reach - 2 * Blade.radius,
       collideConnected: false
     })
     this.game.world.createJoint(distanceJoint)
@@ -66,7 +67,6 @@ export class Fighter extends Actor {
     this.halo.wallPoints = []
     if (this.dead) {
       this.moveDir = Vec2.zero()
-      this.swingSign = 0
       this.body.setLinearVelocity(Vec2.zero())
     }
     this.applyMove()
@@ -107,6 +107,43 @@ export class Fighter extends Actor {
     this.weapon.body.setLinearVelocity(new Vec2(0, 0))
     this.deathTimer = 0
     this.dead = false
+  }
+
+  updateConfiguration (): void {
+    super.updateConfiguration()
+    this.angle = this.getAngle()
+    this.swing = this.getSwing()
+  }
+
+  getAngle (): number {
+    const position = this.body.getPosition()
+    const bladePosition = this.weapon.body.getPosition()
+    const x = Vec2.sub(bladePosition, position)
+    return vecToAngle(x)
+  }
+
+  getSwing (): number {
+    const position = this.body.getPosition()
+    const bladePosition = this.weapon.body.getPosition()
+    const x = Vec2.sub(bladePosition, position)
+    const r = x.length()
+    if (r === 0) return 0
+    const p = rotate(normalize(x), 0.5 * Math.PI)
+    const velocity = this.body.getLinearVelocity()
+    const bladeVelocity = this.weapon.body.getLinearVelocity()
+    const v = Vec2.sub(bladeVelocity, velocity)
+    return Vec2.dot(v, p) / (r * 2 * Math.PI)
+  }
+
+  getAngleError (enemy: Fighter): number {
+    const toEnemy = dirFromTo(this.position, enemy.position)
+    const toEnemyAngle = vecToAngle(toEnemy)
+    return getAngleDiff(toEnemyAngle, this.angle)
+  }
+
+  getAttackSwing (enemy: Fighter): number {
+    const angleError = this.getAngleError(enemy)
+    return this.swing * Math.sign(angleError)
   }
 
   summarize (): FighterSummary {

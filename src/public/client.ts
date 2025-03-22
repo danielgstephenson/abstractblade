@@ -21,6 +21,7 @@ export class Client {
       this.renderer.fighters = playerSummary.game.fighters
       this.renderer.id = playerSummary.id
       this.renderer.savePoint = playerSummary.spawnPoint
+      this.renderer.stars = playerSummary.stars
     })
   }
 

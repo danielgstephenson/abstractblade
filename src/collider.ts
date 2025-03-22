@@ -30,6 +30,8 @@ export class Collider {
       const actorB = featureB.actor
       if (actorA instanceof Player && featureA instanceof Torso && actorB instanceof Star) {
         actorA.spawnPoint = actorB.position
+        if (actorA.stars.includes(actorB.index)) return
+        actorA.stars.push(actorB.index)
       }
       if (actorA instanceof Player && featureA instanceof Torso && featureB instanceof GuardArea) {
         featureB.players.set(actorA.id, actorA)

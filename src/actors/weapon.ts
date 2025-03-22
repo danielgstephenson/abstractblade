@@ -12,7 +12,7 @@ export class Weapon extends Actor {
     super(fighter.game, {
       type: 'dynamic',
       bullet: true,
-      linearDamping: fighter.body.getLinearDamping(),
+      linearDamping: 0.1,
       fixedRotation: true
     })
     this.fighter = fighter

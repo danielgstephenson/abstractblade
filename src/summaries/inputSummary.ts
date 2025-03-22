@@ -4,7 +4,6 @@ import { normalize } from '../math'
 
 export class InputSummary {
   moveDir: Vec2
-  swingSign = 0
 
   constructor (input: Input) {
     let x = 0
@@ -14,9 +13,5 @@ export class InputSummary {
     if (input.isKeyDown('KeyA') || input.isKeyDown('ArrowLeft')) x -= 1
     if (input.isKeyDown('KeyD') || input.isKeyDown('ArrowRight')) x += 1
     this.moveDir = normalize(Vec2(x, y))
-    let swing = 0
-    if (input.isKeyDown('KeyJ')) swing += 1
-    if (input.isKeyDown('KeyK')) swing -= 1
-    this.swingSign = Math.sign(swing)
   }
 }

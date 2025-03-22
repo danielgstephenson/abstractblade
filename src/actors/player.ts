@@ -7,6 +7,7 @@ import { rotate } from '../math'
 
 export class Player extends Fighter {
   spawnOffset = 2
+  stars = [0]
 
   constructor (game: Game) {
     super(game, game.startPoint)
@@ -30,7 +31,6 @@ export class Player extends Fighter {
     const move = input.moveDir ?? new Vec2(0, 0)
     this.moveDir.x = move.x ?? 0
     this.moveDir.y = move.y ?? 0
-    this.swingSign = input.swingSign ?? 0
   }
 
   getPlayerSummary (): PlayerSummary {
