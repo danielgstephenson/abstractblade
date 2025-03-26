@@ -9,8 +9,8 @@ import { Weapon } from './weapon'
 import { Blade } from '../features/blade'
 
 export class Fighter extends Actor {
-  movePower = 2
-  reach = 2.8
+  movePower = 4
+  reach = 4
   deathPoint = new Vec2(0, 0)
   moveDir = new Vec2(0, 0)
   swing = 0
@@ -27,7 +27,7 @@ export class Fighter extends Actor {
     super(game, {
       type: 'dynamic',
       bullet: true,
-      linearDamping: 0.5,
+      linearDamping: 1,
       fixedRotation: true
     })
     this.label = 'fighter'
@@ -48,7 +48,7 @@ export class Fighter extends Actor {
       bodyB: this.weapon.body,
       localAnchorA: new Vec2(0, 0),
       localAnchorB: new Vec2(0, 0),
-      maxLength: this.reach - 2 * Blade.radius,
+      maxLength: this.reach - Blade.radius - Torso.radius,
       collideConnected: false
     })
     this.game.world.createJoint(distanceJoint)

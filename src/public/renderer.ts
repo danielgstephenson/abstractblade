@@ -1,6 +1,6 @@
 import { Vec2 } from 'planck'
 import { Torso } from '../features/torso'
-import { range } from '../math'
+import { dirFromTo, range } from '../math'
 import { FighterSummary } from '../summaries/fighterSummary'
 import { LayoutSummary } from '../summaries/layoutSummary'
 import { Camera } from './camera'
@@ -23,9 +23,9 @@ export class Renderer {
 
   backgroundColor = '#000000'
   torsoColor1 = 'rgb(0,000,255)'
-  bladeColor1 = 'rgb(0,190,255)'
-  torsoColor2 = 'rgb(0,120,000)'
-  bladeColor2 = 'rgb(0,255,000)'
+  bladeColor1 = 'rgba(0,190,255,0.5)'
+  torsoColor2 = 'rgb(0,140,000)'
+  bladeColor2 = 'rgba(150,255,150,0.5)'
 
   constructor (client: Client) {
     this.canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -173,13 +173,17 @@ export class Renderer {
 
   drawRope (fighter: FighterSummary): void {
     this.resetContext()
+    const distance = Vec2.distance(fighter.bladePosition, fighter.position)
+    if (distance < Torso.radius + Blade.radius) return
+    const dirFromBlade = dirFromTo(fighter.bladePosition, fighter.position)
+    const anchor = Vec2.combine(1, fighter.bladePosition, Blade.radius, dirFromBlade)
     this.context.globalAlpha = 0.5
     this.context.strokeStyle = 'white'
     this.context.beginPath()
     this.context.lineWidth = 0.1
     this.context.beginPath()
     this.context.moveTo(fighter.position.x, fighter.position.y)
-    this.context.lineTo(fighter.bladePosition.x, fighter.bladePosition.y)
+    this.context.lineTo(anchor.x, anchor.y)
     this.context.stroke()
   }
 

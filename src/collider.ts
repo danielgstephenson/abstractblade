@@ -86,6 +86,8 @@ export class Collider {
         const fighterB = featureB.fighter
         if (fighterA.id === fighterB.id) {
           contact.setEnabled(false)
+        }
+        if (fighterA.team === fighterB.team) {
           return
         }
         const manifold = contact.getWorldManifold(null)

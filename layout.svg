@@ -31,7 +31,7 @@
      inkscape:window-x="-8"
      inkscape:window-y="2"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer4"
      pagecolor="#242424"
      width="100mm"
      fit-margin-top="0"
@@ -177,13 +177,6 @@
        id="path845"
        cx="52.5"
        cy="157.5"
-       inkscape:label="star"
-       r="1" />
-    <circle
-       style="fill:#ffff00;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
-       id="path845-0"
-       cx="52.5"
-       cy="112.5"
        inkscape:label="star"
        r="1" />
     <circle
