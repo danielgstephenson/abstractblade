@@ -5,6 +5,7 @@ import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
 import { Blade } from '../features/blade'
+import { Torso } from '../features/torso'
 
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
@@ -31,7 +32,6 @@ export class Guard extends Fighter {
   postStep (dt: number): void {
     super.postStep(dt)
     this.guardAreas = this.getGuardAreas()
-    console.log('bladeSpeed', this.weapon.velocity.length().toFixed(2))
     if (this.dead) {
       const visiblePlayer = this.getVisiblePlayer()
       if (visiblePlayer == null) {
@@ -47,23 +47,34 @@ export class Guard extends Fighter {
     this.moveDir = this.wallSlide(this.getFightMove(targetPlayer))
   }
 
+  getDanger (player: Fighter): boolean {
+    const distanceToPlayerBlade = Vec2.distance(player.weapon.position, this.position)
+    const lookAhead = 0.5
+    const futurePosition = Vec2.combine(1, this.position, lookAhead, this.velocity)
+    const futurePlayerBladePosition = Vec2.combine(1, player.weapon.position, lookAhead, player.weapon.velocity)
+    const futureDistanceToPlayerBlade = Vec2.distance(futurePosition, futurePlayerBladePosition)
+    const minDistanceToPlayerBlade = Math.min(distanceToPlayerBlade, futureDistanceToPlayerBlade)
+    const danger = minDistanceToPlayerBlade < this.reach - Blade.radius
+    return danger
+  }
+
   getFightMove (player: Fighter): Vec2 {
     const dirFromPlayer = dirFromTo(player.position, this.position)
     const swingMove = this.getSwingMove()
-    // const distToPlayerBlade = Vec2.distance(player.weapon.position, this.position)
-    // if (distToPlayerBlade < Blade.radius + Torso.radius + 2) {
-    //   return dirFromPlayer
-    // }
+    const danger = this.getDanger(player)
+    if (danger) {
+      return dirFromTo(player.position, this.position)
+    }
     if (this.weapon.velocity.length() < 4) {
       return swingMove
     }
-    const targetDistance = this.reach - Blade.radius
-    const targetPosition = Vec2.combine(1, player.position, targetDistance, dirFromPlayer)
-    const distanceToTarget = Vec2.distance(this.position, targetPosition)
-    const dirToTarget = dirFromTo(this.position, targetPosition)
-    const chaseSpeed = 2 * distanceToTarget
-    const chaseVelocity = Vec2.combine(1, player.velocity, chaseSpeed, dirToTarget)
-    const chaseMove = dirFromTo(this.velocity, chaseVelocity)
+    const chaseDistance = this.reach - Blade.radius
+    const chasePosition = Vec2.combine(1, player.position, chaseDistance, dirFromPlayer)
+    const distanceToChasePosition = Vec2.distance(this.position, chasePosition)
+    const dirToChasePosition = dirFromTo(this.position, chasePosition)
+    const chaseSpeed = 10 * distanceToChasePosition
+    const targetVelocity = Vec2.combine(1, player.velocity, chaseSpeed, dirToChasePosition)
+    const chaseMove = dirFromTo(this.velocity, targetVelocity)
     if (Vec2.dot(chaseMove, swingMove) > 0) return swingMove
     return chaseMove
   }
