@@ -5,10 +5,10 @@ import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
 import { Blade } from '../features/blade'
-import { Torso } from '../features/torso'
 
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
+  distanceToPlayer: number = Infinity
 
   constructor (game: Game, position: Vec2) {
     super(game, position)
@@ -23,6 +23,7 @@ export class Guard extends Fighter {
     this.body.setPosition(this.spawnPoint)
     this.body.setLinearVelocity(Vec2.zero())
     this.body.setAngularVelocity(0)
+    this.distanceToPlayer = Infinity
   }
 
   preStep (dt: number): void {
@@ -36,10 +37,25 @@ export class Guard extends Fighter {
       const visiblePlayer = this.getVisiblePlayer()
       if (visiblePlayer == null) {
         this.respawn()
+      }
+      return
+    }
+    const targetPlayer = this.getTargetPlayer()
+    if (targetPlayer != null) {
+      this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
+    } else {
+      this.distanceToPlayer = Infinity
+    }
+    const nearGuard = this.getNearGuard()
+    if (nearGuard != null) {
+      const nearGuardDistance = Vec2.distance(nearGuard.position, this.position)
+      const tooClose = nearGuardDistance < 2 * this.reach
+      const yieldToOther = nearGuard.distanceToPlayer <= this.distanceToPlayer
+      if (tooClose && yieldToOther) {
+        this.moveDir = dirFromTo(nearGuard.position, this.position)
         return
       }
     }
-    const targetPlayer = this.getTargetPlayer()
     if (targetPlayer == null) {
       this.moveDir = this.getHomeMove()
       return
@@ -49,12 +65,12 @@ export class Guard extends Fighter {
 
   getDanger (player: Fighter): boolean {
     const distanceToPlayerBlade = Vec2.distance(player.weapon.position, this.position)
-    const lookAhead = 0.5
-    const futurePosition = Vec2.combine(1, this.position, lookAhead, this.velocity)
+    const lookAhead = 1
     const futurePlayerBladePosition = Vec2.combine(1, player.weapon.position, lookAhead, player.weapon.velocity)
-    const futureDistanceToPlayerBlade = Vec2.distance(futurePosition, futurePlayerBladePosition)
+    const futureDistanceToPlayerBlade = Vec2.distance(futurePlayerBladePosition, this.position)
     const minDistanceToPlayerBlade = Math.min(distanceToPlayerBlade, futureDistanceToPlayerBlade)
-    const danger = minDistanceToPlayerBlade < this.reach - Blade.radius
+    const danger = minDistanceToPlayerBlade < this.reach
+    console.log('dangerDistance', (minDistanceToPlayerBlade - this.reach).toFixed(2))
     return danger
   }
 
@@ -63,7 +79,10 @@ export class Guard extends Fighter {
     const swingMove = this.getSwingMove()
     const danger = this.getDanger(player)
     if (danger) {
-      return dirFromTo(player.position, this.position)
+      const dodgeSpeed = 4
+      const targetVelocity = Vec2.mul(dodgeSpeed, dirFromPlayer)
+      const dodgeMove = dirFromTo(this.velocity, targetVelocity)
+      return dodgeMove
     }
     if (this.weapon.velocity.length() < 4) {
       return swingMove
@@ -119,6 +138,21 @@ export class Guard extends Fighter {
     const dirToHome = dirFromTo(this.position, this.spawnPoint)
     if (distToHome > this.reach) return dirToHome
     return this.getSwingMove()
+  }
+
+  getNearGuard (): Guard | null {
+    const guards: Guard[] = []
+    this.guardAreas.forEach(guardArea => {
+      const areaGuards = [...guardArea.guards.values()]
+      const otherGuards = areaGuards.filter(guard => guard.id !== this.id)
+      guards.push(...otherGuards)
+    })
+    const livingGuards = guards.filter(guard => !guard.dead)
+    if (livingGuards.length === 0) return null
+    const distances = livingGuards.map(guard => {
+      return Vec2.distance(guard.position, this.position)
+    })
+    return livingGuards[whichMin(distances)]
   }
 
   getTargetPlayer (): Player | null {

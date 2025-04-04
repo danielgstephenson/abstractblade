@@ -19,6 +19,7 @@ export class Fighter extends Actor {
   dead = false
   deathTimer = 0
   team = 1
+  stringLength: number
   torso: Torso
   halo: Halo
   weapon: Weapon
@@ -43,12 +44,13 @@ export class Fighter extends Actor {
       center: new Vec2(0, 0),
       I: 1
     })
+    this.stringLength = this.reach - Blade.radius - Torso.radius
     const distanceJoint = new RopeJoint({
       bodyA: this.body,
       bodyB: this.weapon.body,
       localAnchorA: new Vec2(0, 0),
       localAnchorB: new Vec2(0, 0),
-      maxLength: this.reach - Blade.radius - Torso.radius,
+      maxLength: this.stringLength,
       collideConnected: false
     })
     this.game.world.createJoint(distanceJoint)

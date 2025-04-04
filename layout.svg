@@ -24,8 +24,8 @@
      showgrid="true"
      units="mm"
      inkscape:zoom="2.932688"
-     inkscape:cx="124.11822"
-     inkscape:cy="477.88923"
+     inkscape:cx="124.28871"
+     inkscape:cy="587.00414"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -69,8 +69,8 @@
     <path
        id="rect2617"
        style="fill:#060606;fill-opacity:1;stroke-width:5.43908;stroke-linecap:round"
-       d="M 40,105 20.000001,85 20,40 45,15 V -5 L 30,-20 v -30 h 45 v 30 L 60,-5 v 20 l 24.999997,25 2e-6,45 L 65,105 v 60 l -5,5 H 45 l -5,-5 z"
-       sodipodi:nodetypes="ccccccccccccccccccc"
+       d="M 45,105 20.000001,85 20,40 45,15 V -5 L 30,-20 v -30 h 45 v 30 L 60,-5 v 20 l 24.999997,25 2e-6,45 L 60,105 v 45 l 5,5 v 15 H 40 v -15 l 5,-5 z"
+       sodipodi:nodetypes="ccccccccccccccccccccc"
        inkscape:label="path" />
   </g>
   <g
@@ -157,7 +157,7 @@
        style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-9-9-5-1"
        cx="52.5"
-       cy="135.05225"
+       cy="130"
        inkscape:label="guard"
        r="1">
       <desc
@@ -176,7 +176,7 @@
        style="fill:#ffff00;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845"
        cx="52.5"
-       cy="157.5"
+       cy="162.5"
        inkscape:label="star"
        r="1" />
     <circle

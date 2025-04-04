@@ -8,6 +8,8 @@ import { GuardArea } from './features/guardArea'
 import { Halo } from './features/halo'
 import { Boundary } from './features/boundary'
 import { Blade } from './features/blade'
+import { Fighter } from './actors/fighter'
+import { Guard } from './actors/guard'
 
 export class Collider {
   game: Game
@@ -33,8 +35,13 @@ export class Collider {
         if (actorA.stars.includes(actorB.index)) return
         actorA.stars.push(actorB.index)
       }
-      if (actorA instanceof Player && featureA instanceof Torso && featureB instanceof GuardArea) {
-        featureB.players.set(actorA.id, actorA)
+      if (actorA instanceof Fighter && featureA instanceof Torso && featureB instanceof GuardArea) {
+        if (actorA instanceof Player) {
+          featureB.players.set(actorA.id, actorA)
+        }
+        if (actorA instanceof Guard) {
+          featureB.guards.set(actorA.id, actorA)
+        }
       }
     })
   }
@@ -47,8 +54,13 @@ export class Collider {
       const featureA = pair[0]
       const featureB = pair[1]
       const actorA = featureA.actor
-      if (actorA instanceof Player && featureA instanceof Torso && featureB instanceof GuardArea) {
-        featureB.players.delete(actorA.id)
+      if (actorA instanceof Fighter && featureA instanceof Torso && featureB instanceof GuardArea) {
+        if (actorA instanceof Player) {
+          featureB.players.delete(actorA.id)
+        }
+        if (actorA instanceof Guard) {
+          featureB.guards.delete(actorA.id)
+        }
       }
     })
   }
