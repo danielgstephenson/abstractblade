@@ -7,12 +7,13 @@ export class Weapon extends Actor {
   fighter: Fighter
   blade: Blade
   team = 1
+  maxSpeed = 8
 
   constructor (fighter: Fighter) {
     super(fighter.game, {
       type: 'dynamic',
       bullet: true,
-      linearDamping: 0.2,
+      linearDamping: 0.1,
       fixedRotation: true
     })
     this.fighter = fighter

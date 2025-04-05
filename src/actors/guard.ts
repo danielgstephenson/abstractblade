@@ -4,6 +4,7 @@ import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
+import { Blade } from '../features/blade'
 
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
@@ -39,6 +40,7 @@ export class Guard extends Fighter {
       }
       return
     }
+    console.log('swing', Math.abs(this.swing).toFixed(2))
     const targetPlayer = this.getTargetPlayer()
     if (targetPlayer != null) {
       this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
@@ -63,14 +65,18 @@ export class Guard extends Fighter {
   }
 
   getFightMove (player: Fighter): Vec2 {
-    const targetDistance = 1.9 * this.reach
-    const targetPosition = Vec2.combine(1, player.position, targetDistance, new Vec2(0, 1))
-    const distanceToTarget = Vec2.distance(this.position, targetPosition)
-    const wanderDistance = 0.7 * this.reach
-    if (distanceToTarget < wanderDistance) {
-      return this.getSwingMove()
+    const swingMove = this.getSwingMove()
+    if (Math.abs(this.swing) < 0.3) {
+      return swingMove
     }
-    return dirFromTo(this.position, targetPosition)
+    const dirFromPlayer = dirFromTo(player.position, this.position)
+    const targetDistance = this.reach - Blade.radius
+    const targetPosition = Vec2.combine(1, player.position, targetDistance, dirFromPlayer)
+    const targetMove = dirFromTo(this.position, targetPosition)
+    if (Vec2.dot(targetMove, swingMove) > 0) {
+      return swingMove
+    }
+    return targetMove
   }
 
   getSwingMove (): Vec2 {
@@ -79,7 +85,7 @@ export class Guard extends Fighter {
     const bladePosition = this.weapon.body.getPosition()
     const away = Vec2.sub(bladePosition, position)
     const bladeSpeed = this.weapon.velocity.length()
-    if (bladeSpeed < 1) {
+    if (bladeSpeed < 2) {
       return dirFromTo(this.weapon.position, this.position)
     }
     if (away.length() === 0) return randomDir()

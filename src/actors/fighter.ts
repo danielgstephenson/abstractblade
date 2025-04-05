@@ -46,7 +46,7 @@ export class Fighter extends Actor {
       I: 1
     })
     this.stringLength = this.reach - Blade.radius - Torso.radius
-    const distanceJoint = new RopeJoint({
+    const ropeJoint = new RopeJoint({
       bodyA: this.body,
       bodyB: this.weapon.body,
       localAnchorA: new Vec2(0, 0),
@@ -54,7 +54,18 @@ export class Fighter extends Actor {
       maxLength: this.stringLength,
       collideConnected: false
     })
-    this.game.world.createJoint(distanceJoint)
+    this.game.world.createJoint(ropeJoint)
+    // const distanceJoint = new DistanceJoint({
+    //   bodyA: this.body,
+    //   bodyB: this.weapon.body,
+    //   localAnchorA: new Vec2(0, 0),
+    //   localAnchorB: new Vec2(0, 0),
+    //   collideConnected: false,
+    //   length: 0,
+    //   frequencyHz: 0.4,
+    //   dampingRatio: 0
+    // })
+    // this.game.world.createJoint(distanceJoint)
   }
 
   die (deathPoint: Vec2): void {
@@ -95,21 +106,11 @@ export class Fighter extends Actor {
 
   postStep (dt: number): void {
     super.postStep(dt)
-    this.limitSpeed()
     if (this.dead) {
       this.deathTimer += dt
     }
     if (this.removed) {
       this.game.fighters.delete(this.id)
-    }
-  }
-
-  limitSpeed (): void {
-    const oldVelocity = this.body.getLinearVelocity()
-    const oldSpeed = oldVelocity.length()
-    if (oldSpeed > this.maxSpeed) {
-      this.velocity = Vec2.mul(this.maxSpeed, normalize(oldVelocity))
-      this.body.setLinearVelocity(this.velocity)
     }
   }
 

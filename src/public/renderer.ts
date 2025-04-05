@@ -23,9 +23,9 @@ export class Renderer {
 
   backgroundColor = '#000000'
   torsoColor1 = 'rgb(0,000,255)'
-  bladeColor1 = 'rgba(0,190,255,0.5)'
+  bladeColor1 = 'rgba(0,190,255,0.4)'
   torsoColor2 = 'rgb(0,140,000)'
-  bladeColor2 = 'rgba(150,255,150,0.5)'
+  bladeColor2 = 'rgba(150,255,150,0.4)'
 
   constructor (client: Client) {
     this.canvas = document.getElementById('canvas') as HTMLCanvasElement
