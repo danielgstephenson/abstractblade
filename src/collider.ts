@@ -78,12 +78,12 @@ export class Collider {
         contact.setEnabled(false)
         return
       }
-      // if (featureA instanceof Blade && !(featureB instanceof Blade)) {
-      //   contact.setEnabled(false)
-      // }
-      // if (featureB instanceof Blade && !(featureA instanceof Blade)) {
-      //   contact.setEnabled(false)
-      // }
+      if (featureA instanceof Blade && featureB instanceof Boundary) {
+        contact.setEnabled(false)
+      }
+      if (featureA instanceof Boundary && featureB instanceof Blade) {
+        contact.setEnabled(false)
+      }
       if (featureA instanceof Halo || featureB instanceof Halo) {
         contact.setEnabled(false)
       }

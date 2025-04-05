@@ -9,8 +9,9 @@ import { Weapon } from './weapon'
 import { Blade } from '../features/blade'
 
 export class Fighter extends Actor {
-  movePower = 4
-  reach = 4
+  movePower = 10
+  maxSpeed = 3
+  reach = 5
   deathPoint = new Vec2(0, 0)
   moveDir = new Vec2(0, 0)
   swing = 0
@@ -28,7 +29,7 @@ export class Fighter extends Actor {
     super(game, {
       type: 'dynamic',
       bullet: true,
-      linearDamping: 1,
+      linearDamping: 0,
       fixedRotation: true
     })
     this.label = 'fighter'
@@ -94,11 +95,21 @@ export class Fighter extends Actor {
 
   postStep (dt: number): void {
     super.postStep(dt)
+    this.limitSpeed()
     if (this.dead) {
       this.deathTimer += dt
     }
     if (this.removed) {
       this.game.fighters.delete(this.id)
+    }
+  }
+
+  limitSpeed (): void {
+    const oldVelocity = this.body.getLinearVelocity()
+    const oldSpeed = oldVelocity.length()
+    if (oldSpeed > this.maxSpeed) {
+      this.velocity = Vec2.mul(this.maxSpeed, normalize(oldVelocity))
+      this.body.setLinearVelocity(this.velocity)
     }
   }
 
