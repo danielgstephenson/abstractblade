@@ -66,7 +66,7 @@ export class Guard extends Fighter {
 
   getFightMove (player: Fighter): Vec2 {
     const swingMove = this.getSwingMove()
-    if (Math.abs(this.swing) < 0.3) {
+    if (Math.abs(this.swing) < 0.4) {
       return swingMove
     }
     const dirFromPlayer = dirFromTo(player.position, this.position)
@@ -76,7 +76,12 @@ export class Guard extends Fighter {
     if (Vec2.dot(targetMove, swingMove) > 0) {
       return swingMove
     }
-    return targetMove
+    const sideMove1 = rotate(targetMove, 0.5 * pi)
+    const sideMove2 = rotate(targetMove, -0.5 * pi)
+    if (Vec2.dot(sideMove1, swingMove) > 0) {
+      return sideMove1
+    }
+    return sideMove2
   }
 
   getSwingMove (): Vec2 {
