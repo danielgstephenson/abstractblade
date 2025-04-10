@@ -75,7 +75,7 @@ export class Game extends Simulation {
       player.model.blade.body.setLinearVelocity(player.blade.velocity)
       player.model.moveDir = player.moveDir
     })
-    range(1, 16).forEach(() => {
+    range(1, 20).forEach(() => {
       this.simulation.runner.step(0.1 * this.timeScale)
       this.players.forEach(player => {
         player.forecast.push(player.model.position.clone())

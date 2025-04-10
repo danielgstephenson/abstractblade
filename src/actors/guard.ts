@@ -43,7 +43,7 @@ export class Guard extends Fighter {
       }
       return
     }
-    console.log('bladeSpeed', this.blade.velocity.length().toFixed(2))
+    // console.log('bladeSpeed', this.blade.velocity.length().toFixed(2))
     const targetPlayer = this.getTargetPlayer()
     if (targetPlayer != null) {
       this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
@@ -70,7 +70,7 @@ export class Guard extends Fighter {
   getFightMove (player: Player): Vec2 {
     for (const point of player.blade.forecast) {
       const distance = Vec2.distance(this.position, point)
-      if (distance < BladeCircle.radius + 3 * Torso.radius) {
+      if (distance < BladeCircle.radius + 1 * Torso.radius) {
         // console.log('danger')
         return dirFromTo(point, this.position)
       }
