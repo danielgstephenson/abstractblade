@@ -1,11 +1,11 @@
-import { Game } from '../game'
+import { Simulation } from '../simulation'
 import { FighterSummary } from './fighterSummary'
 
-export class GameSummary {
+export class SimulationSummary {
   fighters: FighterSummary[]
 
-  constructor (game: Game) {
-    const fighters = [...game.fighters.values()]
+  constructor (simulation: Simulation) {
+    const fighters = [...simulation.fighters.values()]
     this.fighters = fighters.map(fighter => fighter.summarize())
   }
 }

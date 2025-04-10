@@ -121,7 +121,6 @@ export class Renderer {
       this.context.fill()
       this.context.strokeStyle = brightYellow
       this.context.lineWidth = 0.6
-      console.log(this.stars)
       if (this.stars.includes(index)) {
         this.context.save()
         this.context.clip()

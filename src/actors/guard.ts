@@ -1,17 +1,19 @@
 import { Transform, Vec2 } from 'planck'
 import { Fighter } from './fighter'
-import { Game } from '../game'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
 import { Blade } from '../features/blade'
+import { Game } from '../game'
 
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   distanceToPlayer: number = Infinity
+  game: Game
 
   constructor (game: Game, position: Vec2) {
     super(game, position)
+    this.game = game
     this.game.guards.set(this.id, this)
     this.spawnPoint = position
     this.team = 2
@@ -40,7 +42,8 @@ export class Guard extends Fighter {
       }
       return
     }
-    console.log('swing', Math.abs(this.swing).toFixed(2))
+    // console.log('swingSpeed', Math.abs(this.swing).toFixed(2))
+    // console.log('bladeSpeed', this.weapon.velocity.length().toFixed(2))
     const targetPlayer = this.getTargetPlayer()
     if (targetPlayer != null) {
       this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
@@ -66,22 +69,28 @@ export class Guard extends Fighter {
 
   getFightMove (player: Fighter): Vec2 {
     const swingMove = this.getSwingMove()
-    if (Math.abs(this.swing) < 0.3) {
+    const bladeSpeed = this.weapon.velocity.length()
+    if (bladeSpeed < 10) {
       return swingMove
     }
+    const distanceToPlayer = Vec2.distance(this.position, player.position)
     const dirFromPlayer = dirFromTo(player.position, this.position)
     const targetDistance = this.reach - Blade.radius
-    const targetPosition = Vec2.combine(1, player.position, targetDistance, dirFromPlayer)
-    const targetMove = dirFromTo(this.position, targetPosition)
+    const reachTime = 0.5 * distanceToPlayer / this.maxSpeed
+    const playerFuturePosition = Vec2.combine(1, player.position, reachTime, player.velocity)
+    const targetPosition = Vec2.combine(1, playerFuturePosition, targetDistance, dirFromPlayer)
+    const targetDir = dirFromTo(this.position, targetPosition)
+    const targetVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, targetDir)
+    const targetMove = dirFromTo(this.velocity, targetVelocity)
     if (Vec2.dot(targetMove, swingMove) > 0) {
-      return swingMove
+      return targetMove
     }
     const sideMove1 = rotate(targetMove, 0.5 * pi)
     const sideMove2 = rotate(targetMove, -0.5 * pi)
     if (Vec2.dot(sideMove1, swingMove) > 0) {
-      return sideMove1
+      return Vec2.combine(1.0, sideMove1, 0, targetMove)
     }
-    return sideMove2
+    return Vec2.combine(1.0, sideMove2, 0, targetMove)
   }
 
   getSwingMove (): Vec2 {
@@ -183,7 +192,7 @@ export class Guard extends Fighter {
   }
 
   getGuardAreas (): GuardArea[] {
-    const guardAreas = this.game.cavern.guardAreas.filter(guardArea => {
+    const guardAreas = this.simulation.cavern.guardAreas.filter(guardArea => {
       return guardArea.polygon.testPoint(Transform.identity(), this.position)
     })
     return guardAreas

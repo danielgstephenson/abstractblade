@@ -1,43 +1,28 @@
 import { Server } from './server'
-import { Vec2, World } from 'planck'
-import { Actor } from './actors/actor'
-import { Cavern } from './actors/cavern'
-import { Fighter } from './actors/fighter'
-import { GameSummary } from './summaries/gameSummary'
-import { Runner } from './runner'
 import { InputSummary } from './summaries/inputSummary'
-import { Layout } from './layout'
-import { Star } from './actors/star'
-import { Collider } from './collider'
-import { Guard } from './actors/guard'
 import { Player } from './actors/player'
+import { Simulation } from './simulation'
+import { Guard } from './actors/guard'
+import { Star } from './actors/star'
+import { SimulationSummary } from './summaries/gameSummary'
 
-export class Game {
-  world: World
-  layout: Layout
-  cavern: Cavern
-  server: Server
-  runner: Runner
-  collider: Collider
-  actors = new Map<string, Actor>()
-  fighters = new Map<string, Fighter>()
+export class Game extends Simulation {
+  time: number
+  timeScale: number
+  // simulation: Simulation
   players = new Map<string, Player>()
   guards = new Map<string, Guard>()
   stars = new Map<string, Star>()
-  summary: GameSummary
-  startPoint = Vec2(0, 0)
 
   constructor (server: Server) {
-    this.server = server
-    this.layout = new Layout()
-    this.world = new World()
-    this.cavern = new Cavern(this)
-    this.summary = new GameSummary(this)
-    this.runner = new Runner(this)
-    this.collider = new Collider(this)
+    super(server)
+    this.time = performance.now()
+    this.timeScale = this.server.config.timeScale
+    // this.simulation = new Simulation(this.server)
     this.setupSavePoints()
     this.setupGuards()
     this.setupIo()
+    setInterval(() => this.step(), 20)
   }
 
   setupIo (): void {
@@ -62,6 +47,12 @@ export class Game {
     })
   }
 
+  setupGuards (): void {
+    this.layout.guardPoints.forEach((position, i) => {
+      void new Guard(this, position)
+    })
+  }
+
   setupSavePoints (): void {
     this.layout.starPoints.forEach((position, index) => {
       void new Star(this, position, index)
@@ -69,13 +60,15 @@ export class Game {
     })
   }
 
-  setupGuards (): void {
-    this.layout.guardPoints.forEach((position, i) => {
-      void new Guard(this, position)
-    })
-  }
-
-  summarize (): GameSummary {
-    return new GameSummary(this)
+  step (): void {
+    const oldTime = this.time
+    this.time = performance.now()
+    const dt = this.timeScale * (this.time - oldTime) / 1000
+    this.runner.step(dt)
+    // this.players.forEach(player => {
+    //   player.model.body.setPosition(player.position)
+    //   player.model.weapon.body.setPosition(player.weapon.position)
+    // })
+    this.summary = new SimulationSummary(this)
   }
 }

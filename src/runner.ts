@@ -1,24 +1,19 @@
-import { Game } from './game'
+import { Simulation } from './simulation'
 
 export class Runner {
-  game: Game
+  simulation: Simulation
   timescale: number
   time: number
 
-  constructor (game: Game) {
-    this.game = game
+  constructor (game: Simulation) {
+    this.simulation = game
     this.time = performance.now()
-    this.timescale = this.game.server.config.timeScale
-    setInterval(() => this.step(), 20)
+    this.timescale = this.simulation.server.config.timeScale
   }
 
-  step (): void {
-    const oldTime = this.time
-    this.time = performance.now()
-    const dt = this.timescale * (this.time - oldTime) / 1000
-    this.game.actors.forEach(actor => actor.preStep(dt))
-    this.game.world.step(dt)
-    this.game.actors.forEach(actor => actor.postStep(dt))
-    this.game.summary = this.game.summarize()
+  step (dt: number): void {
+    this.simulation.actors.forEach(actor => actor.preStep(dt))
+    this.simulation.world.step(dt)
+    this.simulation.actors.forEach(actor => actor.postStep(dt))
   }
 }

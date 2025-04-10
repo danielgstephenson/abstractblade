@@ -1,10 +1,10 @@
 import { BodyDef, Body, Fixture, Vec2 } from 'planck'
-import { Game } from '../game'
 import { normalize } from '../math'
+import { Simulation } from '../simulation'
 
 export class Actor {
   static count = 0
-  game: Game
+  simulation: Simulation
   body: Body
   id: string
   label = 'actor'
@@ -14,13 +14,13 @@ export class Actor {
   maxSpeed = Infinity
   angle = 0
 
-  constructor (game: Game, bodyDef: BodyDef) {
+  constructor (simulation: Simulation, bodyDef: BodyDef) {
     Actor.count += 1
     this.id = String(Actor.count)
-    this.game = game
-    this.body = this.game.world.createBody(bodyDef)
+    this.simulation = simulation
+    this.body = this.simulation.world.createBody(bodyDef)
     this.body.setUserData(this)
-    this.game.actors.set(this.id, this)
+    this.simulation.actors.set(this.id, this)
   }
 
   getFixtures (): Fixture[] {
@@ -37,8 +37,8 @@ export class Actor {
     this.limitSpeed()
     this.updateConfiguration()
     if (this.removed) {
-      this.game.world.destroyBody(this.body)
-      this.game.actors.delete(this.id)
+      this.simulation.world.destroyBody(this.body)
+      this.simulation.actors.delete(this.id)
     }
   }
 

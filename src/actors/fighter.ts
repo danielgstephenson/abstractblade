@@ -1,5 +1,4 @@
 import { RopeJoint, Vec2 } from 'planck'
-import { Game } from '../game'
 import { Actor } from './actor'
 import { Torso } from '../features/torso'
 import { FighterSummary } from '../summaries/fighterSummary'
@@ -7,11 +6,12 @@ import { dirFromTo, getAngleDiff, normalize, rotate, roundDir, vecToAngle } from
 import { Halo } from '../features/halo'
 import { Weapon } from './weapon'
 import { Blade } from '../features/blade'
+import { Simulation } from '../simulation'
 
 export class Fighter extends Actor {
   movePower = 10
   maxSpeed = 3
-  reach = 5
+  reach = 7
   deathPoint = new Vec2(0, 0)
   moveDir = new Vec2(0, 0)
   swing = 0
@@ -25,8 +25,8 @@ export class Fighter extends Actor {
   halo: Halo
   weapon: Weapon
 
-  constructor (game: Game, position: Vec2) {
-    super(game, {
+  constructor (simulation: Simulation, position: Vec2) {
+    super(simulation, {
       type: 'dynamic',
       bullet: true,
       linearDamping: 0,
@@ -35,7 +35,7 @@ export class Fighter extends Actor {
     this.label = 'fighter'
     this.body.setPosition(position)
     this.body.setAngularVelocity(0)
-    this.game.fighters.set(this.id, this)
+    this.simulation.fighters.set(this.id, this)
     this.torso = new Torso(this)
     this.halo = new Halo(this)
     this.weapon = new Weapon(this)
@@ -54,7 +54,7 @@ export class Fighter extends Actor {
       maxLength: this.stringLength,
       collideConnected: false
     })
-    this.game.world.createJoint(ropeJoint)
+    this.simulation.world.createJoint(ropeJoint)
     // const distanceJoint = new DistanceJoint({
     //   bodyA: this.body,
     //   bodyB: this.weapon.body,
@@ -110,7 +110,7 @@ export class Fighter extends Actor {
       this.deathTimer += dt
     }
     if (this.removed) {
-      this.game.fighters.delete(this.id)
+      this.simulation.fighters.delete(this.id)
     }
   }
 
@@ -121,6 +121,7 @@ export class Fighter extends Actor {
     this.weapon.body.setLinearVelocity(new Vec2(0, 0))
     this.deathTimer = 0
     this.dead = false
+    this.updateConfiguration()
   }
 
   updateConfiguration (): void {
@@ -168,6 +169,6 @@ export class Fighter extends Actor {
     super.remove()
     this.weapon.remove()
     this.dead = true
-    this.game.fighters.delete(this.id)
+    this.simulation.fighters.delete(this.id)
   }
 }

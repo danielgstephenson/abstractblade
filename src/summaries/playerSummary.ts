@@ -1,9 +1,9 @@
 import { Vec2 } from 'planck'
-import { GameSummary } from './gameSummary'
+import { SimulationSummary } from './gameSummary'
 import { Player } from '../actors/player'
 
 export class PlayerSummary {
-  game: GameSummary
+  game: SimulationSummary
   id: string
   spawnPoint: Vec2
   stars: number[]

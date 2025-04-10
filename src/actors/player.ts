@@ -8,23 +8,28 @@ import { rotate } from '../math'
 export class Player extends Fighter {
   spawnOffset = 2
   stars = [0]
+  game: Game
+  // model: Fighter
 
   constructor (game: Game) {
     super(game, game.startPoint)
     this.game = game
     this.game.players.set(this.id, this)
-    this.spawnPoint = this.game.startPoint
+    this.spawnPoint = this.simulation.startPoint
     this.team = 1
     this.respawn()
+    // this.model = new Fighter(this.game.simulation, this.position)
   }
 
   respawn (): void {
-    super.respawn()
     const spawnAngle = Math.random() * 2 * Math.PI
     const offset = rotate(new Vec2(0, this.spawnOffset), spawnAngle)
     const startPoint = Vec2.add(this.spawnPoint, offset)
     this.body.setPosition(startPoint)
     this.weapon.body.setPosition(startPoint)
+    this.body.setLinearVelocity(new Vec2(0, 0))
+    this.weapon.body.setLinearVelocity(new Vec2(0, 0))
+    this.updateConfiguration()
   }
 
   handleInput (input: InputSummary): void {

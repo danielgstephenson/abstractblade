@@ -1,5 +1,4 @@
 import { Contact, Vec2 } from 'planck'
-import { Game } from './game'
 import { Feature } from './features/feature'
 import { Star } from './actors/star'
 import { Player } from './actors/player'
@@ -10,15 +9,16 @@ import { Boundary } from './features/boundary'
 import { Blade } from './features/blade'
 import { Fighter } from './actors/fighter'
 import { Guard } from './actors/guard'
+import { Simulation } from './simulation'
 
 export class Collider {
-  game: Game
+  simulation: Simulation
 
-  constructor (game: Game) {
-    this.game = game
-    this.game.world.on('pre-solve', contact => this.preSolve(contact))
-    this.game.world.on('begin-contact', contact => this.beginContact(contact))
-    this.game.world.on('end-contact', contact => this.endContact(contact))
+  constructor (game: Simulation) {
+    this.simulation = game
+    this.simulation.world.on('pre-solve', contact => this.preSolve(contact))
+    this.simulation.world.on('begin-contact', contact => this.beginContact(contact))
+    this.simulation.world.on('end-contact', contact => this.endContact(contact))
   }
 
   beginContact (contact: Contact): void {
