@@ -5,6 +5,7 @@ import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
 import { BladeCircle } from '../features/bladeCircle'
 import { Game } from '../game'
+import { Torso } from '../features/torso'
 
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
@@ -69,19 +70,19 @@ export class Guard extends Fighter {
   getFightMove (player: Player): Vec2 {
     for (const point of player.blade.forecast) {
       const distance = Vec2.distance(this.position, point)
-      if (distance < this.reach - BladeCircle.radius) {
+      if (distance < BladeCircle.radius + 3 * Torso.radius) {
         // console.log('danger')
         return dirFromTo(point, this.position)
       }
     }
     // console.log('safety')
     const swingMove = this.getSwingMove()
-    const bladeSpeed = this.blade.velocity.length()
-    if (bladeSpeed < 2) {
-      return swingMove
-    }
+    // const bladeSpeed = this.blade.velocity.length()
+    // if (bladeSpeed < 0.8 * this.blade.maxSpeed) {
+    //   return swingMove
+    // }
     const distanceToPlayer = Vec2.distance(this.position, player.position)
-    const dirFromPlayer = new Vec2(0, 1) // dirFromTo(player.position, this.position)
+    const dirFromPlayer = dirFromTo(player.position, this.position)
     const targetDistance = this.reach - BladeCircle.radius
     const reachTime = 0.5 * distanceToPlayer / this.maxSpeed
     const playerFuturePosition = Vec2.combine(1, player.position, reachTime, player.velocity)
@@ -90,14 +91,14 @@ export class Guard extends Fighter {
     const targetVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, targetDir)
     const targetMove = dirFromTo(this.velocity, targetVelocity)
     if (Vec2.dot(targetMove, swingMove) > 0) {
-      return targetMove
+      return swingMove
     }
-    const sideMove1 = rotate(targetMove, 0.5 * pi)
-    const sideMove2 = rotate(targetMove, -0.5 * pi)
+    const sideMove1 = rotate(targetDir, 0.5 * pi)
+    const sideMove2 = rotate(targetDir, -0.5 * pi)
     if (Vec2.dot(sideMove1, swingMove) > 0) {
-      return Vec2.combine(1.0, sideMove1, 0, targetMove)
+      return sideMove1
     }
-    return Vec2.combine(1.0, sideMove2, 0, targetMove)
+    return sideMove2
   }
 
   getSwingMove (): Vec2 {

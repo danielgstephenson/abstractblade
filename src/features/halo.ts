@@ -1,6 +1,7 @@
 import { Circle, Vec2 } from 'planck'
 import { Feature } from './feature'
 import { Fighter } from '../actors/fighter'
+import { Torso } from './torso'
 
 export class Halo extends Feature {
   fighter: Fighter
@@ -8,7 +9,7 @@ export class Halo extends Feature {
 
   constructor (fighter: Fighter) {
     super(fighter, {
-      shape: new Circle(new Vec2(0, 0), 0.25 * fighter.reach),
+      shape: new Circle(new Vec2(0, 0), 2 * Torso.radius),
       density: 1,
       friction: 0,
       restitution: 0

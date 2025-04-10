@@ -10,8 +10,8 @@ import { Simulation } from '../simulation'
 
 export class Fighter extends Actor {
   movePower = 10
-  maxSpeed = 3
-  reach = 7
+  maxSpeed = 5
+  reach = 10
   deathPoint = new Vec2(0, 0)
   moveDir = new Vec2(0, 0)
   swing = 0

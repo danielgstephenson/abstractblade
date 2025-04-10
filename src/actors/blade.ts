@@ -7,14 +7,14 @@ export class Blade extends Actor {
   fighter: Fighter
   circle: BladeCircle
   team = 1
-  maxSpeed = 6
+  maxSpeed = 10
   forecast: Vec2[] = []
 
   constructor (fighter: Fighter) {
     super(fighter.simulation, {
       type: 'dynamic',
       bullet: true,
-      linearDamping: 0.2,
+      linearDamping: 0.0,
       fixedRotation: true
     })
     this.fighter = fighter
