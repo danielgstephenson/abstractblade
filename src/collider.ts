@@ -6,7 +6,7 @@ import { Torso } from './features/torso'
 import { GuardArea } from './features/guardArea'
 import { Halo } from './features/halo'
 import { Boundary } from './features/boundary'
-import { Blade } from './features/blade'
+import { BladeCircle } from './features/bladeCircle'
 import { Fighter } from './actors/fighter'
 import { Guard } from './actors/guard'
 import { Simulation } from './simulation'
@@ -78,10 +78,10 @@ export class Collider {
         contact.setEnabled(false)
         return
       }
-      if (featureA instanceof Blade && featureB instanceof Boundary) {
+      if (featureA instanceof BladeCircle && featureB instanceof Boundary) {
         contact.setEnabled(false)
       }
-      if (featureA instanceof Boundary && featureB instanceof Blade) {
+      if (featureA instanceof Boundary && featureB instanceof BladeCircle) {
         contact.setEnabled(false)
       }
       if (featureA instanceof Halo || featureB instanceof Halo) {
@@ -93,7 +93,7 @@ export class Collider {
         const wallPoint = new Vec2(worldManifold.points[0])
         featureA.wallPoints.push(wallPoint)
       }
-      if (featureA instanceof Blade && featureB instanceof Torso && contact.isTouching()) {
+      if (featureA instanceof BladeCircle && featureB instanceof Torso && contact.isTouching()) {
         const fighterA = featureA.fighter
         const fighterB = featureB.fighter
         if (fighterA.id === fighterB.id) {

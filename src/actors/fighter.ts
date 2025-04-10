@@ -4,8 +4,8 @@ import { Torso } from '../features/torso'
 import { FighterSummary } from '../summaries/fighterSummary'
 import { dirFromTo, getAngleDiff, normalize, rotate, roundDir, vecToAngle } from '../math'
 import { Halo } from '../features/halo'
-import { Weapon } from './weapon'
-import { Blade } from '../features/blade'
+import { Blade } from './blade'
+import { BladeCircle } from '../features/bladeCircle'
 import { Simulation } from '../simulation'
 
 export class Fighter extends Actor {
@@ -23,7 +23,8 @@ export class Fighter extends Actor {
   stringLength: number
   torso: Torso
   halo: Halo
-  weapon: Weapon
+  blade: Blade
+  forecast: Vec2[] = []
 
   constructor (simulation: Simulation, position: Vec2) {
     super(simulation, {
@@ -38,34 +39,23 @@ export class Fighter extends Actor {
     this.simulation.fighters.set(this.id, this)
     this.torso = new Torso(this)
     this.halo = new Halo(this)
-    this.weapon = new Weapon(this)
+    this.blade = new Blade(this)
     this.updateConfiguration()
     this.body.setMassData({
       mass: 1,
       center: new Vec2(0, 0),
       I: 1
     })
-    this.stringLength = this.reach - Blade.radius - Torso.radius
+    this.stringLength = this.reach - BladeCircle.radius - Torso.radius
     const ropeJoint = new RopeJoint({
       bodyA: this.body,
-      bodyB: this.weapon.body,
+      bodyB: this.blade.body,
       localAnchorA: new Vec2(0, 0),
       localAnchorB: new Vec2(0, 0),
       maxLength: this.stringLength,
       collideConnected: false
     })
     this.simulation.world.createJoint(ropeJoint)
-    // const distanceJoint = new DistanceJoint({
-    //   bodyA: this.body,
-    //   bodyB: this.weapon.body,
-    //   localAnchorA: new Vec2(0, 0),
-    //   localAnchorB: new Vec2(0, 0),
-    //   collideConnected: false,
-    //   length: 0,
-    //   frequencyHz: 0.4,
-    //   dampingRatio: 0
-    // })
-    // this.game.world.createJoint(distanceJoint)
   }
 
   die (deathPoint: Vec2): void {
@@ -117,8 +107,8 @@ export class Fighter extends Actor {
   respawn (): void {
     this.body.setPosition(this.spawnPoint)
     this.body.setLinearVelocity(new Vec2(0, 0))
-    this.weapon.body.setPosition(this.spawnPoint)
-    this.weapon.body.setLinearVelocity(new Vec2(0, 0))
+    this.blade.body.setPosition(this.spawnPoint)
+    this.blade.body.setLinearVelocity(new Vec2(0, 0))
     this.deathTimer = 0
     this.dead = false
     this.updateConfiguration()
@@ -132,20 +122,20 @@ export class Fighter extends Actor {
 
   getAngle (): number {
     const position = this.body.getPosition()
-    const bladePosition = this.weapon.body.getPosition()
+    const bladePosition = this.blade.body.getPosition()
     const x = Vec2.sub(bladePosition, position)
     return vecToAngle(x)
   }
 
   getSwing (): number {
     const position = this.body.getPosition()
-    const bladePosition = this.weapon.body.getPosition()
+    const bladePosition = this.blade.body.getPosition()
     const x = Vec2.sub(bladePosition, position)
     const r = x.length()
     if (r === 0) return 0
     const p = rotate(normalize(x), 0.5 * Math.PI)
     const velocity = this.body.getLinearVelocity()
-    const bladeVelocity = this.weapon.body.getLinearVelocity()
+    const bladeVelocity = this.blade.body.getLinearVelocity()
     const v = Vec2.sub(bladeVelocity, velocity)
     return Vec2.dot(v, p) / (r * 2 * Math.PI)
   }
@@ -167,7 +157,7 @@ export class Fighter extends Actor {
 
   remove (): void {
     super.remove()
-    this.weapon.remove()
+    this.blade.remove()
     this.dead = true
     this.simulation.fighters.delete(this.id)
   }

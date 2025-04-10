@@ -3,7 +3,7 @@ import { Fighter } from './fighter'
 import { GuardArea } from '../features/guardArea'
 import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
-import { Blade } from '../features/blade'
+import { BladeCircle } from '../features/bladeCircle'
 import { Game } from '../game'
 
 export class Guard extends Fighter {
@@ -42,8 +42,7 @@ export class Guard extends Fighter {
       }
       return
     }
-    // console.log('swingSpeed', Math.abs(this.swing).toFixed(2))
-    // console.log('bladeSpeed', this.weapon.velocity.length().toFixed(2))
+    console.log('bladeSpeed', this.blade.velocity.length().toFixed(2))
     const targetPlayer = this.getTargetPlayer()
     if (targetPlayer != null) {
       this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
@@ -67,15 +66,23 @@ export class Guard extends Fighter {
     this.moveDir = this.wallSlide(this.getFightMove(targetPlayer))
   }
 
-  getFightMove (player: Fighter): Vec2 {
+  getFightMove (player: Player): Vec2 {
+    for (const point of player.blade.forecast) {
+      const distance = Vec2.distance(this.position, point)
+      if (distance < this.reach - BladeCircle.radius) {
+        // console.log('danger')
+        return dirFromTo(point, this.position)
+      }
+    }
+    // console.log('safety')
     const swingMove = this.getSwingMove()
-    const bladeSpeed = this.weapon.velocity.length()
-    if (bladeSpeed < 10) {
+    const bladeSpeed = this.blade.velocity.length()
+    if (bladeSpeed < 2) {
       return swingMove
     }
     const distanceToPlayer = Vec2.distance(this.position, player.position)
-    const dirFromPlayer = dirFromTo(player.position, this.position)
-    const targetDistance = this.reach - Blade.radius
+    const dirFromPlayer = new Vec2(0, 1) // dirFromTo(player.position, this.position)
+    const targetDistance = this.reach - BladeCircle.radius
     const reachTime = 0.5 * distanceToPlayer / this.maxSpeed
     const playerFuturePosition = Vec2.combine(1, player.position, reachTime, player.velocity)
     const targetPosition = Vec2.combine(1, playerFuturePosition, targetDistance, dirFromPlayer)
@@ -96,11 +103,11 @@ export class Guard extends Fighter {
   getSwingMove (): Vec2 {
     if (this.swing === 0) return randomDir()
     const position = this.body.getPosition()
-    const bladePosition = this.weapon.body.getPosition()
+    const bladePosition = this.blade.body.getPosition()
     const away = Vec2.sub(bladePosition, position)
-    const bladeSpeed = this.weapon.velocity.length()
+    const bladeSpeed = this.blade.velocity.length()
     if (bladeSpeed < 2) {
-      return dirFromTo(this.weapon.position, this.position)
+      return dirFromTo(this.blade.position, this.position)
     }
     if (away.length() === 0) return randomDir()
     const perp = rotate(away, -0.5 * pi * Math.sign(this.swing))

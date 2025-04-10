@@ -6,7 +6,7 @@ import { LayoutSummary } from '../summaries/layoutSummary'
 import { Camera } from './camera'
 import { Checker } from './checker'
 import { Client } from './client'
-import { Blade } from '../features/blade'
+import { BladeCircle } from '../features/bladeCircle'
 
 export class Renderer {
   canvas: HTMLCanvasElement
@@ -44,6 +44,7 @@ export class Renderer {
     this.drawBoundary()
     this.drawGaps()
     this.drawStars()
+    console.log('this.fighters.length', this.fighters.length)
     this.fighters.forEach(fighter => {
       this.drawBlood(fighter)
     })
@@ -55,6 +56,9 @@ export class Renderer {
     })
     this.fighters.forEach(fighter => {
       this.drawBlade(fighter)
+    })
+    this.fighters.forEach(fighter => {
+      this.drawForecast(fighter)
     })
   }
 
@@ -158,6 +162,16 @@ export class Renderer {
     this.context.fill()
   }
 
+  drawForecast (fighter: FighterSummary): void {
+    this.resetContext()
+    this.context.fillStyle = 'red'
+    fighter.bladeForecast.forEach(point => {
+      this.context.beginPath()
+      this.context.arc(point.x, point.y, 0.1, 0, 2 * Math.PI)
+      this.context.fill()
+    })
+  }
+
   drawBlade (fighter: FighterSummary): void {
     this.resetContext()
     this.context.fillStyle = fighter.team === 1 ? this.bladeColor1 : this.bladeColor2
@@ -165,7 +179,7 @@ export class Renderer {
     this.context.arc(
       fighter.bladePosition.x,
       fighter.bladePosition.y,
-      Blade.radius, 0, 2 * Math.PI
+      BladeCircle.radius, 0, 2 * Math.PI
     )
     this.context.fill()
   }
@@ -173,9 +187,9 @@ export class Renderer {
   drawRope (fighter: FighterSummary): void {
     this.resetContext()
     const distance = Vec2.distance(fighter.bladePosition, fighter.position)
-    if (distance < Torso.radius + Blade.radius) return
+    if (distance < Torso.radius + BladeCircle.radius) return
     const dirFromBlade = dirFromTo(fighter.bladePosition, fighter.position)
-    const anchor = Vec2.combine(1, fighter.bladePosition, Blade.radius, dirFromBlade)
+    const anchor = Vec2.combine(1, fighter.bladePosition, BladeCircle.radius, dirFromBlade)
     this.context.globalAlpha = 0.5
     this.context.strokeStyle = 'white'
     this.context.beginPath()

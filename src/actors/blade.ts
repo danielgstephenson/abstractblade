@@ -1,26 +1,27 @@
 import { Vec2 } from 'planck'
 import { Actor } from './actor'
 import { Fighter } from './fighter'
-import { Blade } from '../features/blade'
+import { BladeCircle } from '../features/bladeCircle'
 
-export class Weapon extends Actor {
+export class Blade extends Actor {
   fighter: Fighter
-  blade: Blade
+  circle: BladeCircle
   team = 1
-  maxSpeed = 15
+  maxSpeed = 6
+  forecast: Vec2[] = []
 
   constructor (fighter: Fighter) {
     super(fighter.simulation, {
       type: 'dynamic',
       bullet: true,
-      linearDamping: 0.1,
+      linearDamping: 0.2,
       fixedRotation: true
     })
     this.fighter = fighter
     this.label = 'weapon'
     this.body.setPosition(fighter.position)
     this.updateConfiguration()
-    this.blade = new Blade(this)
+    this.circle = new BladeCircle(this)
     this.body.setMassData({
       mass: 0.1,
       center: new Vec2(0, 0),

@@ -1,23 +1,23 @@
 import { Circle, Vec2 } from 'planck'
 import { Feature } from './feature'
-import { Weapon } from '../actors/weapon'
+import { Blade } from '../actors/blade'
 import { Fighter } from '../actors/fighter'
 
-export class Blade extends Feature {
+export class BladeCircle extends Feature {
   static radius = 2.2
-  weapon: Weapon
+  weapon: Blade
   fighter: Fighter
   alive = true
 
-  constructor (weapon: Weapon) {
-    super(weapon, {
-      shape: new Circle(new Vec2(0, 0), Blade.radius),
+  constructor (blade: Blade) {
+    super(blade, {
+      shape: new Circle(new Vec2(0, 0), BladeCircle.radius),
       density: 1,
       friction: 0,
       restitution: 0
     })
-    this.weapon = weapon
-    this.fighter = weapon.fighter
+    this.weapon = blade
+    this.fighter = blade.fighter
     this.label = 'blade'
   }
 }

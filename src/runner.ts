@@ -2,13 +2,9 @@ import { Simulation } from './simulation'
 
 export class Runner {
   simulation: Simulation
-  timescale: number
-  time: number
 
-  constructor (game: Simulation) {
-    this.simulation = game
-    this.time = performance.now()
-    this.timescale = this.simulation.server.config.timeScale
+  constructor (simulation: Simulation) {
+    this.simulation = simulation
   }
 
   step (dt: number): void {
