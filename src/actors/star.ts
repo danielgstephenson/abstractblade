@@ -4,7 +4,7 @@ import { Actor } from './actor'
 import { Game } from '../game'
 
 export class Star extends Actor {
-  static radius = 3
+  static radius = 10
   index: number
   feature: Feature
   position: Vec2
