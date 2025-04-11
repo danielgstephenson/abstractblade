@@ -59,7 +59,7 @@ export class Guard extends Fighter {
       }
     }
     if (targetPlayer == null) {
-      this.moveDir = this.getHomeMove()
+      this.moveDir = this.wallSlide(this.getHomeMove())
       return
     }
     this.moveDir = this.wallSlide(this.getFightMove(targetPlayer))
