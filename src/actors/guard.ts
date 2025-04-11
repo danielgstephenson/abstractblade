@@ -42,7 +42,6 @@ export class Guard extends Fighter {
       }
       return
     }
-    // console.log('bladeSpeed', this.blade.velocity.length().toFixed(2))
     const targetPlayer = this.getTargetPlayer()
     if (targetPlayer != null) {
       this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
@@ -67,27 +66,12 @@ export class Guard extends Fighter {
   }
 
   getFightMove (player: Player): Vec2 {
-    for (const point of player.blade.forecast) {
-      const distance = Vec2.distance(this.position, point)
-      if (distance < this.reach - BladeCircle.radius) {
-        console.log('danger')
-        const dirFromPoint = dirFromTo(point, this.position)
-        const targetVelocity = Vec2.combine(1, player.blade.velocity, this.maxSpeed, dirFromPoint)
-        return dirFromTo(this.velocity, targetVelocity)
-      }
-    }
-    console.log('safety')
+    const dodgeMove = this.getDodgeMove(player)
+    if (dodgeMove != null) return dodgeMove
     const swingMove = this.getSwingMove()
-    // const bladeSpeed = this.blade.velocity.length()
-    // if (bladeSpeed < 0.8 * this.blade.maxSpeed) {
-    //   return swingMove
-    // }
     const distanceToPlayer = Vec2.distance(this.position, player.position)
-    const dirFromPlayer = dirFromTo(player.position, this.position)
-    const targetDistance = 0 // this.reach - BladeCircle.radius
     const reachTime = 0.5 * distanceToPlayer / this.maxSpeed
-    const playerFuturePosition = Vec2.combine(1, player.position, reachTime, player.velocity)
-    const targetPosition = Vec2.combine(1, playerFuturePosition, targetDistance, dirFromPlayer)
+    const targetPosition = Vec2.combine(1, player.position, reachTime, player.velocity)
     const targetDir = dirFromTo(this.position, targetPosition)
     const targetVelocity = Vec2.combine(1, player.velocity, this.maxSpeed, targetDir)
     const targetMove = dirFromTo(this.velocity, targetVelocity)
@@ -95,12 +79,18 @@ export class Guard extends Fighter {
       return swingMove
     }
     return targetMove
-    // const sideMove1 = rotate(targetDir, 0.5 * pi)
-    // const sideMove2 = rotate(targetDir, -0.5 * pi)
-    // if (Vec2.dot(sideMove1, swingMove) > 0) {
-    //   return sideMove1
-    // }
-    // return sideMove2
+  }
+
+  getDodgeMove (player: Player): Vec2 | null {
+    for (const point of player.blade.forecast) {
+      const distance = Vec2.distance(this.position, point)
+      if (distance < this.reach - BladeCircle.radius) {
+        const dirFromPoint = dirFromTo(point, this.position)
+        const targetVelocity = Vec2.combine(1, player.blade.velocity, this.maxSpeed, dirFromPoint)
+        return dirFromTo(this.velocity, targetVelocity)
+      }
+    }
+    return null
   }
 
   getSwingMove (): Vec2 {
@@ -143,6 +133,11 @@ export class Guard extends Fighter {
   }
 
   getHomeMove (): Vec2 {
+    const player = this.getVisiblePlayer()
+    if (player != null) {
+      const dodgeMove = this.getDodgeMove(player)
+      if (dodgeMove != null) return dodgeMove
+    }
     const distToHome = Vec2.distance(this.position, this.spawnPoint)
     const dirToHome = dirFromTo(this.position, this.spawnPoint)
     if (distToHome > this.reach) return dirToHome
