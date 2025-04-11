@@ -98,11 +98,11 @@ export class Guard extends Fighter {
     const position = this.body.getPosition()
     const bladePosition = this.blade.body.getPosition()
     const away = Vec2.sub(bladePosition, position)
+    if (away.length() === 0) return randomDir()
     const bladeSpeed = this.blade.velocity.length()
     if (bladeSpeed < 2) {
       return dirFromTo(this.blade.position, this.position)
     }
-    if (away.length() === 0) return randomDir()
     const perp = rotate(away, -0.5 * pi * Math.sign(this.swing))
     return perp
   }
