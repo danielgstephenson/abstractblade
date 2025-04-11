@@ -198,7 +198,9 @@ export class Guard extends Fighter {
 
   getGuardAreas (): GuardArea[] {
     const guardAreas = this.simulation.cavern.guardAreas.filter(guardArea => {
-      return guardArea.polygon.testPoint(Transform.identity(), this.position)
+      const spawnInside = guardArea.polygon.testPoint(Transform.identity(), this.spawnPoint)
+      const currentInside = guardArea.polygon.testPoint(Transform.identity(), this.position)
+      return spawnInside || currentInside
     })
     return guardAreas
   }
