@@ -5,7 +5,6 @@ import { Player } from './player'
 import { dirFromTo, pi, randomDir, rotate, whichMax, whichMin } from '../math'
 import { BladeCircle } from '../features/bladeCircle'
 import { Game } from '../game'
-import { Torso } from '../features/torso'
 
 export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
@@ -70,12 +69,14 @@ export class Guard extends Fighter {
   getFightMove (player: Player): Vec2 {
     for (const point of player.blade.forecast) {
       const distance = Vec2.distance(this.position, point)
-      if (distance < BladeCircle.radius + 1 * Torso.radius) {
-        // console.log('danger')
-        return dirFromTo(point, this.position)
+      if (distance < this.reach - BladeCircle.radius) {
+        console.log('danger')
+        const dirFromPoint = dirFromTo(point, this.position)
+        const targetVelocity = Vec2.combine(1, player.blade.velocity, this.maxSpeed, dirFromPoint)
+        return dirFromTo(this.velocity, targetVelocity)
       }
     }
-    // console.log('safety')
+    console.log('safety')
     const swingMove = this.getSwingMove()
     // const bladeSpeed = this.blade.velocity.length()
     // if (bladeSpeed < 0.8 * this.blade.maxSpeed) {
@@ -83,7 +84,7 @@ export class Guard extends Fighter {
     // }
     const distanceToPlayer = Vec2.distance(this.position, player.position)
     const dirFromPlayer = dirFromTo(player.position, this.position)
-    const targetDistance = this.reach - BladeCircle.radius
+    const targetDistance = 0 // this.reach - BladeCircle.radius
     const reachTime = 0.5 * distanceToPlayer / this.maxSpeed
     const playerFuturePosition = Vec2.combine(1, player.position, reachTime, player.velocity)
     const targetPosition = Vec2.combine(1, playerFuturePosition, targetDistance, dirFromPlayer)
@@ -93,12 +94,13 @@ export class Guard extends Fighter {
     if (Vec2.dot(targetMove, swingMove) > 0) {
       return swingMove
     }
-    const sideMove1 = rotate(targetDir, 0.5 * pi)
-    const sideMove2 = rotate(targetDir, -0.5 * pi)
-    if (Vec2.dot(sideMove1, swingMove) > 0) {
-      return sideMove1
-    }
-    return sideMove2
+    return targetMove
+    // const sideMove1 = rotate(targetDir, 0.5 * pi)
+    // const sideMove2 = rotate(targetDir, -0.5 * pi)
+    // if (Vec2.dot(sideMove1, swingMove) > 0) {
+    //   return sideMove1
+    // }
+    // return sideMove2
   }
 
   getSwingMove (): Vec2 {

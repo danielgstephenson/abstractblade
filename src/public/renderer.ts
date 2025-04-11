@@ -58,7 +58,7 @@ export class Renderer {
       this.drawBlade(fighter)
     })
     this.fighters.forEach(fighter => {
-      this.drawForecast(fighter)
+      // this.drawForecast(fighter)
     })
   }
 
