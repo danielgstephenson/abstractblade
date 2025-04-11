@@ -99,9 +99,9 @@ export class Collider {
         if (fighterA.id === fighterB.id) {
           contact.setEnabled(false)
         }
-        if (fighterA.team === fighterB.team) {
-          return
-        }
+        // if (fighterA.team === fighterB.team) {
+        //   return
+        // }
         const manifold = contact.getWorldManifold(null)
         if (manifold == null) return
         if (manifold.pointCount === 0) return
