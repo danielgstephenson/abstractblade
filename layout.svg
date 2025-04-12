@@ -23,15 +23,15 @@
      inkscape:document-units="in"
      showgrid="true"
      units="mm"
-     inkscape:zoom="2.0737236"
-     inkscape:cx="100.78489"
-     inkscape:cy="37.854611"
+     inkscape:zoom="1.0368618"
+     inkscape:cx="75.226997"
+     inkscape:cy="-558.89801"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="2"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer4"
      pagecolor="#242424"
      width="100mm"
      fit-margin-top="0"
@@ -69,8 +69,8 @@
     <path
        id="rect2617"
        style="fill:#060606;fill-opacity:1;stroke-width:5.43908;stroke-linecap:round"
-       d="m 45,115 -5,-5 H 30 L 5,85 V 40 L 15,30 h 25 l 5,-5 V 20 L 25,0 V -25 L 35,-35 45,-45 V -60 L 35,-70 40,-80 H 52.5 65 l 5,10 -10,10 v 15 l 10,10 10,10 V 0 L 60,20 v 5 l 5,5 h 25 l 10,10 V 85 L 75,110 H 65 l -5,5 5,5 v 30 10 L 55,170 H 35 5 -10 l -5,-20 v -15 l 10,-5 10,10 v 15 h 30 l 5,-5 v -30 z"
-       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccccccccccccc"
+       d="m 45,115 -5,-5 H 30 L 20,100 h -45 l -5,10 h -15 l -10,-10 -5,-10 5,-10 5,-15 -5,-15 V 40 l 10,-10 h 85 l 5,-5 V 20 L 25,0 v -60 l -10,-30 0,-130 h 25 l 0,-15 12.5,-10 12.5,10 v 15 h 25 l 0,130 -10,30 V 0 L 60,20 v 5 l 5,5 h 95 l 5,20 -5,20 10,10 -15,30 -20,-10 H 85 L 75,110 H 65 l -5,5 5,5 v 30 10 L 55,170 H 35 5 -10 l -5,-20 v -15 l 10,-5 10,10 v 15 h 30 l 5,-5 v -30 z"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
        inkscape:label="path" />
   </g>
   <g
@@ -81,8 +81,8 @@
        id="rect6411"
        style="display:inline;mix-blend-mode:normal;fill:#242424;fill-opacity:1;stroke-width:2.6416;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:label="gap0"
-       d="M 25,70 V 50 l 5,-5 h 45 l 5,5 v 20 l -27.5,30 z"
-       sodipodi:nodetypes="cccccccc" />
+       d="m 35,80 h -70 l 5,-15 -5,-15 180,0 -5,30 H 70 L 55,95 h -5 z"
+       sodipodi:nodetypes="cccccccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -98,8 +98,14 @@
        id="rect2749-7"
        style="fill:none;stroke:#009988;stroke-width:0.508;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690196"
        inkscape:label="guardArea"
-       d="M 25,-10 H 80 V -25 L 60,-45 60,-55 H 45 l 0,10 -20,20 z"
+       d="m 25,-10 h 55 v -50 l 10,-30 0,-35 H 15 l 0,35 10,30 z"
        sodipodi:nodetypes="ccccccccc" />
+    <path
+       id="rect2749-7-4"
+       style="fill:none;stroke:#009988;stroke-width:0.508;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690196"
+       inkscape:label="guardArea"
+       d="m 15,-125 h 75 v -95 H 15 Z"
+       sodipodi:nodetypes="ccccc" />
     <path
        id="rect2749-8"
        style="fill:none;stroke:#009988;stroke-width:0.642575;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
@@ -107,29 +113,29 @@
        d="m 25,120 h 40 v 55 H 25 Z"
        sodipodi:nodetypes="ccccc" />
     <path
-       id="rect2749-8-1"
-       style="fill:none;stroke:#009988;stroke-width:0.633382;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
+       id="rect2749-8-8"
+       style="fill:none;stroke:#009988;stroke-width:0.597158;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
        inkscape:label="guardArea"
-       d="M 5,70 25,70 47.5,95 30,110 5,85 Z"
+       d="m -55,80 h 95 v 20 h -95 l -5,-10 z"
        sodipodi:nodetypes="cccccc" />
     <path
-       id="rect2749-8-1-8"
-       style="fill:none;stroke:#009988;stroke-width:0.633382;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
+       id="rect2749-8-8-9"
+       style="fill:none;stroke:#009988;stroke-width:0.597158;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
        inkscape:label="guardArea"
-       d="m 70,30 h 30 V 70 H 80 V 50 L 70,45 Z"
-       sodipodi:nodetypes="ccccccc" />
+       d="m 65,80.000001 h 95 V 99.999999 H 65 Z"
+       sodipodi:nodetypes="ccccc" />
     <path
-       id="rect2749-8-1-8-5"
-       style="fill:none;stroke:#009988;stroke-width:0.633382;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
+       id="rect2749-8-8-9-2"
+       style="fill:none;stroke:#009988;stroke-width:0.597158;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
        inkscape:label="guardArea"
-       d="M 35,30 H 5 V 70 H 25 V 50 l 10,-5 z"
-       sodipodi:nodetypes="ccccccc" />
+       d="m 65,30 h 95 V 50 H 65 Z"
+       sodipodi:nodetypes="ccccc" />
     <path
-       id="rect2749-8-1-1"
-       style="fill:none;stroke:#009988;stroke-width:0.633382;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
+       id="rect2749-8-8-9-7"
+       style="fill:none;stroke:#009988;stroke-width:0.597158;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.690763"
        inkscape:label="guardArea"
-       d="m 80,70 20,0 V 85 L 75,110 57.5,95 Z"
-       sodipodi:nodetypes="cccccc" />
+       d="M -55,30 H 40 V 50 H -55 Z"
+       sodipodi:nodetypes="ccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -150,8 +156,8 @@
     <circle
        style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-9-9-5-1-52"
-       cx="15"
-       cy="45"
+       cx="-20"
+       cy="40"
        inkscape:label="guard"
        r="1">
       <desc
@@ -162,8 +168,8 @@
     <circle
        style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-9-9-5-1-14"
-       cx="90"
-       cy="45"
+       cx="130"
+       cy="40"
        inkscape:label="guard"
        r="1">
       <desc
@@ -174,8 +180,8 @@
     <circle
        style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-9-9-5-1-14-2"
-       cx="82.5"
-       cy="85"
+       cx="90"
+       cy="90"
        inkscape:label="guard"
        r="1">
       <desc
@@ -185,13 +191,37 @@
     </circle>
     <circle
        style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-14-2-9"
+       cx="135"
+       cy="90"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-2-2-5">{
+	&quot;chargeProb&quot;: 1
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-9-9-5-1-14-2-1"
-       cx="15"
-       cy="80"
+       cx="10"
+       cy="90"
        inkscape:label="guard"
        r="1">
       <desc
          id="desc18950-2-2-6">{
+	&quot;chargeProb&quot;: 1
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-14-2-1-4"
+       cx="-35"
+       cy="90"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-2-2-6-3">{
 	&quot;chargeProb&quot;: 1
 }</desc>
     </circle>
@@ -216,6 +246,30 @@
        r="1">
       <desc
          id="desc18950-7">{
+	&quot;chargeProb&quot;: 0
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-1-1"
+       cx="52.5"
+       cy="-105"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-7-2">{
+	&quot;chargeProb&quot;: 0
+}</desc>
+    </circle>
+    <circle
+       style="fill:#008000;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-9-9-5-1-1-1-3"
+       cx="52.5"
+       cy="-152.5"
+       inkscape:label="guard"
+       r="1">
+      <desc
+         id="desc18950-7-2-3">{
 	&quot;chargeProb&quot;: 0
 }</desc>
     </circle>
@@ -254,9 +308,23 @@
        r="1" />
     <circle
        style="fill:#ffff00;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-0-9-3-6"
+       cx="-40"
+       cy="65"
+       inkscape:label="star"
+       r="1" />
+    <circle
+       style="fill:#ffff00;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
        id="path845-2"
        cx="52.5"
-       cy="-70"
+       cy="-230"
+       inkscape:label="star"
+       r="1" />
+    <circle
+       style="fill:#ffff00;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round"
+       id="path845-0-9-3-1"
+       cx="152.5"
+       cy="60"
        inkscape:label="star"
        r="1" />
   </g>

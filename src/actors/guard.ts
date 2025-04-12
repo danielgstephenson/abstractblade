@@ -41,8 +41,9 @@ export class Guard extends Fighter {
   postStep (dt: number): void {
     super.postStep(dt)
     this.guardAreas = this.getGuardAreas()
+    const targetPlayer = this.getTargetPlayer()
+    const nearestPlayer = this.getNearestPlayer(this.position)
     if (this.dead) {
-      const nearestPlayer = this.getNearestPlayer(this.position)
       if (nearestPlayer == null) {
         this.respawn()
         return
@@ -55,12 +56,11 @@ export class Guard extends Fighter {
       const distance = Vec2.distance(nearestPlayer.position, this.position)
       const spawnDistance = Vec2.distance(spawnNearestPlayer.position, this.spawnPoint)
       const minDistance = Math.min(distance, spawnDistance)
-      if (minDistance > 3 * this.reach) {
+      if (minDistance > 3 * this.reach && targetPlayer == null) {
         this.respawn()
       }
       return
     }
-    const targetPlayer = this.getTargetPlayer()
     if (targetPlayer != null) {
       this.distanceToPlayer = Vec2.distance(targetPlayer.position, this.position)
     } else {
