@@ -11,6 +11,7 @@ import { BladeCircle } from '../features/bladeCircle'
 export class Renderer {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D
+  starCountDiv: HTMLDivElement
   camera = new Camera()
   checker = new Checker()
   client: Client
@@ -30,6 +31,7 @@ export class Renderer {
   constructor (client: Client) {
     this.canvas = document.getElementById('canvas') as HTMLCanvasElement
     this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    this.starCountDiv = document.getElementById('starCountDiv') as HTMLDivElement
     this.id = ''
     this.client = client
     this.starVertices = this.getStarVertices()
@@ -39,6 +41,7 @@ export class Renderer {
   draw (): void {
     window.requestAnimationFrame(() => this.draw())
     if (this.layout == null) return
+    this.starCountDiv.innerHTML = this.stars.length.toFixed(0)
     this.setupCanvas()
     this.moveCamera()
     this.drawBoundary()
@@ -111,8 +114,8 @@ export class Renderer {
     if (this.layout == null) return
     this.resetContext()
     this.layout.stars.forEach((position, index) => {
-      const brightYellow = 'hsl(51 100 45)'
-      const darkYellow = 'hsl(51 100 7)'
+      const brightYellow = 'hsl(51 100 50)'
+      const darkYellow = 'hsl(51 30 20)'
       const distance = Vec2.distance(this.savePoint, position)
       this.context.fillStyle = distance < 1 ? brightYellow : darkYellow
       this.context.beginPath()

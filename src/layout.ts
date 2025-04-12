@@ -12,6 +12,7 @@ export class Layout {
   guardAreas: Vec2[][]
   starPoints: Vec2[] = []
   guardPoints: Vec2[] = []
+  chargeProbs: number[] = []
   summary: LayoutSummary
 
   constructor () {
@@ -28,6 +29,7 @@ export class Layout {
     this.guardAreas = this.getGuardAreas()
     this.starPoints = this.getStarPoints()
     this.guardPoints = this.getGuardPoints()
+    this.chargeProbs = this.getChargeProbs()
     this.summary = new LayoutSummary(this)
   }
 
@@ -41,22 +43,32 @@ export class Layout {
     return starPoints
   }
 
+  getChargeProbs (): number[] {
+    const guardPointLayer = this.svg.children[5]
+    const chargeProbs = guardPointLayer.children.map(guardCircle => {
+      if (guardCircle.children.length === 0) {
+        throw new Error('guardCircle.children.length = 0')
+      }
+      if (guardCircle.children[0].children.length === 0) {
+        throw new Error('guardCircle.children[0].children.length = 0')
+      }
+      const rawString = guardCircle.children[0].children[0].value
+      const jsonString = rawString.replaceAll('&quot;', '"')
+      const jsonObject = JSON.parse(jsonString)
+      if (jsonObject.chargeProb == null) {
+        throw new Error('missing chargeProb')
+      }
+      return Number(jsonObject.chargeProb)
+    })
+    return chargeProbs
+  }
+
   getGuardPoints (): Vec2[] {
     const guardPointLayer = this.svg.children[5]
     const guardPoints = guardPointLayer.children.map(guardCircle => {
       const x = Number(guardCircle.attributes.cx)
       const y = Number(guardCircle.attributes.cy)
       return Vec2(x, -y)
-    })
-    guardPointLayer.children.forEach(guardCircle => {
-      if (guardCircle.children.length === 0) return
-      if (guardCircle.children[0].children.length === 0) return
-      console.log('Description:')
-      const rawString = guardCircle.children[0].children[0].value
-      const jsonString = rawString.replaceAll('&quot;', '"')
-      console.log(rawString)
-      console.log(jsonString)
-      console.log(JSON.parse(jsonString))
     })
     return guardPoints
   }

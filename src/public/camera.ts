@@ -6,7 +6,7 @@ export class Camera {
   zoom = 0
   scale = 1
   maxZoom = 15
-  minZoom = -30
+  minZoom = -5
 
   constructor () {
     this.adjustZoom(0)

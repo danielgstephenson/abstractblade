@@ -10,10 +10,13 @@ export class Guard extends Fighter {
   guardAreas: GuardArea[] = []
   distanceToPlayer: number = Infinity
   game: Game
+  chargeProb: number
+  charge = false
 
-  constructor (game: Game, position: Vec2) {
+  constructor (game: Game, position: Vec2, chargeProb: number) {
     super(game, position)
     this.game = game
+    this.chargeProb = chargeProb
     this.game.guards.set(this.id, this)
     this.spawnPoint = position
     this.team = 2
@@ -30,14 +33,29 @@ export class Guard extends Fighter {
 
   preStep (dt: number): void {
     super.preStep(dt)
+    if (Math.random() < dt) {
+      this.charge = Math.random() < this.chargeProb
+    }
   }
 
   postStep (dt: number): void {
     super.postStep(dt)
     this.guardAreas = this.getGuardAreas()
     if (this.dead) {
-      const visiblePlayer = this.getVisiblePlayer()
-      if (visiblePlayer == null) {
+      const nearestPlayer = this.getNearestPlayer(this.position)
+      if (nearestPlayer == null) {
+        this.respawn()
+        return
+      }
+      const spawnNearestPlayer = this.getNearestPlayer(this.spawnPoint)
+      if (spawnNearestPlayer == null) {
+        this.respawn()
+        return
+      }
+      const distance = Vec2.distance(nearestPlayer.position, this.position)
+      const spawnDistance = Vec2.distance(spawnNearestPlayer.position, this.spawnPoint)
+      const minDistance = Math.min(distance, spawnDistance)
+      if (minDistance > 3 * this.reach) {
         this.respawn()
       }
       return
@@ -66,8 +84,10 @@ export class Guard extends Fighter {
   }
 
   getFightMove (player: Player): Vec2 {
-    const dodgeMove = this.getDodgeMove(player)
-    if (dodgeMove != null) return dodgeMove
+    if (!this.charge) {
+      const dodgeMove = this.getDodgeMove(player)
+      if (dodgeMove != null) return dodgeMove
+    }
     const swingMove = this.getSwingMove()
     const distanceToPlayer = Vec2.distance(this.position, player.position)
     const reachTime = 0.5 * distanceToPlayer / this.maxSpeed
@@ -133,7 +153,7 @@ export class Guard extends Fighter {
   }
 
   getHomeMove (): Vec2 {
-    const player = this.getVisiblePlayer()
+    const player = this.getNearestPlayer(this.position)
     if (player != null) {
       const dodgeMove = this.getDodgeMove(player)
       if (dodgeMove != null) return dodgeMove
@@ -173,27 +193,13 @@ export class Guard extends Fighter {
     return livingPlayers[whichMin(distances)]
   }
 
-  getVisiblePlayer (): Player | null {
-    const players: Player[] = []
-    this.guardAreas.forEach(guardArea => {
-      const guardAreaPlayers = [...guardArea.players.values()]
-      players.push(...guardAreaPlayers)
-    })
+  getNearestPlayer (position: Vec2): Player | null {
+    const players: Player[] = [...this.game.players.values()]
     if (players.length === 0) return null
     const distances = players.map(player => {
-      return Vec2.distance(player.position, this.position)
+      return Vec2.distance(player.position, position)
     })
     return players[whichMin(distances)]
-  }
-
-  getNearestPlayer (): Player | null {
-    const players: Player[] = [...this.game.players.values()]
-    const livingPlayers = players.filter(player => !player.dead)
-    if (livingPlayers.length === 0) return null
-    const distances = livingPlayers.map(player => {
-      return Vec2.distance(player.position, this.position)
-    })
-    return livingPlayers[whichMin(distances)]
   }
 
   getGuardAreas (): GuardArea[] {

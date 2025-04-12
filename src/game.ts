@@ -50,7 +50,8 @@ export class Game extends Simulation {
 
   setupGuards (): void {
     this.layout.guardPoints.forEach((position, i) => {
-      void new Guard(this, position)
+      const chargeProb = this.layout.chargeProbs[i]
+      void new Guard(this, position, chargeProb)
     })
   }
 
