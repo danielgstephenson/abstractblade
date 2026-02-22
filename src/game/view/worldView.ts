@@ -1,4 +1,4 @@
-import { Application, Container, Ticker } from 'pixi.js'
+import { Application, Container } from 'pixi.js'
 import { World } from '../../world/world'
 import { Game } from '../game'
 
@@ -6,7 +6,6 @@ export class WorldView extends Container {
   world: World
   game: Game
   app: Application
-  accumulator = 0
 
   constructor(world: World) {
     super()
@@ -17,13 +16,5 @@ export class WorldView extends Container {
     this.y = 0.5 * this.app.canvas.height
     this.scale.set(10)
     this.app.stage.addChild(this)
-  }
-
-  update(time: Ticker) {
-    this.accumulator += time.deltaTime
-    while (this.accumulator > this.world.timeStep) {
-      this.accumulator -= this.world.timeStep
-      this.world.step()
-    }
   }
 }

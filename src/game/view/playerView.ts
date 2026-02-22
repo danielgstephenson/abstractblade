@@ -1,9 +1,7 @@
 import { Graphics, GraphicsContext } from 'pixi.js'
 import { Player } from '../../world/body/player'
 
-const playerCircle = new GraphicsContext()
-  .circle(0, 0, 5)
-  .fill('hsl(220, 100%, 50%)')
+const playerCircle = new GraphicsContext().circle(0, 0, 5).fill('hsl(220, 100%, 50%)')
 
 export class PlayerView extends Graphics {
   player: Player
