@@ -40,6 +40,7 @@ export class World {
       this.step()
     }
     this.players.forEach(player => player.view.update())
+    this.view.update()
   }
 
   step(): void {

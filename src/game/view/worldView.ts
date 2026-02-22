@@ -12,9 +12,17 @@ export class WorldView extends Container {
     this.world = world
     this.game = world.game
     this.app = world.game.app
-    this.x = 0.5 * this.app.canvas.width
-    this.y = 0.5 * this.app.canvas.height
+    this.x = 0.5 * window.innerWidth
+    this.y = 0.5 * window.innerHeight
     this.scale.set(10)
     this.app.stage.addChild(this)
+  }
+
+  update(): void {
+    const player = this.world.players[0]
+    const offset = player != null ? player.position : [0, 0]
+    this.scale = 10 * Math.exp(0.1 * this.game.input.zoom)
+    this.x = 0.5 * window.innerWidth - this.scale.x * offset[0]
+    this.y = 0.5 * window.innerHeight - this.scale.y * offset[1]
   }
 }
