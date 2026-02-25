@@ -70,5 +70,6 @@ export class WorldView extends Container {
     this.floor.addChild(background)
     this.floor.addChild(mask)
     this.floor.mask = mask
+    this.floor.cacheAsTexture({ resolution: 10 })
   }
 }
