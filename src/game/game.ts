@@ -1,6 +1,7 @@
 import { Application } from 'pixi.js'
 import { World } from '../world/world'
 import { Input } from './input'
+import startSvg from '../svg/start.svg?raw'
 
 export class Game {
   app: Application
@@ -10,7 +11,7 @@ export class Game {
 
   constructor(app: Application) {
     this.app = app
-    this.world = new World(this)
+    this.world = new World(this, startSvg)
     this.input = new Input()
     app.ticker.add(time => {
       this.world.update(time)

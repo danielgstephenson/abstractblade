@@ -2,7 +2,7 @@ import { World } from '../world'
 import { Body } from './body'
 
 export class Agent extends Body {
-  movePower = 30
+  movePower = 15
   align = 1
   action = [0, 0]
   dead = false

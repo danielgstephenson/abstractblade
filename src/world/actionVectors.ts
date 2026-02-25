@@ -4,7 +4,7 @@ export const actionVectors: number[][] = []
 
 actionVectors.push([0, 0])
 
-range(8).forEach((i) => {
+range(8).forEach(i => {
   const angle = (2 * Math.PI * i) / 8
   const dir = angleToDir(angle)
   actionVectors.push(dir)

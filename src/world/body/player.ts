@@ -1,4 +1,4 @@
-import { PlayerView } from '../../game/view/playerView'
+import { PlayerView } from '../../view/playerView'
 import { normalize } from '../../math'
 import { World } from '../world'
 import { Agent } from './agent'

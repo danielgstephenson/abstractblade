@@ -1,5 +1,5 @@
 import { Graphics, GraphicsContext } from 'pixi.js'
-import { Player } from '../../world/body/player'
+import { Player } from '../world/body/player'
 
 const playerCircle = new GraphicsContext().circle(0, 0, 5).fill('hsl(220, 100%, 50%)')
 

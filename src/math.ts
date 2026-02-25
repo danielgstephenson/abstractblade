@@ -1,6 +1,6 @@
 export function range(a: number, b?: number): number[] {
   if (b == null) return [...Array(a).keys()]
-  return [...Array(b - a + 1).keys()].map((i) => a + i)
+  return [...Array(b - a + 1).keys()].map(i => a + i)
 }
 
 export function sample<T>(options: T[]): T {
@@ -9,7 +9,7 @@ export function sample<T>(options: T[]): T {
 
 export function sum(array: number[]): number {
   let total = 0
-  array.forEach((x) => {
+  array.forEach(x => {
     total = total + x
   })
   return total
@@ -21,8 +21,8 @@ export function mean(array: number[]): number {
 }
 
 export function meanPoint(points: number[][]): number[] {
-  const xs = points.map((p) => p[0])
-  const ys = points.map((p) => p[1])
+  const xs = points.map(p => p[0])
+  const ys = points.map(p => p[1])
   return [mean(xs), mean(ys)]
 }
 
@@ -49,28 +49,23 @@ export function angleToDir(angle: number): number[] {
 }
 
 export function sub(a: number[], b: number[]): number[] {
-  return range(a.length).map((i) => a[i] - b[i])
+  return range(a.length).map(i => a[i] - b[i])
 }
 
 export function add(a: number[], b: number[]): number[] {
-  return range(a.length).map((i) => a[i] + b[i])
+  return range(a.length).map(i => a[i] + b[i])
 }
 
-export function combine(
-  a: number,
-  v: number[],
-  b: number,
-  w: number[],
-): number[] {
+export function combine(a: number, v: number[], b: number, w: number[]): number[] {
   return add(mul(a, v), mul(b, w))
 }
 
 export function mul(a: number, v: number[]): number[] {
-  return v.map((x) => a * x)
+  return v.map(x => a * x)
 }
 
 export function getLength(v: number[]): number {
-  const squares = v.map((x) => x ** 2)
+  const squares = v.map(x => x ** 2)
   return Math.sqrt(sum(squares))
 }
 
@@ -105,7 +100,7 @@ export function whichMax(array: number[]): number {
 }
 
 export function whichMin(array: number[]): number {
-  const negArray = array.map((x) => -x)
+  const negArray = array.map(x => -x)
   return whichMax(negArray)
 }
 
@@ -127,11 +122,11 @@ export function randomDir(): number[] {
 export function sortBy<T>(array: T[], priorities: number[]): T[] {
   const pairs: Array<[T, number]> = array.map((x, i) => [x, priorities[i]])
   pairs.sort((a, b) => a[1] - b[1])
-  const sorted = pairs.map((pair) => pair[0])
+  const sorted = pairs.map(pair => pair[0])
   return sorted
 }
 
 export function shuffle<T>(array: T[]): T[] {
-  const priorities = array.map((_) => Math.random())
+  const priorities = array.map(_ => Math.random())
   return sortBy(array, priorities)
 }
