@@ -1,4 +1,4 @@
-import { Application, Container, FillGradient, Graphics, Rectangle, TilingSprite } from 'pixi.js'
+import { Application, Container, Graphics } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
 import { range } from '../math'
@@ -31,40 +31,6 @@ export class WorldView extends Container {
   }
 
   buildFloor(): void {
-    const fillGradient = new FillGradient({
-      type: 'radial',
-      center: { x: 0.5, y: 0.5 },
-      outerCenter: { x: 0.5, y: 0.5 },
-      colorStops: [
-        { offset: 0, color: 'hsla(0,0%,10%,1)' },
-        { offset: 1, color: 'hsla(0,0%,10%,0)' },
-      ],
-      textureSpace: 'local',
-      textureSize: 1024,
-    })
-    const graphics = new Graphics()
-    const R = 100
-    range(1).forEach(_ => {
-      const x = R * Math.random()
-      const y = R * Math.random()
-      const size = 0.5
-      graphics.circle(x, y, size * R).fill(fillGradient)
-      graphics.circle(x + R, y + 0, size * R).fill(fillGradient)
-      graphics.circle(x - R, y + 0, size * R).fill(fillGradient)
-      graphics.circle(x + 0, y + R, size * R).fill(fillGradient)
-      graphics.circle(x + 0, y - R, size * R).fill(fillGradient)
-      graphics.circle(x + R, y + R, size * R).fill(fillGradient)
-      graphics.circle(x - R, y + R, size * R).fill(fillGradient)
-      graphics.circle(x + R, y - R, size * R).fill(fillGradient)
-      graphics.circle(x - R, y - R, size * R).fill(fillGradient)
-    })
-    const texture = this.app.renderer.generateTexture({
-      target: graphics,
-      antialias: false,
-      clearColor: 'hsl(0,0%,3%)',
-      frame: new Rectangle(0, 0, R, R),
-      resolution: 1,
-    })
     const boundaryPoints = this.world.boundaries.flatMap(b => b.points)
     const xs = boundaryPoints.map(p => p[0])
     const ys = boundaryPoints.map(p => p[1])
@@ -72,15 +38,21 @@ export class WorldView extends Container {
     const yMin = Math.min(...ys)
     const xMax = Math.max(...xs)
     const yMax = Math.max(...ys)
-    const tilingSprite = new TilingSprite({
-      texture,
-      width: xMax - xMin,
-      height: yMax - yMin,
-      tileScale: { x: 1, y: 1 },
+    const width = xMax - xMin
+    const height = yMax - yMin
+    const background = new Graphics()
+    background.rect(xMin, yMin, width, height)
+    background.fill('hsl(0,0%,3%)')
+    const count = Math.round((width * height) / 10)
+    console.log(count)
+    range(count).forEach(_ => {
+      const x = xMin + width * Math.random()
+      const y = yMin + height * Math.random()
+      const lightness = 1 + 4 * Math.random()
+      const radius = 2 + 5 * Math.random()
+      background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.1)`)
     })
-    tilingSprite.x = xMin
-    tilingSprite.y = yMin
-    const mask = new Graphics()
+    const mask = new Container()
     this.world.boundaries.forEach(boundary => {
       const boundaryView = new Graphics()
       boundary.points.forEach((point, i) => {
@@ -92,9 +64,10 @@ export class WorldView extends Container {
       })
       boundaryView.closePath()
       boundaryView.fill('hsl(0,0%,0%)')
+      boundaryView.cullable = true
       mask.addChild(boundaryView)
     })
-    this.floor.addChild(tilingSprite)
+    this.floor.addChild(background)
     this.floor.addChild(mask)
     this.floor.mask = mask
   }
