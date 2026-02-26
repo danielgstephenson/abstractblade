@@ -22,4 +22,6 @@ export class Body {
     this.history = range(this.historyLength).map(_ => this.position)
     this.world.bodies.push(this)
   }
+
+  preStep(): void {}
 }

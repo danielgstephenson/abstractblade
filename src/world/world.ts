@@ -26,6 +26,7 @@ export class World {
     this.accumulator += time.deltaTime * this.timeStep
     while (this.accumulator > this.timeStep) {
       this.accumulator -= this.timeStep
+      this.bodies.forEach(b => b.preStep())
       step(this)
     }
   }

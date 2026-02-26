@@ -9,6 +9,7 @@ export class WorldView extends Container {
   game: Game
   app: Application
   floor: Container
+  trails: Container
   playerViews: PlayerView[] = []
 
   constructor(game: Game, world: World) {
@@ -18,6 +19,9 @@ export class WorldView extends Container {
     this.app = this.game.app
     this.app.stage.addChild(this)
     this.floor = new Floor(this)
+    this.trails = new Container()
+    this.trails.blendMode = 'darken'
+    this.addChild(this.trails)
     this.world.players.forEach(player => {
       this.playerViews.push(new PlayerView(this, player))
     })
