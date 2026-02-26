@@ -7,7 +7,6 @@ export function build(world: World, svgString: string): void {
   const svgNode = parseSync(svgString)
   const layer1 = svgNode.children[2]
   addBoundaries(world, layer1)
-  world.view.buildFloor()
   addPlayer(world, layer1)
 }
 

@@ -1,38 +1,38 @@
-import { Application, Container, Graphics } from 'pixi.js'
+import { Application, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
-import { range } from '../math'
 import { Floor } from './floor'
+import { PlayerView } from './playerView'
 
 export class WorldView extends Container {
   world: World
   game: Game
   app: Application
   floor: Container
+  playerViews: PlayerView[] = []
 
-  constructor(world: World) {
+  constructor(game: Game, world: World) {
     super()
+    this.game = game
     this.world = world
-    this.game = world.game
-    this.app = world.game.app
-    this.x = 0.5 * window.innerWidth
-    this.y = 0.5 * window.innerHeight
-    this.scale.set(10)
+    this.app = this.game.app
     this.app.stage.addChild(this)
-    this.floor = new Container()
-    // this.addChild(this.floor)
+    this.floor = new Floor(this)
+    this.world.players.forEach(player => {
+      this.playerViews.push(new PlayerView(this, player))
+    })
   }
 
   update(): void {
+    this.updateCamera()
+    this.playerViews.forEach(x => x.update())
+  }
+
+  updateCamera(): void {
     const player = this.world.players[0]
     const offset = player != null ? player.position : [0, 0]
     this.scale = 10 * Math.exp(0.1 * this.game.input.zoom)
     this.x = 0.5 * window.innerWidth - this.scale.x * offset[0]
     this.y = 0.5 * window.innerHeight - this.scale.y * offset[1]
-  }
-
-  buildFloor(): void {
-    this.floor = new Floor(this.world)
-    this.addChild(this.floor)
   }
 }

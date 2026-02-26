@@ -1,5 +1,3 @@
-import { Game } from '../game/game'
-import { WorldView } from '../view/worldView'
 import { Boundary } from './boundary'
 import { Player } from './body/player'
 import { Agent } from './body/agent'
@@ -9,8 +7,6 @@ import { build } from './build'
 import { step } from './step'
 
 export class World {
-  game: Game
-  view: WorldView
   boundaries: Boundary[] = []
   bodies: Body[] = []
   agents: Agent[] = []
@@ -21,26 +17,17 @@ export class World {
   busy = false
   paused = false
 
-  constructor(game: Game, svgString?: string) {
-    this.game = game
-    this.view = new WorldView(this)
+  constructor(svgString?: string) {
     if (svgString == null) return
     build(this, svgString)
   }
 
-  destroy(): void {
-    this.view.destroy()
-  }
-
   update(time: Ticker): void {
-    this.players.forEach(player => player.handleInput())
     this.accumulator += time.deltaTime * this.timeStep
     while (this.accumulator > this.timeStep) {
       this.accumulator -= this.timeStep
       step(this)
     }
-    this.players.forEach(player => player.view.update())
-    this.view.update()
   }
 
   addPlayer(position: number[]): Player {

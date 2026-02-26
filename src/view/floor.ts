@@ -2,25 +2,29 @@ import { Application, Container, Graphics } from 'pixi.js'
 import { Game } from '../game/game'
 import { World } from '../world/world'
 import { range } from '../math'
+import { WorldView } from './worldView'
 
 export class Floor extends Container {
+  worldView: WorldView
   world: World
   game: Game
   app: Application
   background: Graphics
   cavern: Container
 
-  constructor(world: World) {
+  constructor(worldView: WorldView) {
     super()
-    this.world = world
-    this.game = world.game
-    this.app = world.game.app
+    this.worldView = worldView
+    this.world = this.worldView.world
+    this.game = this.worldView.game
+    this.app = this.worldView.game.app
     this.background = this.buildBackground()
     this.cavern = this.buildCavern()
     this.addChild(this.background)
     this.addChild(this.cavern)
     this.background.mask = this.cavern
     this.cacheAsTexture({ resolution: 10 })
+    this.worldView.addChild(this)
   }
 
   buildBackground(): Graphics {
@@ -35,15 +39,15 @@ export class Floor extends Container {
     const height = yMax - yMin
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
-    background.fill('hsl(0,0%,3%)')
+    background.fill('hsl(0,0%,4%)')
     const count = Math.round((width * height) / 10)
     console.log(count)
     range(count).forEach(_ => {
       const x = xMin + width * Math.random()
       const y = yMin + height * Math.random()
-      const lightness = 1 + 10 * Math.random()
+      const lightness = 2 + 4 * Math.random()
       const radius = 2 + 5 * Math.random()
-      background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.08)`)
+      background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.2)`)
     })
     return background
   }
