@@ -3,9 +3,11 @@ import { World } from '../world/world'
 import { Game } from '../game/game'
 import { Floor } from './floor'
 import { AgentView } from './agentView'
+import { BodyView } from './bodyView'
 
 const playerColor = 'hsl(220, 100%, 50%)'
 const roverColor = 'hsl(120, 100%, 35%)'
+const rockColor = 'hsl(120, 0%, 50%)'
 
 export class WorldView extends Container {
   world: World
@@ -13,7 +15,7 @@ export class WorldView extends Container {
   app: Application
   floor: Container
   trails: Container
-  agentViews: AgentView[] = []
+  bodyViews: BodyView[] = []
 
   constructor(game: Game, world: World) {
     super()
@@ -26,16 +28,19 @@ export class WorldView extends Container {
     this.trails.blendMode = 'darken'
     this.addChild(this.trails)
     this.world.players.forEach(player => {
-      this.agentViews.push(new AgentView(this, player, playerColor))
+      this.bodyViews.push(new AgentView(this, player, playerColor))
     })
     this.world.rovers.forEach(rover => {
-      this.agentViews.push(new AgentView(this, rover, roverColor))
+      this.bodyViews.push(new AgentView(this, rover, roverColor))
+    })
+    this.world.rocks.forEach(rock => {
+      this.bodyViews.push(new BodyView(this, rock, rockColor))
     })
   }
 
   update(): void {
     this.updateCamera()
-    this.agentViews.forEach(x => x.update())
+    this.bodyViews.forEach(x => x.update())
   }
 
   updateCamera(): void {

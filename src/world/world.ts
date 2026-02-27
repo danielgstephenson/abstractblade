@@ -6,6 +6,7 @@ import { Ticker } from 'pixi.js'
 import { build } from './build'
 import { step } from './step'
 import { Rover } from './body/agent/rover'
+import { Rock } from './body/rock'
 
 export class World {
   boundaries: Boundary[] = []
@@ -13,6 +14,7 @@ export class World {
   agents: Agent[] = []
   players: Player[] = []
   rovers: Rover[] = []
+  rocks: Rock[] = []
   timeStep = 1 / 60
   time = 0
   accumulator = 0
@@ -41,6 +43,11 @@ export class World {
   addRover(position: number[]): Rover {
     const rover = new Rover(this, position)
     return rover
+  }
+
+  addRock(position: number[], radius: number): Rock {
+    const rock = new Rock(this, position, radius)
+    return rock
   }
 
   addBoundary(points: number[][]): Boundary {
