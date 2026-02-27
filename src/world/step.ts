@@ -1,5 +1,5 @@
 import { combine, mul } from '../math'
-import { collideBodyBounday } from './collide'
+import { collideBodyBody, collideBodyBounday } from './collide'
 import { World } from './world'
 
 export function step(world: World): void {
@@ -22,6 +22,12 @@ export function step(world: World): void {
   world.bodies.forEach(body => {
     world.boundaries.forEach(boundary => {
       collideBodyBounday(body, boundary)
+    })
+  })
+  world.bodies.forEach(body => {
+    world.bodies.forEach(other => {
+      if (body.index <= other.index) return
+      collideBodyBody(body, other)
     })
   })
   world.bodies.forEach(body => {

@@ -1,9 +1,8 @@
-import { range } from '../../math'
-import { World } from '../world'
-import { Body } from './body'
+import { range } from '../../../math'
+import { World } from '../../world'
+import { Body } from '../body'
 
 export class Agent extends Body {
-  static historyLength = 50
   movePower = 15
   align = 1
   action = [0, 0]
@@ -12,7 +11,7 @@ export class Agent extends Body {
 
   constructor(world: World, position: number[], radius: number) {
     super(world, position, radius)
-    this.history = range(Agent.historyLength).map(_ => structuredClone(this.position))
+    this.history = range(50).map(_ => structuredClone(this.position))
     this.world.agents.push(this)
   }
 

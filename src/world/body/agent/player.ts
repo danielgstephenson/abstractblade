@@ -1,10 +1,11 @@
-import { Input } from '../../game/input'
-import { normalize } from '../../math'
-import { World } from '../world'
+import { Input } from '../../../game/input'
+import { normalize } from '../../../math'
+import { World } from '../../world'
 import { Agent } from './agent'
 
 export class Player extends Agent {
   drag = 0.7
+  align = 0
 
   constructor(world: World, position: number[]) {
     super(world, position, 5)

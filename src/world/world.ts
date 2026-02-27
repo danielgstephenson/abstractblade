@@ -1,16 +1,18 @@
 import { Boundary } from './boundary'
-import { Player } from './body/player'
-import { Agent } from './body/agent'
+import { Player } from './body/agent/player'
+import { Agent } from './body/agent/agent'
 import { Body } from './body/body'
 import { Ticker } from 'pixi.js'
 import { build } from './build'
 import { step } from './step'
+import { Rover } from './body/agent/rover'
 
 export class World {
   boundaries: Boundary[] = []
   bodies: Body[] = []
   agents: Agent[] = []
   players: Player[] = []
+  rovers: Rover[] = []
   timeStep = 1 / 60
   time = 0
   accumulator = 0
@@ -34,6 +36,11 @@ export class World {
   addPlayer(position: number[]): Player {
     const player = new Player(this, position)
     return player
+  }
+
+  addRover(position: number[]): Rover {
+    const rover = new Rover(this, position)
+    return rover
   }
 
   addBoundary(points: number[][]): Boundary {

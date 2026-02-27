@@ -2,7 +2,10 @@ import { Application, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
 import { Floor } from './floor'
-import { PlayerView } from './playerView'
+import { AgentView } from './agentView'
+
+const playerColor = 'hsl(220, 100%, 50%)'
+const roverColor = 'hsl(120, 100%, 35%)'
 
 export class WorldView extends Container {
   world: World
@@ -10,7 +13,7 @@ export class WorldView extends Container {
   app: Application
   floor: Container
   trails: Container
-  playerViews: PlayerView[] = []
+  agentViews: AgentView[] = []
 
   constructor(game: Game, world: World) {
     super()
@@ -23,13 +26,16 @@ export class WorldView extends Container {
     this.trails.blendMode = 'darken'
     this.addChild(this.trails)
     this.world.players.forEach(player => {
-      this.playerViews.push(new PlayerView(this, player))
+      this.agentViews.push(new AgentView(this, player, playerColor))
+    })
+    this.world.rovers.forEach(rover => {
+      this.agentViews.push(new AgentView(this, rover, roverColor))
     })
   }
 
   update(): void {
     this.updateCamera()
-    this.playerViews.forEach(x => x.update())
+    this.agentViews.forEach(x => x.update())
   }
 
   updateCamera(): void {

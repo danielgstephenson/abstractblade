@@ -1,6 +1,23 @@
-import { add, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
+import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
 import { Body } from './body/body'
 import { Boundary } from './boundary'
+
+export function collideBodyBody(body1: Body, body2: Body): boolean {
+  const distance = getDistance(body1.position, body2.position)
+  const overlap = body1.radius + body2.radius - distance
+  if (overlap <= 0) return false
+  const normal = dirFromTo(body1.position, body2.position)
+  const relativeVelocity = sub(body1.velocity, body2.velocity)
+  const impactSpeed = dot(relativeVelocity, normal)
+  const massFactor = 1 / (1 / body1.mass + 1 / body2.mass)
+  const impulse = mul(impactSpeed * massFactor, normal)
+  const shift = mul(0.5 * overlap, normal)
+  body1.impulse = combine(1, body1.impulse, -1, impulse)
+  body2.impulse = combine(1, body2.impulse, +1, impulse)
+  body1.shift = combine(1, body1.shift, -1, shift)
+  body2.shift = combine(1, body2.shift, +1, shift)
+  return true
+}
 
 export function collideBodyBounday(body: Body, boundary: Boundary): boolean {
   const points = boundary.points

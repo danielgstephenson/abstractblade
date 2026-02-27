@@ -1,4 +1,3 @@
-import { range } from '../../math'
 import { World } from '../world'
 
 export class Body {
@@ -6,8 +5,7 @@ export class Body {
   radius: number
   position: number[]
   mass: number
-  historyLength = 20
-  history: number[][]
+  index: number
   velocity = [0, 0]
   force = [0, 0]
   impulse = [0, 0]
@@ -19,7 +17,7 @@ export class Body {
     this.position = position
     this.radius = radius
     this.mass = Math.PI * (0.1 * this.radius) ** 2
-    this.history = range(this.historyLength).map(_ => this.position)
+    this.index = this.world.bodies.length
     this.world.bodies.push(this)
   }
 

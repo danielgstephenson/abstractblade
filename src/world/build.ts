@@ -8,6 +8,7 @@ export function build(world: World, svgString: string): void {
   const layer1 = svgNode.children[2]
   addBoundaries(world, layer1)
   addPlayer(world, layer1)
+  addRovers(world, layer1)
 }
 
 function addBoundaries(world: World, layer: INode): void {
@@ -23,6 +24,15 @@ function addPlayer(world: World, layer: INode): void {
   const x = Number(node.attributes.cx)
   const y = Number(node.attributes.cy)
   world.addPlayer([x, y])
+}
+
+function addRovers(world: World, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'rover')
+  nodes.forEach(node => {
+    const x = Number(node.attributes.cx)
+    const y = Number(node.attributes.cy)
+    world.addRover([x, y])
+  })
 }
 
 function getPathPoints(node: INode): number[][] {
