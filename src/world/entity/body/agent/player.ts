@@ -1,6 +1,6 @@
-import { Input } from '../../../game/input'
-import { normalize } from '../../../math'
-import { World } from '../../world'
+import { Input } from '../../../../game/input'
+import { normalize } from '../../../../math'
+import { World } from '../../../world'
 import { Agent } from './agent'
 
 export class Player extends Agent {

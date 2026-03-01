@@ -1,22 +1,26 @@
-import { Boundary } from './boundary'
-import { Player } from './body/agent/player'
-import { Agent } from './body/agent/agent'
-import { Body } from './body/body'
+import { Boundary } from './entity/boundary'
+import { Player } from './entity/body/agent/player'
+import { Agent } from './entity/body/agent/agent'
+import { Body } from './entity/body/body'
 import { Ticker } from 'pixi.js'
 import { build } from './build'
 import { step } from './step'
-import { Rover } from './body/agent/rover'
-import { Rock } from './body/rock'
-import { Monster } from './body/agent/monster'
+import { Rover } from './entity/body/agent/rover'
+import { Rock } from './entity/body/rock'
+import { Monster } from './entity/body/agent/monster'
+import { Entity } from './entity/entity'
+import { Star } from './entity/star'
 
 export class World {
   boundaries: Boundary[] = []
+  entities: Entity[] = []
   bodies: Body[] = []
   agents: Agent[] = []
   players: Player[] = []
   rovers: Rover[] = []
   monsters: Monster[] = []
   rocks: Rock[] = []
+  stars: Star[] = []
   timeStep = 1 / 60
   time = 0
   accumulator = 0
@@ -38,23 +42,23 @@ export class World {
   }
 
   addPlayer(position: number[]): Player {
-    const player = new Player(this, position)
-    return player
+    return new Player(this, position)
   }
 
   addRover(position: number[]): Rover {
-    const rover = new Rover(this, position)
-    return rover
+    return new Rover(this, position)
   }
 
   addMonster(position: number[]): Monster {
-    const monster = new Monster(this, position)
-    return monster
+    return new Monster(this, position)
   }
 
   addRock(position: number[], radius: number): Rock {
-    const rock = new Rock(this, position, radius)
-    return rock
+    return new Rock(this, position, radius)
+  }
+
+  addStar(position: number[]): Star {
+    return new Star(this, position)
   }
 
   addBoundary(points: number[][]): Boundary {

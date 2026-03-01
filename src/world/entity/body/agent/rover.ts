@@ -1,4 +1,4 @@
-import { World } from '../../world'
+import { World } from '../../../world'
 import { Agent } from './agent'
 
 export class Rover extends Agent {

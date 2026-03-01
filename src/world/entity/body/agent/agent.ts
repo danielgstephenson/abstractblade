@@ -1,5 +1,5 @@
-import { range } from '../../../math'
-import { World } from '../../world'
+import { range } from '../../../../math'
+import { World } from '../../../world'
 import { Body } from '../body'
 
 export class Agent extends Body {

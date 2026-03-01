@@ -3,7 +3,7 @@ import { Game } from '../game/game'
 import { World } from '../world/world'
 import { range } from '../math'
 import { WorldView } from './worldView'
-import { Boundary } from '../world/boundary'
+import { Boundary } from '../world/entity/boundary'
 
 export class BoundaryView extends Container {
   worldView: WorldView
@@ -42,13 +42,12 @@ export class BoundaryView extends Container {
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
     background.fill('hsl(0,0%,4%)')
-    const count = Math.round((width * height) / 10)
-    console.log(count)
+    const count = Math.round((width * height) / 100)
     range(count).forEach(_ => {
       const x = xMin + width * Math.random()
       const y = yMin + height * Math.random()
       const lightness = 2 + 4 * Math.random()
-      const radius = 2 + 5 * Math.random()
+      const radius = 10 + 20 * Math.random()
       background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.2)`)
     })
     return background

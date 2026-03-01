@@ -4,6 +4,7 @@ import { Game } from '../game/game'
 import { AgentView } from './agentView'
 import { BodyView } from './bodyView'
 import { BoundaryView } from './boundaryView'
+import { StarView } from './starView'
 
 const playerColor = 'hsl(220, 100%, 50%)'
 const roverColor = 'hsl(120, 100%, 35%)'
@@ -16,7 +17,6 @@ export class WorldView extends Container {
   app: Application
   trails: Container
   bodyViews: BodyView[] = []
-  boundaryViews: BoundaryView[] = []
 
   constructor(game: Game, world: World) {
     super()
@@ -25,7 +25,10 @@ export class WorldView extends Container {
     this.app = this.game.app
     this.app.stage.addChild(this)
     this.world.boundaries.forEach(boundary => {
-      this.boundaryViews.push(new BoundaryView(this, boundary))
+      void new BoundaryView(this, boundary)
+    })
+    this.world.stars.forEach(star => {
+      void new StarView(this, star)
     })
     this.trails = new Container()
     this.trails.blendMode = 'darken'

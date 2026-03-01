@@ -1,7 +1,7 @@
 import { ColorSource, Container, Graphics } from 'pixi.js'
 import { WorldView } from './worldView'
-import { Agent } from '../world/body/agent/agent'
 import { BodyView } from './bodyView'
+import { Agent } from '../world/entity/body/agent/agent'
 
 export class AgentView extends BodyView {
   trail: Container

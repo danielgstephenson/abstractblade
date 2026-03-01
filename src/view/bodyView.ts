@@ -1,6 +1,6 @@
 import { ColorSource, Graphics, GraphicsContext } from 'pixi.js'
 import { WorldView } from './worldView'
-import { Body } from '../world/body/body'
+import { Body } from '../world/entity/body/body'
 
 export class BodyView extends Graphics {
   worldView: WorldView

@@ -1,11 +1,10 @@
-import { World } from '../world'
+import { World } from '../../world'
+import { Entity } from '../entity'
 
-export class Body {
-  world: World
+export class Body extends Entity {
   radius: number
   position: number[]
   mass: number
-  index: number
   velocity = [0, 0]
   force = [0, 0]
   impulse = [0, 0]
@@ -13,13 +12,10 @@ export class Body {
   drag = 0.7
 
   constructor(world: World, position: number[], radius: number) {
-    this.world = world
+    super(world)
     this.position = position
     this.radius = radius
     this.mass = Math.PI * (0.1 * this.radius) ** 2
-    this.index = this.world.bodies.length
     this.world.bodies.push(this)
   }
-
-  preStep(): void {}
 }

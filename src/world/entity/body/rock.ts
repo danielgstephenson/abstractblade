@@ -1,4 +1,4 @@
-import { World } from '../world'
+import { World } from '../../world'
 import { Body } from './body'
 
 export class Rock extends Body {

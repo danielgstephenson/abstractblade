@@ -1,6 +1,6 @@
 import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
-import { Body } from './body/body'
-import { Boundary } from './boundary'
+import { Boundary } from './entity/boundary'
+import { Body } from './entity/body/body'
 
 export function collideBodyBody(body1: Body, body2: Body): boolean {
   const distance = getDistance(body1.position, body2.position)

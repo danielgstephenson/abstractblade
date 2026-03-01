@@ -1,16 +1,17 @@
 import { INode, parseSync } from 'svgson'
 import { World } from './world'
 import { pointsOnPath } from 'points-on-path'
-import { getDistance } from '../math'
+import { getDistance, mean } from '../math'
 
 export function build(world: World, svgString: string): void {
   const svgNode = parseSync(svgString)
-  const layer1 = svgNode.children[2]
-  addBoundaries(world, layer1)
-  addPlayer(world, layer1)
-  addRovers(world, layer1)
-  addMonsters(world, layer1)
-  addRocks(world, layer1)
+  const entityLayer = svgNode.children[2]
+  addBoundaries(world, entityLayer)
+  addStars(world, entityLayer)
+  addPlayer(world, entityLayer)
+  addRovers(world, entityLayer)
+  addMonsters(world, entityLayer)
+  addRocks(world, entityLayer)
 }
 
 function addBoundaries(world: World, layer: INode): void {
@@ -54,6 +55,19 @@ function addRocks(world: World, layer: INode): void {
     const position = [x, y]
     const radius = Number(node.attributes.r)
     world.addRock(position, radius)
+  })
+}
+
+function addStars(world: World, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'star')
+  nodes.forEach(node => {
+    const points = getPathPoints(node)
+    const xs = points.map(p => p[0])
+    const ys = points.map(p => p[1])
+    const x = mean(xs)
+    const y = mean(ys)
+    const position = [x, y]
+    world.addStar(position)
   })
 }
 
