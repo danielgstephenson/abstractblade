@@ -9,6 +9,7 @@ export function build(world: World, svgString: string): void {
   addBoundaries(world, layer1)
   addPlayer(world, layer1)
   addRovers(world, layer1)
+  addMonsters(world, layer1)
   addRocks(world, layer1)
 }
 
@@ -33,6 +34,15 @@ function addRovers(world: World, layer: INode): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     world.addRover([x, y])
+  })
+}
+
+function addMonsters(world: World, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'monster')
+  nodes.forEach(node => {
+    const x = Number(node.attributes.cx)
+    const y = Number(node.attributes.cy)
+    world.addMonster([x, y])
   })
 }
 

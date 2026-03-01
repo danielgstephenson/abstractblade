@@ -7,6 +7,7 @@ import { build } from './build'
 import { step } from './step'
 import { Rover } from './body/agent/rover'
 import { Rock } from './body/rock'
+import { Monster } from './body/agent/monster'
 
 export class World {
   boundaries: Boundary[] = []
@@ -14,6 +15,7 @@ export class World {
   agents: Agent[] = []
   players: Player[] = []
   rovers: Rover[] = []
+  monsters: Monster[] = []
   rocks: Rock[] = []
   timeStep = 1 / 60
   time = 0
@@ -43,6 +45,11 @@ export class World {
   addRover(position: number[]): Rover {
     const rover = new Rover(this, position)
     return rover
+  }
+
+  addMonster(position: number[]): Monster {
+    const monster = new Monster(this, position)
+    return monster
   }
 
   addRock(position: number[], radius: number): Rock {

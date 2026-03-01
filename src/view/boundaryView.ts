@@ -3,34 +3,36 @@ import { Game } from '../game/game'
 import { World } from '../world/world'
 import { range } from '../math'
 import { WorldView } from './worldView'
+import { Boundary } from '../world/boundary'
 
-export class Floor extends Container {
+export class BoundaryView extends Container {
   worldView: WorldView
   world: World
   game: Game
   app: Application
+  boundary: Boundary
   background: Graphics
-  cavern: Container
+  floor: Container
 
-  constructor(worldView: WorldView) {
+  constructor(worldView: WorldView, boundary: Boundary) {
     super()
     this.worldView = worldView
     this.world = this.worldView.world
     this.game = this.worldView.game
     this.app = this.worldView.game.app
+    this.boundary = boundary
     this.background = this.buildBackground()
-    this.cavern = this.buildCavern()
+    this.floor = this.buildFloor()
     this.addChild(this.background)
-    this.addChild(this.cavern)
-    this.background.mask = this.cavern
+    this.addChild(this.floor)
+    this.background.mask = this.floor
     this.cacheAsTexture({ resolution: 10 })
     this.worldView.addChild(this)
   }
 
   buildBackground(): Graphics {
-    const boundaryPoints = this.world.boundaries.flatMap(b => b.points)
-    const xs = boundaryPoints.map(p => p[0])
-    const ys = boundaryPoints.map(p => p[1])
+    const xs = this.boundary.points.map(p => p[0])
+    const ys = this.boundary.points.map(p => p[1])
     const xMin = Math.min(...xs)
     const yMin = Math.min(...ys)
     const xMax = Math.max(...xs)
@@ -52,22 +54,17 @@ export class Floor extends Container {
     return background
   }
 
-  buildCavern(): Container {
+  buildFloor(): Container {
     const cavern = new Container()
-    this.world.boundaries.forEach(boundary => {
-      const boundaryView = new Graphics()
-      boundary.points.forEach((point, i) => {
-        if (i === 0) {
-          boundaryView.moveTo(point[0], point[1])
-          return
-        }
-        boundaryView.lineTo(point[0], point[1])
-      })
-      boundaryView.closePath()
-      boundaryView.fill('hsl(0,0%,0%)')
-      boundaryView.cullable = true
-      cavern.addChild(boundaryView)
+    const boundaryView = new Graphics()
+    this.boundary.points.forEach((point, i) => {
+      if (i === 0) boundaryView.moveTo(point[0], point[1])
+      else boundaryView.lineTo(point[0], point[1])
     })
+    boundaryView.closePath()
+    boundaryView.fill('hsl(0,0%,0%)')
+    boundaryView.cullable = true
+    cavern.addChild(boundaryView)
     return cavern
   }
 }

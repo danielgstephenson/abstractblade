@@ -1,21 +1,22 @@
 import { Application, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
-import { Floor } from './floor'
 import { AgentView } from './agentView'
 import { BodyView } from './bodyView'
+import { BoundaryView } from './boundaryView'
 
 const playerColor = 'hsl(220, 100%, 50%)'
 const roverColor = 'hsl(120, 100%, 35%)'
+const monsterColor = 'hsl(0, 100%, 40%)'
 const rockColor = 'hsl(120, 0%, 50%)'
 
 export class WorldView extends Container {
   world: World
   game: Game
   app: Application
-  floor: Container
   trails: Container
   bodyViews: BodyView[] = []
+  boundaryViews: BoundaryView[] = []
 
   constructor(game: Game, world: World) {
     super()
@@ -23,7 +24,9 @@ export class WorldView extends Container {
     this.world = world
     this.app = this.game.app
     this.app.stage.addChild(this)
-    this.floor = new Floor(this)
+    this.world.boundaries.forEach(boundary => {
+      this.boundaryViews.push(new BoundaryView(this, boundary))
+    })
     this.trails = new Container()
     this.trails.blendMode = 'darken'
     this.addChild(this.trails)
@@ -32,6 +35,9 @@ export class WorldView extends Container {
     })
     this.world.rovers.forEach(rover => {
       this.bodyViews.push(new AgentView(this, rover, roverColor))
+    })
+    this.world.monsters.forEach(monster => {
+      this.bodyViews.push(new AgentView(this, monster, monsterColor))
     })
     this.world.rocks.forEach(rock => {
       this.bodyViews.push(new BodyView(this, rock, rockColor))
