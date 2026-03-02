@@ -1,5 +1,4 @@
 import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
-import { Boundary } from './entity/boundary'
 import { Body } from './entity/body/body'
 
 export function collideBodyBody(body1: Body, body2: Body): boolean {
@@ -19,8 +18,7 @@ export function collideBodyBody(body1: Body, body2: Body): boolean {
   return true
 }
 
-export function collideBodyBounday(body: Body, boundary: Boundary): boolean {
-  const points = boundary.points
+export function collideBodyBounday(body: Body, points: number[][]): boolean {
   let hit = false
   for (const i of range(points.length)) {
     const j = i > 0 ? i - 1 : points.length - 1

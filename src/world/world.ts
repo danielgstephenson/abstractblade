@@ -10,6 +10,7 @@ import { Rock } from './entity/body/rock'
 import { Monster } from './entity/body/agent/monster'
 import { Entity } from './entity/entity'
 import { Star } from './entity/star'
+import { Door } from './entity/door'
 
 export class World {
   boundaries: Boundary[] = []
@@ -21,6 +22,7 @@ export class World {
   monsters: Monster[] = []
   rocks: Rock[] = []
   stars: Star[] = []
+  doors: Door[] = []
   timeStep = 1 / 60
   time = 0
   accumulator = 0
@@ -36,7 +38,6 @@ export class World {
     this.accumulator += time.deltaTime * this.timeStep
     while (this.accumulator > this.timeStep) {
       this.accumulator -= this.timeStep
-      this.bodies.forEach(b => b.preStep())
       step(this)
     }
   }
@@ -59,6 +60,10 @@ export class World {
 
   addStar(position: number[]): Star {
     return new Star(this, position)
+  }
+
+  addDoor(points: number[][]): Door {
+    return new Door(this, points)
   }
 
   addBoundary(points: number[][]): Boundary {

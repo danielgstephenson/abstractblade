@@ -12,6 +12,7 @@ export function build(world: World, svgString: string): void {
   addRovers(world, entityLayer)
   addMonsters(world, entityLayer)
   addRocks(world, entityLayer)
+  addDoors(world, entityLayer)
 }
 
 function addBoundaries(world: World, layer: INode): void {
@@ -68,6 +69,14 @@ function addStars(world: World, layer: INode): void {
     const y = mean(ys)
     const position = [x, y]
     world.addStar(position)
+  })
+}
+
+function addDoors(world: World, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'door')
+  nodes.forEach(node => {
+    const points = getPathPoints(node)
+    world.addDoor(points)
   })
 }
 

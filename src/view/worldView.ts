@@ -5,6 +5,7 @@ import { AgentView } from './agentView'
 import { BodyView } from './bodyView'
 import { BoundaryView } from './boundaryView'
 import { StarView } from './starView'
+import { DoorView } from './doorView'
 
 const playerColor = 'hsl(220, 100%, 50%)'
 const roverColor = 'hsl(120, 100%, 35%)'
@@ -17,6 +18,8 @@ export class WorldView extends Container {
   app: Application
   trails: Container
   bodyViews: BodyView[] = []
+  starViews: StarView[] = []
+  doorViews: DoorView[] = []
 
   constructor(game: Game, world: World) {
     super()
@@ -28,11 +31,15 @@ export class WorldView extends Container {
       void new BoundaryView(this, boundary)
     })
     this.world.stars.forEach(star => {
-      void new StarView(this, star)
+      this.starViews.push(new StarView(this, star))
     })
     this.trails = new Container()
     this.trails.blendMode = 'darken'
     this.addChild(this.trails)
+    this.build()
+  }
+
+  build(): void {
     this.world.players.forEach(player => {
       this.bodyViews.push(new AgentView(this, player, playerColor))
     })
@@ -45,11 +52,16 @@ export class WorldView extends Container {
     this.world.rocks.forEach(rock => {
       this.bodyViews.push(new BodyView(this, rock, rockColor))
     })
+    this.world.doors.forEach(door => {
+      this.doorViews.push(new DoorView(this, door))
+    })
   }
 
   update(): void {
     this.updateCamera()
     this.bodyViews.forEach(x => x.update())
+    this.starViews.forEach(x => x.update())
+    this.doorViews.forEach(x => x.update())
   }
 
   updateCamera(): void {

@@ -10,6 +10,7 @@ export function step(world: World): void {
   if (world.paused) return
   const dt = world.timeStep
   world.time += dt
+  world.entities.forEach(entity => entity.preStep(dt))
   world.bodies.forEach(body => {
     body.force = [0, 0]
     body.impulse = [0, 0]
@@ -21,10 +22,12 @@ export function step(world: World): void {
   })
   world.bodies.forEach(body => {
     world.boundaries.forEach(boundary => {
-      collideBodyBounday(body, boundary)
+      collideBodyBounday(body, boundary.points)
     })
-  })
-  world.bodies.forEach(body => {
+    world.doors.forEach(door => {
+      const hit = collideBodyBounday(body, door.points)
+      if (hit) door.knock(body)
+    })
     world.bodies.forEach(other => {
       if (body.index <= other.index) return
       collideBodyBody(body, other)

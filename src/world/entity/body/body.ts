@@ -5,6 +5,7 @@ export class Body extends Entity {
   radius: number
   position: number[]
   mass: number
+  star = false
   velocity = [0, 0]
   force = [0, 0]
   impulse = [0, 0]

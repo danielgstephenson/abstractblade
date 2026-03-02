@@ -54,16 +54,16 @@ export class BoundaryView extends Container {
   }
 
   buildFloor(): Container {
-    const cavern = new Container()
-    const boundaryView = new Graphics()
+    const floor = new Container()
+    const cavern = new Graphics()
     this.boundary.points.forEach((point, i) => {
-      if (i === 0) boundaryView.moveTo(point[0], point[1])
-      else boundaryView.lineTo(point[0], point[1])
+      if (i === 0) cavern.moveTo(point[0], point[1])
+      else cavern.lineTo(point[0], point[1])
     })
-    boundaryView.closePath()
-    boundaryView.fill('hsl(0,0%,0%)')
-    boundaryView.cullable = true
-    cavern.addChild(boundaryView)
-    return cavern
+    cavern.closePath()
+    cavern.fill('hsl(0,0%,0%)')
+    cavern.cullable = true
+    floor.addChild(cavern)
+    return floor
   }
 }

@@ -15,7 +15,7 @@ export class AgentView extends BodyView {
     this.worldView.trails.addChild(this.trail)
     const L = this.body.history.length
     this.trailCircles = this.body.history.map((p, i) => {
-      const trailCircle = new Graphics(this.graphicsContext)
+      const trailCircle = new Graphics(this.torsoGraphicsContext)
       trailCircle.alpha = 0.05 * (i / L)
       trailCircle.x = p[0]
       trailCircle.x = p[1]

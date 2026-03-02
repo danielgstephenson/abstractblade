@@ -10,5 +10,5 @@ export class Entity {
     this.world.entities.push(this)
   }
 
-  preStep(): void {}
+  preStep(_dt: number): void {}
 }
