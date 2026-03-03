@@ -25,7 +25,6 @@ export class Door extends Entity {
     if (!body.star) return
     this.star = true
     body.star = false
-    console.log('knock', this.star, body.star)
   }
 
   preStep(): void {

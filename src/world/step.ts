@@ -1,5 +1,5 @@
 import { combine, mul } from '../math'
-import { collideBodyBody, collideBodyBounday } from './collide'
+import { collideBodyBody, collideBodyPolygon } from './collide'
 import { World } from './world'
 
 export function step(world: World): void {
@@ -22,10 +22,10 @@ export function step(world: World): void {
   })
   world.bodies.forEach(body => {
     world.boundaries.forEach(boundary => {
-      collideBodyBounday(body, boundary.points)
+      collideBodyPolygon(body, boundary.points)
     })
     world.doors.forEach(door => {
-      const hit = collideBodyBounday(body, door.points)
+      const hit = collideBodyPolygon(body, door.points)
       if (hit) door.knock(body)
     })
     world.bodies.forEach(other => {
