@@ -7,6 +7,7 @@ import { BoundaryView } from './boundaryView'
 import { StarView } from './starView'
 import { DoorView } from './doorView'
 import { TransporterView } from './transporterView'
+import { SpawnView } from './spawnView'
 
 const playerColor = 'hsl(220, 100%, 50%)'
 const roverColor = 'hsl(120, 100%, 35%)'
@@ -22,6 +23,7 @@ export class WorldView extends Container {
   starViews: StarView[] = []
   transporterViews: TransporterView[] = []
   doorViews: DoorView[] = []
+  spawnView: SpawnView
 
   constructor(game: Game, world: World) {
     super()
@@ -30,6 +32,7 @@ export class WorldView extends Container {
     this.app = this.game.app
     this.app.stage.addChild(this)
     this.trailContainer = new Container()
+    this.spawnView = new SpawnView(this)
     this.build()
   }
 
@@ -43,6 +46,7 @@ export class WorldView extends Container {
     this.world.doors.forEach(door => {
       this.doorViews.push(new DoorView(this, door))
     })
+    this.addChild(this.spawnView)
     this.addChild(this.trailContainer)
     this.world.stars.forEach(star => {
       this.starViews.push(new StarView(this, star))
@@ -67,6 +71,7 @@ export class WorldView extends Container {
     this.starViews.forEach(x => x.update())
     this.doorViews.forEach(x => x.update())
     this.transporterViews.forEach(x => x.update())
+    this.spawnView.update()
   }
 
   updateCamera(): void {

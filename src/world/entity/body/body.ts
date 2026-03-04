@@ -14,7 +14,7 @@ export class Body extends Entity {
 
   constructor(world: World, position: number[], radius: number) {
     super(world)
-    this.position = position
+    this.position = structuredClone(position)
     this.radius = radius
     this.mass = Math.PI * (0.1 * this.radius) ** 2
     this.world.bodies.push(this)

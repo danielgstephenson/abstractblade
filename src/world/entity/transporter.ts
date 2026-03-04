@@ -23,5 +23,6 @@ export class Transporter extends Entity {
     this.charge = clamp(0, this.interval, this.charge + sign * dt)
     if (this.charge < this.interval) return
     player.position = this.target
+    this.world.spawnPoint = this.target
   }
 }

@@ -30,7 +30,8 @@ function addPlayer(world: World, layer: INode): void {
   const node = layer.children.filter(child => child.attributes.role === 'player')[0]
   const x = Number(node.attributes.cx)
   const y = Number(node.attributes.cy)
-  world.addPlayer([x, y])
+  world.spawnPoint = [x, y]
+  world.addPlayer(world.spawnPoint)
 }
 
 function addRovers(world: World, layer: INode): void {

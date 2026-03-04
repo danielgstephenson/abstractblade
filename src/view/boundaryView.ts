@@ -48,7 +48,7 @@ export class BoundaryView extends Container {
       const y = yMin + height * Math.random()
       const lightness = 1 + 2 * Math.random() * 1.5
       const radius = 1 + 4 * Math.random()
-      background.circle(x, y, radius).fill(`hsl(0,0%,${lightness}%)`)
+      background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.5)`)
     })
     return background
   }

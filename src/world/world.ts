@@ -25,6 +25,7 @@ export class World {
   stars: Star[] = []
   doors: Door[] = []
   transporters: Transporter[] = []
+  spawnPoint = [0, 0]
   timeStep = 1 / 60
   timeScale = 2
   time = 0
