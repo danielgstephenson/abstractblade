@@ -6,7 +6,7 @@ const appDiv = document.getElementById('app')!
 async function start(): Promise<void> {
   const app = new Application()
   await app.init({
-    background: 'hsl(0, 0%, 0%)',
+    background: 'hsl(0, 0%, 15%)',
     resizeTo: window,
     antialias: true,
   })

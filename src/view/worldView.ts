@@ -1,4 +1,4 @@
-import { Application, ColorMatrixFilter, Container } from 'pixi.js'
+import { Application, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
 import { AgentView } from './agentView'
@@ -35,9 +35,6 @@ export class WorldView extends Container {
     this.addChild(this.layer1)
     this.addChild(this.layer2)
     this.addChild(this.layer3)
-    const colorMatrix = new ColorMatrixFilter()
-    colorMatrix.brightness(navigator.maxTouchPoints > 0 ? 4 : 1, false)
-    this.layer1.filters = [colorMatrix]
     this.build()
   }
 

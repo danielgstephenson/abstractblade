@@ -41,12 +41,12 @@ export class BoundaryView extends Container {
     const height = yMax - yMin
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
-    background.fill(`hsl(0,0%,5%)`)
+    background.fill(`hsl(0,0%,3%)`)
     const count = Math.round((width * height) / 20)
     range(count).forEach(_ => {
       const x = xMin + width * Math.random()
       const y = yMin + height * Math.random()
-      const lightness = 4 + Math.random() * 1.5
+      const lightness = 1 + 2 * Math.random() * 1.5
       const radius = 1 + 4 * Math.random()
       background.circle(x, y, radius).fill(`hsl(0,0%,${lightness}%)`)
     })

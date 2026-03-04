@@ -57,12 +57,12 @@ export class DoorView extends Container {
     const height = yMax - yMin
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
-    background.fill('hsl(36,100%,5%)')
+    background.fill('hsl(36,100%,10%)')
     const count = Math.round((width * height) / 5)
     range(count).forEach(_ => {
       const x = xMin + width * Math.random()
       const y = yMin + height * Math.random()
-      const lightness = 3 + 2 * Math.random()
+      const lightness = 5 + 5 * Math.random()
       const radius = 1 + 4 * Math.random()
       background.circle(x, y, radius).fill(`hsla(36,100%,${lightness}%,0.2)`)
     })
