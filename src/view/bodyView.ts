@@ -18,7 +18,7 @@ export class BodyView extends Container {
     this.worldView = worldView
     this.body = body
     this.cullable = true
-    this.worldView.layer3.addChild(this)
+    this.worldView.addChild(this)
     this.starGraphics = new Graphics(starGraphicsContext)
     this.starGraphics.visible = false
     this.addChild(this.starGraphics)

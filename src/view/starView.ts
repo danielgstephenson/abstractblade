@@ -15,7 +15,7 @@ export class StarView extends Graphics {
     this.cullable = true
     this.x = star.position[0]
     this.y = star.position[1]
-    this.worldView.layer3.addChild(this)
+    this.worldView.addChild(this)
   }
 
   update(): void {

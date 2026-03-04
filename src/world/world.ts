@@ -11,6 +11,7 @@ import { Monster } from './entity/body/agent/monster'
 import { Entity } from './entity/entity'
 import { Star } from './entity/star'
 import { Door } from './entity/door'
+import { Transporter } from './entity/transporter'
 
 export class World {
   boundaries: Boundary[] = []
@@ -23,7 +24,9 @@ export class World {
   rocks: Rock[] = []
   stars: Star[] = []
   doors: Door[] = []
+  transporters: Transporter[] = []
   timeStep = 1 / 60
+  timeScale = 2
   time = 0
   accumulator = 0
   busy = false
@@ -62,8 +65,12 @@ export class World {
     return new Star(this, position)
   }
 
-  addDoor(points: number[][]): Door {
-    return new Door(this, points)
+  addDoor(points: number[][], vector: number[]): Door {
+    return new Door(this, points, vector)
+  }
+
+  addTransporter(position: number[], target: number[]): Transporter {
+    return new Transporter(this, position, target)
   }
 
   addBoundary(points: number[][]): Boundary {

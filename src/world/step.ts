@@ -8,7 +8,7 @@ export function step(world: World): void {
     return
   }
   if (world.paused) return
-  const dt = world.timeStep
+  const dt = world.timeStep * world.timeScale
   world.time += dt
   world.entities.forEach(entity => entity.preStep(dt))
   world.bodies.forEach(body => {

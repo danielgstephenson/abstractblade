@@ -26,7 +26,7 @@ export class BoundaryView extends Container {
     this.addChild(this.background)
     this.addChild(this.floor)
     this.background.mask = this.floor
-    this.worldView.layer1.addChild(this)
+    this.worldView.addChild(this)
     this.cacheAsTexture({ resolution: 10 })
   }
 

@@ -19,7 +19,7 @@ export class DoorView extends Container {
     this.cullable = true
     this.x = door.position[0]
     this.y = door.position[1]
-    this.worldView.layer1.addChild(this)
+    this.worldView.addChild(this)
     this.background = this.buildBackground()
     this.outline = this.buildContainer()
     this.addChild(this.background)

@@ -1,18 +1,21 @@
 import { INode, parseSync } from 'svgson'
 import { World } from './world'
 import { pointsOnPath } from 'points-on-path'
-import { getDistance, mean } from '../math'
+import { getDistance, mean, sub } from '../math'
+import { insidePolygon } from './raycast'
 
 export function build(world: World, svgString: string): void {
   const svgNode = parseSync(svgString)
   const entityLayer = svgNode.children[2]
+  const arrows = getArrows(entityLayer)
   addBoundaries(world, entityLayer)
   addStars(world, entityLayer)
   addPlayer(world, entityLayer)
   addRovers(world, entityLayer)
   addMonsters(world, entityLayer)
   addRocks(world, entityLayer)
-  addDoors(world, entityLayer)
+  addDoors(world, entityLayer, arrows)
+  addTransporters(world, entityLayer, arrows)
 }
 
 function addBoundaries(world: World, layer: INode): void {
@@ -72,11 +75,25 @@ function addStars(world: World, layer: INode): void {
   })
 }
 
-function addDoors(world: World, layer: INode): void {
+function addDoors(world: World, layer: INode, arrows: number[][][]): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'door')
   nodes.forEach(node => {
-    const points = getPathPoints(node)
-    world.addDoor(points)
+    const polygon = getPathPoints(node)
+    const insideArrow = arrows.filter(a => insidePolygon(a[0], polygon))[0]
+    const vector = sub(insideArrow[1], insideArrow[0])
+    world.addDoor(polygon, vector)
+  })
+}
+
+function addTransporters(world: World, layer: INode, arrows: number[][][]): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'transporter')
+  nodes.forEach(node => {
+    const x = Number(node.attributes.cx)
+    const y = Number(node.attributes.cy)
+    const r = Number(node.attributes.r)
+    const position = [x, y]
+    const insideArrow = arrows.filter(a => getDistance(a[0], position) < r)[0]
+    world.addTransporter(position, insideArrow[1])
   })
 }
 
@@ -86,4 +103,12 @@ function getPathPoints(node: INode): number[][] {
   const endDistance = getDistance(points[0], points[points.length - 1])
   if (endDistance === 0) points.pop()
   return points
+}
+
+function getArrows(layer: INode): number[][][] {
+  const nodes = layer.children.filter(child => child.attributes.role === 'arrow')
+  const arrows = nodes.map(node => {
+    return getPathPoints(node)
+  })
+  return arrows
 }

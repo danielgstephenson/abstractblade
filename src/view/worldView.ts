@@ -6,6 +6,7 @@ import { BodyView } from './bodyView'
 import { BoundaryView } from './boundaryView'
 import { StarView } from './starView'
 import { DoorView } from './doorView'
+import { TransporterView } from './transporterView'
 
 const playerColor = 'hsl(220, 100%, 50%)'
 const roverColor = 'hsl(120, 100%, 35%)'
@@ -16,11 +17,10 @@ export class WorldView extends Container {
   world: World
   game: Game
   app: Application
-  layer1: Container
-  layer2: Container
-  layer3: Container
+  trailContainer: Container
   bodyViews: BodyView[] = []
   starViews: StarView[] = []
+  transporterViews: TransporterView[] = []
   doorViews: DoorView[] = []
 
   constructor(game: Game, world: World) {
@@ -29,12 +29,7 @@ export class WorldView extends Container {
     this.world = world
     this.app = this.game.app
     this.app.stage.addChild(this)
-    this.layer1 = new Container()
-    this.layer2 = new Container()
-    this.layer3 = new Container()
-    this.addChild(this.layer1)
-    this.addChild(this.layer2)
-    this.addChild(this.layer3)
+    this.trailContainer = new Container()
     this.build()
   }
 
@@ -42,9 +37,13 @@ export class WorldView extends Container {
     this.world.boundaries.forEach(boundary => {
       void new BoundaryView(this, boundary)
     })
+    this.world.transporters.forEach(transporter => {
+      this.transporterViews.push(new TransporterView(this, transporter))
+    })
     this.world.doors.forEach(door => {
       this.doorViews.push(new DoorView(this, door))
     })
+    this.addChild(this.trailContainer)
     this.world.stars.forEach(star => {
       this.starViews.push(new StarView(this, star))
     })
@@ -67,6 +66,7 @@ export class WorldView extends Container {
     this.bodyViews.forEach(x => x.update())
     this.starViews.forEach(x => x.update())
     this.doorViews.forEach(x => x.update())
+    this.transporterViews.forEach(x => x.update())
   }
 
   updateCamera(): void {
