@@ -40,13 +40,13 @@ export class Input {
 
   onmousemove(event: MouseEvent): void {
     this.mousePosition[0] = event.clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = 0.5 * window.innerHeight - event.clientY
+    this.mousePosition[1] = event.clientY - 0.5 * window.innerHeight
   }
 
   onmousedown(event: MouseEvent): void {
     this.mouseButtons.set(event.button, true)
     this.mousePosition[0] = event.clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = 0.5 * window.innerHeight - event.clientY
+    this.mousePosition[1] = event.clientY - 0.5 * window.innerHeight
   }
 
   onmouseup(event: MouseEvent): void {
@@ -55,13 +55,13 @@ export class Input {
 
   ontouchmove(event: TouchEvent): void {
     this.mousePosition[0] = event.touches[0].clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = 0.5 * window.innerHeight - event.touches[0].clientY
+    this.mousePosition[1] = event.touches[0].clientY - 0.5 * window.innerHeight
   }
 
   ontouchstart(event: TouchEvent): void {
     this.mouseButtons.set(0, true)
     this.mousePosition[0] = event.touches[0].clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = 0.5 * window.innerHeight - event.touches[0].clientY
+    this.mousePosition[1] = event.touches[0].clientY - 0.5 * window.innerHeight
   }
 
   ontouchend(_: TouchEvent): void {

@@ -12,7 +12,7 @@ export class AgentView extends BodyView {
     super(worldView, agent, color)
     this.body = agent
     this.trail = new Container()
-    this.worldView.trails.addChild(this.trail)
+    this.worldView.layer2.addChild(this.trail)
     const L = this.body.history.length
     this.trailCircles = this.body.history.map((p, i) => {
       const trailCircle = new Graphics(this.torsoGraphicsContext)
@@ -24,7 +24,6 @@ export class AgentView extends BodyView {
       return trailCircle
     })
     this.cullable = true
-    this.worldView.addChild(this)
   }
 
   update(): void {

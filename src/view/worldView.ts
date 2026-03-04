@@ -1,4 +1,4 @@
-import { Application, Container } from 'pixi.js'
+import { Application, ColorMatrixFilter, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
 import { AgentView } from './agentView'
@@ -16,7 +16,9 @@ export class WorldView extends Container {
   world: World
   game: Game
   app: Application
-  trails: Container
+  layer1: Container
+  layer2: Container
+  layer3: Container
   bodyViews: BodyView[] = []
   starViews: StarView[] = []
   doorViews: DoorView[] = []
@@ -27,19 +29,28 @@ export class WorldView extends Container {
     this.world = world
     this.app = this.game.app
     this.app.stage.addChild(this)
-    this.world.boundaries.forEach(boundary => {
-      void new BoundaryView(this, boundary)
-    })
-    this.world.stars.forEach(star => {
-      this.starViews.push(new StarView(this, star))
-    })
-    this.trails = new Container()
-    this.trails.blendMode = 'darken'
-    this.addChild(this.trails)
+    this.layer1 = new Container()
+    this.layer2 = new Container()
+    this.layer3 = new Container()
+    this.addChild(this.layer1)
+    this.addChild(this.layer2)
+    this.addChild(this.layer3)
+    const colorMatrix = new ColorMatrixFilter()
+    colorMatrix.brightness(navigator.maxTouchPoints > 0 ? 4 : 1, false)
+    this.layer1.filters = [colorMatrix]
     this.build()
   }
 
   build(): void {
+    this.world.boundaries.forEach(boundary => {
+      void new BoundaryView(this, boundary)
+    })
+    this.world.doors.forEach(door => {
+      this.doorViews.push(new DoorView(this, door))
+    })
+    this.world.stars.forEach(star => {
+      this.starViews.push(new StarView(this, star))
+    })
     this.world.players.forEach(player => {
       this.bodyViews.push(new AgentView(this, player, playerColor))
     })
@@ -51,9 +62,6 @@ export class WorldView extends Container {
     })
     this.world.rocks.forEach(rock => {
       this.bodyViews.push(new BodyView(this, rock, rockColor))
-    })
-    this.world.doors.forEach(door => {
-      this.doorViews.push(new DoorView(this, door))
     })
   }
 
@@ -68,7 +76,7 @@ export class WorldView extends Container {
     const player = this.world.players[0]
     const offset = player != null ? player.position : [0, 0]
     const vmin = Math.min(window.innerWidth, window.innerHeight)
-    console.log('vmin', vmin / 100)
+    console.log('test', 1)
     this.scale = 0.01 * vmin * Math.exp(0.1 * this.game.input.zoom)
     this.x = 0.5 * window.innerWidth - this.scale.x * offset[0]
     this.y = 0.5 * window.innerHeight - this.scale.y * offset[1]

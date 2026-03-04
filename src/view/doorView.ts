@@ -19,7 +19,7 @@ export class DoorView extends Container {
     this.cullable = true
     this.x = door.position[0]
     this.y = door.position[1]
-    this.worldView.addChild(this)
+    this.worldView.layer1.addChild(this)
     this.background = this.buildBackground()
     this.outline = this.buildContainer()
     this.addChild(this.background)
@@ -57,13 +57,13 @@ export class DoorView extends Container {
     const height = yMax - yMin
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
-    background.fill('hsl(36,100%,6%)')
-    const count = Math.round((width * height) / 10)
+    background.fill('hsl(36,100%,5%)')
+    const count = Math.round((width * height) / 5)
     range(count).forEach(_ => {
       const x = xMin + width * Math.random()
       const y = yMin + height * Math.random()
-      const lightness = 1 + 7 * Math.random()
-      const radius = 10 + 4 * Math.random()
+      const lightness = 3 + 2 * Math.random()
+      const radius = 1 + 4 * Math.random()
       background.circle(x, y, radius).fill(`hsla(36,100%,${lightness}%,0.2)`)
     })
     return background

@@ -26,8 +26,8 @@ export class BoundaryView extends Container {
     this.addChild(this.background)
     this.addChild(this.floor)
     this.background.mask = this.floor
+    this.worldView.layer1.addChild(this)
     this.cacheAsTexture({ resolution: 10 })
-    this.worldView.addChild(this)
   }
 
   buildBackground(): Graphics {
@@ -41,14 +41,14 @@ export class BoundaryView extends Container {
     const height = yMax - yMin
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
-    background.fill('hsl(0,0%,4%)')
-    const count = Math.round((width * height) / 100)
+    background.fill(`hsl(0,0%,5%)`)
+    const count = Math.round((width * height) / 20)
     range(count).forEach(_ => {
       const x = xMin + width * Math.random()
       const y = yMin + height * Math.random()
-      const lightness = 2 + 4 * Math.random()
-      const radius = 10 + 20 * Math.random()
-      background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.2)`)
+      const lightness = 4 + Math.random() * 1.5
+      const radius = 1 + 4 * Math.random()
+      background.circle(x, y, radius).fill(`hsl(0,0%,${lightness}%)`)
     })
     return background
   }
@@ -62,7 +62,6 @@ export class BoundaryView extends Container {
     })
     cavern.closePath()
     cavern.fill('hsl(0,0%,0%)')
-    cavern.cullable = true
     floor.addChild(cavern)
     return floor
   }

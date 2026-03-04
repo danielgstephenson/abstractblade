@@ -1,9 +1,10 @@
 import { Application } from 'pixi.js'
 import { Game } from './game/game'
 
+const appDiv = document.getElementById('app')!
+
 async function start(): Promise<void> {
   const app = new Application()
-  const appDiv = document.getElementById('app')!
   await app.init({
     background: 'hsl(0, 0%, 0%)',
     resizeTo: window,
@@ -11,6 +12,20 @@ async function start(): Promise<void> {
   })
   appDiv.appendChild(app.canvas)
   new Game(app)
+}
+
+console.log('start')
+
+if (navigator.maxTouchPoints > 0) {
+  appDiv.addEventListener('mousedown', () => {
+    appDiv.requestFullscreen()
+  })
+  appDiv.addEventListener('touchstart', () => {
+    appDiv.requestFullscreen()
+  })
+  appDiv.addEventListener('touchmove', () => {
+    appDiv.requestFullscreen()
+  })
 }
 
 start()

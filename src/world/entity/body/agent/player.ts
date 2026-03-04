@@ -20,5 +20,6 @@ export class Player extends Agent {
     if (input.isKeyDown('KeyA') || input.isKeyDown('ArrowLeft')) x -= 1
     if (input.isKeyDown('KeyD') || input.isKeyDown('ArrowRight')) x += 1
     this.action = normalize([x, y])
+    if (input.isMouseButtonDown(0)) this.action = normalize(input.mousePosition)
   }
 }
