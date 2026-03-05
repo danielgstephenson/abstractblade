@@ -10,12 +10,12 @@ export function step(world: World): void {
   if (world.paused) return
   const dt = world.timeStep * world.timeScale
   world.time += dt
-  world.entities.forEach(entity => entity.preStep(dt))
   world.bodies.forEach(body => {
     body.force = [0, 0]
     body.impulse = [0, 0]
     body.shift = [0, 0]
   })
+  world.entities.forEach(entity => entity.preStep(dt))
   world.agents.forEach(agent => {
     if (agent.dead) return
     agent.force = mul(agent.movePower, agent.action)

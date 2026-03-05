@@ -1,20 +1,18 @@
 import { ColorSource, Container, Graphics } from 'pixi.js'
 import { WorldView } from './worldView'
 import { BodyView } from './bodyView'
-import { Agent } from '../world/entity/body/agent/agent'
+import { Body } from '../world/entity/body/body'
 
-export class AgentView extends BodyView {
+export class TrailBodyView extends BodyView {
   trail: Container
   trailCircles: Graphics[]
-  body: Agent
 
-  constructor(worldView: WorldView, agent: Agent, color: ColorSource) {
-    super(worldView, agent, color)
-    this.body = agent
+  constructor(worldView: WorldView, body: Body, color: ColorSource) {
+    super(worldView, body, color)
     this.trail = new Container()
     this.worldView.trailContainer.addChild(this.trail)
-    const L = this.body.history.length
-    this.trailCircles = this.body.history.map((p, i) => {
+    const L = this.body.trail.length
+    this.trailCircles = this.body.trail.map((p, i) => {
       const trailCircle = new Graphics(this.torsoGraphicsContext)
       trailCircle.alpha = 0.05 * (i / L)
       trailCircle.x = p[0]
@@ -29,7 +27,7 @@ export class AgentView extends BodyView {
   update(): void {
     super.update()
     this.trailCircles.forEach((circle, i) => {
-      const h = this.body.history[i]
+      const h = this.body.trail[i]
       circle.x = h[0]
       circle.y = h[1]
     })

@@ -10,6 +10,7 @@ export function build(world: World, svgString: string): void {
   const arrows = getArrows(entityLayer)
   addBoundaries(world, entityLayer)
   addStars(world, entityLayer)
+  addBlades(world, entityLayer)
   addPlayer(world, entityLayer)
   addRovers(world, entityLayer)
   addMonsters(world, entityLayer)
@@ -49,6 +50,17 @@ function addMonsters(world: World, layer: INode): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     world.addMonster([x, y])
+  })
+}
+
+function addBlades(world: World, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'blade')
+  nodes.forEach(node => {
+    const x = Number(node.attributes.cx)
+    const y = Number(node.attributes.cy)
+    const position = [x, y]
+    const align = Number(node.attributes.align)
+    world.addBlade(position, align)
   })
 }
 

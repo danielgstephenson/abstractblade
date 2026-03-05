@@ -5,6 +5,8 @@ export function collideBodyBody(body1: Body, body2: Body): boolean {
   const distance = getDistance(body1.position, body2.position)
   const overlap = body1.radius + body2.radius - distance
   if (overlap <= 0) return false
+  if (!body1.doesCollide(body2)) return false
+  if (!body2.doesCollide(body1)) return false
   const normal = dirFromTo(body1.position, body2.position)
   const relativeVelocity = sub(body1.velocity, body2.velocity)
   const impactSpeed = dot(relativeVelocity, normal)

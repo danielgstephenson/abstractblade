@@ -24,5 +24,6 @@ export class Transporter extends Entity {
     if (this.charge < this.interval) return
     player.position = this.target
     this.world.spawnPoint = this.target
+    if (player.blade != null) player.blade.detach()
   }
 }

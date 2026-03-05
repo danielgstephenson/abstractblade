@@ -12,6 +12,7 @@ import { Entity } from './entity/entity'
 import { Star } from './entity/star'
 import { Door } from './entity/door'
 import { Transporter } from './entity/transporter'
+import { Blade } from './entity/body/blade'
 
 export class World {
   boundaries: Boundary[] = []
@@ -24,6 +25,7 @@ export class World {
   rocks: Rock[] = []
   stars: Star[] = []
   doors: Door[] = []
+  blades: Blade[] = []
   transporters: Transporter[] = []
   spawnPoint = [0, 0]
   timeStep = 1 / 60
@@ -60,6 +62,10 @@ export class World {
 
   addRock(position: number[], radius: number): Rock {
     return new Rock(this, position, radius)
+  }
+
+  addBlade(position: number[], align: number): Blade {
+    return new Blade(this, position, align)
   }
 
   addStar(position: number[]): Star {
