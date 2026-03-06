@@ -2,11 +2,11 @@ import { World } from '../world'
 import { Entity } from './entity'
 
 export class Boundary extends Entity {
-  points: number[][]
+  polygon: number[][]
 
-  constructor(world: World, points: number[][]) {
+  constructor(world: World, polygon: number[][]) {
     super(world)
     this.world.boundaries.push(this)
-    this.points = points
+    this.polygon = structuredClone(polygon)
   }
 }

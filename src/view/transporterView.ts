@@ -42,6 +42,6 @@ export class TransporterView extends Container {
     this.chargeRing.clear()
     this.chargeRing
       .arc(0, 0, 17, 1.5 * Math.PI, 1.5 * Math.PI + (this.charge / this.interval) * 2 * Math.PI)
-      .stroke({ color: 'hsl(64, 100%, 8%)', join: 'round', cap: 'round', width: 3 })
+      .stroke({ color: 'hsla(64, 100%, 30%)', join: 'round', cap: 'round', width: 3 })
   }
 }

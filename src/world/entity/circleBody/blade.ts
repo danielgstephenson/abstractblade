@@ -1,0 +1,69 @@
+import { clampVec, combine, sub } from '../../../math'
+import { World } from '../../world'
+import { EntityState } from '../entity'
+import { Agent } from './agent/agent'
+import { CircleBody } from './circleBody'
+
+export class Blade extends CircleBody {
+  drag = 0.3
+  movePower = 2
+  align: number
+  agent?: Agent
+
+  constructor(world: World, position: number[], align: number) {
+    super(world, position, 10)
+    this.align = align
+    this.world.blades.push(this)
+  }
+
+  preStep(dt: number): void {
+    super.preStep(dt)
+    if (this.agent == null) return
+    const vector = sub(this.agent.position, this.position)
+    this.force = combine(1, this.force, this.movePower, clampVec(vector, 50))
+  }
+
+  attach(agent: Agent): void {
+    this.detach()
+    agent.blade = this
+    this.agent = agent
+  }
+
+  detach(): void {
+    if (this.agent != null) {
+      this.agent.blade = undefined
+      this.agent = undefined
+    }
+  }
+
+  doesCollide(otherBody: CircleBody): boolean {
+    if (otherBody instanceof Agent) {
+      if (otherBody.align === this.align) {
+        if (otherBody.blade == null && this.agent == null) this.attach(otherBody)
+      }
+      if (otherBody.align !== this.align) {
+        otherBody.die()
+      }
+      return false
+    }
+    return true
+  }
+
+  getState(): EntityState {
+    const state = super.getState()
+    if (this.agent != null) {
+      state.agent = this.agent.agentIndex
+    }
+    return state
+  }
+
+  loadState(state: EntityState): void {
+    super.loadState(state)
+    if (state.agent == null) {
+      this.detach()
+      return
+    }
+    const agent = this.world.agents[state.agent]
+    this.attach(agent)
+  }
+}

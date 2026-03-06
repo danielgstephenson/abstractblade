@@ -7,6 +7,7 @@ export function step(world: World): void {
     console.log('busy')
     return
   }
+  if (world.players[0].dead) return
   if (world.paused) return
   const dt = world.timeStep * world.timeScale
   world.time += dt
@@ -21,19 +22,22 @@ export function step(world: World): void {
     agent.force = mul(agent.movePower, agent.action)
   })
   world.bodies.forEach(body => {
+    if (body.dead) return
     world.boundaries.forEach(boundary => {
-      collideBodyPolygon(body, boundary.points)
+      collideBodyPolygon(body, boundary.polygon)
     })
     world.doors.forEach(door => {
-      const hit = collideBodyPolygon(body, door.points)
+      const hit = collideBodyPolygon(body, door.polygon)
       if (hit) door.knock(body)
     })
     world.bodies.forEach(other => {
+      if (other.dead) return
       if (body.index <= other.index) return
       collideBodyBody(body, other)
     })
   })
   world.bodies.forEach(body => {
+    if (body.dead) return
     body.velocity = mul(1 - body.drag * dt, body.velocity)
     body.velocity = combine(1, body.velocity, dt / body.mass, body.force)
     body.velocity = combine(1, body.velocity, 1 / body.mass, body.impulse)

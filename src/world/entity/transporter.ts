@@ -11,8 +11,8 @@ export class Transporter extends Entity {
 
   constructor(world: World, position: number[], target: number[]) {
     super(world)
-    this.position = position
-    this.target = target
+    this.position = structuredClone(position)
+    this.target = structuredClone(target)
     this.world.transporters.push(this)
   }
 
@@ -22,8 +22,9 @@ export class Transporter extends Entity {
     const sign = distance < this.radius ? 1 : -1
     this.charge = clamp(0, this.interval, this.charge + sign * dt)
     if (this.charge < this.interval) return
-    player.position = this.target
-    this.world.spawnPoint = this.target
+    player.position = structuredClone(this.target)
+    player.spawnPoint = structuredClone(this.target)
     if (player.blade != null) player.blade.detach()
+    this.world.saveState()
   }
 }

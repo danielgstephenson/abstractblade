@@ -1,8 +1,8 @@
 import { Application, Color, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
-import { TrailBodyView } from './agentView'
-import { BodyView } from './bodyView'
+import { TrailCircleView } from './trailCircleView'
+import { CircleView } from './circleView'
 import { BoundaryView } from './boundaryView'
 import { StarView } from './starView'
 import { DoorView } from './doorView'
@@ -22,12 +22,12 @@ export class WorldView extends Container {
   game: Game
   app: Application
   trailContainer: Container
-  bodyViews: BodyView[] = []
+  circleViews: CircleView[] = []
   springViews: SpringView[] = []
   starViews: StarView[] = []
   transporterViews: TransporterView[] = []
   doorViews: DoorView[] = []
-  spawnView: SpawnView
+  spawnViews: SpawnView[] = []
 
   constructor(game: Game, world: World) {
     super()
@@ -37,7 +37,6 @@ export class WorldView extends Container {
     this.app = this.game.app
     this.app.stage.addChild(this)
     this.trailContainer = new Container()
-    this.spawnView = new SpawnView(this)
     this.build()
     console.timeEnd('WorldView contructor')
   }
@@ -49,41 +48,43 @@ export class WorldView extends Container {
     this.world.transporters.forEach(transporter => {
       this.transporterViews.push(new TransporterView(this, transporter))
     })
+    this.world.players.forEach(player => {
+      this.spawnViews.push(new SpawnView(this, player))
+    })
     this.world.doors.forEach(door => {
       this.doorViews.push(new DoorView(this, door))
     })
-    this.addChild(this.spawnView)
     this.addChild(this.trailContainer)
-    this.world.stars.forEach(star => {
-      this.starViews.push(new StarView(this, star))
-    })
     this.world.rocks.forEach(rock => {
-      this.bodyViews.push(new BodyView(this, rock, rockColor))
+      this.circleViews.push(new CircleView(this, rock, rockColor))
     })
     this.world.blades.forEach(blade => {
       const color = blade.align === 0 ? playerBladeColor : roverBladeColor
       this.springViews.push(new SpringView(this, blade, color))
-      this.bodyViews.push(new TrailBodyView(this, blade, color))
+      this.circleViews.push(new TrailCircleView(this, blade, color))
+    })
+    this.world.stars.forEach(star => {
+      this.starViews.push(new StarView(this, star))
     })
     this.world.players.forEach(player => {
-      this.bodyViews.push(new TrailBodyView(this, player, playerColor))
+      this.circleViews.push(new TrailCircleView(this, player, playerColor))
     })
     this.world.rovers.forEach(rover => {
-      this.bodyViews.push(new TrailBodyView(this, rover, roverColor))
+      this.circleViews.push(new TrailCircleView(this, rover, roverColor))
     })
     this.world.monsters.forEach(monster => {
-      this.bodyViews.push(new TrailBodyView(this, monster, monsterColor))
+      this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
     })
   }
 
   update(): void {
     this.updateCamera()
-    this.bodyViews.forEach(x => x.update())
+    this.circleViews.forEach(x => x.update())
     this.springViews.forEach(x => x.update())
     this.starViews.forEach(x => x.update())
     this.doorViews.forEach(x => x.update())
     this.transporterViews.forEach(x => x.update())
-    this.spawnView.update()
+    this.spawnViews.forEach(x => x.update())
   }
 
   updateCamera(): void {

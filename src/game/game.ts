@@ -3,6 +3,7 @@ import { World } from '../world/world'
 import { Input } from './input'
 import startSvg from '../svg/start.svg?raw'
 import { WorldView } from '../view/worldView'
+import { EntityState } from '../world/entity/entity'
 
 export class Game {
   app: Application
@@ -10,16 +11,29 @@ export class Game {
   worldView: WorldView
   input: Input
   accumulator = 0
+  saveState: EntityState[]
 
   constructor(app: Application) {
     this.app = app
     this.world = new World(startSvg)
     this.worldView = new WorldView(this, this.world)
     this.input = new Input()
+    this.saveState = this.world.getState()
     app.ticker.add(time => {
       this.world.players.forEach(player => player.handleInput(this.input))
       this.world.update(time)
       this.worldView.update()
     })
+    window.addEventListener('keydown', event => {
+      if (event.repeat) return
+      this.proceed()
+    })
+    window.addEventListener('mousedown', () => this.proceed())
+  }
+
+  proceed(): void {
+    if (this.world.players[0].dead) {
+      this.world.loadState()
+    }
   }
 }

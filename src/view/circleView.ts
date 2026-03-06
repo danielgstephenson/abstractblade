@@ -1,16 +1,16 @@
 import { ColorSource, Container, Graphics, GraphicsContext } from 'pixi.js'
 import { WorldView } from './worldView'
-import { Body } from '../world/entity/body/body'
+import { CircleBody } from '../world/entity/circleBody/circleBody'
 import { starGraphicsContext } from './starView'
 
-export class BodyView extends Container {
+export class CircleView extends Container {
   worldView: WorldView
-  body: Body
+  body: CircleBody
   torsoGraphicsContext: GraphicsContext
   torsoGraphics: Graphics
   starGraphics: Graphics
 
-  constructor(worldView: WorldView, body: Body, color: ColorSource) {
+  constructor(worldView: WorldView, body: CircleBody, color: ColorSource) {
     super()
     this.torsoGraphicsContext = new GraphicsContext().circle(0, 0, body.radius).fill(color)
     this.torsoGraphics = new Graphics(this.torsoGraphicsContext)

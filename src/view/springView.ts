@@ -1,6 +1,6 @@
 import { Color, Graphics } from 'pixi.js'
 import { WorldView } from './worldView'
-import { Blade } from '../world/entity/body/blade'
+import { Blade } from '../world/entity/circleBody/blade'
 
 export class SpringView extends Graphics {
   worldView: WorldView

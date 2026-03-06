@@ -1,13 +1,14 @@
 import { ColorSource, Container, Graphics } from 'pixi.js'
 import { WorldView } from './worldView'
-import { BodyView } from './bodyView'
-import { Body } from '../world/entity/body/body'
+import { CircleView } from './circleView'
+import { CircleBody } from '../world/entity/circleBody/circleBody'
+import { Player } from '../world/entity/circleBody/agent/player'
 
-export class TrailBodyView extends BodyView {
+export class TrailCircleView extends CircleView {
   trail: Container
   trailCircles: Graphics[]
 
-  constructor(worldView: WorldView, body: Body, color: ColorSource) {
+  constructor(worldView: WorldView, body: CircleBody, color: ColorSource) {
     super(worldView, body, color)
     this.trail = new Container()
     this.worldView.trailContainer.addChild(this.trail)
@@ -26,10 +27,13 @@ export class TrailBodyView extends BodyView {
 
   update(): void {
     super.update()
+    const visible = !this.body.dead || this.body instanceof Player
+    this.visible = visible
     this.trailCircles.forEach((circle, i) => {
       const h = this.body.trail[i]
       circle.x = h[0]
       circle.y = h[1]
+      circle.visible = visible
     })
   }
 }

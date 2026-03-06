@@ -1,7 +1,7 @@
 import { World } from '../../world'
-import { Body } from './body'
+import { CircleBody } from './circleBody'
 
-export class Rock extends Body {
+export class Rock extends CircleBody {
   drag = 2
 
   constructor(world: World, position: number[], radius: number) {

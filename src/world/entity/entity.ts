@@ -1,5 +1,7 @@
 import { World } from '../world'
 
+export type EntityState = Record<string, number>
+
 export class Entity {
   world: World
   index: number
@@ -11,4 +13,10 @@ export class Entity {
   }
 
   preStep(_dt: number): void {}
+
+  getState(): EntityState {
+    return {}
+  }
+
+  loadState(_state: EntityState) {}
 }

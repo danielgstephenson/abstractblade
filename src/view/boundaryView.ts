@@ -31,8 +31,8 @@ export class BoundaryView extends Container {
   }
 
   buildBackground(): Graphics {
-    const xs = this.boundary.points.map(p => p[0])
-    const ys = this.boundary.points.map(p => p[1])
+    const xs = this.boundary.polygon.map(p => p[0])
+    const ys = this.boundary.polygon.map(p => p[1])
     const xMin = Math.min(...xs)
     const yMin = Math.min(...ys)
     const xMax = Math.max(...xs)
@@ -56,7 +56,7 @@ export class BoundaryView extends Container {
   buildFloor(): Container {
     const floor = new Container()
     const cavern = new Graphics()
-    this.boundary.points.forEach((point, i) => {
+    this.boundary.polygon.forEach((point, i) => {
       if (i === 0) cavern.moveTo(point[0], point[1])
       else cavern.lineTo(point[0], point[1])
     })

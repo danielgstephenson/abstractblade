@@ -1,23 +1,26 @@
 import { Boundary } from './entity/boundary'
-import { Player } from './entity/body/agent/player'
-import { Agent } from './entity/body/agent/agent'
-import { Body } from './entity/body/body'
+import { Player } from './entity/circleBody/agent/player'
+import { Agent } from './entity/circleBody/agent/agent'
+import { CircleBody } from './entity/circleBody/circleBody'
 import { Ticker } from 'pixi.js'
 import { build } from './build'
 import { step } from './step'
-import { Rover } from './entity/body/agent/rover'
-import { Rock } from './entity/body/rock'
-import { Monster } from './entity/body/agent/monster'
-import { Entity } from './entity/entity'
+import { Rover } from './entity/circleBody/agent/rover'
+import { Rock } from './entity/circleBody/rock'
+import { Monster } from './entity/circleBody/agent/monster'
+import { Entity, EntityState } from './entity/entity'
 import { Star } from './entity/star'
 import { Door } from './entity/door'
 import { Transporter } from './entity/transporter'
-import { Blade } from './entity/body/blade'
+import { Blade } from './entity/circleBody/blade'
+
+export type WorldState = EntityState[]
 
 export class World {
+  backup: WorldState
   boundaries: Boundary[] = []
   entities: Entity[] = []
-  bodies: Body[] = []
+  bodies: CircleBody[] = []
   agents: Agent[] = []
   players: Player[] = []
   rovers: Rover[] = []
@@ -27,7 +30,6 @@ export class World {
   doors: Door[] = []
   blades: Blade[] = []
   transporters: Transporter[] = []
-  spawnPoint = [0, 0]
   timeStep = 1 / 60
   timeScale = 2
   time = 0
@@ -35,9 +37,9 @@ export class World {
   busy = false
   paused = false
 
-  constructor(svgString?: string) {
-    if (svgString == null) return
+  constructor(svgString: string) {
     build(this, svgString)
+    this.backup = this.getState()
   }
 
   update(time: Ticker): void {
@@ -46,6 +48,20 @@ export class World {
       this.accumulator -= this.timeStep
       step(this)
     }
+  }
+
+  getState(): WorldState {
+    return this.entities.map(x => x.getState())
+  }
+
+  saveState(): void {
+    this.backup = this.getState()
+  }
+
+  loadState(): void {
+    this.entities.map((entity, i) => {
+      entity.loadState(this.backup[i])
+    })
   }
 
   addPlayer(position: number[]): Player {

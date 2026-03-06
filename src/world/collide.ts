@@ -1,12 +1,13 @@
 import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
-import { Body } from './entity/body/body'
+import { CircleBody } from './entity/circleBody/circleBody'
 
-export function collideBodyBody(body1: Body, body2: Body): boolean {
+export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
   const distance = getDistance(body1.position, body2.position)
   const overlap = body1.radius + body2.radius - distance
   if (overlap <= 0) return false
-  if (!body1.doesCollide(body2)) return false
-  if (!body2.doesCollide(body1)) return false
+  const doesCollide1 = body1.doesCollide(body2)
+  const doesCollide2 = body2.doesCollide(body1)
+  if (!doesCollide1 || !doesCollide2) return false
   const normal = dirFromTo(body1.position, body2.position)
   const relativeVelocity = sub(body1.velocity, body2.velocity)
   const impactSpeed = dot(relativeVelocity, normal)
@@ -20,7 +21,7 @@ export function collideBodyBody(body1: Body, body2: Body): boolean {
   return true
 }
 
-export function collideBodyPolygon(body: Body, points: number[][]): boolean {
+export function collideBodyPolygon(body: CircleBody, points: number[][]): boolean {
   let hit = false
   for (const i of range(points.length)) {
     const j = i > 0 ? i - 1 : points.length - 1
@@ -56,7 +57,7 @@ export function collideBodyPolygon(body: Body, points: number[][]): boolean {
   return hit
 }
 
-export function collideBodyPoint(body: Body, point: number[]): boolean {
+export function collideBodyPoint(body: CircleBody, point: number[]): boolean {
   const distance = getDistance(body.position, point)
   const overlap = body.radius - distance
   if (overlap <= 0) return false
