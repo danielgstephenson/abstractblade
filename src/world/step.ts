@@ -37,7 +37,7 @@ export function step(world: World): void {
     })
   })
   world.bodies.forEach(body => {
-    if (body.dead) return
+    if (body.dead || body.static) return
     body.velocity = mul(1 - body.drag * dt, body.velocity)
     body.velocity = combine(1, body.velocity, dt / body.mass, body.force)
     body.velocity = combine(1, body.velocity, 1 / body.mass, body.impulse)

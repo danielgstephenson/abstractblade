@@ -26,9 +26,9 @@ export class World {
   rovers: Rover[] = []
   monsters: Monster[] = []
   rocks: Rock[] = []
+  blades: Blade[] = []
   stars: Star[] = []
   doors: Door[] = []
-  blades: Blade[] = []
   transporters: Transporter[] = []
   timeStep = 1 / 60
   timeScale = 2

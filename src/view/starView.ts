@@ -1,8 +1,9 @@
 import { Graphics, GraphicsContext } from 'pixi.js'
 import { WorldView } from './worldView'
 import { Star } from '../world/entity/star'
+import { starColor } from './colors'
 
-export const starGraphicsContext = new GraphicsContext().star(0, 0, 5, 4, 1.8).fill(`hsl(60,100%,40%)`)
+export const starGraphicsContext = new GraphicsContext().star(0, 0, 5, 4, 1.8).fill(starColor)
 
 export class StarView extends Graphics {
   worldView: WorldView

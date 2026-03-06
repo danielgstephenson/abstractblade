@@ -1,6 +1,6 @@
 import { clamp, getDistance } from '../../math'
 import { World } from '../world'
-import { Entity } from './entity'
+import { Entity, EntityState } from './entity'
 
 export class Transporter extends Entity {
   position: number[]
@@ -26,5 +26,10 @@ export class Transporter extends Entity {
     player.spawnPoint = structuredClone(this.target)
     if (player.blade != null) player.blade.detach()
     this.world.saveState()
+  }
+
+  loadState(state: EntityState): void {
+    super.loadState(state)
+    this.charge = 0
   }
 }

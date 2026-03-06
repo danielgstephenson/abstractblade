@@ -12,6 +12,7 @@ export class CircleBody extends Entity {
   impulse = [0, 0]
   shift = [0, 0]
   drag = 0.7
+  static = false
   dead = false
   trail: number[][]
 
@@ -37,6 +38,10 @@ export class CircleBody extends Entity {
     return true
   }
 
+  invincible(): boolean {
+    return false
+  }
+
   getState(): EntityState {
     const state = super.getState()
     state.x = this.position[0]
@@ -55,5 +60,6 @@ export class CircleBody extends Entity {
     if (state.vy != null) this.velocity[1] = state.vy
     if (state.star != null) this.star = Boolean(state.star)
     if (state.dead != null) this.dead = Boolean(state.dead)
+    this.trail = range(50).map(_ => structuredClone(this.position))
   }
 }

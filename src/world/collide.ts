@@ -2,6 +2,7 @@ import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub }
 import { CircleBody } from './entity/circleBody/circleBody'
 
 export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
+  if (body1.dead || body2.dead) return false
   const distance = getDistance(body1.position, body2.position)
   const overlap = body1.radius + body2.radius - distance
   if (overlap <= 0) return false

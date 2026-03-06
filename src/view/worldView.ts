@@ -1,4 +1,4 @@
-import { Application, Color, Container } from 'pixi.js'
+import { Application, Container } from 'pixi.js'
 import { World } from '../world/world'
 import { Game } from '../game/game'
 import { TrailCircleView } from './trailCircleView'
@@ -9,13 +9,7 @@ import { DoorView } from './doorView'
 import { TransporterView } from './transporterView'
 import { SpawnView } from './spawnView'
 import { SpringView } from './springView'
-
-export const playerColor = new Color('hsl(220, 100%, 50%)')
-export const roverColor = new Color('hsl(120, 100%, 35%)')
-export const monsterColor = new Color('hsl(0, 100%, 40%)')
-export const rockColor = new Color('hsl(120, 0%, 50%)')
-export const playerBladeColor = new Color('hsl(190, 100%, 50%)')
-export const roverBladeColor = new Color('hsl(150, 100%, 50%)')
+import { monsterColor, playerBladeColor, playerColor, rockColor, roverBladeColor, roverColor } from './colors'
 
 export class WorldView extends Container {
   world: World
@@ -58,6 +52,9 @@ export class WorldView extends Container {
     this.world.rocks.forEach(rock => {
       this.circleViews.push(new CircleView(this, rock, rockColor))
     })
+    this.world.monsters.forEach(monster => {
+      this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
+    })
     this.world.blades.forEach(blade => {
       const color = blade.align === 0 ? playerBladeColor : roverBladeColor
       this.springViews.push(new SpringView(this, blade, color))
@@ -71,9 +68,6 @@ export class WorldView extends Container {
     })
     this.world.rovers.forEach(rover => {
       this.circleViews.push(new TrailCircleView(this, rover, roverColor))
-    })
-    this.world.monsters.forEach(monster => {
-      this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
     })
   }
 

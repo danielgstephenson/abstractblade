@@ -1,5 +1,5 @@
 import { Input } from '../../../../game/input'
-import { normalize } from '../../../../math'
+import { getDistance, normalize } from '../../../../math'
 import { World } from '../../../world'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
@@ -15,8 +15,9 @@ export class Player extends Agent {
     this.world.players.push(this)
   }
 
-  die() {
-    this.dead = true
+  invincible(): boolean {
+    const distance = getDistance(this.position, this.spawnPoint)
+    return distance < 15
   }
 
   handleInput(input: Input) {

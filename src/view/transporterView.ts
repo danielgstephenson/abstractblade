@@ -1,9 +1,10 @@
 import { Container, Graphics, GraphicsContext } from 'pixi.js'
 import { WorldView } from './worldView'
 import { Transporter } from '../world/entity/transporter'
+import { starColor } from './colors'
 
 export const transportGraphicsContext = new GraphicsContext().circle(0, 0, 13).stroke({
-  color: 'hsl(64, 100%, 30%)',
+  color: starColor,
   width: 1,
 })
 
@@ -42,6 +43,6 @@ export class TransporterView extends Container {
     this.chargeRing.clear()
     this.chargeRing
       .arc(0, 0, 17, 1.5 * Math.PI, 1.5 * Math.PI + (this.charge / this.interval) * 2 * Math.PI)
-      .stroke({ color: 'hsla(64, 100%, 30%)', join: 'round', cap: 'round', width: 3 })
+      .stroke({ color: starColor, join: 'round', cap: 'round', width: 1 })
   }
 }

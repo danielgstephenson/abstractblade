@@ -24,7 +24,8 @@ export class Blade extends CircleBody {
   }
 
   attach(agent: Agent): void {
-    this.detach()
+    if (agent.blade != null) return
+    if (this.agent != null) return
     agent.blade = this
     this.agent = agent
   }
@@ -36,13 +37,19 @@ export class Blade extends CircleBody {
     }
   }
 
+  die(): void {
+    super.die()
+    this.detach()
+  }
+
   doesCollide(otherBody: CircleBody): boolean {
     if (otherBody instanceof Agent) {
       if (otherBody.align === this.align) {
         if (otherBody.blade == null && this.agent == null) this.attach(otherBody)
       }
       if (otherBody.align !== this.align) {
-        otherBody.die()
+        if (otherBody.invincible()) this.die()
+        else otherBody.die()
       }
       return false
     }
