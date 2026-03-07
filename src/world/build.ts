@@ -31,7 +31,8 @@ function addBoundaries(world: World, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'boundary')
   nodes.forEach(node => {
     const points = getPathPoints(node)
-    world.addBoundary(points)
+    const boundary = world.addBoundary(points)
+    boundary.name = node.attributes.id
   })
 }
 
@@ -48,7 +49,8 @@ function addRovers(world: World, layer: INode): void {
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    world.addRover([x, y])
+    const rover = world.addRover([x, y])
+    rover.name = node.attributes.id
   })
 }
 
@@ -57,7 +59,8 @@ function addMonsters(world: World, layer: INode): void {
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    world.addMonster([x, y])
+    const monster = world.addMonster([x, y])
+    monster.name = node.attributes.id
   })
 }
 
@@ -68,7 +71,8 @@ function addBlades(world: World, layer: INode): void {
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const align = Number(node.attributes.align)
-    world.addBlade(position, align)
+    const blade = world.addBlade(position, align)
+    blade.name = node.attributes.id
   })
 }
 
@@ -79,7 +83,8 @@ function addRocks(world: World, layer: INode): void {
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const radius = Number(node.attributes.r)
-    world.addRock(position, radius)
+    const rock = world.addRock(position, radius)
+    rock.name = node.attributes.id
   })
 }
 
@@ -92,7 +97,8 @@ function addStars(world: World, layer: INode): void {
     const x = mean(xs)
     const y = mean(ys)
     const position = [x, y]
-    world.addStar(position)
+    const star = world.addStar(position)
+    star.name = node.attributes.id
   })
 }
 
@@ -102,7 +108,8 @@ function addDoors(world: World, layer: INode, arrows: number[][][]): void {
     const polygon = getPathPoints(node)
     const insideArrow = arrows.filter(a => insidePolygon(a[0], polygon))[0]
     const vector = sub(insideArrow[1], insideArrow[0])
-    world.addDoor(polygon, vector)
+    const door = world.addDoor(polygon, vector)
+    door.name = node.attributes.id
   })
 }
 
@@ -114,7 +121,8 @@ function addTransporters(world: World, layer: INode, arrows: number[][][]): void
     const r = Number(node.attributes.r)
     const position = [x, y]
     const insideArrow = arrows.filter(a => getDistance(a[0], position) < r)[0]
-    world.addTransporter(position, insideArrow[1])
+    const transporter = world.addTransporter(position, insideArrow[1])
+    transporter.name = node.attributes.id
   })
 }
 

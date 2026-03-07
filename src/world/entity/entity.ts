@@ -5,6 +5,7 @@ export type EntityState = Record<string, number>
 export class Entity {
   world: World
   index: number
+  name = 'entityName'
 
   constructor(world: World) {
     this.world = world

@@ -8,6 +8,7 @@ export class Player extends Agent {
   drag = 0.7
   align = 0
   spawnPoint: number[]
+  name = 'player'
 
   constructor(world: World, position: number[]) {
     super(world, position, 5)

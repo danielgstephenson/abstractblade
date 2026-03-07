@@ -24,8 +24,8 @@
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
      inkscape:zoom="1.4142136"
-     inkscape:cx="-267.28637"
-     inkscape:cy="149.55309"
+     inkscape:cx="-184.90842"
+     inkscape:cy="202.58609"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -215,7 +215,8 @@
   </defs>
   <g
      inkscape:groupmode="layer"
-     id="boundaryLayer">
+     id="boundaryLayer"
+     inkscape:highlight-color="#3e67e3">
     <path
        id="boundary5"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
@@ -361,8 +362,8 @@
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="rock5"
-       cx="-509.09003"
-       cy="442.49683"
+       cx="-551.51642"
+       cy="395.82779"
        role="rock"
        r="5" />
     <circle
@@ -549,16 +550,16 @@
     <circle
        style="fill:#00bfe5;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="playerBlade1-1"
-       cx="-439.26724"
-       cy="421.71594"
+       cx="-462.80545"
+       cy="618.07916"
        role="blade"
        r="10"
        align="0" />
     <circle
        style="fill:#00e5af;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="roverBlade1"
-       cx="-542.34094"
-       cy="384.15393"
+       cx="-476.34131"
+       cy="448.01587"
        role="blade"
        r="10"
        align="1" />
@@ -604,8 +605,8 @@
     <circle
        style="fill:#00b200;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="rover3"
-       cx="-540.94409"
-       cy="384.65497"
+       cx="-474.94446"
+       cy="448.51691"
        role="rover"
        r="5" />
     <circle
@@ -682,5 +683,19 @@
        id="arrow1"
        sodipodi:nodetypes="cc"
        role="arrow" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer12"
+     inkscape:label="entranceLayer"
+     inkscape:highlight-color="#227eff"
+     style="fill:none">
+    <circle
+       style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       cx="-36.739277"
+       cy="24.173635"
+       r="8.9375"
+       inkscape:label="entrance1" />
   </g>
 </svg>
