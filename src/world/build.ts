@@ -3,20 +3,28 @@ import { World } from './world'
 import { pointsOnPath } from 'points-on-path'
 import { getDistance, mean, sub } from '../math'
 import { insidePolygon } from './raycast'
+import { getChildById } from '../svg/svg'
 
 export function build(world: World, svgString: string): void {
   const svgNode = parseSync(svgString)
-  const entityLayer = svgNode.children[2]
-  const arrows = getArrows(entityLayer)
-  addBoundaries(world, entityLayer)
-  addStars(world, entityLayer)
-  addBlades(world, entityLayer)
-  addPlayer(world, entityLayer)
-  addRovers(world, entityLayer)
-  addMonsters(world, entityLayer)
-  addRocks(world, entityLayer)
-  addDoors(world, entityLayer, arrows)
-  addTransporters(world, entityLayer, arrows)
+  const boundaryLayer = getChildById(svgNode, 'boundaryLayer')
+  const starLayer = getChildById(svgNode, 'starLayer')
+  const transportLayer = getChildById(svgNode, 'transportLayer')
+  const doorLayer = getChildById(svgNode, 'doorLayer')
+  const rockLayer = getChildById(svgNode, 'rockLayer')
+  const bladeLayer = getChildById(svgNode, 'bladeLayer')
+  const agentLayer = getChildById(svgNode, 'agentLayer')
+  const arrowLayer = getChildById(svgNode, 'arrowLayer')
+  const arrows = getArrows(arrowLayer)
+  addBoundaries(world, boundaryLayer)
+  addStars(world, starLayer)
+  addTransporters(world, transportLayer, arrows)
+  addDoors(world, doorLayer, arrows)
+  addRocks(world, rockLayer)
+  addBlades(world, bladeLayer)
+  addPlayer(world, agentLayer)
+  addRovers(world, agentLayer)
+  addMonsters(world, agentLayer)
 }
 
 function addBoundaries(world: World, layer: INode): void {

@@ -25,14 +25,12 @@ export class WorldView extends Container {
 
   constructor(game: Game, world: World) {
     super()
-    console.time('WorldView contructor')
     this.game = game
     this.world = world
     this.app = this.game.app
     this.app.stage.addChild(this)
     this.trailContainer = new Container()
     this.build()
-    console.timeEnd('WorldView contructor')
   }
 
   build(): void {
@@ -42,8 +40,8 @@ export class WorldView extends Container {
     this.world.transporters.forEach(transporter => {
       this.transporterViews.push(new TransporterView(this, transporter))
     })
-    this.world.players.forEach(player => {
-      this.spawnViews.push(new SpawnView(this, player))
+    this.world.stars.forEach(star => {
+      this.starViews.push(new StarView(this, star))
     })
     this.world.doors.forEach(door => {
       this.doorViews.push(new DoorView(this, door))
@@ -52,16 +50,13 @@ export class WorldView extends Container {
     this.world.rocks.forEach(rock => {
       this.circleViews.push(new CircleView(this, rock, rockColor))
     })
-    this.world.monsters.forEach(monster => {
-      this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
-    })
     this.world.blades.forEach(blade => {
       const color = blade.align === 0 ? playerBladeColor : roverBladeColor
       this.springViews.push(new SpringView(this, blade, color))
       this.circleViews.push(new TrailCircleView(this, blade, color))
     })
-    this.world.stars.forEach(star => {
-      this.starViews.push(new StarView(this, star))
+    this.world.monsters.forEach(monster => {
+      this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
     })
     this.world.players.forEach(player => {
       this.circleViews.push(new TrailCircleView(this, player, playerColor))
