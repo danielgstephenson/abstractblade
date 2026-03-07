@@ -40,6 +40,9 @@ export class WorldView extends Container {
     this.world.transporters.forEach(transporter => {
       this.transporterViews.push(new TransporterView(this, transporter))
     })
+    this.world.players.forEach(player => {
+      this.spawnViews.push(new SpawnView(this, player))
+    })
     this.world.stars.forEach(star => {
       this.starViews.push(new StarView(this, star))
     })
