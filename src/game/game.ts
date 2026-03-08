@@ -1,9 +1,9 @@
 import { Application } from 'pixi.js'
 import { World } from '../world/world'
 import { Input } from './input'
-import startSvg from '../svg/start.svg?raw'
 import { WorldView } from '../view/worldView'
 import { EntityState } from '../world/entity/entity'
+import svgLevel1 from '../svg/level1.svg?raw'
 
 export class Game {
   app: Application
@@ -15,7 +15,7 @@ export class Game {
 
   constructor(app: Application) {
     this.app = app
-    this.world = new World(startSvg)
+    this.world = new World(svgLevel1)
     this.worldView = new WorldView(this, this.world)
     this.input = new Input()
     this.saveState = this.world.getState()
