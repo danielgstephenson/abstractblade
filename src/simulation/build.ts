@@ -1,11 +1,11 @@
 import { INode, parseSync } from 'svgson'
-import { World } from './world'
+import { Simulation } from './simulation'
 import { pointsOnPath } from 'points-on-path'
 import { getDistance, mean, sub } from '../math'
 import { insidePolygon } from './raycast'
 import { getChildById } from '../svg/svg'
 
-export function build(world: World, svgString: string): void {
+export function build(simulation: Simulation, svgString: string): void {
   const svgNode = parseSync(svgString)
   const boundaryLayer = getChildById(svgNode, 'boundaryLayer')
   const starLayer = getChildById(svgNode, 'starLayer')
@@ -16,79 +16,79 @@ export function build(world: World, svgString: string): void {
   const agentLayer = getChildById(svgNode, 'agentLayer')
   const arrowLayer = getChildById(svgNode, 'arrowLayer')
   const arrows = getArrows(arrowLayer)
-  addBoundaries(world, boundaryLayer)
-  addStars(world, starLayer)
-  addTransporters(world, transportLayer, arrows)
-  addDoors(world, doorLayer, arrows)
-  addRocks(world, rockLayer)
-  addBlades(world, bladeLayer)
-  addPlayer(world, agentLayer)
-  addRovers(world, agentLayer)
-  addMonsters(world, agentLayer)
+  addBoundaries(simulation, boundaryLayer)
+  addStars(simulation, starLayer)
+  addTransporters(simulation, transportLayer, arrows)
+  addDoors(simulation, doorLayer, arrows)
+  addRocks(simulation, rockLayer)
+  addBlades(simulation, bladeLayer)
+  addPlayer(simulation, agentLayer)
+  addRovers(simulation, agentLayer)
+  addMonsters(simulation, agentLayer)
 }
 
-function addBoundaries(world: World, layer: INode): void {
+function addBoundaries(simulation: Simulation, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'boundary')
   nodes.forEach(node => {
     const points = getPathPoints(node)
-    const boundary = world.addBoundary(points)
+    const boundary = simulation.addBoundary(points)
     boundary.name = node.attributes.id
   })
 }
 
-function addPlayer(world: World, layer: INode): void {
+function addPlayer(simulation: Simulation, layer: INode): void {
   const node = layer.children.filter(child => child.attributes.role === 'player')[0]
   const x = Number(node.attributes.cx)
   const y = Number(node.attributes.cy)
   const position = [x, y]
-  world.addPlayer(position)
+  simulation.addPlayer(position)
 }
 
-function addRovers(world: World, layer: INode): void {
+function addRovers(simulation: Simulation, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'rover')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    const rover = world.addRover([x, y])
+    const rover = simulation.addRover([x, y])
     rover.name = node.attributes.id
   })
 }
 
-function addMonsters(world: World, layer: INode): void {
+function addMonsters(simulation: Simulation, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'monster')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    const monster = world.addMonster([x, y])
+    const monster = simulation.addMonster([x, y])
     monster.name = node.attributes.id
   })
 }
 
-function addBlades(world: World, layer: INode): void {
+function addBlades(simulation: Simulation, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'blade')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const align = Number(node.attributes.align)
-    const blade = world.addBlade(position, align)
+    const blade = simulation.addBlade(position, align)
     blade.name = node.attributes.id
   })
 }
 
-function addRocks(world: World, layer: INode): void {
+function addRocks(simulation: Simulation, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'rock')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const radius = Number(node.attributes.r)
-    const rock = world.addRock(position, radius)
+    const rock = simulation.addRock(position, radius)
     rock.name = node.attributes.id
   })
 }
 
-function addStars(world: World, layer: INode): void {
+function addStars(simulation: Simulation, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'star')
   nodes.forEach(node => {
     const points = getPathPoints(node)
@@ -97,23 +97,23 @@ function addStars(world: World, layer: INode): void {
     const x = mean(xs)
     const y = mean(ys)
     const position = [x, y]
-    const star = world.addStar(position)
+    const star = simulation.addStar(position)
     star.name = node.attributes.id
   })
 }
 
-function addDoors(world: World, layer: INode, arrows: number[][][]): void {
+function addDoors(simulation: Simulation, layer: INode, arrows: number[][][]): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'door')
   nodes.forEach(node => {
     const polygon = getPathPoints(node)
     const insideArrow = arrows.filter(a => insidePolygon(a[0], polygon))[0]
     const vector = sub(insideArrow[1], insideArrow[0])
-    const door = world.addDoor(polygon, vector)
+    const door = simulation.addDoor(polygon, vector)
     door.name = node.attributes.id
   })
 }
 
-function addTransporters(world: World, layer: INode, arrows: number[][][]): void {
+function addTransporters(simulation: Simulation, layer: INode, arrows: number[][][]): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'transporter')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
@@ -121,7 +121,7 @@ function addTransporters(world: World, layer: INode, arrows: number[][][]): void
     const r = Number(node.attributes.r)
     const position = [x, y]
     const insideArrow = arrows.filter(a => getDistance(a[0], position) < r)[0]
-    const transporter = world.addTransporter(position, insideArrow[1])
+    const transporter = simulation.addTransporter(position, insideArrow[1])
     transporter.name = node.attributes.id
   })
 }

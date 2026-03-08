@@ -1,16 +1,16 @@
-import { World } from '../world'
+import { Simulation } from '../simulation'
 
 export type EntityState = Record<string, number>
 
 export class Entity {
-  world: World
+  simulation: Simulation
   index: number
   name = 'entityName'
 
-  constructor(world: World) {
-    this.world = world
-    this.index = this.world.entities.length
-    this.world.entities.push(this)
+  constructor(simulation: Simulation) {
+    this.simulation = simulation
+    this.index = this.simulation.entities.length
+    this.simulation.entities.push(this)
   }
 
   preStep(_dt: number): void {}

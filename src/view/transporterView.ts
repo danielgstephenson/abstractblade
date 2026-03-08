@@ -1,6 +1,6 @@
 import { Container, Graphics, GraphicsContext } from 'pixi.js'
-import { WorldView } from './worldView'
-import { Transporter } from '../world/entity/transporter'
+import { SimulationView } from './simulationView'
+import { Transporter } from '../simulation/entity/transporter'
 import { starColor } from './colors'
 
 export const transportGraphicsContext = new GraphicsContext().circle(0, 0, 13).stroke({
@@ -9,23 +9,23 @@ export const transportGraphicsContext = new GraphicsContext().circle(0, 0, 13).s
 })
 
 export class TransporterView extends Container {
-  worldView: WorldView
+  simulationView: SimulationView
   transporter: Transporter
   baseRing: Graphics
   chargeRing: Graphics
   interval: number
   charge: number
 
-  constructor(worldView: WorldView, transporter: Transporter) {
+  constructor(simulationView: SimulationView, transporter: Transporter) {
     super()
-    this.worldView = worldView
+    this.simulationView = simulationView
     this.transporter = transporter
     this.interval = transporter.interval
     this.charge = transporter.charge
     this.cullable = true
     this.x = transporter.position[0]
     this.y = transporter.position[1]
-    this.worldView.addChild(this)
+    this.simulationView.addChild(this)
     this.baseRing = new Graphics(transportGraphicsContext)
     this.addChild(this.baseRing)
     this.chargeRing = new Graphics()

@@ -1,5 +1,5 @@
 import { range } from '../../../math'
-import { World } from '../../world'
+import { Simulation } from '../../simulation'
 import { Entity, EntityState } from '../entity'
 
 export class CircleBody extends Entity {
@@ -16,12 +16,12 @@ export class CircleBody extends Entity {
   dead = false
   trail: number[][]
 
-  constructor(world: World, position: number[], radius: number) {
-    super(world)
+  constructor(simulation: Simulation, position: number[], radius: number) {
+    super(simulation)
     this.position = structuredClone(position)
     this.radius = radius
     this.mass = Math.PI * (0.1 * this.radius) ** 2
-    this.world.bodies.push(this)
+    this.simulation.bodies.push(this)
     this.trail = range(50).map(_ => structuredClone(this.position))
   }
 

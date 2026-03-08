@@ -1,19 +1,19 @@
 import { Color, Graphics } from 'pixi.js'
-import { WorldView } from './worldView'
-import { Blade } from '../world/entity/circleBody/blade'
+import { SimulationView } from './simulationView'
+import { Blade } from '../simulation/entity/circleBody/blade'
 
 export class SpringView extends Graphics {
-  worldView: WorldView
+  simulationView: SimulationView
   blade: Blade
   color: Color
 
-  constructor(worldView: WorldView, blade: Blade, color: Color) {
+  constructor(simulationView: SimulationView, blade: Blade, color: Color) {
     super()
-    this.worldView = worldView
+    this.simulationView = simulationView
     this.blade = blade
     this.color = color
     this.cullable = true
-    this.worldView.addChild(this)
+    this.simulationView.addChild(this)
   }
 
   update(): void {

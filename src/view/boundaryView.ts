@@ -1,32 +1,32 @@
 import { Application, Container, Graphics } from 'pixi.js'
 import { Game } from '../game/game'
-import { World } from '../world/world'
+import { Simulation } from '../simulation/simulation'
 import { range } from '../math'
-import { WorldView } from './worldView'
-import { Boundary } from '../world/entity/boundary'
+import { SimulationView } from './simulationView'
+import { Boundary } from '../simulation/entity/boundary'
 
 export class BoundaryView extends Container {
-  worldView: WorldView
-  world: World
+  simulationView: SimulationView
+  simulation: Simulation
   game: Game
   app: Application
   boundary: Boundary
   background: Graphics
   floor: Container
 
-  constructor(worldView: WorldView, boundary: Boundary) {
+  constructor(simulationView: SimulationView, boundary: Boundary) {
     super()
-    this.worldView = worldView
-    this.world = this.worldView.world
-    this.game = this.worldView.game
-    this.app = this.worldView.game.app
+    this.simulationView = simulationView
+    this.simulation = this.simulationView.simulation
+    this.game = this.simulationView.game
+    this.app = this.simulationView.game.app
     this.boundary = boundary
     this.background = this.buildBackground()
     this.floor = this.buildFloor()
     this.addChild(this.background)
     this.addChild(this.floor)
     this.background.mask = this.floor
-    this.worldView.addChild(this)
+    this.simulationView.addChild(this)
     this.cacheAsTexture({ resolution: 10 })
   }
 

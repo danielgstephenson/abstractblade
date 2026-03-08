@@ -1,28 +1,28 @@
 import { Application } from 'pixi.js'
-import { World } from '../world/world'
+import { Simulation } from '../simulation/simulation'
 import { Input } from './input'
-import { WorldView } from '../view/worldView'
-import { EntityState } from '../world/entity/entity'
+import { SimulationView } from '../view/simulationView'
+import { EntityState } from '../simulation/entity/entity'
 import svgLevel1 from '../svg/level1.svg?raw'
 
 export class Game {
   app: Application
-  world: World
-  worldView: WorldView
+  simulation: Simulation
+  simulationView: SimulationView
   input: Input
   accumulator = 0
   saveState: EntityState[]
 
   constructor(app: Application) {
     this.app = app
-    this.world = new World(svgLevel1)
-    this.worldView = new WorldView(this, this.world)
+    this.simulation = new Simulation(svgLevel1)
+    this.simulationView = new SimulationView(this, this.simulation)
     this.input = new Input()
-    this.saveState = this.world.getState()
+    this.saveState = this.simulation.getState()
     app.ticker.add(time => {
-      this.world.players.forEach(player => player.handleInput(this.input))
-      this.world.update(time)
-      this.worldView.update()
+      this.simulation.players.forEach(player => player.handleInput(this.input))
+      this.simulation.update(time)
+      this.simulationView.update()
     })
     window.addEventListener('keydown', event => {
       if (event.repeat) return
@@ -32,8 +32,8 @@ export class Game {
   }
 
   proceed(): void {
-    if (this.world.players[0].dead) {
-      this.world.loadState()
+    if (this.simulation.players[0].dead) {
+      this.simulation.loadState()
     }
   }
 }

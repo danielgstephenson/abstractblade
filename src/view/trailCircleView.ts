@@ -1,17 +1,17 @@
 import { ColorSource, Container, Graphics } from 'pixi.js'
-import { WorldView } from './worldView'
+import { SimulationView } from './simulationView'
 import { CircleView } from './circleView'
-import { CircleBody } from '../world/entity/circleBody/circleBody'
-import { Player } from '../world/entity/circleBody/agent/player'
+import { CircleBody } from '../simulation/entity/circleBody/circleBody'
+import { Player } from '../simulation/entity/circleBody/agent/player'
 
 export class TrailCircleView extends CircleView {
   trail: Container
   trailCircles: Graphics[]
 
-  constructor(worldView: WorldView, body: CircleBody, color: ColorSource) {
-    super(worldView, body, color)
+  constructor(simulationView: SimulationView, body: CircleBody, color: ColorSource) {
+    super(simulationView, body, color)
     this.trail = new Container()
-    this.worldView.trailContainer.addChild(this.trail)
+    this.simulationView.trailContainer.addChild(this.trail)
     const L = this.body.trail.length
     this.trailCircles = this.body.trail.map((p, i) => {
       const trailCircle = new Graphics(this.torsoGraphicsContext)

@@ -1,4 +1,4 @@
-import { World } from '../../../world'
+import { Simulation } from '../../../simulation'
 import { Blade } from '../blade'
 import { CircleBody } from '../circleBody'
 
@@ -9,11 +9,11 @@ export class Agent extends CircleBody {
   blade?: Blade
   agentIndex: number
 
-  constructor(world: World, position: number[], radius: number) {
-    super(world, position, radius)
+  constructor(simulation: Simulation, position: number[], radius: number) {
+    super(simulation, position, radius)
     this.mass = 1
-    this.agentIndex = this.world.agents.length
-    this.world.agents.push(this)
+    this.agentIndex = this.simulation.agents.length
+    this.simulation.agents.push(this)
   }
 
   preStep(dt: number): void {

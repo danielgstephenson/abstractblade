@@ -1,22 +1,22 @@
 import { Graphics, GraphicsContext } from 'pixi.js'
-import { WorldView } from './worldView'
-import { Star } from '../world/entity/star'
+import { SimulationView } from './simulationView'
+import { Star } from '../simulation/entity/star'
 import { starColor } from './colors'
 
 export const starGraphicsContext = new GraphicsContext().star(0, 0, 5, 4, 1.8).fill(starColor)
 
 export class StarView extends Graphics {
-  worldView: WorldView
+  simulationView: SimulationView
   starEntity: Star
 
-  constructor(worldView: WorldView, star: Star) {
+  constructor(simulationView: SimulationView, star: Star) {
     super(starGraphicsContext)
-    this.worldView = worldView
+    this.simulationView = simulationView
     this.starEntity = star
     this.cullable = true
     this.x = star.position[0]
     this.y = star.position[1]
-    this.worldView.addChild(this)
+    this.simulationView.addChild(this)
   }
 
   update(): void {

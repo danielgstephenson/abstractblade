@@ -14,10 +14,10 @@ import { Door } from './entity/door'
 import { Transporter } from './entity/transporter'
 import { Blade } from './entity/circleBody/blade'
 
-export type WorldState = EntityState[]
+export type SimulationState = EntityState[]
 
-export class World {
-  backup: WorldState
+export class Simulation {
+  backup: SimulationState
   boundaries: Boundary[] = []
   entities: Entity[] = []
   bodies: CircleBody[] = []
@@ -50,7 +50,7 @@ export class World {
     }
   }
 
-  getState(): WorldState {
+  getState(): SimulationState {
     return this.entities.map(x => x.getState())
   }
 

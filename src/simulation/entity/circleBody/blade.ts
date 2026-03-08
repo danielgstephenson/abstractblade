@@ -1,5 +1,5 @@
 import { clampVec, combine, sub } from '../../../math'
-import { World } from '../../world'
+import { Simulation } from '../../simulation'
 import { EntityState } from '../entity'
 import { Agent } from './agent/agent'
 import { CircleBody } from './circleBody'
@@ -10,10 +10,10 @@ export class Blade extends CircleBody {
   align: number
   agent?: Agent
 
-  constructor(world: World, position: number[], align: number) {
-    super(world, position, 10)
+  constructor(simulation: Simulation, position: number[], align: number) {
+    super(simulation, position, 10)
     this.align = align
-    this.world.blades.push(this)
+    this.simulation.blades.push(this)
   }
 
   preStep(dt: number): void {
@@ -70,7 +70,7 @@ export class Blade extends CircleBody {
       this.detach()
       return
     }
-    const agent = this.world.agents[state.agent]
+    const agent = this.simulation.agents[state.agent]
     this.attach(agent)
   }
 }

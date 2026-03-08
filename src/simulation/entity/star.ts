@@ -1,22 +1,22 @@
 import { getDistance } from '../../math'
-import { World } from '../world'
+import { Simulation } from '../simulation'
 import { Entity, EntityState } from './entity'
 
 export class Star extends Entity {
-  world: World
+  simulation: Simulation
   position: number[]
   available = true
 
-  constructor(world: World, position: number[]) {
-    super(world)
-    this.world = world
+  constructor(simulation: Simulation, position: number[]) {
+    super(simulation)
+    this.simulation = simulation
     this.position = structuredClone(position)
-    this.world.stars.push(this)
+    this.simulation.stars.push(this)
   }
 
   preStep(): void {
     if (!this.available) return
-    const player = this.world.players[0]
+    const player = this.simulation.players[0]
     if (player.star) return
     const distance = getDistance(this.position, player.position)
     if (distance > 9) return

@@ -1,25 +1,25 @@
 import { Container, Graphics } from 'pixi.js'
-import { WorldView } from './worldView'
-import { Door } from '../world/entity/door'
+import { SimulationView } from './simulationView'
+import { Door } from '../simulation/entity/door'
 import { range } from '../math'
 import { starGraphicsContext } from './starView'
 
 export class DoorView extends Container {
-  worldView: WorldView
+  simulationView: SimulationView
   door: Door
   background: Graphics
   outline: Container
   starGraphics: Graphics
   holeGraphics: Graphics
 
-  constructor(worldView: WorldView, door: Door) {
+  constructor(simulationView: SimulationView, door: Door) {
     super()
-    this.worldView = worldView
+    this.simulationView = simulationView
     this.door = door
     this.cullable = true
     this.x = door.position[0]
     this.y = door.position[1]
-    this.worldView.addChild(this)
+    this.simulationView.addChild(this)
     this.background = this.buildBackground()
     this.outline = this.buildContainer()
     this.addChild(this.background)

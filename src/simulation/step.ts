@@ -1,42 +1,42 @@
 import { combine, mul } from '../math'
 import { collideBodyBody, collideBodyPolygon } from './collide'
-import { World } from './world'
+import { Simulation } from './simulation'
 
-export function step(world: World): void {
-  if (world.busy) {
+export function step(simulation: Simulation): void {
+  if (simulation.busy) {
     console.log('busy')
     return
   }
-  if (world.players[0].dead) return
-  if (world.paused) return
-  const dt = world.timeStep * world.timeScale
-  world.time += dt
-  world.bodies.forEach(body => {
+  if (simulation.players[0].dead) return
+  if (simulation.paused) return
+  const dt = simulation.timeStep * simulation.timeScale
+  simulation.time += dt
+  simulation.bodies.forEach(body => {
     body.force = [0, 0]
     body.impulse = [0, 0]
     body.shift = [0, 0]
   })
-  world.entities.forEach(entity => entity.preStep(dt))
-  world.agents.forEach(agent => {
+  simulation.entities.forEach(entity => entity.preStep(dt))
+  simulation.agents.forEach(agent => {
     if (agent.dead) return
     agent.force = mul(agent.movePower, agent.action)
   })
-  world.bodies.forEach(body => {
+  simulation.bodies.forEach(body => {
     if (body.dead) return
-    world.boundaries.forEach(boundary => {
+    simulation.boundaries.forEach(boundary => {
       collideBodyPolygon(body, boundary.polygon)
     })
-    world.doors.forEach(door => {
+    simulation.doors.forEach(door => {
       const hit = collideBodyPolygon(body, door.polygon)
       if (hit) door.knock(body)
     })
-    world.bodies.forEach(other => {
+    simulation.bodies.forEach(other => {
       if (other.dead) return
       if (body.index <= other.index) return
       collideBodyBody(body, other)
     })
   })
-  world.bodies.forEach(body => {
+  simulation.bodies.forEach(body => {
     if (body.dead || body.static) return
     body.velocity = mul(1 - body.drag * dt, body.velocity)
     body.velocity = combine(1, body.velocity, dt / body.mass, body.force)
