@@ -1,6 +1,6 @@
 import { Container, Graphics, GraphicsContext } from 'pixi.js'
 import { SimulationView } from './simulationView'
-import { Transporter } from '../simulation/entity/transporter'
+import { Transporter } from '../entity/transporter'
 import { starColor } from './colors'
 
 export const transportGraphicsContext = new GraphicsContext().circle(0, 0, 13).stroke({

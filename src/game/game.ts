@@ -2,7 +2,7 @@ import { Application } from 'pixi.js'
 import { Simulation } from '../simulation/simulation'
 import { Input } from './input'
 import { SimulationView } from '../view/simulationView'
-import { EntityState } from '../simulation/entity/entity'
+import { EntityState } from '../entity/entity'
 import svgLevel1 from '../svg/level1.svg?raw'
 
 export class Game {

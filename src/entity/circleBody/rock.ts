@@ -1,4 +1,4 @@
-import { Simulation } from '../../simulation'
+import { Simulation } from '../../simulation/simulation'
 import { CircleBody } from './circleBody'
 
 export class Rock extends CircleBody {

@@ -1,5 +1,5 @@
-import { clamp, getDistance } from '../../math'
-import { Simulation } from '../simulation'
+import { clamp, getDistance } from '../math'
+import { Simulation } from '../simulation/simulation'
 import { Entity, EntityState } from './entity'
 
 export class Transporter extends Entity {

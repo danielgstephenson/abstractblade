@@ -1,6 +1,6 @@
-import { Input } from '../../../../game/input'
-import { getDistance, normalize } from '../../../../math'
-import { Simulation } from '../../../simulation'
+import { Input } from '../../../game/input'
+import { getDistance, normalize } from '../../../math'
+import { Simulation } from '../../../simulation/simulation'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
 

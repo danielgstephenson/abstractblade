@@ -1,7 +1,7 @@
 import { Container, Graphics, GraphicsContext } from 'pixi.js'
 import { SimulationView } from './simulationView'
 import { Simulation } from '../simulation/simulation'
-import { Player } from '../simulation/entity/circleBody/agent/player'
+import { Player } from '../entity/circleBody/agent/player'
 
 export const spawnGraphicsContext = new GraphicsContext().circle(0, 0, 8).stroke({
   color: 'hsla(220, 100%, 50%, 0.3)',

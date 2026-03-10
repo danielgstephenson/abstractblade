@@ -1,6 +1,6 @@
 import { Graphics, GraphicsContext } from 'pixi.js'
 import { SimulationView } from './simulationView'
-import { Star } from '../simulation/entity/star'
+import { Star } from '../entity/star'
 import { starColor } from './colors'
 
 export const starGraphicsContext = new GraphicsContext().star(0, 0, 5, 4, 1.8).fill(starColor)

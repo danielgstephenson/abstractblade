@@ -1,5 +1,5 @@
-import { clampVec, combine, sub } from '../../../math'
-import { Simulation } from '../../simulation'
+import { clampVec, combine, sub } from '../../math'
+import { Simulation } from '../../simulation/simulation'
 import { EntityState } from '../entity'
 import { Agent } from './agent/agent'
 import { CircleBody } from './circleBody'

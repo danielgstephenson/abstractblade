@@ -1,6 +1,6 @@
 import { Color, Graphics } from 'pixi.js'
 import { SimulationView } from './simulationView'
-import { Blade } from '../simulation/entity/circleBody/blade'
+import { Blade } from '../entity/circleBody/blade'
 
 export class SpringView extends Graphics {
   simulationView: SimulationView

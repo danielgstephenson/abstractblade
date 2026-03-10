@@ -1,4 +1,4 @@
-import { Simulation } from '../../../simulation'
+import { Simulation } from '../../../simulation/simulation'
 import { Agent } from './agent'
 
 export class Rover extends Agent {

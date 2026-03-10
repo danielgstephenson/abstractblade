@@ -1,6 +1,6 @@
 import { ColorSource, Container, Graphics, GraphicsContext } from 'pixi.js'
 import { SimulationView } from './simulationView'
-import { CircleBody } from '../simulation/entity/circleBody/circleBody'
+import { CircleBody } from '../entity/circleBody/circleBody'
 import { starGraphicsContext } from './starView'
 
 export class CircleView extends Container {

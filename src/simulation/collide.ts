@@ -1,5 +1,5 @@
 import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
-import { CircleBody } from './entity/circleBody/circleBody'
+import { CircleBody } from '../entity/circleBody/circleBody'
 
 export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
   if (body1.dead || body2.dead) return false

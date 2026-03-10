@@ -3,7 +3,7 @@ import { Game } from '../game/game'
 import { Simulation } from '../simulation/simulation'
 import { range } from '../math'
 import { SimulationView } from './simulationView'
-import { Boundary } from '../simulation/entity/boundary'
+import { Boundary } from '../entity/boundary'
 
 export class BoundaryView extends Container {
   simulationView: SimulationView

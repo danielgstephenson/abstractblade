@@ -1,6 +1,6 @@
 import { Container, Graphics } from 'pixi.js'
 import { SimulationView } from './simulationView'
-import { Door } from '../simulation/entity/door'
+import { Door } from '../entity/door'
 import { range } from '../math'
 import { starGraphicsContext } from './starView'
 
