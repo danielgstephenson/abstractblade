@@ -1,4 +1,4 @@
-import { Input } from '../../../game/input'
+import { Input } from '../../../input'
 import { getDistance, normalize } from '../../../math'
 import { Simulation } from '../../../simulation/simulation'
 import { EntityState } from '../../entity'
@@ -8,12 +8,12 @@ export class Player extends Agent {
   drag = 0.7
   align = 0
   spawnPoint: number[]
-  name = 'player'
+  id = 'player'
 
   constructor(simulation: Simulation, position: number[]) {
     super(simulation, position, 5)
     this.spawnPoint = structuredClone(position)
-    this.simulation.players.push(this)
+    this.simulation.player = this
   }
 
   invincible(): boolean {

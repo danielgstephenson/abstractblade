@@ -1,5 +1,5 @@
 import { Application } from 'pixi.js'
-import { Game } from './game/game'
+import { Game } from './game'
 
 const appDiv = document.getElementById('app')!
 

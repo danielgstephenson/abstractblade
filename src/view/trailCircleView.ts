@@ -1,5 +1,5 @@
 import { ColorSource, Container, Graphics } from 'pixi.js'
-import { SimulationView } from './simulationView'
+import { LevelView } from './levelView'
 import { CircleView } from './circleView'
 import { CircleBody } from '../entity/circleBody/circleBody'
 import { Player } from '../entity/circleBody/agent/player'
@@ -8,7 +8,7 @@ export class TrailCircleView extends CircleView {
   trail: Container
   trailCircles: Graphics[]
 
-  constructor(simulationView: SimulationView, body: CircleBody, color: ColorSource) {
+  constructor(simulationView: LevelView, body: CircleBody, color: ColorSource) {
     super(simulationView, body, color)
     this.trail = new Container()
     this.simulationView.trailContainer.addChild(this.trail)

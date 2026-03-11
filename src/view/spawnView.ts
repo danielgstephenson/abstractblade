@@ -1,5 +1,5 @@
 import { Container, Graphics, GraphicsContext } from 'pixi.js'
-import { SimulationView } from './simulationView'
+import { LevelView } from './levelView'
 import { Simulation } from '../simulation/simulation'
 import { Player } from '../entity/circleBody/agent/player'
 
@@ -9,15 +9,15 @@ export const spawnGraphicsContext = new GraphicsContext().circle(0, 0, 8).stroke
 })
 
 export class SpawnView extends Container {
-  simulationView: SimulationView
+  simulationView: LevelView
   player: Player
   simulation: Simulation
   ring: Graphics
 
-  constructor(simulationView: SimulationView, player: Player) {
+  constructor(simulationView: LevelView, player: Player) {
     super()
     this.simulationView = simulationView
-    this.simulation = simulationView.simulation
+    this.simulation = simulationView.level
     this.player = player
     this.cullable = true
     this.x = this.player.spawnPoint[0]

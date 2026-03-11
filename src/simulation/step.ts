@@ -4,11 +4,10 @@ import { Simulation } from './simulation'
 
 export function step(simulation: Simulation): void {
   if (simulation.busy) {
-    console.log('busy')
+    console.log('simulation busy')
     return
   }
-  if (simulation.players[0].dead) return
-  if (simulation.paused) return
+  if (simulation.player.dead) return
   const dt = simulation.timeStep * simulation.timeScale
   simulation.time += dt
   simulation.bodies.forEach(body => {

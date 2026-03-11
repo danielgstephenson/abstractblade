@@ -17,7 +17,7 @@ export class Transporter extends Entity {
   }
 
   preStep(dt: number): void {
-    const player = this.simulation.players[0]
+    const player = this.simulation.player
     const distance = getDistance(this.position, player.position)
     const sign = distance < this.radius ? 1 : -1
     this.charge = clamp(0, this.interval, this.charge + sign * dt)
@@ -25,7 +25,7 @@ export class Transporter extends Entity {
     player.position = structuredClone(this.target)
     player.spawnPoint = structuredClone(this.target)
     if (player.blade != null) player.blade.detach()
-    this.simulation.saveState()
+    this.simulation.saveBackup()
   }
 
   loadState(state: EntityState): void {

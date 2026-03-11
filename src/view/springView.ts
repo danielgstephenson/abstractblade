@@ -1,13 +1,13 @@
 import { Color, Graphics } from 'pixi.js'
-import { SimulationView } from './simulationView'
+import { LevelView } from './levelView'
 import { Blade } from '../entity/circleBody/blade'
 
 export class SpringView extends Graphics {
-  simulationView: SimulationView
+  simulationView: LevelView
   blade: Blade
   color: Color
 
-  constructor(simulationView: SimulationView, blade: Blade, color: Color) {
+  constructor(simulationView: LevelView, blade: Blade, color: Color) {
     super()
     this.simulationView = simulationView
     this.blade = blade

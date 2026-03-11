@@ -16,7 +16,7 @@ export class Star extends Entity {
 
   preStep(): void {
     if (!this.available) return
-    const player = this.simulation.players[0]
+    const player = this.simulation.player
     if (player.star) return
     const distance = getDistance(this.position, player.position)
     if (distance > 9) return

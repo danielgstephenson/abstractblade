@@ -1,18 +1,18 @@
 import { Container, Graphics } from 'pixi.js'
-import { SimulationView } from './simulationView'
+import { LevelView } from './levelView'
 import { Door } from '../entity/door'
 import { range } from '../math'
 import { starGraphicsContext } from './starView'
 
 export class DoorView extends Container {
-  simulationView: SimulationView
+  simulationView: LevelView
   door: Door
   background: Graphics
   outline: Container
   starGraphics: Graphics
   holeGraphics: Graphics
 
-  constructor(simulationView: SimulationView, door: Door) {
+  constructor(simulationView: LevelView, door: Door) {
     super()
     this.simulationView = simulationView
     this.door = door

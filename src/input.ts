@@ -1,4 +1,4 @@
-import { clamp } from '../math'
+import { clamp } from './math'
 
 export class Input {
   keyboard = new Map<string, boolean>()

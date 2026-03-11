@@ -32,7 +32,7 @@ function addBoundaries(simulation: Simulation, layer: INode): void {
   nodes.forEach(node => {
     const points = getPathPoints(node)
     const boundary = simulation.addBoundary(points)
-    boundary.name = node.attributes.id
+    boundary.id = node.attributes.id
   })
 }
 
@@ -50,7 +50,7 @@ function addRovers(simulation: Simulation, layer: INode): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const rover = simulation.addRover([x, y])
-    rover.name = node.attributes.id
+    rover.id = node.attributes.id
   })
 }
 
@@ -60,7 +60,7 @@ function addMonsters(simulation: Simulation, layer: INode): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const monster = simulation.addMonster([x, y])
-    monster.name = node.attributes.id
+    monster.id = node.attributes.id
   })
 }
 
@@ -72,7 +72,7 @@ function addBlades(simulation: Simulation, layer: INode): void {
     const position = [x, y]
     const align = Number(node.attributes.align)
     const blade = simulation.addBlade(position, align)
-    blade.name = node.attributes.id
+    blade.id = node.attributes.id
   })
 }
 
@@ -84,7 +84,7 @@ function addRocks(simulation: Simulation, layer: INode): void {
     const position = [x, y]
     const radius = Number(node.attributes.r)
     const rock = simulation.addRock(position, radius)
-    rock.name = node.attributes.id
+    rock.id = node.attributes.id
   })
 }
 
@@ -98,7 +98,7 @@ function addStars(simulation: Simulation, layer: INode): void {
     const y = mean(ys)
     const position = [x, y]
     const star = simulation.addStar(position)
-    star.name = node.attributes.id
+    star.id = node.attributes.id
   })
 }
 
@@ -109,7 +109,7 @@ function addDoors(simulation: Simulation, layer: INode, arrows: number[][][]): v
     const insideArrow = arrows.filter(a => insidePolygon(a[0], polygon))[0]
     const vector = sub(insideArrow[1], insideArrow[0])
     const door = simulation.addDoor(polygon, vector)
-    door.name = node.attributes.id
+    door.id = node.attributes.id
   })
 }
 
@@ -122,7 +122,7 @@ function addTransporters(simulation: Simulation, layer: INode, arrows: number[][
     const position = [x, y]
     const insideArrow = arrows.filter(a => getDistance(a[0], position) < r)[0]
     const transporter = simulation.addTransporter(position, insideArrow[1])
-    transporter.name = node.attributes.id
+    transporter.id = node.attributes.id
   })
 }
 

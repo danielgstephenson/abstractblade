@@ -17,12 +17,11 @@ import { Blade } from '../entity/circleBody/blade'
 export type SimulationState = EntityState[]
 
 export class Simulation {
-  backup: SimulationState
   boundaries: Boundary[] = []
   entities: Entity[] = []
   bodies: CircleBody[] = []
   agents: Agent[] = []
-  players: Player[] = []
+  player!: Player
   rovers: Rover[] = []
   monsters: Monster[] = []
   rocks: Rock[] = []
@@ -35,7 +34,7 @@ export class Simulation {
   time = 0
   accumulator = 0
   busy = false
-  paused = false
+  backup: SimulationState
 
   constructor(svgString: string) {
     build(this, svgString)
@@ -54,11 +53,11 @@ export class Simulation {
     return this.entities.map(x => x.getState())
   }
 
-  saveState(): void {
+  saveBackup(): void {
     this.backup = this.getState()
   }
 
-  loadState(): void {
+  loadBackup(): void {
     this.entities.map((entity, i) => {
       entity.loadState(this.backup[i])
     })

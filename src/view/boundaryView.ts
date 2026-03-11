@@ -1,25 +1,20 @@
-import { Application, Container, Graphics } from 'pixi.js'
-import { Game } from '../game/game'
+import { Container, Graphics } from 'pixi.js'
 import { Simulation } from '../simulation/simulation'
 import { range } from '../math'
-import { SimulationView } from './simulationView'
+import { LevelView } from './levelView'
 import { Boundary } from '../entity/boundary'
 
 export class BoundaryView extends Container {
-  simulationView: SimulationView
+  simulationView: LevelView
   simulation: Simulation
-  game: Game
-  app: Application
   boundary: Boundary
   background: Graphics
   floor: Container
 
-  constructor(simulationView: SimulationView, boundary: Boundary) {
+  constructor(simulationView: LevelView, boundary: Boundary) {
     super()
     this.simulationView = simulationView
-    this.simulation = this.simulationView.simulation
-    this.game = this.simulationView.game
-    this.app = this.simulationView.game.app
+    this.simulation = this.simulationView.level
     this.boundary = boundary
     this.background = this.buildBackground()
     this.floor = this.buildFloor()

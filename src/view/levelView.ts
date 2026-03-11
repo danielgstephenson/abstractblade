@@ -1,6 +1,4 @@
-import { Application, Container } from 'pixi.js'
-import { Simulation } from '../simulation/simulation'
-import { Game } from '../game/game'
+import { Container } from 'pixi.js'
 import { TrailCircleView } from './trailCircleView'
 import { CircleView } from './circleView'
 import { BoundaryView } from './boundaryView'
@@ -10,11 +8,12 @@ import { TransporterView } from './transporterView'
 import { SpawnView } from './spawnView'
 import { SpringView } from './springView'
 import { monsterColor, playerBladeColor, playerColor, rockColor, roverBladeColor, roverColor } from './colors'
+import { World } from '../world'
+import { Level } from '../level/level'
 
-export class SimulationView extends Container {
-  simulation: Simulation
-  game: Game
-  app: Application
+export class LevelView extends Container {
+  level: Level
+  world: World
   trailContainer: Container
   circleViews: CircleView[] = []
   springViews: SpringView[] = []
@@ -23,48 +22,43 @@ export class SimulationView extends Container {
   doorViews: DoorView[] = []
   spawnViews: SpawnView[] = []
 
-  constructor(game: Game, simulation: Simulation) {
+  constructor(world: World) {
     super()
-    this.game = game
-    this.simulation = simulation
-    this.app = this.game.app
-    this.app.stage.addChild(this)
+    this.world = world
+    this.level = world.currentLevel
+    this.world.game.app.stage.addChild(this)
     this.trailContainer = new Container()
     this.build()
   }
 
   build(): void {
-    this.simulation.boundaries.forEach(boundary => {
+    this.level.boundaries.forEach(boundary => {
       void new BoundaryView(this, boundary)
     })
-    this.simulation.transporters.forEach(transporter => {
+    this.level.transporters.forEach(transporter => {
       this.transporterViews.push(new TransporterView(this, transporter))
     })
-    this.simulation.players.forEach(player => {
-      this.spawnViews.push(new SpawnView(this, player))
-    })
-    this.simulation.stars.forEach(star => {
+    this.spawnViews.push(new SpawnView(this, this.level.player))
+    this.level.stars.forEach(star => {
       this.starViews.push(new StarView(this, star))
     })
-    this.simulation.doors.forEach(door => {
+    this.level.doors.forEach(door => {
       this.doorViews.push(new DoorView(this, door))
     })
     this.addChild(this.trailContainer)
-    this.simulation.rocks.forEach(rock => {
+    this.level.rocks.forEach(rock => {
       this.circleViews.push(new CircleView(this, rock, rockColor))
     })
-    this.simulation.blades.forEach(blade => {
+    this.level.blades.forEach(blade => {
       const color = blade.align === 0 ? playerBladeColor : roverBladeColor
       this.springViews.push(new SpringView(this, blade, color))
       this.circleViews.push(new TrailCircleView(this, blade, color))
     })
-    this.simulation.monsters.forEach(monster => {
+    this.level.monsters.forEach(monster => {
       this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
     })
-    this.simulation.players.forEach(player => {
-      this.circleViews.push(new TrailCircleView(this, player, playerColor))
-    })
-    this.simulation.rovers.forEach(rover => {
+    this.circleViews.push(new TrailCircleView(this, this.level.player, playerColor))
+    this.level.rovers.forEach(rover => {
       this.circleViews.push(new TrailCircleView(this, rover, roverColor))
     })
   }
@@ -80,10 +74,10 @@ export class SimulationView extends Container {
   }
 
   updateCamera(): void {
-    const player = this.simulation.players[0]
+    const player = this.level.player
     const offset = player != null ? player.position : [0, 0]
     const vmin = Math.min(window.innerWidth, window.innerHeight)
-    this.scale = 0.007 * vmin * Math.exp(0.1 * this.game.input.zoom)
+    this.scale = 0.007 * vmin * Math.exp(0.1 * this.world.input.zoom)
     this.x = 0.5 * window.innerWidth - this.scale.x * offset[0]
     this.y = 0.5 * window.innerHeight - this.scale.y * offset[1]
   }

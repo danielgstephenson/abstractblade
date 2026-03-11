@@ -5,7 +5,7 @@ export type EntityState = Record<string, number>
 export class Entity {
   simulation: Simulation
   index: number
-  name = 'entityName'
+  id = 'entityId'
 
   constructor(simulation: Simulation) {
     this.simulation = simulation
