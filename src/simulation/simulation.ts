@@ -13,6 +13,7 @@ import { Star } from '../entity/star'
 import { Door } from '../entity/door'
 import { Transporter } from '../entity/transporter'
 import { Blade } from '../entity/circleBody/blade'
+import { Entrance } from '../entity/entrance'
 
 export type SimulationState = EntityState[]
 
@@ -29,10 +30,14 @@ export class Simulation {
   stars: Star[] = []
   doors: Door[] = []
   transporters: Transporter[] = []
+  entrances: Entrance[] = []
   timeStep = 1 / 60
   timeScale = 2
   time = 0
   accumulator = 0
+  leaving = false
+  targetLevel = 1
+  targetEntrance = 0
   busy = false
   backup: SimulationState
 
@@ -98,5 +103,10 @@ export class Simulation {
   addBoundary(points: number[][]): Boundary {
     const boundary = new Boundary(this, points)
     return boundary
+  }
+
+  addEntrance(location: number[]): Entrance {
+    const entrance = new Entrance(this, location)
+    return entrance
   }
 }

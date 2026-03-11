@@ -1,5 +1,6 @@
 import { clamp, getDistance } from '../math'
 import { Simulation } from '../simulation/simulation'
+import { Player } from './circleBody/agent/player'
 import { Entity, EntityState } from './entity'
 
 export class Transporter extends Entity {
@@ -8,6 +9,9 @@ export class Transporter extends Entity {
   radius = 13
   charge = 0
   interval = 4
+  exit = false
+  targetLevel = 1
+  targetEntrance = 0
 
   constructor(simulation: Simulation, position: number[], target: number[]) {
     super(simulation)
@@ -22,9 +26,20 @@ export class Transporter extends Entity {
     const sign = distance < this.radius ? 1 : -1
     this.charge = clamp(0, this.interval, this.charge + sign * dt)
     if (this.charge < this.interval) return
-    player.position = structuredClone(this.target)
-    player.spawnPoint = structuredClone(this.target)
-    if (player.blade != null) player.blade.detach()
+    this.transport(player)
+  }
+
+  transport(player: Player): void {
+    this.charge = 0
+    if (this.exit) {
+      this.simulation.leaving = true
+      this.simulation.targetLevel = this.targetLevel
+      this.simulation.targetEntrance = this.targetEntrance
+    } else {
+      player.position = structuredClone(this.target)
+      player.spawnPoint = structuredClone(this.target)
+      if (player.blade != null) player.blade.detach()
+    }
     this.simulation.saveBackup()
   }
 

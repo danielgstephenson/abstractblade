@@ -14,6 +14,7 @@ export function build(simulation: Simulation, svgString: string): void {
   const rockLayer = getChildById(svgNode, 'rockLayer')
   const bladeLayer = getChildById(svgNode, 'bladeLayer')
   const agentLayer = getChildById(svgNode, 'agentLayer')
+  const entranceLayer = getChildById(svgNode, 'entranceLayer')
   const arrowLayer = getChildById(svgNode, 'arrowLayer')
   const arrows = getArrows(arrowLayer)
   addBoundaries(simulation, boundaryLayer)
@@ -25,6 +26,7 @@ export function build(simulation: Simulation, svgString: string): void {
   addPlayer(simulation, agentLayer)
   addRovers(simulation, agentLayer)
   addMonsters(simulation, agentLayer)
+  addEntrances(simulation, entranceLayer)
 }
 
 function addBoundaries(simulation: Simulation, layer: INode): void {
@@ -120,9 +122,25 @@ function addTransporters(simulation: Simulation, layer: INode, arrows: number[][
     const y = Number(node.attributes.cy)
     const r = Number(node.attributes.r)
     const position = [x, y]
-    const insideArrow = arrows.filter(a => getDistance(a[0], position) < r)[0]
-    const transporter = simulation.addTransporter(position, insideArrow[1])
+    const insideArrows = arrows.filter(a => getDistance(a[0], position) < r)
+    const target = insideArrows.length > 0 ? insideArrows[0][1] : position
+    const transporter = simulation.addTransporter(position, target)
     transporter.id = node.attributes.id
+    transporter.exit = node.attributes.exit === 'true'
+    if (!transporter.exit) return
+    transporter.targetLevel = Number(node.attributes.targetLevel)
+    transporter.targetEntrance = Number(node.attributes.targetEntrance)
+  })
+}
+
+function addEntrances(simulation: Simulation, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'entrance')
+  nodes.forEach(node => {
+    const x = Number(node.attributes.cx)
+    const y = Number(node.attributes.cy)
+    const position = [x, y]
+    const entrance = simulation.addEntrance(position)
+    entrance.id = node.attributes.id
   })
 }
 

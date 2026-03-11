@@ -10,15 +10,14 @@ export class World {
   input = new Input()
   levels: Record<number, Level> = {}
   game: Game
-  currentLevel: Level
+  level: Level
   levelView: LevelView
 
   constructor(game: Game) {
     this.game = game
     this.buildLevels()
-    this.currentLevel = this.levels[1]
+    this.level = this.levels[1]
     this.levelView = new LevelView(this)
-    this.changeLevel(2)
     window.addEventListener('keydown', event => {
       if (event.repeat) return
       this.proceed()
@@ -27,15 +26,26 @@ export class World {
   }
 
   update(time: Ticker): void {
-    this.currentLevel.player.handleInput(this.input)
-    this.currentLevel.update(time)
+    if (this.level.leaving) {
+      this.level.leaving = false
+      this.changeLevel(this.level.targetLevel, this.level.targetEntrance)
+    }
+    this.level.player.handleInput(this.input)
+    this.level.update(time)
     this.levelView.update()
   }
 
-  changeLevel(levelIndex: number): void {
-    this.levelView.destroy()
-    this.currentLevel = this.levels[levelIndex]
+  changeLevel(levelIndex: number, entranceIndex: number): void {
+    const oldLevelView = this.levelView
+    oldLevelView.visible = false
+    this.level = this.levels[levelIndex]
+    console.log('this.level.entrances.length', this.level.entrances.length)
+    console.log('entranceIndex', entranceIndex)
+    const entrance = this.level.entrances[entranceIndex]
+    this.level.player.position = structuredClone(entrance.position)
+    this.level.player.spawnPoint = structuredClone(entrance.position)
     this.levelView = new LevelView(this)
+    oldLevelView.destroy({ children: true, texture: true, textureSource: true })
   }
 
   buildLevels(): void {
@@ -44,8 +54,8 @@ export class World {
   }
 
   proceed(): void {
-    if (this.currentLevel.player.dead) {
-      this.currentLevel.loadBackup()
+    if (this.level.player.destroyed) {
+      this.level.loadBackup()
     }
   }
 }

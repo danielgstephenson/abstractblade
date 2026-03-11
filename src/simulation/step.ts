@@ -7,7 +7,7 @@ export function step(simulation: Simulation): void {
     console.log('simulation busy')
     return
   }
-  if (simulation.player.dead) return
+  if (simulation.player.destroyed) return
   const dt = simulation.timeStep * simulation.timeScale
   simulation.time += dt
   simulation.bodies.forEach(body => {
@@ -17,11 +17,11 @@ export function step(simulation: Simulation): void {
   })
   simulation.entities.forEach(entity => entity.preStep(dt))
   simulation.agents.forEach(agent => {
-    if (agent.dead) return
+    if (agent.destroyed) return
     agent.force = mul(agent.movePower, agent.action)
   })
   simulation.bodies.forEach(body => {
-    if (body.dead) return
+    if (body.destroyed) return
     simulation.boundaries.forEach(boundary => {
       collideBodyPolygon(body, boundary.polygon)
     })
@@ -30,13 +30,13 @@ export function step(simulation: Simulation): void {
       if (hit) door.knock(body)
     })
     simulation.bodies.forEach(other => {
-      if (other.dead) return
+      if (other.destroyed) return
       if (body.index <= other.index) return
       collideBodyBody(body, other)
     })
   })
   simulation.bodies.forEach(body => {
-    if (body.dead || body.static) return
+    if (body.destroyed || body.static) return
     body.velocity = mul(1 - body.drag * dt, body.velocity)
     body.velocity = combine(1, body.velocity, dt / body.mass, body.force)
     body.velocity = combine(1, body.velocity, 1 / body.mass, body.impulse)

@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="start.svg"
+   sodipodi:docname="level1.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="-184.90842"
-     inkscape:cy="202.58609"
+     inkscape:zoom="0.50000001"
+     inkscape:cx="-863.99998"
+     inkscape:cy="175"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="boundaryLayer"
+     inkscape:current-layer="transportLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -154,26 +154,6 @@
     </marker>
     <marker
        style="overflow:visible"
-       id="ArrowWide-3-9"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path1-6-3" />
-    </marker>
-    <marker
-       style="overflow:visible"
        id="ArrowWide-3-76"
        refX="0"
        refY="0"
@@ -216,7 +196,8 @@
   <g
      inkscape:groupmode="layer"
      id="boundaryLayer"
-     inkscape:highlight-color="#3e67e3">
+     inkscape:highlight-color="#3e67e3"
+     sodipodi:insensitive="true">
     <path
        id="boundary5"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
@@ -277,39 +258,46 @@
      inkscape:highlight-color="#ffff00">
     <circle
        style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter1"
+       id="transporter0"
        cx="-343.25604"
        cy="323.00073"
        role="transporter"
-       r="20" />
+       r="20"
+       exit="false" />
     <circle
        style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter2"
+       id="transporter1"
        cx="-333.19547"
        cy="239.69064"
        role="transporter"
-       r="20" />
+       r="20"
+       exit="false" />
     <circle
        style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter2-1"
-       cx="-707.95618"
-       cy="536.44824"
-       role="transporter"
-       r="20" />
-    <circle
-       style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter2-8"
+       id="transporter2"
        cx="-429.34314"
        cy="572.35358"
        role="transporter"
-       r="20" />
+       r="20"
+       exit="false" />
     <circle
        style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter2-8-9"
+       id="transporter3"
        cx="-368.6066"
        cy="637.25739"
        role="transporter"
-       r="20" />
+       r="20"
+       exit="false" />
+    <circle
+       style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="transporter4"
+       cx="-77.956192"
+       cy="112.44826"
+       role="transporter"
+       r="20"
+       exit="true"
+       targetEntrance="0"
+       targetLevel="2" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -345,83 +333,6 @@
        cy="167"
        role="rock"
        r="3" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-7-9"
-       cx="-498.87299"
-       cy="578.31305"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock9-1"
-       cx="-648.87219"
-       cy="474.75946"
-       role="rock"
-       r="3.5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5"
-       cx="-551.51642"
-       cy="395.82779"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock6-0"
-       cx="-43"
-       cy="43.125"
-       role="rock"
-       r="2" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock7"
-       cx="-69.201195"
-       cy="86.119537"
-       role="rock"
-       r="2" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock8"
-       cx="-40.257912"
-       cy="51.481163"
-       role="rock"
-       r="3" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock9"
-       cx="-359.0209"
-       cy="440.40781"
-       role="rock"
-       r="3.5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock10"
-       cx="-52.125"
-       cy="35.75"
-       role="rock"
-       r="3.5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-1"
-       cx="-169.90273"
-       cy="18.12689"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-7"
-       cx="-51.75"
-       cy="47"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock4"
-       cx="-33.805382"
-       cy="107.70514"
-       role="rock"
-       r="2" />
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="rock5-7-9-6"
@@ -508,32 +419,18 @@
        r="3" />
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock1"
-       cx="-116.08258"
-       cy="127.29187"
+       id="rock5-7-9-1-5"
+       cx="-396"
+       cy="427"
        role="rock"
-       r="3" />
+       r="5" />
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock2-7"
-       cx="-43.5"
-       cy="126.25"
+       id="rock5-7-9-1-1"
+       cx="-591"
+       cy="413"
        role="rock"
-       r="2" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock10-9"
-       cx="-439.96991"
-       cy="368.72818"
-       role="rock"
-       r="2" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock9-7"
-       cx="-629.15625"
-       cy="532.34015"
-       role="rock"
-       r="3.5" />
+       r="5" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -555,14 +452,6 @@
        role="blade"
        r="10"
        align="0" />
-    <circle
-       style="fill:#00e5af;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="roverBlade1"
-       cx="-476.34131"
-       cy="448.01587"
-       role="blade"
-       r="10"
-       align="1" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -603,13 +492,6 @@
        role="rover"
        r="5" />
     <circle
-       style="fill:#00b200;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rover3"
-       cx="-474.94446"
-       cy="448.51691"
-       role="rover"
-       r="5" />
-    <circle
        style="fill:#009900;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="rover2"
        cx="-94.884041"
@@ -630,6 +512,13 @@
        cy="24.018797"
        role="player"
        r="5" />
+    <circle
+       style="fill:#cc0000;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="monster1-8"
+       cx="-486.85788"
+       cy="423.02945"
+       role="monster"
+       r="10" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -666,12 +555,6 @@
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
-       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-9)"
-       d="m -707.32519,542.21897 37.26156,-28.85125"
-       id="arrow2-4"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
-    <path
        style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-4-1-3)"
        d="m -157.46267,203.25936 13.65183,33.24717"
        id="arrow4"
@@ -686,16 +569,22 @@
   </g>
   <g
      inkscape:groupmode="layer"
-     id="layer12"
-     inkscape:label="entranceLayer"
+     id="entranceLayer"
      inkscape:highlight-color="#227eff"
      style="fill:none">
     <circle
        style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="path1"
+       id="entrance0"
        cx="-36.739277"
        cy="24.173635"
        r="8.9375"
-       inkscape:label="entrance1" />
+       role="entrance" />
+    <circle
+       style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="entrance1"
+       cx="-10.340674"
+       cy="152.15323"
+       r="8.9375"
+       role="entrance" />
   </g>
 </svg>

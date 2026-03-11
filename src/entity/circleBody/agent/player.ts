@@ -34,6 +34,6 @@ export class Player extends Agent {
 
   loadState(state: EntityState): void {
     super.loadState(state)
-    this.dead = false
+    this.destroyed = false
   }
 }

@@ -37,19 +37,21 @@ export class Blade extends CircleBody {
     }
   }
 
-  die(): void {
-    super.die()
+  destroy(): void {
+    super.destroy()
     this.detach()
   }
 
   doesCollide(otherBody: CircleBody): boolean {
     if (otherBody instanceof Agent) {
       if (otherBody.align === this.align) {
-        if (otherBody.blade == null && this.agent == null) this.attach(otherBody)
+        if (otherBody.blade == null && this.agent == null) {
+          this.attach(otherBody)
+        }
       }
       if (otherBody.align !== this.align) {
-        if (otherBody.invincible()) this.die()
-        else otherBody.die()
+        if (otherBody.invincible()) this.destroy()
+        else otherBody.destroy()
       }
       return false
     }

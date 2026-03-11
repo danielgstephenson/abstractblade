@@ -13,7 +13,7 @@ export class CircleBody extends Entity {
   shift = [0, 0]
   drag = 0.7
   static = false
-  dead = false
+  destroyed = false
   trail: number[][]
 
   constructor(simulation: Simulation, position: number[], radius: number) {
@@ -30,8 +30,8 @@ export class CircleBody extends Entity {
     this.trail.shift()
   }
 
-  die() {
-    this.dead = true
+  destroy() {
+    this.destroyed = true
   }
 
   doesCollide(_otherBody: CircleBody): boolean {
@@ -49,7 +49,7 @@ export class CircleBody extends Entity {
     state.vx = this.velocity[0]
     state.vy = this.velocity[1]
     state.star = Number(this.star)
-    state.dead = Number(this.dead)
+    state.dead = Number(this.destroyed)
     return state
   }
 
@@ -59,7 +59,7 @@ export class CircleBody extends Entity {
     if (state.vx != null) this.velocity[0] = state.vx
     if (state.vy != null) this.velocity[1] = state.vy
     if (state.star != null) this.star = Boolean(state.star)
-    if (state.dead != null) this.dead = Boolean(state.dead)
+    if (state.dead != null) this.destroyed = Boolean(state.dead)
     this.trail = range(50).map(_ => structuredClone(this.position))
   }
 }

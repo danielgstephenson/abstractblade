@@ -18,12 +18,8 @@ export class Agent extends CircleBody {
 
   preStep(dt: number): void {
     super.preStep(dt)
-    if (this.dead && this.blade != null) {
+    if (this.destroyed && this.blade != null) {
       this.blade.detach()
     }
-  }
-
-  die() {
-    super.die()
   }
 }
