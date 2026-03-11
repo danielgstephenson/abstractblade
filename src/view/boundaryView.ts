@@ -22,7 +22,7 @@ export class BoundaryView extends Container {
     this.addChild(this.floor)
     this.background.mask = this.floor
     this.simulationView.addChild(this)
-    this.cacheAsTexture({ resolution: 10 })
+    // this.cacheAsTexture({ resolution: 10 })
   }
 
   buildBackground(): Graphics {
@@ -37,14 +37,14 @@ export class BoundaryView extends Container {
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
     background.fill(`hsl(0,0%,3%)`)
-    const count = Math.round((width * height) / 20)
-    range(count).forEach(_ => {
-      const x = xMin + width * Math.random()
-      const y = yMin + height * Math.random()
-      const lightness = 1 + 2 * Math.random() * 1.5
-      const radius = 1 + 4 * Math.random()
-      background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.5)`)
-    })
+    // const count = Math.round((width * height) / 20)
+    // range(count).forEach(_ => {
+    //   const x = xMin + width * Math.random()
+    //   const y = yMin + height * Math.random()
+    //   const lightness = 1 + 2 * Math.random() * 1.5
+    //   const radius = 1 + 4 * Math.random()
+    //   background.circle(x, y, radius).fill(`hsla(0,0%,${lightness}%,0.5)`)
+    // })
     return background
   }
 

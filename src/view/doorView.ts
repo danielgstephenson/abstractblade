@@ -34,7 +34,7 @@ export class DoorView extends Container {
     this.starGraphics.visible = false
     this.addChild(this.holeGraphics)
     this.addChild(this.starGraphics)
-    this.cacheAsTexture({ resolution: 10 })
+    // this.cacheAsTexture({ resolution: 10 })
   }
 
   update(): void {
@@ -58,14 +58,14 @@ export class DoorView extends Container {
     const background = new Graphics()
     background.rect(xMin, yMin, width, height)
     background.fill('hsl(36,100%,10%)')
-    const count = Math.round((width * height) / 5)
-    range(count).forEach(_ => {
-      const x = xMin + width * Math.random()
-      const y = yMin + height * Math.random()
-      const lightness = 5 + 5 * Math.random()
-      const radius = 1 + 4 * Math.random()
-      background.circle(x, y, radius).fill(`hsla(36,100%,${lightness}%,0.2)`)
-    })
+    // const count = Math.round((width * height) / 5)
+    // range(count).forEach(_ => {
+    //   const x = xMin + width * Math.random()
+    //   const y = yMin + height * Math.random()
+    //   const lightness = 5 + 5 * Math.random()
+    //   const radius = 1 + 4 * Math.random()
+    //   background.circle(x, y, radius).fill(`hsla(36,100%,${lightness}%,0.2)`)
+    // })
     return background
   }
 
