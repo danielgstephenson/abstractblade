@@ -18,6 +18,7 @@ export class World {
     this.buildLevels()
     this.currentLevel = this.levels[1]
     this.levelView = new LevelView(this)
+    this.changeLevel(2)
     window.addEventListener('keydown', event => {
       if (event.repeat) return
       this.proceed()
@@ -25,15 +26,21 @@ export class World {
     window.addEventListener('mousedown', () => this.proceed())
   }
 
-  buildLevels(): void {
-    void new Level1(this)
-    void new Level2(this)
-  }
-
   update(time: Ticker): void {
     this.currentLevel.player.handleInput(this.input)
     this.currentLevel.update(time)
     this.levelView.update()
+  }
+
+  changeLevel(levelIndex: number): void {
+    this.levelView.destroy()
+    this.currentLevel = this.levels[levelIndex]
+    this.levelView = new LevelView(this)
+  }
+
+  buildLevels(): void {
+    void new Level1(this)
+    void new Level2(this)
   }
 
   proceed(): void {
