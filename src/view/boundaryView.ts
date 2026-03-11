@@ -1,6 +1,5 @@
 import { Container, Graphics } from 'pixi.js'
 import { Simulation } from '../simulation/simulation'
-import { range } from '../math'
 import { LevelView } from './levelView'
 import { Boundary } from '../entity/boundary'
 

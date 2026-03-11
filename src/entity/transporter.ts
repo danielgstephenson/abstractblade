@@ -39,8 +39,8 @@ export class Transporter extends Entity {
       player.position = structuredClone(this.target)
       player.spawnPoint = structuredClone(this.target)
       if (player.blade != null) player.blade.detach()
+      this.simulation.saveBackup()
     }
-    this.simulation.saveBackup()
   }
 
   loadState(state: EntityState): void {

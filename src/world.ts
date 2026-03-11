@@ -39,11 +39,10 @@ export class World {
     const oldLevelView = this.levelView
     oldLevelView.visible = false
     this.level = this.levels[levelIndex]
-    console.log('this.level.entrances.length', this.level.entrances.length)
-    console.log('entranceIndex', entranceIndex)
     const entrance = this.level.entrances[entranceIndex]
     this.level.player.position = structuredClone(entrance.position)
     this.level.player.spawnPoint = structuredClone(entrance.position)
+    this.level.saveBackup()
     this.levelView = new LevelView(this)
     oldLevelView.destroy({ children: true, texture: true, textureSource: true })
   }
