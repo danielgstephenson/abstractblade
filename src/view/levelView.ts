@@ -77,7 +77,7 @@ export class LevelView extends Container {
     const player = this.level.player
     const offset = player != null ? player.position : [0, 0]
     const vmin = Math.min(window.innerWidth, window.innerHeight)
-    this.scale = 0.007 * vmin * Math.exp(0.1 * this.world.input.zoom)
+    this.scale = 0.004 * vmin * Math.exp(0.1 * this.world.input.zoom)
     this.x = 0.5 * window.innerWidth - this.scale.x * offset[0]
     this.y = 0.5 * window.innerHeight - this.scale.y * offset[1]
   }
