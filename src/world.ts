@@ -42,6 +42,7 @@ export class World {
     const entrance = this.level.entrances[entranceIndex]
     this.level.player.position = structuredClone(entrance.position)
     this.level.player.spawnPoint = structuredClone(entrance.position)
+    this.level.player.trail = this.level.player.trail.map(_ => structuredClone(entrance.position))
     this.level.saveBackup()
     this.levelView = new LevelView(this)
     oldLevelView.destroy({ children: true, texture: true, textureSource: true })
