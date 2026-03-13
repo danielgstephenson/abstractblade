@@ -3,6 +3,7 @@ import { CircleBody } from '../circleBody'
 import { Agent } from './agent'
 
 export class Monster extends Agent {
+  movePower = 20
   drag = 0.7
   align = 3
 

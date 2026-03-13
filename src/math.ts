@@ -48,6 +48,11 @@ export function angleToDir(angle: number): number[] {
   return [Math.cos(angle), Math.sin(angle)]
 }
 
+export function getRandomDir(): number[] {
+  const angle = Math.random() * 2 * Math.PI
+  return angleToDir(angle)
+}
+
 export function sub(a: number[], b: number[]): number[] {
   return range(a.length).map(i => a[i] - b[i])
 }
