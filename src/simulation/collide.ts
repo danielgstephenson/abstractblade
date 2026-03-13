@@ -19,6 +19,8 @@ export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
   body2.impulse = combine(1, body2.impulse, +1, impulse)
   body1.shift = combine(1, body1.shift, -1, shift)
   body2.shift = combine(1, body2.shift, +1, shift)
+  body1.onCollide(body2)
+  body2.onCollide(body1)
   return true
 }
 

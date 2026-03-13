@@ -38,6 +38,8 @@ export class CircleBody extends Entity {
     return true
   }
 
+  onCollide(_entity: Entity): void {}
+
   invincible(): boolean {
     return false
   }
