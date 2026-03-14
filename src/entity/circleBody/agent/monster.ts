@@ -6,8 +6,8 @@ import { CircleBody } from '../circleBody'
 import { Agent } from './agent'
 
 export class Monster extends Agent {
-  movePower = 20
-  drag = 0.7
+  movePower = 19
+  drag = 0.02
   align = 3
   targetVelocity = [0, 0]
 
