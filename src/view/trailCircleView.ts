@@ -2,7 +2,6 @@ import { ColorSource, Container, Graphics } from 'pixi.js'
 import { LevelView } from './levelView'
 import { CircleView } from './circleView'
 import { CircleBody } from '../entity/circleBody/circleBody'
-import { Player } from '../entity/circleBody/agent/player'
 
 export class TrailCircleView extends CircleView {
   trail: Container
