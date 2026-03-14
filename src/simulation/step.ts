@@ -23,16 +23,12 @@ export function step(simulation: Simulation): void {
   simulation.bodies.forEach(body => {
     if (body.destroyed) return
     simulation.boundaries.forEach(boundary => {
-      const hit = collideBodyPolygon(body, boundary.polygon)
-      if (hit) {
-        body.onCollide(boundary)
-      }
+      collideBodyPolygon(body, boundary.polygon)
     })
     simulation.doors.forEach(door => {
       const hit = collideBodyPolygon(body, door.polygon)
       if (hit) {
         door.knock(body)
-        body.onCollide(door)
       }
     })
     simulation.bodies.forEach(other => {

@@ -69,17 +69,17 @@ export function mul(a: number, v: number[]): number[] {
   return v.map(x => a * x)
 }
 
-export function getLength(v: number[]): number {
+export function getMagnitude(v: number[]): number {
   const squares = v.map(x => x ** 2)
   return Math.sqrt(sum(squares))
 }
 
 export function getDistance(v: number[], w: number[]): number {
-  return getLength(sub(v, w))
+  return getMagnitude(sub(v, w))
 }
 
 export function normalize(v: number[]): number[] {
-  const length = getLength(v)
+  const length = getMagnitude(v)
   if (length === 0) return [0, 0]
   return mul(1 / length, v)
 }
@@ -110,7 +110,7 @@ export function whichMin(array: number[]): number {
 }
 
 export function clampVec(vector: number[], maxLength: number): number[] {
-  const length = getLength(vector)
+  const length = getMagnitude(vector)
   if (length < maxLength) return vector
   const direction = normalize(vector)
   return mul(maxLength, direction)

@@ -1,4 +1,4 @@
-import { dirFromTo, getLength, getRandomDir, mul } from '../../../math'
+import { dirFromTo } from '../../../math'
 import { roundVector } from '../../../simulation/actionVectors'
 import { Simulation } from '../../../simulation/simulation'
 import { EntityState } from '../../entity'
@@ -19,11 +19,6 @@ export class Rover extends Agent {
     super.preStep(dt)
     const targetAction = dirFromTo(this.velocity, this.targetVelocity)
     this.action = roundVector(targetAction)
-  }
-
-  onCollide(): void {
-    const targetSpeed = getLength(this.targetVelocity)
-    this.targetVelocity = mul(targetSpeed, getRandomDir())
   }
 
   getState(): EntityState {

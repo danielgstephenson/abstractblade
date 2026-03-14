@@ -1,4 +1,4 @@
-import { dirFromTo, getLength as getMagnitude, getRandomDir, mul } from '../../../math'
+import { dirFromTo } from '../../../math'
 import { roundVector } from '../../../simulation/actionVectors'
 import { Simulation } from '../../../simulation/simulation'
 import { EntityState } from '../../entity'
@@ -31,11 +31,6 @@ export class Monster extends Agent {
       }
     }
     return true
-  }
-
-  onCollide(): void {
-    const targetSpeed = getMagnitude(this.targetVelocity)
-    this.targetVelocity = mul(targetSpeed, getRandomDir())
   }
 
   getState(): EntityState {

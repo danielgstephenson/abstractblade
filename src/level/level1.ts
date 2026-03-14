@@ -44,7 +44,7 @@ export class Level1 extends Level {
         }
         return
       }
-      if (2000 * Math.random() < time.deltaMS) {
+      if (1000 * Math.random() < time.deltaMS) {
         rover.targetVelocity = mul(targetSpeed, getRandomDir())
       }
     })
