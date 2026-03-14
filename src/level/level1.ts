@@ -24,6 +24,7 @@ export class Level1 extends Level {
     const dangers = [...this.monsters, ...this.blades].filter(danger => !danger.destroyed)
     const safeDistance = 100
     this.rovers.forEach(rover => {
+      if (rover.destroyed) return
       let minDangerDistance = safeDistance
       dangers.forEach(danger => {
         const distance = getDistance(rover.position, danger.position)
@@ -66,9 +67,10 @@ export class Level1 extends Level {
   updateMonsters(): void {
     const targetSpeed = 30
     this.monsters.forEach(monster => {
+      if (monster.destroyed) return
       const player = this.player
-      if (getDistance(monster.position, player.spawnPoint) < 50) {
-        const segment = [monster.position, player.position]
+      if (getDistance(monster.position, player.spawnPoint) < 70) {
+        const segment = [monster.position, player.spawnPoint]
         const visible = this.segmentCast(segment).length === 0
         if (visible) {
           monster.targetVelocity = mul(50, dirFromTo(this.player.spawnPoint, monster.position))
