@@ -27,13 +27,11 @@ export class TrailCircleView extends CircleView {
 
   update(): void {
     super.update()
-    const visible = !this.body.destroyed || this.body instanceof Player
-    this.visible = visible
     this.trailCircles.forEach((circle, i) => {
       const h = this.body.trail[i]
       circle.x = h[0]
       circle.y = h[1]
-      circle.visible = visible
+      circle.visible = this.visible
     })
   }
 }

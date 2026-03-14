@@ -7,31 +7,30 @@ import { dirFromTo, getDistance, getRandomDir, mul } from '../math'
 export class Level1 extends Level {
   constructor(world: World) {
     super(world, 1, svgString)
+    this.rovers.forEach(rover => {
+      rover.targetVelocity = mul(30, getRandomDir())
+    })
   }
 
   update(time: Ticker): void {
     super.update(time)
     this.updateRovers(time)
-    this.updateMonsters(time)
+    this.updateMonsters()
   }
 
   updateRovers(time: Ticker): void {
     const player = this.player
-    const targetSpeed = 30
+    const targetSpeed = 20
     const dangers = [...this.monsters, ...this.blades]
-    const safeDistance = 50
+    const safeDistance = 70
     this.rovers.forEach(rover => {
       let minDangerDistance = safeDistance
       dangers.forEach(danger => {
         const distance = getDistance(rover.position, danger.position)
         if (distance < minDangerDistance) {
-          const segment = [rover.position, danger.position]
-          const visible = this.segmentCast(segment).length === 0
-          if (visible) {
-            minDangerDistance = distance
-            const targetDir = dirFromTo(danger.position, rover.position)
-            rover.targetVelocity = mul(2 * targetSpeed, targetDir)
-          }
+          minDangerDistance = distance
+          const targetDir = dirFromTo(danger.position, rover.position)
+          rover.targetVelocity = mul(2 * targetSpeed, targetDir)
         }
       })
       if (minDangerDistance < safeDistance) return
@@ -51,9 +50,9 @@ export class Level1 extends Level {
     })
   }
 
-  updateMonsters(time: Ticker): void {
+  updateMonsters(): void {
     const targetSpeed = 30
-    const safeDistance = 30
+    const safeDistance = 20
     const dangers = [...this.blades]
     this.monsters.forEach(monster => {
       let minDangerDistance = safeDistance
@@ -80,7 +79,7 @@ export class Level1 extends Level {
         }
       }
       const preyAgents = [this.player, ...this.rovers].filter(x => !x.destroyed)
-      let minPreyDistance = 100
+      let minPreyDistance = 200
       preyAgents.forEach(prey => {
         const distance = getDistance(monster.position, prey.position)
         if (distance < minPreyDistance) {
@@ -93,9 +92,6 @@ export class Level1 extends Level {
           }
         }
       })
-      if (2000 * Math.random() < time.deltaMS) {
-        monster.targetVelocity = mul(targetSpeed, getRandomDir())
-      }
     })
   }
 }

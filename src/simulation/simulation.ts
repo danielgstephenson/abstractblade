@@ -116,6 +116,9 @@ export class Simulation {
     this.boundaries.forEach(boundary => {
       intersections.push(...rayCastPolygon(rayStart, rayVector, boundary.polygon))
     })
+    this.doors.forEach(door => {
+      intersections.push(...rayCastPolygon(rayStart, rayVector, door.polygon))
+    })
     return intersections
   }
 
@@ -123,6 +126,9 @@ export class Simulation {
     const intersections: number[][] = []
     this.boundaries.forEach(boundary => {
       intersections.push(...segmentCastPolygon(segment, boundary.polygon))
+    })
+    this.doors.forEach(door => {
+      intersections.push(...segmentCastPolygon(segment, door.polygon))
     })
     return intersections
   }

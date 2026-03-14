@@ -13,7 +13,6 @@ export class Monster extends Agent {
 
   constructor(simulation: Simulation, position: number[]) {
     super(simulation, position, 10)
-    this.targetVelocity = mul(10, getRandomDir())
     this.simulation.monsters.push(this)
   }
 

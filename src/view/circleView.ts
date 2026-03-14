@@ -2,6 +2,7 @@ import { ColorSource, Container, Graphics, GraphicsContext } from 'pixi.js'
 import { LevelView } from './levelView'
 import { CircleBody } from '../entity/circleBody/circleBody'
 import { starGraphicsContext } from './starView'
+import { Player } from '../entity/circleBody/agent/player'
 
 export class CircleView extends Container {
   simulationView: LevelView
@@ -28,5 +29,6 @@ export class CircleView extends Container {
     this.x = this.body.position[0]
     this.y = this.body.position[1]
     this.starGraphics.visible = this.body.star
+    this.visible = !this.body.destroyed || this.body instanceof Player
   }
 }

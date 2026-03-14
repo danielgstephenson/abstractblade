@@ -5,7 +5,7 @@ import { EntityState } from '../../entity'
 import { Agent } from './agent'
 
 export class Rover extends Agent {
-  movePower = 10
+  movePower = 20
   drag = 0.7
   align = 1
   targetVelocity = [0, 0]
@@ -13,7 +13,6 @@ export class Rover extends Agent {
   constructor(simulation: Simulation, position: number[]) {
     super(simulation, position, 5)
     this.simulation.rovers.push(this)
-    this.targetVelocity = mul(10, getRandomDir())
   }
 
   preStep(dt: number): void {
