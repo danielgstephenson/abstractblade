@@ -1,4 +1,4 @@
-import { dirFromTo, getMagnitude, getRandomDir, mul } from '../../../math'
+import { dirFromTo, getRandomDir, mul } from '../../../math'
 import { roundVector } from '../../../simulation/actionVectors'
 import { Simulation } from '../../../simulation/simulation'
 import { Entity, EntityState } from '../../entity'
@@ -22,8 +22,7 @@ export class Rover extends Agent {
   }
 
   onCollide(_entity: Entity): void {
-    const speed = getMagnitude(this.velocity)
-    this.targetVelocity = mul(speed, getRandomDir())
+    this.targetVelocity = mul(30, getRandomDir())
   }
 
   getState(): EntityState {

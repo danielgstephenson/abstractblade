@@ -7,7 +7,7 @@ import { Agent } from './agent'
 
 export class Monster extends Agent {
   movePower = 19
-  drag = 0.02
+  drag = 0
   align = 3
   targetVelocity = [0, 0]
 

@@ -15,7 +15,7 @@ export class Player extends Agent {
   constructor(simulation: Simulation, position: number[]) {
     super(simulation, position, 5)
     this.spawnPoint = structuredClone(position)
-    this.history = range(50).map(_ => structuredClone(this.position))
+    this.history = range(20).map(_ => structuredClone(this.position))
     this.simulation.player = this
   }
 

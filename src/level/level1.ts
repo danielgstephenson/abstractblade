@@ -2,7 +2,7 @@ import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level1.svg?raw'
 import { Ticker } from 'pixi.js'
-import { dirFromTo, getDistance, getRandomDir, mul } from '../math'
+import { dirFromTo, dot, getDistance, getRandomDir, mul } from '../math'
 
 export class Level1 extends Level {
   constructor(world: World) {
@@ -33,32 +33,42 @@ export class Level1 extends Level {
           const visible = this.segmentCast(segment).length === 0
           if (visible) {
             minDangerDistance = distance
-            const targetDir = dirFromTo(danger.position, rover.position)
-            rover.targetVelocity = mul(2 * targetSpeed, targetDir)
+            const toDanger = dirFromTo(rover.position, danger.position)
+            const movingToDanger = dot(toDanger, rover.targetVelocity) > 0
+            if (movingToDanger) rover.targetVelocity = mul(-2 * targetSpeed, getRandomDir())
           }
         }
       })
       if (minDangerDistance < safeDistance) return
       const distance = getDistance(rover.position, player.position)
-      if (distance > 50 && distance < 400) {
+      if (distance < 400) {
         const segment = [rover.position, player.position]
         const visible = this.segmentCast(segment).length === 0
         if (visible) {
           const targetDir = dirFromTo(rover.position, player.position)
-          rover.targetVelocity = mul(targetSpeed, targetDir)
-          return
-        }
-        for (const point of player.history) {
-          const segment = [rover.position, point]
-          const visible = this.segmentCast(segment).length === 0
-          if (visible) {
-            const targetDir = dirFromTo(rover.position, point)
-            rover.targetVelocity = mul(targetSpeed, targetDir)
+          const movingToPlayer = dot(targetDir, rover.targetVelocity) > 0
+          if (distance < 15) {
+            if (movingToPlayer) rover.targetVelocity = mul(targetSpeed, getRandomDir())
+            return
+          }
+          if (distance > 40) {
+            if (!movingToPlayer) rover.targetVelocity = mul(targetSpeed, getRandomDir())
             return
           }
         }
+        if (!visible) {
+          for (const point of player.history) {
+            const segment = [rover.position, point]
+            const visible = this.segmentCast(segment).length === 0
+            if (visible) {
+              const targetDir = dirFromTo(rover.position, point)
+              rover.targetVelocity = mul(targetSpeed, targetDir)
+              return
+            }
+          }
+        }
       }
-      if (1000 * Math.random() < time.deltaMS) {
+      if (2000 * Math.random() < time.deltaMS) {
         rover.targetVelocity = mul(targetSpeed, getRandomDir())
       }
     })

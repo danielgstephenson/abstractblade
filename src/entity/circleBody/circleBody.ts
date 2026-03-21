@@ -20,7 +20,7 @@ export class CircleBody extends Entity {
     super(simulation)
     this.position = structuredClone(position)
     this.radius = radius
-    this.mass = Math.PI * (0.1 * this.radius) ** 2
+    this.mass = 0.01 * Math.PI * this.radius ** 2
     this.simulation.bodies.push(this)
     this.trail = range(50).map(_ => structuredClone(this.position))
   }
