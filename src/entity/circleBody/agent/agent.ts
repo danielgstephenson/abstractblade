@@ -1,4 +1,4 @@
-import { Simulation } from '../../../simulation/simulation'
+import { Simulation } from '../../../physics/simulation'
 import { Blade } from '../blade'
 import { CircleBody } from '../circleBody'
 

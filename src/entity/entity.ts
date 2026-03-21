@@ -1,4 +1,4 @@
-import { Simulation } from '../simulation/simulation'
+import { Simulation } from '../physics/simulation'
 
 export type EntityState = Record<string, number>
 

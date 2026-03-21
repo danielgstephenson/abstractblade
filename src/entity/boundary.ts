@@ -1,4 +1,4 @@
-import { Simulation } from '../simulation/simulation'
+import { Simulation } from '../physics/simulation'
 import { Entity } from './entity'
 
 export class Boundary extends Entity {

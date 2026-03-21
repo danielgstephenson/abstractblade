@@ -1,6 +1,6 @@
 import { Input } from '../../../input'
 import { getDistance, normalize, range } from '../../../math'
-import { Simulation } from '../../../simulation/simulation'
+import { Simulation } from '../../../physics/simulation'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
 

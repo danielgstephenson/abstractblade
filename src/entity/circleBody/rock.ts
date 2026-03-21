@@ -1,4 +1,4 @@
-import { Simulation } from '../../simulation/simulation'
+import { Simulation } from '../../physics/simulation'
 import { Player } from './agent/player'
 import { CircleBody } from './circleBody'
 

@@ -1,5 +1,5 @@
 import { range } from '../../math'
-import { Simulation } from '../../simulation/simulation'
+import { Simulation } from '../../physics/simulation'
 import { Entity, EntityState } from '../entity'
 
 export class CircleBody extends Entity {

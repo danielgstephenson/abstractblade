@@ -1,5 +1,5 @@
 import { clamp, getDistance } from '../math'
-import { Simulation } from '../simulation/simulation'
+import { Simulation } from '../physics/simulation'
 import { Player } from './circleBody/agent/player'
 import { Entity, EntityState } from './entity'
 

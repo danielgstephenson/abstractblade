@@ -1,6 +1,6 @@
 import { dirFromTo } from '../../../math'
-import { roundVector } from '../../../simulation/actionVectors'
-import { Simulation } from '../../../simulation/simulation'
+import { roundVector } from '../../../physics/actionVectors'
+import { Simulation } from '../../../physics/simulation'
 import { EntityState } from '../../entity'
 import { CircleBody } from '../circleBody'
 import { Agent } from './agent'

@@ -1,6 +1,6 @@
 import { Container, Graphics, GraphicsContext } from 'pixi.js'
 import { LevelView } from './levelView'
-import { Simulation } from '../simulation/simulation'
+import { Simulation } from '../physics/simulation'
 import { Player } from '../entity/circleBody/agent/player'
 
 export const spawnGraphicsContext = new GraphicsContext().circle(0, 0, 8).stroke({

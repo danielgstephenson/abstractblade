@@ -1,6 +1,6 @@
 import { dirFromTo, getRandomDir, mul } from '../../../math'
-import { roundVector } from '../../../simulation/actionVectors'
-import { Simulation } from '../../../simulation/simulation'
+import { roundVector } from '../../../physics/actionVectors'
+import { Simulation } from '../../../physics/simulation'
 import { Entity, EntityState } from '../../entity'
 import { Agent } from './agent'
 
