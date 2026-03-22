@@ -111,25 +111,25 @@ export class Simulation {
     return entrance
   }
 
-  rayCast(rayStart: number[], rayVector: number[]): number[][] {
-    const intersections: number[][] = []
+  rayCast(rayStart: number[], rayVector: number[]): number[] {
+    const hitFactors: number[] = []
     this.boundaries.forEach(boundary => {
-      intersections.push(...rayCastPolygon(rayStart, rayVector, boundary.polygon))
+      hitFactors.push(...rayCastPolygon(rayStart, rayVector, boundary.polygon))
     })
     this.doors.forEach(door => {
-      intersections.push(...rayCastPolygon(rayStart, rayVector, door.polygon))
+      hitFactors.push(...rayCastPolygon(rayStart, rayVector, door.polygon))
     })
-    return intersections
+    return hitFactors
   }
 
-  segmentCast(segment: number[][]): number[][] {
-    const intersections: number[][] = []
+  segmentCast(segment: number[][]): number[] {
+    const hitFactors: number[] = []
     this.boundaries.forEach(boundary => {
-      intersections.push(...segmentCastPolygon(segment, boundary.polygon))
+      hitFactors.push(...segmentCastPolygon(segment, boundary.polygon))
     })
     this.doors.forEach(door => {
-      intersections.push(...segmentCastPolygon(segment, door.polygon))
+      hitFactors.push(...segmentCastPolygon(segment, door.polygon))
     })
-    return intersections
+    return hitFactors
   }
 }
