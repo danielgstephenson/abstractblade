@@ -51,7 +51,7 @@ export class Level1 extends Level {
             if (movingToPlayer) rover.targetVelocity = mul(targetSpeed, getRandomDir())
             return
           }
-          if (distance > 40) {
+          if (distance > 30) {
             if (!movingToPlayer) rover.targetVelocity = mul(targetSpeed, getRandomDir())
             return
           }

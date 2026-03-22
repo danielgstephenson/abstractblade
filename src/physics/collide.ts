@@ -41,6 +41,7 @@ export function collideBodyPolygon(body: CircleBody, entity: Boundary | Door): b
     const pointHit = collideBodyPoint(body, point)
     if (pointHit) {
       body.onCollide(entity)
+      return true
     }
   }
   return false
