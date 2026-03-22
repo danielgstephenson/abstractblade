@@ -2,7 +2,7 @@ import { INode, parseSync } from 'svgson'
 import { Simulation } from './simulation'
 import { pointsOnPath } from 'points-on-path'
 import { getDistance, mean, sub } from '../math'
-import { insidePolygon } from './raycast'
+import { insidePolygon } from './segmentCast'
 import { getChildById } from '../svg/svg'
 
 export function build(simulation: Simulation, svgString: string): void {
