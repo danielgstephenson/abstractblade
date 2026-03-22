@@ -38,11 +38,27 @@ export function rayCastSegment(rayStart: number[], rayVector: number[], segment:
 }
 
 export function insidePolygon(point: number[], polygon: number[][]): boolean {
-  const intersections = rayCastPolygon(point, [1, 0], polygon)
-  return intersections.length % 2 === 1
+  const hitFactors = rayCastPolygon(point, [1, 0], polygon)
+  return hitFactors.length % 2 === 1
 }
 
 export function segmentCastSegment(segmentA: number[][], segmentB: number[][]): number[] {
+  const xsA = segmentA.map(p => p[0])
+  const xsB = segmentB.map(p => p[0])
+  const xMaxA = Math.max(...xsA)
+  const xMinB = Math.min(...xsB)
+  if (xMaxA < xMinB) return []
+  const xMinA = Math.min(...xsA)
+  const xMaxB = Math.max(...xsB)
+  if (xMaxB < xMinA) return []
+  const ysA = segmentA.map(p => p[1])
+  const ysB = segmentB.map(p => p[1])
+  const yMaxA = Math.max(...ysA)
+  const yMinB = Math.min(...ysB)
+  if (yMaxA < yMinB) return []
+  const yMinA = Math.min(...ysA)
+  const yMaxB = Math.max(...ysB)
+  if (yMaxB < yMinA) return []
   const aStart = segmentA[0]
   const aEnd = segmentA[1]
   const bStart = segmentB[0]
