@@ -1,6 +1,6 @@
 import { Container, Graphics } from 'pixi.js'
 import { LevelView } from './levelView'
-import { Door } from '../entity/door'
+import { Door } from '../entity/polygonBody/door'
 import { starGraphicsContext } from './starView'
 
 export class DoorView extends Container {

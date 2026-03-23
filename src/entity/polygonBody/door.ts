@@ -1,7 +1,7 @@
-import { add, combine, dirFromTo, getDistance, mean } from '../math'
-import { Simulation } from '../physics/simulation'
-import { CircleBody } from './circleBody/circleBody'
-import { Entity, EntityState } from './entity'
+import { add, combine, dirFromTo, getDistance, mean } from '../../math'
+import { Simulation } from '../../physics/simulation'
+import { CircleBody } from '../circleBody/circleBody'
+import { Entity, EntityState } from '../entity'
 
 export class Door extends Entity {
   localPoints: number[][]

@@ -1,7 +1,7 @@
 import { Container, Graphics } from 'pixi.js'
 import { Simulation } from '../physics/simulation'
 import { LevelView } from './levelView'
-import { Boundary } from '../entity/boundary'
+import { Boundary } from '../entity/polygonBody/boundary'
 
 export class BoundaryView extends Container {
   simulationView: LevelView

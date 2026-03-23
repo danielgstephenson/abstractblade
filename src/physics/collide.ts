@@ -1,17 +1,22 @@
-import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub } from '../math'
+import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub, sum } from '../math'
 import { CircleBody } from '../entity/circleBody/circleBody'
-import { Boundary } from '../entity/boundary'
-import { Door } from '../entity/door'
+import { Boundary } from '../entity/polygonBody/boundary'
+import { Door } from '../entity/polygonBody/door'
 
 export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
   if (body1.destroyed || body2.destroyed) return false
-  const distance = getDistance(body1.position, body2.position)
-  const overlap = body1.radius + body2.radius - distance
+  const totalRadius = body1.radius + body2.radius
+  const vector = sub(body2.position, body1.position)
+  if (Math.abs(vector[0]) > totalRadius) return false
+  if (Math.abs(vector[1]) > totalRadius) return false
+  const squaredDistance = sum(vector.map(x => x * x))
+  const distance = Math.sqrt(squaredDistance)
+  const overlap = totalRadius - distance
   if (overlap <= 0) return false
   const doesCollide1 = body1.doesCollide(body2)
   const doesCollide2 = body2.doesCollide(body1)
   if (!doesCollide1 || !doesCollide2) return false
-  const normal = dirFromTo(body1.position, body2.position)
+  const normal = mul(1 / distance, vector)
   const relativeVelocity = sub(body1.velocity, body2.velocity)
   const impactSpeed = dot(relativeVelocity, normal)
   const massFactor = 1 / (1 / body1.mass + 1 / body2.mass)
@@ -48,6 +53,12 @@ export function collideBodyPolygon(body: CircleBody, entity: Boundary | Door): b
 }
 
 export function collideBodySegment(body: CircleBody, segment: number[][]): boolean {
+  const xs = segment.map(p => p[0])
+  if (Math.max(...xs) < body.position[0] - body.radius) return false
+  if (Math.min(...xs) > body.position[0] + body.radius) return false
+  const ys = segment.map(p => p[1])
+  if (Math.max(...ys) < body.position[1] - body.radius) return false
+  if (Math.min(...ys) > body.position[1] + body.radius) return false
   const a = segment[0]
   const b = segment[1]
   const c = body.position
