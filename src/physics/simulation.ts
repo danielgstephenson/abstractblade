@@ -14,7 +14,7 @@ import { Door } from '../entity/polygonBody/door'
 import { Transporter } from '../entity/transporter'
 import { Blade } from '../entity/circleBody/blade'
 import { Entrance } from '../entity/entrance'
-import { segmentCastPolygon } from './raycast'
+import { segmentCastPolygon } from './rayCast'
 
 export type SimulationState = EntityState[]
 

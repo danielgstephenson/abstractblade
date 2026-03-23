@@ -1,4 +1,4 @@
-import { add, combine, dirFromTo, dot, getDistance, mul, normalize, range, sub, sum } from '../math'
+import { add, combine, dirFromTo, dot, mul, normalize, range, sub, sum } from '../math'
 import { CircleBody } from '../entity/circleBody/circleBody'
 import { Boundary } from '../entity/polygonBody/boundary'
 import { Door } from '../entity/polygonBody/door'
@@ -10,9 +10,9 @@ export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
   if (Math.abs(vector[0]) > totalRadius) return false
   if (Math.abs(vector[1]) > totalRadius) return false
   const squaredDistance = sum(vector.map(x => x * x))
+  if (squaredDistance >= totalRadius * totalRadius) return false
   const distance = Math.sqrt(squaredDistance)
   const overlap = totalRadius - distance
-  if (overlap <= 0) return false
   const doesCollide1 = body1.doesCollide(body2)
   const doesCollide2 = body2.doesCollide(body1)
   if (!doesCollide1 || !doesCollide2) return false
@@ -84,7 +84,12 @@ export function collideBodySegment(body: CircleBody, segment: number[][]): boole
 }
 
 export function collideBodyPoint(body: CircleBody, point: number[]): boolean {
-  const distance = getDistance(body.position, point)
+  const vector = sub(point, body.position)
+  if (Math.abs(vector[0]) > body.radius) return false
+  if (Math.abs(vector[1]) > body.radius) return false
+  const squaredDistance = sum(vector.map(x => x * x))
+  if (squaredDistance >= body.radius * body.radius) return false
+  const distance = Math.sqrt(squaredDistance)
   const overlap = body.radius - distance
   if (overlap <= 0) return false
   const normal = dirFromTo(point, body.position)

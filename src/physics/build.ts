@@ -3,7 +3,7 @@ import { Simulation } from './simulation'
 import { pointsOnPath } from 'points-on-path'
 import { getDistance, mean, sub } from '../math'
 import { getChildById } from '../svg/svg'
-import { insidePolygon } from './raycast'
+import { insidePolygon } from './rayCast'
 
 export function build(simulation: Simulation, svgString: string): void {
   const svgNode = parseSync(svgString)
