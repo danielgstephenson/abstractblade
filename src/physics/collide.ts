@@ -3,7 +3,7 @@ import { CircleBody } from '../entity/circleBody/circleBody'
 import { Boundary } from '../entity/polygonBody/boundary'
 import { Door } from '../entity/polygonBody/door'
 
-export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
+export function collideCircleCircle(body1: CircleBody, body2: CircleBody): boolean {
   if (body1.destroyed || body2.destroyed) return false
   const totalRadius = body1.radius + body2.radius
   const vector = sub(body2.position, body1.position)
@@ -31,19 +31,19 @@ export function collideBodyBody(body1: CircleBody, body2: CircleBody): boolean {
   return true
 }
 
-export function collideBodyPolygon(body: CircleBody, entity: Boundary | Door): boolean {
+export function collideCirclePolygon(body: CircleBody, entity: Boundary | Door): boolean {
   const polygon = entity.polygon
   for (const i of range(polygon.length)) {
     const j = i > 0 ? i - 1 : polygon.length - 1
     const segment = [polygon[i], polygon[j]]
-    const segmentHit = collideBodySegment(body, segment)
+    const segmentHit = collideCircleSegment(body, segment)
     if (segmentHit) {
       body.onCollide(entity)
       return true
     }
   }
   for (const point of polygon) {
-    const pointHit = collideBodyPoint(body, point)
+    const pointHit = collideCirclePoint(body, point)
     if (pointHit) {
       body.onCollide(entity)
       return true
@@ -52,7 +52,7 @@ export function collideBodyPolygon(body: CircleBody, entity: Boundary | Door): b
   return false
 }
 
-export function collideBodySegment(body: CircleBody, segment: number[][]): boolean {
+export function collideCircleSegment(body: CircleBody, segment: number[][]): boolean {
   const xs = segment.map(p => p[0])
   if (Math.max(...xs) < body.position[0] - body.radius) return false
   if (Math.min(...xs) > body.position[0] + body.radius) return false
@@ -83,7 +83,7 @@ export function collideBodySegment(body: CircleBody, segment: number[][]): boole
   return true
 }
 
-export function collideBodyPoint(body: CircleBody, point: number[]): boolean {
+export function collideCirclePoint(body: CircleBody, point: number[]): boolean {
   const vector = sub(point, body.position)
   if (Math.abs(vector[0]) > body.radius) return false
   if (Math.abs(vector[1]) > body.radius) return false

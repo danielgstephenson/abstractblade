@@ -21,7 +21,7 @@ export type SimulationState = EntityState[]
 export class Simulation {
   boundaries: Boundary[] = []
   entities: Entity[] = []
-  bodies: CircleBody[] = []
+  circleBodies: CircleBody[] = []
   agents: Agent[] = []
   player!: Player
   rovers: Rover[] = []
@@ -48,7 +48,7 @@ export class Simulation {
   }
 
   update(time: Ticker): void {
-    this.accumulator += time.deltaTime * this.timeStep
+    this.accumulator += 0.001 * time.deltaMS
     while (this.accumulator > this.timeStep) {
       this.accumulator -= this.timeStep
       step(this)

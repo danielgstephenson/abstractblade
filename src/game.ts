@@ -4,7 +4,6 @@ import { World } from './world'
 export class Game {
   app: Application
   world: World
-  accumulator = 0
 
   constructor(app: Application) {
     this.app = app

@@ -1,5 +1,5 @@
 import { combine, mul } from '../math'
-import { collideBodyBody, collideBodyPolygon } from './collide'
+import { collideCircleCircle, collideCirclePolygon } from './collide'
 import { Simulation } from './simulation'
 
 export function step(simulation: Simulation): void {
@@ -10,7 +10,7 @@ export function step(simulation: Simulation): void {
   if (simulation.player.destroyed) return
   const dt = simulation.timeStep * simulation.timeScale
   simulation.time += dt
-  simulation.bodies.forEach(body => {
+  simulation.circleBodies.forEach(body => {
     body.force = [0, 0]
     body.impulse = [0, 0]
     body.shift = [0, 0]
@@ -20,22 +20,22 @@ export function step(simulation: Simulation): void {
     if (agent.destroyed) return
     agent.force = mul(agent.movePower, agent.action)
   })
-  simulation.bodies.forEach(body => {
+  simulation.circleBodies.forEach(body => {
     if (body.destroyed) return
     simulation.boundaries.forEach(boundary => {
-      collideBodyPolygon(body, boundary)
+      collideCirclePolygon(body, boundary)
     })
     simulation.doors.forEach(door => {
-      const hit = collideBodyPolygon(body, door)
+      const hit = collideCirclePolygon(body, door)
       if (hit) door.knock(body)
     })
-    simulation.bodies.forEach(other => {
+    simulation.circleBodies.forEach(other => {
       if (other.destroyed) return
       if (body.index <= other.index) return
-      collideBodyBody(body, other)
+      collideCircleCircle(body, other)
     })
   })
-  simulation.bodies.forEach(body => {
+  simulation.circleBodies.forEach(body => {
     if (body.destroyed || body.static) return
     body.velocity = mul(1 - body.drag * dt, body.velocity)
     body.velocity = combine(1, body.velocity, dt / body.mass, body.force)
