@@ -2,7 +2,7 @@ import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level1.svg?raw'
 import { Ticker } from 'pixi.js'
-import { dirFromTo, dot, getDistance, getRandomDir, mul } from '../math'
+import { dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundVector } from '../physics/actionVectors'
 
@@ -29,6 +29,21 @@ export class Level1 extends Level {
     const player = this.player
     const targetAgentSpeed = 20
     if (agent.destroyed) return
+    if (agent.collisions.length > 0) {
+      const normals = agent.collisions.map(c => c.normal)
+      const xMean = mean(normals.map(v => v[0]))
+      const yMean = mean(normals.map(v => v[1]))
+      const normalMean = normalize([xMean, yMean])
+      const randomVelocity = mul(targetAgentSpeed, getRandomDir())
+      const vDot = dot(randomVelocity, normalMean)
+      agent.targetVelocity = vDot > 0 ? randomVelocity : mul(-1, agent.targetVelocity)
+      agent.targetVelocity = mul(targetAgentSpeed, normalMean)
+      return
+    }
+    if (500 * Math.random() < time.deltaMS) {
+      agent.targetVelocity = mul(targetAgentSpeed, getRandomDir())
+      return
+    }
     const distance = getDistance(agent.position, player.position)
     if (distance < 400 && player.actionTimer < 10) {
       const segment = [agent.position, player.position]
@@ -56,9 +71,6 @@ export class Level1 extends Level {
           }
         }
       }
-    }
-    if (2000 * Math.random() < time.deltaMS) {
-      agent.targetVelocity = mul(targetAgentSpeed, getRandomDir())
     }
   }
 

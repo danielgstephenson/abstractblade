@@ -1,10 +1,12 @@
 import { range } from '../../math'
+import { Collision } from '../../physics/collision'
 import { Simulation } from '../../physics/simulation'
 import { Entity, EntityState } from '../entity'
 
 export class CircleBody extends Entity {
   radius: number
   position: number[]
+  collisions: Collision[] = []
   mass: number
   star = false
   velocity = [0, 0]

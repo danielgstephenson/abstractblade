@@ -33,7 +33,7 @@ export class Simulation {
   transporters: Transporter[] = []
   entrances: Entrance[] = []
   timeStep = 1 / 60
-  timeScale = 2
+  timeScale = 1.5
   time = 0
   accumulator = 0
   leaving = false

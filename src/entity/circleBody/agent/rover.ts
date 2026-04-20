@@ -1,6 +1,5 @@
-import { getRandomDir, mul } from '../../../math'
 import { Simulation } from '../../../physics/simulation'
-import { Entity, EntityState } from '../../entity'
+import { EntityState } from '../../entity'
 import { Agent } from './agent'
 
 export class Rover extends Agent {
@@ -11,10 +10,6 @@ export class Rover extends Agent {
   constructor(simulation: Simulation, position: number[]) {
     super(simulation, position, 5)
     this.simulation.rovers.push(this)
-  }
-
-  onCollide(_entity: Entity): void {
-    this.targetVelocity = mul(30, getRandomDir())
   }
 
   getState(): EntityState {

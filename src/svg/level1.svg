@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      inkscape:zoom="2"
      inkscape:cx="8.25"
-     inkscape:cy="132.75"
+     inkscape:cy="12.75"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="transportLayer"
+     inkscape:current-layer="boundaryLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -120,20 +120,20 @@
     <path
        id="boundary1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="M 122.23483,75.532868 92.410045,124.36114 16.497436,127.09213 -17.328084,68.512628 -1.0858242,25.271437 45.025216,-10.558482 105.68962,9.910477 Z"
-       sodipodi:nodetypes="cccccccc"
+       d="m 110.23483,37.532868 -17.824785,86.828272 -75.912609,2.73099 -33.82552,-58.579502 29.3533,-83.57111 66.664404,-0.531041 z"
+       sodipodi:nodetypes="ccccccc"
        role="boundary" />
     <path
        id="boundary1-8"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 13.373426,136.85207 81.682218,-2.48418 -9.374404,55.31656 -40.37681,63.73169 -78.460663,-104.90062 -71.011037,26.02812 -45.53309,47.47044 -83.86259,-26.29189 27.42178,-88.73744 85.66075,1.71353 45.61654,-16.71048 -5.60416,-58.53215 67.0118,-7.01748 -14.489182,45.908306 z"
+       d="m 13.373426,136.85207 81.682218,-2.48418 -9.374404,55.31656 -40.37681,63.73169 -78.460663,-104.90062 -71.011037,26.02812 -45.53309,47.47044 -83.86259,-26.29189 44.42178,-106.73744 68.66075,19.71353 45.61654,-16.71048 -5.60416,-58.53215 67.0118,-7.01748 -14.489182,45.908306 z"
        sodipodi:nodetypes="ccccccccccccccc"
        role="boundary" />
     <path
        id="boundary1-8-5-7"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -4.0926876,15.219537 -91.0379874,7.816285 7.949869,61.306893 -46.711774,9.513439 -69.8202,-3.644689 52.3783,-123.45251 88.415439,-25.905102 102.966169,31.551738 z"
-       sodipodi:nodetypes="ccccccccc"
+       d="m -11.592688,16.719537 -76.537987,8.316285 0.949869,59.306893 -46.711774,9.513439 -47.8202,-23.644689 30.3783,-103.45251 88.415439,-25.905102 50.019259,5.319095 18.44691,32.732643 z"
+       sodipodi:nodetypes="cccccccccc"
        role="boundary" />
     <path
        id="boundary1-8-5-7-2"
@@ -244,8 +244,8 @@
     <circle
        style="fill:#009900;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="rover2"
-       cx="-143.37091"
-       cy="275.22498"
+       cx="42.629089"
+       cy="15.724976"
        role="rover"
        r="5" />
     <circle

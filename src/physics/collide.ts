@@ -1,7 +1,8 @@
-import { add, combine, dirFromTo, dot, mul, normalize, range, sub, sum } from '../math'
+import { add, clamp, combine, dirFromTo, dot, getMagnitude, mul, normalize, range, sub, sum } from '../math'
 import { CircleBody } from '../entity/circleBody/circleBody'
 import { Boundary } from '../entity/polygonBody/boundary'
 import { Door } from '../entity/polygonBody/door'
+import { Collision } from './collision'
 
 export function collideCircleCircle(body1: CircleBody, body2: CircleBody): boolean {
   if (body1.destroyed || body2.destroyed) return false
@@ -33,70 +34,62 @@ export function collideCircleCircle(body1: CircleBody, body2: CircleBody): boole
 
 export function collideCirclePolygon(body: CircleBody, entity: Boundary | Door): boolean {
   const polygon = entity.polygon
+  let collide = false
   for (const i of range(polygon.length)) {
     const j = i > 0 ? i - 1 : polygon.length - 1
     const segment = [polygon[i], polygon[j]]
     const segmentHit = collideCircleSegment(body, segment)
     if (segmentHit) {
       body.onCollide(entity)
-      return true
+      collide = true
     }
   }
   for (const point of polygon) {
     const pointHit = collideCirclePoint(body, point)
     if (pointHit) {
       body.onCollide(entity)
-      return true
+      collide = true
     }
   }
-  return false
+  return collide
 }
 
-export function collideCircleSegment(body: CircleBody, segment: number[][]): boolean {
+export function collideCircleSegment(circle: CircleBody, segment: number[][]): boolean {
   const xs = segment.map(p => p[0])
-  if (Math.max(...xs) < body.position[0] - body.radius) return false
-  if (Math.min(...xs) > body.position[0] + body.radius) return false
+  if (Math.max(...xs) < circle.position[0] - circle.radius) return false
+  if (Math.min(...xs) > circle.position[0] + circle.radius) return false
   const ys = segment.map(p => p[1])
-  if (Math.max(...ys) < body.position[1] - body.radius) return false
-  if (Math.min(...ys) > body.position[1] + body.radius) return false
-  const a = segment[0]
-  const b = segment[1]
-  const c = body.position
-  const ab = sub(b, a)
-  const ac = sub(c, a)
-  const bc = sub(c, b)
-  const dir = normalize(ab)
-  const normal = [-dir[1], +dir[0]]
-  if (dot(normal, ac) < 0) {
-    normal[0] = -normal[0]
-    normal[1] = -normal[1]
-  }
-  if (dot(ac, ab) < 0) return false
-  if (dot(bc, ab) > 0) return false
-  const overlap = body.radius - dot(ac, normal)
+  if (Math.max(...ys) < circle.position[1] - circle.radius) return false
+  if (Math.min(...ys) > circle.position[1] + circle.radius) return false
+  const segmentStart = segment[0]
+  const segmentEnd = segment[1]
+  const segmentVector = sub(segmentEnd, segmentStart)
+  const startToBody = sub(circle.position, segmentStart)
+  const segmentFactor = clamp(0, 1, dot(startToBody, segmentVector) / (dot(segmentVector, segmentVector) + 1e-9))
+  const closestPoint = combine(1, segmentStart, segmentFactor, segmentVector)
+  const pointToCircle = sub(circle.position, closestPoint)
+  const distance = getMagnitude(pointToCircle)
+  const overlap = circle.radius - distance
   if (overlap < 0) return false
-  const impactSpeed = -dot(body.velocity, normal)
-  const impulse = mul(1.2 * impactSpeed * body.mass, normal)
-  body.impulse = add(body.impulse, impulse)
-  const shift = mul(overlap, normal)
-  body.shift = add(body.shift, shift)
+  const normal = normalize(pointToCircle)
+  circle.collisions.push(new Collision(normal, overlap))
   return true
 }
 
-export function collideCirclePoint(body: CircleBody, point: number[]): boolean {
-  const vector = sub(point, body.position)
-  if (Math.abs(vector[0]) > body.radius) return false
-  if (Math.abs(vector[1]) > body.radius) return false
+export function collideCirclePoint(circle: CircleBody, point: number[]): boolean {
+  const vector = sub(point, circle.position)
+  if (Math.abs(vector[0]) > circle.radius) return false
+  if (Math.abs(vector[1]) > circle.radius) return false
   const squaredDistance = sum(vector.map(x => x * x))
-  if (squaredDistance >= body.radius * body.radius) return false
+  if (squaredDistance >= circle.radius * circle.radius) return false
   const distance = Math.sqrt(squaredDistance)
-  const overlap = body.radius - distance
+  const overlap = circle.radius - distance
   if (overlap <= 0) return false
-  const normal = dirFromTo(point, body.position)
-  const impactSpeed = -dot(body.velocity, normal)
-  const impulse = mul(1.2 * impactSpeed * body.mass, normal)
-  body.impulse = add(body.impulse, impulse)
+  const normal = dirFromTo(point, circle.position)
+  const impactSpeed = -dot(circle.velocity, normal)
+  const impulse = mul(1.2 * impactSpeed * circle.mass, normal)
+  circle.impulse = add(circle.impulse, impulse)
   const shift = mul(overlap, normal)
-  body.shift = add(body.shift, shift)
+  circle.shift = add(circle.shift, shift)
   return true
 }
