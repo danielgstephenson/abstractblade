@@ -1,3 +1,4 @@
+import { sum } from '../../../math'
 import { Simulation } from '../../../physics/simulation'
 import { Blade } from '../blade'
 import { CircleBody } from '../circleBody'
@@ -8,6 +9,7 @@ export class Agent extends CircleBody {
   action = [0, 0]
   blade?: Blade
   agentIndex: number
+  actionTimer = 0
 
   constructor(simulation: Simulation, position: number[], radius: number) {
     super(simulation, position, radius)
@@ -21,5 +23,7 @@ export class Agent extends CircleBody {
     if (this.destroyed && this.blade != null) {
       this.blade.detach()
     }
+    const active = sum(this.action.map(x => x ** 2)) > 0
+    this.actionTimer = active ? 0 : this.actionTimer + dt
   }
 }

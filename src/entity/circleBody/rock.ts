@@ -7,6 +7,7 @@ export class Rock extends CircleBody {
 
   constructor(simulation: Simulation, position: number[], radius: number) {
     super(simulation, position, radius)
+    this.mass = 0.005 * Math.PI * this.radius ** 2
     this.simulation.rocks.push(this)
   }
 
