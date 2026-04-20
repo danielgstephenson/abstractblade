@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="-82.37794"
-     inkscape:cy="159.45258"
+     inkscape:zoom="2"
+     inkscape:cx="8.25"
+     inkscape:cy="132.75"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="boundaryLayer"
+     inkscape:current-layer="transportLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -199,8 +199,8 @@
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock1-6-11-2"
-       cx="91.778427"
-       cy="73.039574"
+       cx="85.028427"
+       cy="81.539574"
        role="rock"
        r="3.5977182" />
     <circle
@@ -251,8 +251,8 @@
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player"
-       cx="74.565224"
-       cy="31.649265"
+       cx="59.315224"
+       cy="64.649269"
        role="player"
        r="5" />
     <circle
@@ -294,8 +294,8 @@
     <circle
        style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="entrance0"
-       cx="74.266823"
-       cy="31.096996"
+       cx="59.016823"
+       cy="64.097"
        r="8.9375"
        role="entrance" />
   </g>
