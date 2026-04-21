@@ -3,17 +3,17 @@ import { LevelView } from './levelView'
 import { Blade } from '../entity/circleBody/blade'
 
 export class SpringView extends Graphics {
-  simulationView: LevelView
+  levelView: LevelView
   blade: Blade
   color: Color
 
-  constructor(simulationView: LevelView, blade: Blade, color: Color) {
+  constructor(levelView: LevelView, blade: Blade, color: Color) {
     super()
-    this.simulationView = simulationView
+    this.levelView = levelView
     this.blade = blade
     this.color = color
     this.cullable = true
-    this.simulationView.addChild(this)
+    this.levelView.addChild(this)
   }
 
   update(): void {

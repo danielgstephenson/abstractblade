@@ -5,21 +5,21 @@ import { starGraphicsContext } from './starView'
 import { Player } from '../entity/circleBody/agent/player'
 
 export class CircleView extends Container {
-  simulationView: LevelView
+  levelView: LevelView
   body: CircleBody
   torsoGraphicsContext: GraphicsContext
   torsoGraphics: Graphics
   starGraphics: Graphics
 
-  constructor(simulationView: LevelView, body: CircleBody, color: ColorSource) {
+  constructor(levelView: LevelView, body: CircleBody, color: ColorSource) {
     super()
     this.torsoGraphicsContext = new GraphicsContext().circle(0, 0, body.radius).fill(color)
     this.torsoGraphics = new Graphics(this.torsoGraphicsContext)
     this.addChild(this.torsoGraphics)
-    this.simulationView = simulationView
+    this.levelView = levelView
     this.body = body
     this.cullable = true
-    this.simulationView.addChild(this)
+    this.levelView.addChild(this)
     this.starGraphics = new Graphics(starGraphicsContext)
     this.starGraphics.visible = false
     this.addChild(this.starGraphics)

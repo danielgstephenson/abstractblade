@@ -9,20 +9,20 @@ export const spawnGraphicsContext = new GraphicsContext().circle(0, 0, 8).stroke
 })
 
 export class SpawnView extends Container {
-  simulationView: LevelView
+  levelView: LevelView
   player: Player
   simulation: Simulation
   ring: Graphics
 
-  constructor(simulationView: LevelView, player: Player) {
+  constructor(levelView: LevelView, player: Player) {
     super()
-    this.simulationView = simulationView
-    this.simulation = simulationView.level
+    this.levelView = levelView
+    this.simulation = levelView.level
     this.player = player
     this.cullable = true
     this.x = this.player.spawnPoint[0]
     this.y = this.player.spawnPoint[1]
-    this.simulationView.addChild(this)
+    this.levelView.addChild(this)
     this.ring = new Graphics(spawnGraphicsContext)
     this.addChild(this.ring)
   }

@@ -4,21 +4,21 @@ import { Door } from '../entity/polygonBody/door'
 import { starGraphicsContext } from './starView'
 
 export class DoorView extends Container {
-  simulationView: LevelView
+  levelView: LevelView
   door: Door
   background: Graphics
   outline: Container
   starGraphics: Graphics
   holeGraphics: Graphics
 
-  constructor(simulationView: LevelView, door: Door) {
+  constructor(levelView: LevelView, door: Door) {
     super()
-    this.simulationView = simulationView
+    this.levelView = levelView
     this.door = door
     this.cullable = true
     this.x = door.position[0]
     this.y = door.position[1]
-    this.simulationView.addChild(this)
+    this.levelView.addChild(this)
     this.background = this.buildBackground()
     this.outline = this.buildContainer()
     this.addChild(this.background)

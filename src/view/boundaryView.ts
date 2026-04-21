@@ -4,19 +4,19 @@ import { LevelView } from './levelView'
 import { Boundary } from '../entity/polygonBody/boundary'
 
 export class BoundaryView extends Container {
-  simulationView: LevelView
+  levelView: LevelView
   simulation: Simulation
   boundary: Boundary
   floor: Container
 
-  constructor(simulationView: LevelView, boundary: Boundary) {
+  constructor(levelView: LevelView, boundary: Boundary) {
     super()
-    this.simulationView = simulationView
-    this.simulation = this.simulationView.level
+    this.levelView = levelView
+    this.simulation = this.levelView.level
     this.boundary = boundary
     this.floor = this.buildFloor()
     this.addChild(this.floor)
-    this.simulationView.addChild(this)
+    this.levelView.addChild(this)
   }
 
   buildFloor(): Container {

@@ -17,6 +17,8 @@ export class Level1 extends Level {
     })
   }
 
+  // Define separate classes for Transporter and Exit
+
   update(time: Ticker): void {
     super.update(time)
     this.activeAgents.forEach(agent => {
@@ -40,7 +42,7 @@ export class Level1 extends Level {
       agent.targetVelocity = mul(targetAgentSpeed, normalMean)
       return
     }
-    if (500 * Math.random() < time.deltaMS) {
+    if (2000 * Math.random() < time.deltaMS) {
       agent.targetVelocity = mul(targetAgentSpeed, getRandomDir())
       return
     }

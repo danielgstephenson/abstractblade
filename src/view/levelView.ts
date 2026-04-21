@@ -7,7 +7,7 @@ import { DoorView } from './doorView'
 import { TransporterView } from './transporterView'
 import { SpawnView } from './spawnView'
 import { SpringView } from './springView'
-import { monsterColor, playerBladeColor, playerColor, rockColor, roverBladeColor, roverColor } from './colors'
+import { monsterColor, playerBladeColor, playerColor, rockColor, roverBladeColor, roverColor } from '../colors'
 import { World } from '../world'
 import { Level } from '../level/level'
 

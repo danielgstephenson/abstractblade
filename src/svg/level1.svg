@@ -24,14 +24,14 @@
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
      inkscape:zoom="2"
-     inkscape:cx="8.25"
-     inkscape:cy="12.75"
+     inkscape:cx="-3.25"
+     inkscape:cy="182.75"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="boundaryLayer"
+     inkscape:current-layer="doorLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -126,7 +126,7 @@
     <path
        id="boundary1-8"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 13.373426,136.85207 81.682218,-2.48418 -9.374404,55.31656 -40.37681,63.73169 -78.460663,-104.90062 -71.011037,26.02812 -45.53309,47.47044 -83.86259,-26.29189 44.42178,-106.73744 68.66075,19.71353 45.61654,-16.71048 -5.60416,-58.53215 67.0118,-7.01748 -14.489182,45.908306 z"
+       d="m 13.373426,136.85207 81.682218,-2.48418 -9.374404,55.31656 -50.37681,11.73169 -68.460663,-52.90062 -71.011037,26.02812 -45.53309,47.47044 -83.86259,-26.29189 44.42178,-106.73744 68.66075,19.71353 45.61654,-16.71048 -5.60416,-58.53215 67.0118,-7.01748 -14.489182,45.908306 z"
        sodipodi:nodetypes="ccccccccccccccc"
        role="boundary" />
     <path
@@ -138,7 +138,7 @@
     <path
        id="boundary1-8-5-7-2"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -238.35766,208.73922 92.45221,28.95327 48.618669,-47.87187 60.146803,-18.70583 75.477054,84.96197 -75.005715,44.96366 -101.305871,10.30708 -107.04631,-21.61057 z"
+       d="m -238.35766,208.73922 92.45221,28.95327 48.618669,-47.87187 61.38424,-26.30723 65.386064,45.45677 -66.152162,92.07026 -101.305871,10.30708 -107.04631,-21.61057 z"
        sodipodi:nodetypes="ccccccccc"
        role="boundary" />
   </g>
@@ -149,7 +149,7 @@
     <path
        id="star1"
        style="fill:#ffff00;stroke-width:0.908675;stroke-linejoin:round"
-       d="m 49.00125,213.06412 -3.113,-2.05032 -3.06735,2.12446 0.89946,-3.73502 -2.8766,-2.39948 3.66888,-0.25809 1.28952,-3.60741 1.36803,3.57553 3.67357,0.17001 -2.82339,2.46787 z"
+       d="m 38.00125,190.06412 -3.113,-2.05032 -3.06735,2.12446 0.89946,-3.73502 -2.8766,-2.39948 3.66888,-0.25809 1.28952,-3.60741 1.36803,3.57553 3.67357,0.17001 -2.82339,2.46787 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>
@@ -181,7 +181,7 @@
     <path
        id="door2"
        style="fill:#322000;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m -116.40201,116.50297 16.69241,-21.4508 36.482862,21.7006 13.5512,45.12756 -16.461512,6.5084 -21.12862,8.35363 z"
+       d="m -117.90201,112.00297 16.69241,-21.4508 36.482862,21.7006 12.5512,40.12756 -15.961512,21.0084 -20.62862,-1.14637 z"
        sodipodi:nodetypes="ccccccc"
        role="door" />
   </g>
@@ -199,22 +199,22 @@
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock1-6-11-2"
-       cx="85.028427"
-       cy="81.539574"
+       cx="52.028427"
+       cy="39.039574"
        role="rock"
        r="3.5977182" />
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock1-6-11-2-1"
-       cx="12.948822"
-       cy="160.51404"
+       cx="-108.55118"
+       cy="3.0140381"
        role="rock"
        r="3.5977182" />
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="rock1-6-11-0-6"
-       cx="-139.13174"
-       cy="134.08669"
+       cx="-59.631744"
+       cy="184.08669"
        role="rock"
        r="3" />
   </g>
@@ -225,8 +225,8 @@
     <circle
        style="fill:#00d4ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="playerBlade1"
-       cx="-49.549927"
-       cy="250.72867"
+       cx="-132.04993"
+       cy="268.22867"
        role="blade"
        r="10"
        align="0" />
@@ -241,13 +241,6 @@
        cy="-17.939697"
        role="monster"
        r="10" />
-    <circle
-       style="fill:#009900;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rover2"
-       cx="42.629089"
-       cy="15.724976"
-       role="rover"
-       r="5" />
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player"

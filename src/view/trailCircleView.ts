@@ -7,10 +7,10 @@ export class TrailCircleView extends CircleView {
   trail: Container
   trailCircles: Graphics[]
 
-  constructor(simulationView: LevelView, body: CircleBody, color: ColorSource) {
-    super(simulationView, body, color)
+  constructor(levelView: LevelView, body: CircleBody, color: ColorSource) {
+    super(levelView, body, color)
     this.trail = new Container()
-    this.simulationView.trailContainer.addChild(this.trail)
+    this.levelView.trailContainer.addChild(this.trail)
     const L = this.body.trail.length
     this.trailCircles = this.body.trail.map((p, i) => {
       const trailCircle = new Graphics(this.torsoGraphicsContext)
