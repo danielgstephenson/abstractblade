@@ -7,13 +7,14 @@ import { DoorView } from './doorView'
 import { TransporterView } from './transporterView'
 import { SpawnView } from './spawnView'
 import { SpringView } from './springView'
-import { monsterColor, playerBladeColor, playerColor, rockColor, roverBladeColor, roverColor } from '../colors'
+import { Colors } from '../colors'
 import { World } from '../world'
 import { Level } from '../level/level'
 
 export class LevelView extends Container {
   level: Level
   world: World
+  colors: Colors
   trailContainer: Container
   circleViews: CircleView[] = []
   springViews: SpringView[] = []
@@ -28,6 +29,7 @@ export class LevelView extends Container {
     this.level = world.level
     this.world.game.app.stage.addChild(this)
     this.trailContainer = new Container()
+    this.colors = this.world.game.colors
     this.build()
   }
 
@@ -47,19 +49,19 @@ export class LevelView extends Container {
     })
     this.addChild(this.trailContainer)
     this.level.rocks.forEach(rock => {
-      this.circleViews.push(new CircleView(this, rock, rockColor))
+      this.circleViews.push(new CircleView(this, rock, this.colors.rockColor))
     })
     this.level.blades.forEach(blade => {
-      const color = blade.align === 0 ? playerBladeColor : roverBladeColor
+      const color = blade.align === 0 ? this.colors.playerBladeColor : this.colors.roverBladeColor
       this.springViews.push(new SpringView(this, blade, color))
       this.circleViews.push(new TrailCircleView(this, blade, color))
     })
     this.level.monsters.forEach(monster => {
-      this.circleViews.push(new TrailCircleView(this, monster, monsterColor))
+      this.circleViews.push(new TrailCircleView(this, monster, this.colors.monsterColor))
     })
-    this.circleViews.push(new TrailCircleView(this, this.level.player, playerColor))
+    this.circleViews.push(new TrailCircleView(this, this.level.player, this.colors.playerColor))
     this.level.rovers.forEach(rover => {
-      this.circleViews.push(new TrailCircleView(this, rover, roverColor))
+      this.circleViews.push(new TrailCircleView(this, rover, this.colors.roverColor))
     })
   }
 
