@@ -101,13 +101,21 @@ export class Simulation {
     return new Transporter(this, position, target)
   }
 
+  addExit(position: number[], targetLevel: number, targetEntrance: number): Transporter {
+    const transporter = new Transporter(this, position, position)
+    transporter.exit = true
+    transporter.targetLevel = targetLevel
+    transporter.targetEntrance = targetEntrance
+    return transporter
+  }
+
   addBoundary(points: number[][]): Boundary {
     const boundary = new Boundary(this, points)
     return boundary
   }
 
-  addEntrance(location: number[]): Entrance {
-    const entrance = new Entrance(this, location)
+  addEntrance(position: number[]): Entrance {
+    const entrance = new Entrance(this, position)
     return entrance
   }
 

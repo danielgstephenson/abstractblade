@@ -2,10 +2,6 @@ import { Color, Container, Graphics, GraphicsContext } from 'pixi.js'
 import { LevelView } from './levelView'
 import { Transporter } from '../entity/transporter'
 
-export const transportGraphicsContext = new GraphicsContext().circle(0, 0, 13).stroke({
-  width: 1,
-})
-
 export class TransporterView extends Container {
   levelView: LevelView
   transporter: Transporter
@@ -17,7 +13,7 @@ export class TransporterView extends Container {
 
   constructor(levelView: LevelView, transporter: Transporter) {
     super()
-    this.color = levelView.colors.transporterColor
+    this.color = transporter.exit ? levelView.colors.starColor : levelView.colors.transporterColor
     this.levelView = levelView
     this.transporter = transporter
     this.interval = transporter.interval

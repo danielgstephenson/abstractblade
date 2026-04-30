@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="level2.svg"
+   sodipodi:docname="level0.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
-     inkscape:zoom="1"
-     inkscape:cx="-806"
-     inkscape:cy="144.5"
+     inkscape:zoom="2"
+     inkscape:cx="-3.25"
+     inkscape:cy="142.75"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -34,7 +34,7 @@
      inkscape:current-layer="transportLayer"
      showborder="false"
      showgrid="true"
-     showguides="false">
+     showguides="true">
     <inkscape:grid
        id="grid1"
        units="px"
@@ -54,7 +54,7 @@
      id="defs1">
     <marker
        style="overflow:visible"
-       id="ArrowWide-4-1"
+       id="ArrowWide-3"
        refX="0"
        refY="0"
        orient="auto-start-reverse"
@@ -70,11 +70,11 @@
          d="M 3,-3 0,0 3,3"
          transform="rotate(180,0.125,0)"
          sodipodi:nodetypes="ccc"
-         id="path1-8-5" />
+         id="path1-6" />
     </marker>
     <marker
        style="overflow:visible"
-       id="ArrowWide-3-7"
+       id="ArrowWide-4-1-3"
        refX="0"
        refY="0"
        orient="auto-start-reverse"
@@ -90,11 +90,11 @@
          d="M 3,-3 0,0 3,3"
          transform="rotate(180,0.125,0)"
          sodipodi:nodetypes="ccc"
-         id="path1-6-1" />
+         id="path1-8-5-1" />
     </marker>
     <marker
        style="overflow:visible"
-       id="ArrowWide-3-7-4"
+       id="ArrowWide-3-76-7-6"
        refX="0"
        refY="0"
        orient="auto-start-reverse"
@@ -110,25 +110,36 @@
          d="M 3,-3 0,0 3,3"
          transform="rotate(180,0.125,0)"
          sodipodi:nodetypes="ccc"
-         id="path1-6-1-5" />
+         id="path1-6-36-2-1" />
     </marker>
   </defs>
   <g
      inkscape:groupmode="layer"
      id="boundaryLayer"
-     inkscape:highlight-color="#3e67e3"
-     sodipodi:insensitive="true">
+     inkscape:highlight-color="#3e67e3">
     <path
-       id="boundary5"
+       id="boundary-1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -643.4017,-68.30725 183.9741,-38.30217 119.42876,97.3798875 51.05435,88.7163865 -25.38421,101.989406 -42.12533,130.51548 -20.09501,42.79581 -156.71103,91.76714 -215.89244,8.40555 -136.02838,-55.81673 78.44451,-256.42886 93.34245,-97.995651 z"
-       sodipodi:nodetypes="ccccccccccccc"
+       d="m 110.23483,37.532868 -17.824785,86.828272 -75.912609,2.73099 -33.82552,-58.579502 29.3533,-83.57111 66.664404,-0.531041 z"
+       sodipodi:nodetypes="ccccccc"
        role="boundary" />
     <path
-       id="boundary3"
+       id="boundary-2"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -715.91406,9.4544697 -94.25222,92.6281003 -29.09134,77.70764 -57.56619,176.75895 -99.11314,-79.93174 -75.33515,-131.73742 -154.7624,42.70663 1.9502,-116.581139 151.453,1.11516 59.075,-86.2656 99.59239,-40.995653 z"
-       sodipodi:nodetypes="cccccccccccc"
+       d="m 13.373426,136.85207 81.682218,-2.48418 -9.374404,55.31656 -50.37681,11.73169 -68.460663,-52.90062 -71.011037,26.02812 -45.53309,47.47044 -83.86259,-26.29189 44.42178,-106.73744 68.66075,19.71353 45.61654,-16.71048 -5.60416,-58.53215 67.0118,-7.01748 -14.489182,45.908306 z"
+       sodipodi:nodetypes="ccccccccccccccc"
+       role="boundary" />
+    <path
+       id="boundary-3"
+       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
+       d="m -11.592688,16.719537 -76.537987,8.316285 0.949869,59.306893 -46.711774,9.513439 -47.8202,-23.644689 30.3783,-103.45251 88.415439,-25.905102 50.019259,5.319095 18.44691,32.732643 z"
+       sodipodi:nodetypes="cccccccccc"
+       role="boundary" />
+    <path
+       id="boundary-4"
+       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
+       d="m -238.35766,208.73922 92.45221,28.95327 48.618669,-47.87187 61.38424,-26.30723 65.386064,45.45677 -66.152162,92.07026 -101.305871,10.30708 -107.04631,-21.61057 z"
+       sodipodi:nodetypes="ccccccccc"
        role="boundary" />
   </g>
   <g
@@ -136,9 +147,9 @@
      id="starLayer"
      inkscape:highlight-color="#ffff00">
     <path
-       id="star2"
+       id="star-1"
        style="fill:#ffff00;stroke-width:0.908675;stroke-linejoin:round"
-       d="m -441.85597,70.392995 -3.113,-2.05031 -3.06735,2.12445 0.89946,-3.73502 -2.8766,-2.39948 3.66888,-0.25808 1.28952,-3.60742 1.36804,3.57554 3.67356,0.17001 -2.82339,2.46786 z"
+       d="m 38.00125,190.06412 -3.113,-2.05032 -3.06735,2.12446 0.89946,-3.73502 -2.8766,-2.39948 3.66888,-0.25809 1.28952,-3.60741 1.36803,3.57553 3.67357,0.17001 -2.82339,2.46787 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>
@@ -147,30 +158,27 @@
      id="transportLayer"
      inkscape:highlight-color="#ffff00">
     <circle
-       style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter0"
-       cx="-699.36279"
-       cy="107.76569"
+       style="fill:#b2b2b2;fill-opacity:0.04212461;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="transporter-1"
+       cx="14.524902"
+       cy="64.976395"
        role="transporter"
-       r="20"
-       exit="false" />
+       r="20" />
     <circle
-       style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter1"
-       cx="-914.5"
-       cy="265.5"
+       style="fill:#b2b2b2;fill-opacity:0.04212461;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="transporter-2"
+       cx="60.077621"
+       cy="162.64287"
        role="transporter"
-       r="20"
-       exit="false" />
+       r="20" />
     <circle
-       style="fill:#f4ff06;fill-opacity:0.0421246;stroke:#ffff00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter2"
-       cx="-1177.5"
-       cy="126.5"
-       role="transporter"
+       style="fill:#ffea12;fill-opacity:0.07106599;stroke:#d1df00;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="exit-1"
+       cx="-174.5"
+       cy="158.5"
+       role="exit"
        r="20"
-       exit="true"
-       targetLevel="1"
+       targetLevel="0"
        targetEntrance="0" />
   </g>
   <g
@@ -178,10 +186,10 @@
      id="doorLayer"
      inkscape:highlight-color="#aa6d00">
     <path
-       id="door2-0"
+       id="door-1"
        style="fill:#322000;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m -1067.7034,66.045591 5.699,46.427409 -2.5394,40.84146 -14.3609,6.93413 -16.8661,-5.59441 -4.4771,-41.40459 4.8814,-44.829761 15.3009,-7.465211 z"
-       sodipodi:nodetypes="ccccccccc"
+       d="m -117.90201,112.00297 16.69241,-21.4508 36.482862,21.7006 12.5512,40.12756 -15.961512,21.0084 -20.62862,-1.14637 z"
+       sodipodi:nodetypes="ccccccc"
        role="door" />
   </g>
   <g
@@ -190,51 +198,30 @@
      inkscape:highlight-color="#8a8a8a">
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-7-9-6"
-       cx="-920.35236"
-       cy="27.081182"
+       id="rock-1"
+       cx="-49.063942"
+       cy="72.058876"
        role="rock"
-       r="5" />
+       r="2" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock-2"
+       cx="52.028427"
+       cy="39.039574"
+       role="rock"
+       r="3.5977182" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock-3"
+       cx="-108.55118"
+       cy="3.0140381"
+       role="rock"
+       r="3.5977182" />
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-7-9-1"
-       cx="-638.29706"
-       cy="110.57151"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-7-9-74"
-       cx="-546.50165"
-       cy="-26.206663"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock5-7-9-93"
-       cx="-583.35236"
-       cy="371.08118"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock1-6"
-       cx="-495.35236"
-       cy="148.08118"
-       role="rock"
-       r="3" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock1-9"
-       cx="-585.35236"
-       cy="262.08118"
-       role="rock"
-       r="3" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rock1-60"
-       cx="-484.35236"
-       cy="332.08118"
+       id="rock1-6-11-0-6"
+       cx="-59.631744"
+       cy="184.08669"
        role="rock"
        r="3" />
   </g>
@@ -244,17 +231,17 @@
      inkscape:highlight-color="#29ffff">
     <circle
        style="fill:#00d4ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="playerBlade1"
-       cx="-406.51221"
-       cy="250.29541"
+       id="playerBlade-1"
+       cx="-132.04993"
+       cy="268.22867"
        role="blade"
        r="10"
        align="0" />
     <circle
-       style="fill:#00e5af;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="roverBlade1"
-       cx="-984.69366"
-       cy="109.59705"
+       style="fill:#00ffaa;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="agentBlade-1"
+       cx="-54"
+       cy="240.5"
        role="blade"
        r="10"
        align="1" />
@@ -264,38 +251,24 @@
      id="agentLayer">
     <circle
        style="fill:#cc0000;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="monster1"
-       cx="-566.8598"
-       cy="51.630013"
+       id="monster-1"
+       cx="-72.966705"
+       cy="-17.939697"
        role="monster"
        r="10" />
     <circle
-       style="fill:#009900;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rover5"
-       cx="-454.23105"
-       cy="294.29794"
-       role="rover"
-       r="5" />
-    <circle
-       style="fill:#009900;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rover4"
-       cx="-700.82397"
-       cy="284.9548"
-       role="rover"
-       r="5" />
-    <circle
-       style="fill:#00b200;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="rover3"
-       cx="-983.29681"
-       cy="110.09809"
-       role="rover"
-       r="5" />
-    <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player"
-       cx="-416.18411"
-       cy="-39.926937"
+       cx="59.315224"
+       cy="64.649269"
        role="player"
+       r="5" />
+    <circle
+       style="fill:#009900;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="rover-1"
+       cx="-27.584564"
+       cy="127.91275"
+       role="rover"
        r="5" />
   </g>
   <g
@@ -303,21 +276,21 @@
      id="arrowLayer"
      inkscape:highlight-color="#ffffff">
     <path
-       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-7)"
-       d="M -697.18174,108.47125 -791.03502,31.522183"
-       id="arrow3"
+       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3)"
+       d="M 15.70213,65.29245 -32.866624,97.846276"
+       id="arrow-1"
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
-       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-7-4)"
-       d="m -915.39816,266.25305 90.18508,28.19664"
-       id="arrow3-1"
+       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-4-1-3)"
+       d="m -95.42263,106.2761 26.151832,52.49717"
+       id="arrow-2"
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
-       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-4-1)"
-       d="m -1081.8367,132.94954 0.1696,-61.472498"
-       id="arrow1"
+       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6)"
+       d="m 60.44545,163.88177 0.466143,-55.19186"
+       id="arrow-3"
        sodipodi:nodetypes="cc"
        role="arrow" />
   </g>
@@ -328,16 +301,9 @@
      style="fill:none">
     <circle
        style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="entrance0"
-       cx="-416.12897"
-       cy="-39.772106"
-       role="entrance"
-       r="8.9375" />
-    <circle
-       style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="entrance1"
-       cx="-1032.1544"
-       cy="57.631382"
+       id="entrance-0"
+       cx="59.016823"
+       cy="64.097"
        r="8.9375"
        role="entrance" />
   </g>

@@ -20,6 +20,7 @@ export function build(simulation: Simulation, svgString: string): void {
   addBoundaries(simulation, boundaryLayer)
   addStars(simulation, starLayer)
   addTransporters(simulation, transportLayer, arrows)
+  addExits(simulation, transportLayer)
   addDoors(simulation, doorLayer, arrows)
   addRocks(simulation, rockLayer)
   addBlades(simulation, bladeLayer)
@@ -126,10 +127,19 @@ function addTransporters(simulation: Simulation, layer: INode, arrows: number[][
     const target = insideArrows.length > 0 ? insideArrows[0][1] : position
     const transporter = simulation.addTransporter(position, target)
     transporter.id = node.attributes.id
-    transporter.exit = node.attributes.exit === 'true'
-    if (!transporter.exit) return
-    transporter.targetLevel = Number(node.attributes.targetLevel)
-    transporter.targetEntrance = Number(node.attributes.targetEntrance)
+  })
+}
+
+function addExits(simulation: Simulation, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'exit')
+  nodes.forEach(node => {
+    const x = Number(node.attributes.cx)
+    const y = Number(node.attributes.cy)
+    const position = [x, y]
+    const targetLevel = Number(node.attributes.targetLevel)
+    const targetEntrance = Number(node.attributes.targetLevel)
+    const exit = simulation.addExit(position, targetLevel, targetEntrance)
+    exit.id = node.attributes.id
   })
 }
 
@@ -139,6 +149,7 @@ function addEntrances(simulation: Simulation, layer: INode): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
+    console.log('entrance position', position)
     const entrance = simulation.addEntrance(position)
     entrance.id = node.attributes.id
   })

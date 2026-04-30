@@ -2,13 +2,12 @@ import { Ticker } from 'pixi.js'
 import { Game } from './game'
 import { LevelView } from './view/levelView'
 import { Level } from './level/level'
-import { Level1 } from './level/level1'
-import { Level2 } from './level/level2'
+import { Level0 } from './level/level0'
 import { Input } from './input'
 
 export class World {
   input = new Input()
-  levels: Record<number, Level> = {}
+  levels: Level[] = []
   game: Game
   level: Level
   levelView: LevelView
@@ -16,7 +15,7 @@ export class World {
   constructor(game: Game) {
     this.game = game
     this.buildLevels()
-    this.level = this.levels[1]
+    this.level = this.levels[0]
     this.levelView = new LevelView(this)
     window.addEventListener('keydown', event => {
       if (event.repeat) return
@@ -39,18 +38,22 @@ export class World {
     const oldLevelView = this.levelView
     oldLevelView.visible = false
     this.level = this.levels[levelIndex]
+    console.log('Object.keys(this.level.entrances)', Object.keys(this.level.entrances))
+    console.log('Object.values(this.level.entrances)', Object.values(this.level.entrances))
     const entrance = this.level.entrances[entranceIndex]
+    console.log('entrance', entrance)
+    console.log('Object.keys(entrance)', Object.keys(entrance))
     this.level.player.position = structuredClone(entrance.position)
     this.level.player.spawnPoint = structuredClone(entrance.position)
     this.level.player.trail = this.level.player.trail.map(_ => structuredClone(entrance.position))
+    this.level.player.history = this.level.player.history.map(_ => structuredClone(entrance.position))
     this.level.saveBackup()
     this.levelView = new LevelView(this)
     oldLevelView.destroy({ children: true, texture: true, textureSource: true })
   }
 
   buildLevels(): void {
-    void new Level1(this)
-    void new Level2(this)
+    void new Level0(this)
   }
 
   proceed(): void {
