@@ -1,4 +1,4 @@
-import { clampVec, combine, sub } from '../../math'
+import { clampVec, sub } from '../../math'
 import { Simulation } from '../../physics/simulation'
 import { EntityState } from '../entity'
 import { Agent } from './agent/agent'
@@ -20,7 +20,7 @@ export class Blade extends CircleBody {
     super.preStep(dt)
     if (this.agent == null) return
     const vector = sub(this.agent.position, this.position)
-    this.force = combine(1, this.force, this.movePower, clampVec(vector, 50))
+    this.action = clampVec(vector, 50)
   }
 
   attach(agent: Agent): void {

@@ -1,4 +1,4 @@
-import { combine, dot, mean, mul, normalize } from '../math'
+import { add, combine, dot, mean, mul, normalize } from '../math'
 import { collideCircleCircle, collideCirclePolygon } from './collide'
 import { Simulation } from './simulation'
 
@@ -15,6 +15,10 @@ export function step(simulation: Simulation): void {
   simulation.agents.forEach(agent => {
     if (agent.destroyed) return
     agent.force = combine(1, agent.force, agent.movePower / agent.mass, agent.action)
+  })
+  simulation.blades.forEach(blade => {
+    if (blade.destroyed) return
+    blade.force = add(blade.force, blade.action)
   })
   resolve(simulation, dt)
   clear(simulation)

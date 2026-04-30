@@ -137,7 +137,7 @@ function addExits(simulation: Simulation, layer: INode): void {
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const targetLevel = Number(node.attributes.targetLevel)
-    const targetEntrance = Number(node.attributes.targetLevel)
+    const targetEntrance = Number(node.attributes.targetEntrance)
     const exit = simulation.addExit(position, targetLevel, targetEntrance)
     exit.id = node.attributes.id
   })

@@ -9,6 +9,7 @@ export class CircleBody extends Entity {
   collisions: Collision[] = []
   mass: number
   star = false
+  action = [0, 0]
   velocity = [0, 0]
   force = [0, 0]
   impulse = [0, 0]

@@ -4,6 +4,7 @@ import { LevelView } from './view/levelView'
 import { Level } from './level/level'
 import { Level0 } from './level/level0'
 import { Input } from './input'
+import { Level1 } from './level/level1'
 
 export class World {
   input = new Input()
@@ -39,6 +40,9 @@ export class World {
     oldLevelView.visible = false
     this.level = this.levels[levelIndex]
     const entrance = this.level.entrances[entranceIndex]
+    console.log(this.level.entrances)
+    console.log(levelIndex, entranceIndex)
+    console.log(this.level.entrances[entranceIndex])
     this.level.player.position = structuredClone(entrance.position)
     this.level.player.spawnPoint = structuredClone(entrance.position)
     this.level.player.trail = this.level.player.trail.map(_ => structuredClone(entrance.position))
@@ -50,6 +54,7 @@ export class World {
 
   buildLevels(): void {
     void new Level0(this)
+    void new Level1(this)
   }
 
   proceed(): void {
