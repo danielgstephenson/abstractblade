@@ -29,9 +29,5 @@ export class CircleView extends Container {
     this.y = this.body.position[1]
     this.starGraphics.visible = this.body.star
     this.visible = !this.body.destroyed || this.body instanceof Player
-    if (this.body.star) {
-      console.log('this.body.star', this.body.star)
-      console.log('this.starGraphics.visible', this.starGraphics.visible)
-    }
   }
 }

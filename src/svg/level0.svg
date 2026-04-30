@@ -31,7 +31,7 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="transportLayer"
+     inkscape:current-layer="boundaryLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -138,7 +138,7 @@
     <path
        id="boundary-4"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -238.35766,208.73922 92.45221,28.95327 48.618669,-47.87187 61.38424,-26.30723 65.386064,45.45677 -66.152162,92.07026 -101.305871,10.30708 -107.04631,-21.61057 z"
+       d="m -238.35766,208.73922 92.45221,28.95327 48.618669,-47.87187 61.38424,-26.30723 73.386064,56.95677 -85.652162,15.57026 -75.305871,46.80708 -122.04631,-22.61057 z"
        sodipodi:nodetypes="ccccccccc"
        role="boundary" />
   </g>
@@ -232,16 +232,16 @@
     <circle
        style="fill:#00d4ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="playerBlade-1"
-       cx="-132.04993"
-       cy="268.22867"
+       cx="-75.049927"
+       cy="201.72867"
        role="blade"
        r="10"
        align="0" />
     <circle
        style="fill:#00ffaa;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="agentBlade-1"
-       cx="-54"
-       cy="240.5"
+       cx="-46.5"
+       cy="205"
        role="blade"
        r="10"
        align="1" />

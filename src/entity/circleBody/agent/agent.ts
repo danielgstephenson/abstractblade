@@ -8,6 +8,7 @@ export class Agent extends CircleBody {
   align = 1
   action = [0, 0]
   targetVelocity = [0, 0]
+  targetPoint = [0, 0]
   blade?: Blade
   agentIndex: number
   actionTimer = 0

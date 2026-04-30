@@ -14,7 +14,7 @@ import { Door } from '../entity/polygonBody/door'
 import { Transporter } from '../entity/transporter'
 import { Blade } from '../entity/circleBody/blade'
 import { Entrance } from '../entity/entrance'
-import { segmentCastPolygon } from './rayCast'
+import { rayCastPolygon, segmentCastPolygon } from './rayCast'
 
 export type SimulationState = EntityState[]
 
@@ -126,6 +126,17 @@ export class Simulation {
     })
     this.doors.forEach(door => {
       hitFactors.push(...segmentCastPolygon(segment, door.polygon))
+    })
+    return hitFactors
+  }
+
+  rayCast(start: number[], vector: number[]): number[] {
+    const hitFactors: number[] = []
+    this.boundaries.forEach(boundary => {
+      hitFactors.push(...rayCastPolygon(start, vector, boundary.polygon))
+    })
+    this.doors.forEach(door => {
+      hitFactors.push(...rayCastPolygon(start, vector, door.polygon))
     })
     return hitFactors
   }
