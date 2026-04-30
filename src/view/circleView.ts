@@ -1,7 +1,6 @@
 import { ColorSource, Container, Graphics, GraphicsContext } from 'pixi.js'
 import { LevelView } from './levelView'
 import { CircleBody } from '../entity/circleBody/circleBody'
-import { starGraphicsContext } from './starView'
 import { Player } from '../entity/circleBody/agent/player'
 
 export class CircleView extends Container {
@@ -20,7 +19,7 @@ export class CircleView extends Container {
     this.body = body
     this.cullable = true
     this.levelView.addChild(this)
-    this.starGraphics = new Graphics(starGraphicsContext)
+    this.starGraphics = new Graphics().star(0, 0, 5, 4, 1.8).fill(levelView.colors.starColor)
     this.starGraphics.visible = false
     this.addChild(this.starGraphics)
   }
@@ -30,5 +29,9 @@ export class CircleView extends Container {
     this.y = this.body.position[1]
     this.starGraphics.visible = this.body.star
     this.visible = !this.body.destroyed || this.body instanceof Player
+    if (this.body.star) {
+      console.log('this.body.star', this.body.star)
+      console.log('this.starGraphics.visible', this.starGraphics.visible)
+    }
   }
 }

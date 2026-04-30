@@ -149,7 +149,6 @@ function addEntrances(simulation: Simulation, layer: INode): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
-    console.log('entrance position', position)
     const entrance = simulation.addEntrance(position)
     entrance.id = node.attributes.id
   })

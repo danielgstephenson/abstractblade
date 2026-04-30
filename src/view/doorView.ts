@@ -1,8 +1,6 @@
 import { Container, Graphics } from 'pixi.js'
 import { LevelView } from './levelView'
 import { Door } from '../entity/polygonBody/door'
-import { starGraphicsContext } from './starView'
-
 export class DoorView extends Container {
   levelView: LevelView
   door: Door
@@ -29,7 +27,7 @@ export class DoorView extends Container {
       width: 1,
       join: 'round',
     })
-    this.starGraphics = new Graphics(starGraphicsContext)
+    this.starGraphics = new Graphics().star(0, 0, 5, 4, 1.8).fill(levelView.colors.starColor)
     this.starGraphics.visible = false
     this.addChild(this.holeGraphics)
     this.addChild(this.starGraphics)

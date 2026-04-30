@@ -38,11 +38,7 @@ export class World {
     const oldLevelView = this.levelView
     oldLevelView.visible = false
     this.level = this.levels[levelIndex]
-    console.log('Object.keys(this.level.entrances)', Object.keys(this.level.entrances))
-    console.log('Object.values(this.level.entrances)', Object.values(this.level.entrances))
     const entrance = this.level.entrances[entranceIndex]
-    console.log('entrance', entrance)
-    console.log('Object.keys(entrance)', Object.keys(entrance))
     this.level.player.position = structuredClone(entrance.position)
     this.level.player.spawnPoint = structuredClone(entrance.position)
     this.level.player.trail = this.level.player.trail.map(_ => structuredClone(entrance.position))
