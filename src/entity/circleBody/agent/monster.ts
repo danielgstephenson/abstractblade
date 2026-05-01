@@ -25,8 +25,7 @@ export class Monster extends Agent {
   doesCollide(otherBody: CircleBody): boolean {
     if (otherBody instanceof Agent) {
       if (otherBody.align !== this.align) {
-        if (otherBody.invincible()) this.destroy()
-        else otherBody.destroy()
+        if (!otherBody.invincible()) otherBody.destroy()
         return false
       }
     }

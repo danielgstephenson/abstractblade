@@ -34,6 +34,7 @@ export class Blade extends CircleBody {
     if (this.agent != null) {
       this.agent.blade = undefined
       this.agent = undefined
+      this.action = [0, 0]
     }
   }
 
@@ -50,8 +51,7 @@ export class Blade extends CircleBody {
         }
       }
       if (otherBody.align !== this.align) {
-        if (otherBody.invincible()) this.destroy()
-        else otherBody.destroy()
+        if (!otherBody.invincible()) otherBody.destroy()
       }
       return false
     }

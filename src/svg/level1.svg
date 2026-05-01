@@ -31,7 +31,7 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="arrowLayer"
+     inkscape:current-layer="doorLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -229,7 +229,7 @@
     <path
        id="star-1"
        style="fill:#ffff00;stroke-width:0.908675;stroke-linejoin:round"
-       d="m 9.716979,-181.16694 -3.113,-2.05032 -3.06735,2.12446 0.89946,-3.73502 -2.8766,-2.39948 3.66888,-0.25809 1.28952,-3.60741 1.36803,3.57553 3.67357,0.17001 -2.82339,2.46787 z"
+       d="m 58.507347,-65.201428 -3.113,-2.05032 -3.06735,2.12446 0.89946,-3.73502 -2.8766,-2.39948 3.66888,-0.25809 1.28952,-3.60741 1.36803,3.57553 3.67357,0.17001 -2.82339,2.46787 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>
@@ -296,8 +296,8 @@
     <path
        id="door-1"
        style="fill:#322000;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m -160.40201,-62.99703 17.24787,-39.49674 40.94212,29.363549 38.03648,3.010551 5.554101,34.266652 -83.351341,5.85363 z"
-       sodipodi:nodetypes="ccccccc"
+       d="m -184.44364,-61.582816 25.73315,-33.839886 56.49847,22.292481 36.622266,-3.35341 16.161916,17.781825 -9.193601,22.848788 -47.325201,12.068166 -54.41092,-4.800322 z"
+       sodipodi:nodetypes="ccccccccc"
        role="door" />
   </g>
   <g
