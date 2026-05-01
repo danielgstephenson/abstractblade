@@ -12,7 +12,7 @@ export class Monster extends Agent {
   targetVelocity = [0, 0]
 
   constructor(simulation: Simulation, position: number[]) {
-    super(simulation, position, 10)
+    super(simulation, position, 7)
     this.simulation.monsters.push(this)
   }
 

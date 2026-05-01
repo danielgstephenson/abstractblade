@@ -31,11 +31,10 @@ export class Blade extends CircleBody {
   }
 
   detach(): void {
-    if (this.agent != null) {
-      this.agent.blade = undefined
-      this.agent = undefined
-      this.action = [0, 0]
-    }
+    this.action = [0, 0]
+    if (this.agent == null) return
+    this.agent.blade = undefined
+    this.agent = undefined
   }
 
   destroy(): void {
