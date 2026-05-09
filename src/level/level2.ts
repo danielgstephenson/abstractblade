@@ -1,16 +1,16 @@
 import { Level } from './level'
 import { World } from '../world'
-import svgString from '../svg/level1.svg?raw'
+import svgString from '../svg/level2.svg?raw'
 import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundVector } from '../physics/actionVectors'
 
-export class Level1 extends Level {
+export class Level2 extends Level {
   activeAgents: Agent[]
 
   constructor(world: World) {
-    super(world, 1, svgString)
+    super(world, 2, svgString)
     this.activeAgents = [...this.rovers, ...this.monsters]
     this.activeAgents.forEach(rover => {
       rover.targetVelocity = mul(30, getRandomDir())

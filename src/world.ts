@@ -5,6 +5,7 @@ import { Level } from './level/level'
 import { Level0 } from './level/level0'
 import { Input } from './input'
 import { Level1 } from './level/level1'
+import { Level2 } from './level/level2'
 
 export class World {
   input = new Input()
@@ -55,6 +56,7 @@ export class World {
   buildLevels(): void {
     void new Level0(this)
     void new Level1(this)
+    void new Level2(this)
   }
 
   proceed(): void {
