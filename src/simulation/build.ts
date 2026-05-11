@@ -10,6 +10,7 @@ export function build(simulation: Simulation, svgString: string): void {
   const boundaryLayer = getChildById(svgNode, 'boundaryLayer')
   const starLayer = getChildById(svgNode, 'starLayer')
   const transportLayer = getChildById(svgNode, 'transportLayer')
+  const wallLayer = getChildById(svgNode, 'wallLayer')
   const doorLayer = getChildById(svgNode, 'doorLayer')
   const rockLayer = getChildById(svgNode, 'rockLayer')
   const bladeLayer = getChildById(svgNode, 'bladeLayer')
@@ -21,6 +22,7 @@ export function build(simulation: Simulation, svgString: string): void {
   addStars(simulation, starLayer)
   addTransporters(simulation, transportLayer, arrows)
   addExits(simulation, transportLayer)
+  addWalls(simulation, wallLayer)
   addDoors(simulation, doorLayer, arrows)
   addRocks(simulation, rockLayer)
   addBlades(simulation, bladeLayer)
@@ -44,7 +46,8 @@ function addPlayer(simulation: Simulation, layer: INode): void {
   const x = Number(node.attributes.cx)
   const y = Number(node.attributes.cy)
   const position = [x, y]
-  simulation.addPlayer(position)
+  const player = simulation.addPlayer(position)
+  player.id = 'player'
 }
 
 function addRovers(simulation: Simulation, layer: INode): void {
@@ -113,6 +116,15 @@ function addDoors(simulation: Simulation, layer: INode, arrows: number[][][]): v
     const vector = sub(insideArrow[1], insideArrow[0])
     const door = simulation.addDoor(polygon, vector)
     door.id = node.attributes.id
+  })
+}
+
+function addWalls(simulation: Simulation, layer: INode): void {
+  const nodes = layer.children.filter(child => child.attributes.role === 'wall')
+  nodes.forEach(node => {
+    const polygon = getPathPoints(node)
+    const wall = simulation.addWall(polygon)
+    wall.id = node.attributes.id
   })
 }
 

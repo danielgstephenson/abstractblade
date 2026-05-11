@@ -9,4 +9,5 @@ export class Colors {
   roverBladeColor = new Color('hsl(160, 100%, 45%)')
   starColor = new Color(`hsl(60,100%,45%)`)
   transporterColor = new Color('hsl(120, 0%, 70%)')
+  wallColor = new Color('hsl(0, 0%, 15%)')
 }

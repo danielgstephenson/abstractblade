@@ -15,6 +15,7 @@ import { Transporter } from '../entity/transporter'
 import { Blade } from '../entity/circleBody/blade'
 import { Entrance } from '../entity/entrance'
 import { rayCastPolygon, segmentCastPolygon } from './rayCast'
+import { Wall } from '../entity/polygonBody/wall'
 
 export type SimulationState = EntityState[]
 
@@ -29,6 +30,7 @@ export class Simulation {
   rocks: Rock[] = []
   blades: Blade[] = []
   stars: Star[] = []
+  walls: Wall[] = []
   doors: Door[] = []
   transporters: Transporter[] = []
   entrances: Entrance[] = []
@@ -95,6 +97,10 @@ export class Simulation {
 
   addDoor(points: number[][], vector: number[]): Door {
     return new Door(this, points, vector)
+  }
+
+  addWall(points: number[][]): Wall {
+    return new Wall(this, points)
   }
 
   addTransporter(position: number[], target: number[]): Transporter {

@@ -10,6 +10,7 @@ export class Game {
   constructor(app: Application) {
     this.app = app
     this.world = new World(this)
+    this.app.renderer.background.color = this.colors.wallColor
     app.ticker.add(time => {
       this.world.update(time)
     })

@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      inkscape:zoom="1.4142136"
      inkscape:cx="-137.53227"
-     inkscape:cy="51.972347"
+     inkscape:cy="51.26524"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="transportLayer"
+     inkscape:current-layer="wallLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -222,6 +222,10 @@
        sodipodi:nodetypes="cccccccccc"
        role="boundary" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="wallLayer"
+     inkscape:highlight-color="#868a9b" />
   <g
      inkscape:groupmode="layer"
      id="starLayer"

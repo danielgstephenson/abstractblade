@@ -1,4 +1,4 @@
-import { Simulation } from '../../../physics/simulation'
+import { Simulation } from '../../../simulation/simulation'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
 

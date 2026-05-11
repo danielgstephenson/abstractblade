@@ -27,6 +27,9 @@ export function step(simulation: Simulation): void {
     simulation.boundaries.forEach(boundary => {
       collideCirclePolygon(circle, boundary)
     })
+    simulation.walls.forEach(wall => {
+      collideCirclePolygon(circle, wall)
+    })
     simulation.doors.forEach(door => {
       const hit = collideCirclePolygon(circle, door)
       if (hit) door.knock(circle)

@@ -1,6 +1,6 @@
 import { range } from '../../math'
-import { Collision } from '../../physics/collision'
-import { Simulation } from '../../physics/simulation'
+import { Collision } from '../../simulation/collision'
+import { Simulation } from '../../simulation/simulation'
 import { Entity, EntityState } from '../entity'
 
 export class CircleBody extends Entity {

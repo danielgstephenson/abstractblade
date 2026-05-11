@@ -1,4 +1,4 @@
-import { Simulation } from '../physics/simulation'
+import { Simulation } from '../simulation/simulation'
 import { World } from '../world'
 
 export class Level extends Simulation {

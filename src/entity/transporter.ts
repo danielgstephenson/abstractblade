@@ -1,5 +1,5 @@
 import { clamp, getDistance } from '../math'
-import { Simulation } from '../physics/simulation'
+import { Simulation } from '../simulation/simulation'
 import { Player } from './circleBody/agent/player'
 import { Entity, EntityState } from './entity'
 
@@ -32,6 +32,7 @@ export class Transporter extends Entity {
   transport(player: Player): void {
     this.charge = 0
     if (this.exit) {
+      if (player.blade != null) player.blade.detach()
       this.simulation.leaving = true
       this.simulation.targetLevel = this.targetLevel
       this.simulation.targetEntrance = this.targetEntrance

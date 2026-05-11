@@ -24,14 +24,14 @@
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
      inkscape:zoom="2"
-     inkscape:cx="-3.25"
+     inkscape:cx="-3"
      inkscape:cy="142.75"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="bladeLayer"
+     inkscape:current-layer="wallLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -142,6 +142,10 @@
        sodipodi:nodetypes="ccccccccc"
        role="boundary" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="wallLayer"
+     inkscape:highlight-color="#8580a1" />
   <g
      inkscape:groupmode="layer"
      id="starLayer"

@@ -10,6 +10,7 @@ import { SpringView } from './springView'
 import { Colors } from '../colors'
 import { World } from '../world'
 import { Level } from '../level/level'
+import { WallView } from './wallView'
 
 export class LevelView extends Container {
   level: Level
@@ -21,6 +22,7 @@ export class LevelView extends Container {
   starViews: StarView[] = []
   transporterViews: TransporterView[] = []
   doorViews: DoorView[] = []
+  wallViews: WallView[] = []
   spawnViews: SpawnView[] = []
 
   constructor(world: World) {
@@ -36,6 +38,9 @@ export class LevelView extends Container {
   build(): void {
     this.level.boundaries.forEach(boundary => {
       void new BoundaryView(this, boundary)
+    })
+    this.level.walls.forEach(wall => {
+      this.wallViews.push(new WallView(this, wall))
     })
     this.level.transporters.forEach(transporter => {
       this.transporterViews.push(new TransporterView(this, transporter))

@@ -4,7 +4,7 @@ import svgString from '../svg/level2.svg?raw'
 import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
-import { roundVector } from '../physics/actionVectors'
+import { roundVector } from '../simulation/actionVectors'
 
 export class Level2 extends Level {
   activeAgents: Agent[]
