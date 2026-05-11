@@ -133,6 +133,9 @@ export class Simulation {
     this.doors.forEach(door => {
       hitFactors.push(...segmentCastPolygon(segment, door.polygon))
     })
+    this.walls.forEach(wall => {
+      hitFactors.push(...segmentCastPolygon(segment, wall.polygon))
+    })
     return hitFactors
   }
 
@@ -143,6 +146,9 @@ export class Simulation {
     })
     this.doors.forEach(door => {
       hitFactors.push(...rayCastPolygon(start, vector, door.polygon))
+    })
+    this.walls.forEach(wall => {
+      hitFactors.push(...rayCastPolygon(start, vector, wall.polygon))
     })
     return hitFactors
   }

@@ -5,33 +5,58 @@ import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundVector } from '../simulation/actionVectors'
+import { Monster } from '../entity/circleBody/agent/monster'
+import { Rover } from '../entity/circleBody/agent/rover'
+import { Player } from '../entity/circleBody/agent/player'
 
 export class Level2 extends Level {
-  activeAgents: Agent[]
+  monster1: Monster
+  monster2: Monster
+  rover1: Rover
 
   constructor(world: World) {
     super(world, 2, svgString)
-    this.activeAgents = [...this.rovers, ...this.monsters]
-    this.activeAgents.forEach(rover => {
-      rover.targetVelocity = mul(30, getRandomDir())
-    })
+    const monster1 = this.monsters.find(m => m.id === 'monster-1')
+    if (monster1 == null) throw new Error('monster-1 not found')
+    this.monster1 = monster1
+    const monster2 = this.monsters.find(m => m.id === 'monster-2')
+    if (monster2 == null) throw new Error('monster-2 not found')
+    this.monster2 = monster2
+    const rover1 = this.rovers.find(r => r.id === 'rover-1')
+    if (rover1 == null) throw new Error('rover-1 not found')
+    this.rover1 = rover1
   }
 
   update(time: Ticker): void {
     super.update(time)
-    this.activeAgents.forEach(agent => {
-      this.think(agent, time)
-      this.move(agent)
-    })
+    this.wander(this.monster1, time)
+    this.chase(this.monster2, this.player)
   }
 
-  think(agent: Agent, time: Ticker): void {
+  chase(agent: Agent, target: Player): void {
+    if (agent.destroyed) return
+    agent.targetVelocity = [0, 0]
+    if (this.segmentCast([agent.position, target.position]).length === 0) {
+      agent.targetVelocity = mul(50, dirFromTo(agent.position, target.position))
+    } else {
+      for (const point of target.history) {
+        if (this.segmentCast([agent.position, point]).length === 0) {
+          agent.targetVelocity = mul(50, dirFromTo(agent.position, point))
+          break
+        }
+      }
+    }
+    this.move(agent)
+  }
+
+  wander(agent: Agent, time: Ticker): void {
     if (agent.destroyed) return
     this.avoidWalls(agent)
     if (2000 * Math.random() < time.deltaMS) this.updateTargetPoint(agent)
     const arrived = getDistance(agent.position, agent.targetPoint) < 2 * agent.radius
     if (arrived) this.updateTargetPoint(agent)
-    agent.targetVelocity = mul(20, dirFromTo(agent.position, agent.targetPoint))
+    agent.targetVelocity = mul(10, dirFromTo(agent.position, agent.targetPoint))
+    this.move(agent)
   }
 
   updateTargetPoint(agent: Agent) {

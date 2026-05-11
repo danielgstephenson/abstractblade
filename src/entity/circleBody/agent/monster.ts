@@ -1,5 +1,3 @@
-import { dirFromTo } from '../../../math'
-import { roundVector } from '../../../simulation/actionVectors'
 import { Simulation } from '../../../simulation/simulation'
 import { EntityState } from '../../entity'
 import { CircleBody } from '../circleBody'
@@ -18,8 +16,6 @@ export class Monster extends Agent {
 
   preStep(dt: number): void {
     super.preStep(dt)
-    const targetAction = dirFromTo(this.velocity, this.targetVelocity)
-    this.action = roundVector(targetAction)
   }
 
   doesCollide(otherBody: CircleBody): boolean {

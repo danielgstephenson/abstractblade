@@ -8,7 +8,7 @@ export class Transporter extends Entity {
   target: number[]
   radius = 13
   charge = 0
-  interval = 4
+  interval = 2
   exit = false
   targetLevel = 1
   targetEntrance = 0
