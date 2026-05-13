@@ -5,6 +5,7 @@ import { roundVector } from '../simulation/actionVectors'
 
 export class EvadeBrain {
   session?: ort.InferenceSession
+  thinking = false
   visionReach = 100
   visionDirs: number[][] = []
 
@@ -35,8 +36,8 @@ export class EvadeBrain {
 
   async act(agent: Agent, otherAgent: Agent): Promise<void> {
     if (this.session == null) return
-    if (agent.thinking) return
-    agent.thinking = true
+    if (this.thinking) return
+    this.thinking = true
     const bladePosition = otherAgent.blade == null ? otherAgent.position : otherAgent.blade.position
     const bladeVelocity = otherAgent.blade == null ? otherAgent.velocity : otherAgent.blade.velocity
     const state: number[] = []
@@ -53,6 +54,6 @@ export class EvadeBrain {
     const results = await this.session.run(feeds)
     const output = Array.from(results['grad'].data as Float32Array)
     agent.action = roundVector(output)
-    agent.thinking = false
+    this.thinking = false
   }
 }

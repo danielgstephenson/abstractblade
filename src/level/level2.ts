@@ -14,6 +14,7 @@ export class Level2 extends Level {
   evadeBrain = new EvadeBrain()
   monster1: Monster
   monster2: Monster
+  monster3: Monster
   monster5: Monster
   rover1: Rover
 
@@ -21,6 +22,7 @@ export class Level2 extends Level {
     super(world, 2, svgString)
     this.monster1 = find(this.monsters, m => m.id == 'monster-1')
     this.monster2 = find(this.monsters, m => m.id == 'monster-2')
+    this.monster3 = find(this.monsters, m => m.id == 'monster-3')
     this.monster5 = find(this.monsters, m => m.id == 'monster-5')
     this.rover1 = find(this.rovers, m => m.id == 'rover-1')
   }
@@ -28,7 +30,8 @@ export class Level2 extends Level {
   update(time: Ticker): void {
     super.update(time)
     this.evade(this.monster1, this.player, time)
-    this.chase(this.monster2, this.player, time, true)
+    this.evade(this.monster2, this.player, time)
+    this.evade(this.monster3, this.player, time)
     this.chase(this.monster5, this.player, time)
     this.wander(this.rover1, time)
   }
