@@ -2,40 +2,52 @@ import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level2.svg?raw'
 import { Ticker } from 'pixi.js'
-import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
+import { combine, dirFromTo, dot, find, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundVector } from '../simulation/actionVectors'
 import { Monster } from '../entity/circleBody/agent/monster'
 import { Rover } from '../entity/circleBody/agent/rover'
 import { Player } from '../entity/circleBody/agent/player'
+import { EvadeBrain } from '../brain/evade'
 
 export class Level2 extends Level {
+  evadeBrain = new EvadeBrain()
   monster1: Monster
   monster2: Monster
+  monster5: Monster
   rover1: Rover
 
   constructor(world: World) {
     super(world, 2, svgString)
-    const monster1 = this.monsters.find(m => m.id === 'monster-1')
-    if (monster1 == null) throw new Error('monster-1 not found')
-    this.monster1 = monster1
-    const monster2 = this.monsters.find(m => m.id === 'monster-2')
-    if (monster2 == null) throw new Error('monster-2 not found')
-    this.monster2 = monster2
-    const rover1 = this.rovers.find(r => r.id === 'rover-1')
-    if (rover1 == null) throw new Error('rover-1 not found')
-    this.rover1 = rover1
+    this.monster1 = find(this.monsters, m => m.id == 'monster-1')
+    this.monster2 = find(this.monsters, m => m.id == 'monster-2')
+    this.monster5 = find(this.monsters, m => m.id == 'monster-5')
+    this.rover1 = find(this.rovers, m => m.id == 'rover-1')
   }
 
   update(time: Ticker): void {
     super.update(time)
-    this.wander(this.monster1, time)
-    this.chase(this.monster2, this.player)
+    this.evade(this.monster1, this.player, time)
+    this.chase(this.monster2, this.player, time, true)
+    this.chase(this.monster5, this.player, time)
+    this.wander(this.rover1, time)
   }
 
-  chase(agent: Agent, target: Player): void {
+  evade(agent: Agent, danger: Agent, time: Ticker) {
+    const distance = getDistance(agent.position, danger.position)
+    if (distance > 50) {
+      this.wander(agent, time)
+      return
+    }
+    this.evadeBrain.act(agent, danger)
+  }
+
+  chase(agent: Agent, target: Player, time: Ticker, wander?: boolean): void {
     if (agent.destroyed) return
     agent.targetVelocity = [0, 0]
+    if (wander) {
+      this.wander(agent, time)
+    }
     if (this.segmentCast([agent.position, target.position]).length === 0) {
       agent.targetVelocity = mul(50, dirFromTo(agent.position, target.position))
     } else {

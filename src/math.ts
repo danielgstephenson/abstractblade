@@ -135,3 +135,9 @@ export function shuffle<T>(array: T[]): T[] {
   const priorities = array.map(_ => Math.random())
   return sortBy(array, priorities)
 }
+
+export function find<T>(array: T[], predicate: (item: T) => boolean): T {
+  const found = array.find(predicate)
+  if (found == null) throw new Error('item not found')
+  return found
+}

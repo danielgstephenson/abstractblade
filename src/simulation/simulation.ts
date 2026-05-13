@@ -16,6 +16,7 @@ import { Blade } from '../entity/circleBody/blade'
 import { Entrance } from '../entity/entrance'
 import { rayCastPolygon, segmentCastPolygon } from './rayCast'
 import { Wall } from '../entity/polygonBody/wall'
+import { combine, sub } from '../math'
 
 export type SimulationState = EntityState[]
 
@@ -137,6 +138,14 @@ export class Simulation {
       hitFactors.push(...segmentCastPolygon(segment, wall.polygon))
     })
     return hitFactors
+  }
+
+  segmentCastPoint(segment: number[][]): number[] {
+    const hitFactors = this.segmentCast(segment)
+    if (hitFactors.length === 0) return segment[1]
+    const hitFactor = Math.min(...hitFactors)
+    const vector = sub(segment[1], segment[0])
+    return combine(1, segment[0], hitFactor, vector)
   }
 
   rayCast(start: number[], vector: number[]): number[] {
