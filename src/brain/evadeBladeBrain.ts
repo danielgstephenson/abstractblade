@@ -1,11 +1,11 @@
 import * as ort from 'onnxruntime-web'
 import { Agent } from '../entity/circleBody/agent/agent'
-import { combine, range, sub } from '../math'
+import { combine, range, toMatrix, sub } from '../math'
 import { roundVector } from '../simulation/actionVectors'
 
-export class EvadeBrain {
+export class EvadeBladeBrain {
   session?: ort.InferenceSession
-  thinking = false
+  busy = false
   visionReach = 100
   visionDirs: number[][] = []
 
@@ -34,26 +34,34 @@ export class EvadeBrain {
     return visionPoints.flat()
   }
 
-  async act(agent: Agent, otherAgent: Agent): Promise<void> {
+  async act(agents: Agent[], danger: Agent): Promise<void> {
     if (this.session == null) return
-    if (this.thinking) return
-    this.thinking = true
-    const bladePosition = otherAgent.blade == null ? otherAgent.position : otherAgent.blade.position
-    const bladeVelocity = otherAgent.blade == null ? otherAgent.velocity : otherAgent.blade.velocity
-    const state: number[] = []
-    state.push(...sub(otherAgent.position, agent.position))
-    state.push(...otherAgent.velocity)
-    state.push(...sub(bladePosition, agent.position))
-    state.push(...bladeVelocity)
-    state.push(...agent.velocity)
-    state.push(...this.getVision(agent))
-    const data = new Float32Array(state)
-    const dims = [1, 26]
+    if (this.busy) {
+      console.log('busy')
+      return
+    }
+    this.busy = true
+    const bladePosition = danger.blade == null ? danger.position : danger.blade.position
+    const bladeVelocity = danger.blade == null ? danger.velocity : danger.blade.velocity
+    const states: number[] = []
+    agents.forEach(agent => {
+      states.push(...sub(danger.position, agent.position))
+      states.push(...danger.velocity)
+      states.push(...sub(bladePosition, agent.position))
+      states.push(...bladeVelocity)
+      states.push(...agent.velocity)
+      states.push(...this.getVision(agent))
+    })
+    const data = new Float32Array(states)
+    const dims = [agents.length, 26]
     const stateTensor = new ort.Tensor('float32', data, dims)
     const feeds = { state: stateTensor }
     const results = await this.session.run(feeds)
     const output = Array.from(results['grad'].data as Float32Array)
-    agent.action = roundVector(output)
-    this.thinking = false
+    const grads = toMatrix(output, [agents.length, 2])
+    range(agents.length).forEach(i => {
+      agents[i].action = roundVector(grads[i])
+    })
+    this.busy = false
   }
 }

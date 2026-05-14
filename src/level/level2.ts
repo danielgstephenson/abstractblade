@@ -5,44 +5,34 @@ import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, find, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundVector } from '../simulation/actionVectors'
-import { Monster } from '../entity/circleBody/agent/monster'
-import { Rover } from '../entity/circleBody/agent/rover'
 import { Player } from '../entity/circleBody/agent/player'
-import { EvadeBrain } from '../brain/evade'
+import { EvadeBladeBrain } from '../brain/evadeBladeBrain'
 
 export class Level2 extends Level {
-  evadeBrain = new EvadeBrain()
-  monster1: Monster
-  monster2: Monster
-  monster3: Monster
-  monster5: Monster
-  rover1: Rover
+  evadeBladeBrain = new EvadeBladeBrain()
+  chasers: Agent[] = []
+  wanderers: Agent[] = []
 
   constructor(world: World) {
     super(world, 2, svgString)
-    this.monster1 = find(this.monsters, m => m.id == 'monster-1')
-    this.monster2 = find(this.monsters, m => m.id == 'monster-2')
-    this.monster3 = find(this.monsters, m => m.id == 'monster-3')
-    this.monster5 = find(this.monsters, m => m.id == 'monster-5')
-    this.rover1 = find(this.rovers, m => m.id == 'rover-1')
+    this.chasers.push(find(this.monsters, m => m.id == 'monster-4'))
+    this.chasers.push(find(this.monsters, m => m.id == 'monster-5'))
+    this.wanderers.push(find(this.monsters, m => m.id == 'monster-1'))
+    this.wanderers.push(find(this.monsters, m => m.id == 'monster-2'))
+    this.wanderers.push(find(this.monsters, m => m.id == 'monster-3'))
+    this.wanderers.push(find(this.rovers, m => m.id == 'rover-1'))
   }
 
   update(time: Ticker): void {
     super.update(time)
-    this.evade(this.monster1, this.player, time)
-    this.evade(this.monster2, this.player, time)
-    this.evade(this.monster3, this.player, time)
-    this.chase(this.monster5, this.player, time)
-    this.wander(this.rover1, time)
-  }
-
-  evade(agent: Agent, danger: Agent, time: Ticker) {
-    const distance = getDistance(agent.position, danger.position)
-    if (distance > 50) {
-      this.wander(agent, time)
-      return
-    }
-    this.evadeBrain.act(agent, danger)
+    this.chasers.forEach(agent => this.chase(agent, this.player, time))
+    const evaders: Agent[] = []
+    this.wanderers.forEach(agent => {
+      const distance = getDistance(agent.position, this.player.position)
+      if (distance > 50 || this.player.blade == null) this.wander(agent, time)
+      else evaders.push(agent)
+    })
+    this.evadeBladeBrain.act(evaders, this.player)
   }
 
   chase(agent: Agent, target: Player, time: Ticker, wander?: boolean): void {
@@ -64,9 +54,23 @@ export class Level2 extends Level {
     this.move(agent)
   }
 
+  avoidBlades(agent: Agent): void {
+    this.blades.forEach(blade => {
+      if (blade.align === agent.align) return
+      const distance = getDistance(agent.position, blade.position)
+      if (distance > 50) return
+      const blocked = this.segmentCast([agent.position, blade.position]).length > 0
+      if (blocked) return
+      const away = dirFromTo(blade.position, agent.position)
+      const awayPoint = combine(1, agent.position, 100, away)
+      agent.targetPoint = this.segmentCastPoint([agent.position, awayPoint])
+    })
+  }
+
   wander(agent: Agent, time: Ticker): void {
     if (agent.destroyed) return
     this.avoidWalls(agent)
+    this.avoidBlades(agent)
     if (2000 * Math.random() < time.deltaMS) this.updateTargetPoint(agent)
     const arrived = getDistance(agent.position, agent.targetPoint) < 2 * agent.radius
     if (arrived) this.updateTargetPoint(agent)

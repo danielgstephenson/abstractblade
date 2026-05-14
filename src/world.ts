@@ -37,13 +37,12 @@ export class World {
   }
 
   changeLevel(levelIndex: number, entranceIndex: number): void {
+    const blade = this.level.player.blade
+    if (blade != null) blade.detach()
     const oldLevelView = this.levelView
     oldLevelView.visible = false
     this.level = this.levels[levelIndex]
     const entrance = this.level.entrances[entranceIndex]
-    console.log(this.level.entrances)
-    console.log(levelIndex, entranceIndex)
-    console.log(this.level.entrances[entranceIndex])
     this.level.player.position = structuredClone(entrance.position)
     this.level.player.spawnPoint = structuredClone(entrance.position)
     this.level.player.trail = this.level.player.trail.map(_ => structuredClone(entrance.position))

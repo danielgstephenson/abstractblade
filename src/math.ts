@@ -141,3 +141,30 @@ export function find<T>(array: T[], predicate: (item: T) => boolean): T {
   if (found == null) throw new Error('item not found')
   return found
 }
+
+export function prod(array: number[]): number {
+  let product = 1
+  array.forEach(x => {
+    product = product * x
+  })
+  return product
+}
+
+export function toMatrix<T>(flatArray: T[], dims: number[]): T[][] {
+  if (flatArray.length !== prod(dims)) {
+    throw new Error(`Total elements (${flatArray.length}) does not match dimensions (${dims.join('x')})`)
+  }
+  if (dims.length != 2) {
+    throw new Error(`Dimensions (${dims.join('x')}) must have length 2.`)
+  }
+  const [currentDim, ...remainingDims] = dims
+  const stride = prod(remainingDims)
+  const result = []
+  for (let i = 0; i < currentDim; i++) {
+    const start = i * stride
+    const end = start + stride
+    const row = flatArray.slice(start, end)
+    result.push(row)
+  }
+  return result
+}
