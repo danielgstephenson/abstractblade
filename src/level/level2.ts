@@ -16,7 +16,7 @@ import {
   randomDir,
 } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
-import { roundVector } from '../simulation/actionVectors'
+import { roundDir } from '../simulation/actionVectors'
 import { Player } from '../entity/circleBody/agent/player'
 
 export class Level2 extends Level {
@@ -130,6 +130,6 @@ export class Level2 extends Level {
 
   move(agent: Agent) {
     const targetAction = dirFromTo(agent.velocity, agent.targetVelocity)
-    agent.action = roundVector(targetAction)
+    agent.action = roundDir(targetAction)
   }
 }

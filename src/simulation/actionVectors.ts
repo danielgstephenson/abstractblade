@@ -8,7 +8,7 @@ range(8).forEach(i => {
   actionVectors.push(dir)
 })
 
-export function roundVector(vector: number[]): number[] {
+export function roundDir(vector: number[]): number[] {
   const dots = actionVectors.map(actionVector => dot(vector, actionVector))
   return actionVectors[whichMax(dots)]
 }

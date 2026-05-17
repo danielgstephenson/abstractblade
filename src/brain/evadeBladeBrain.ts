@@ -1,7 +1,7 @@
 import * as ort from 'onnxruntime-web'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { combine, range, toMatrix, sub } from '../math'
-import { roundVector } from '../simulation/actionVectors'
+import { roundDir } from '../simulation/actionVectors'
 
 export class EvadeBladeBrain {
   session?: ort.InferenceSession
@@ -65,7 +65,7 @@ export class EvadeBladeBrain {
     const output = Array.from(results['grad'].data as Float32Array)
     const grads = toMatrix(output, [agents.length, 2])
     range(agents.length).forEach(i => {
-      agents[i].action = roundVector(grads[i])
+      agents[i].action = roundDir(grads[i])
     })
     this.busy = false
   }

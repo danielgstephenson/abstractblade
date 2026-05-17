@@ -14,7 +14,8 @@ export function step(simulation: Simulation): void {
   clear(simulation)
   simulation.agents.forEach(agent => {
     if (agent.destroyed) return
-    agent.force = combine(1, agent.force, agent.movePower / agent.mass, agent.action)
+    const dir = normalize(agent.action)
+    agent.force = combine(1, agent.force, agent.movePower / agent.mass, dir)
   })
   simulation.blades.forEach(blade => {
     if (blade.destroyed) return

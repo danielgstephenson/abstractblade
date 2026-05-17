@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="136.47161"
-     inkscape:cy="-982.52485"
+     inkscape:zoom="5.6568544"
+     inkscape:cx="457.49808"
+     inkscape:cy="-777.55227"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="boundaryLayer"
+     inkscape:current-layer="arrowLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -416,8 +416,8 @@
     <path
        id="door-1-9-2"
        style="fill:#322000;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m 450.00341,-802.71327 28.56589,-0.0747 -1.04312,63.57628 -28.77136,-0.61342 z"
-       sodipodi:nodetypes="ccccc"
+       d="m 448.41242,-792.99055 9.26153,-9.74278 12.19705,-0.0319 9.22863,9.52319 0.0638,42.81927 -7.82439,11.56462 -16.75055,-1.4973 -7.04343,-8.64947 z"
+       sodipodi:nodetypes="ccccccccc"
        role="door" />
     <path
        id="door-1-9-2-5"
@@ -736,7 +736,7 @@
        role="arrow" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-4-1-3-4-7)"
-       d="m 466.29745,-795.46871 -1.34401,41.18602"
+       d="m 464.52968,-798.82747 -2.05111,54.62105"
        id="arrow-2-2-1"
        sodipodi:nodetypes="cc"
        role="arrow" />

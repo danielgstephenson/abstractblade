@@ -4,7 +4,7 @@ import svgString from '../svg/level0.svg?raw'
 import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
-import { roundVector } from '../simulation/actionVectors'
+import { roundDir } from '../simulation/actionVectors'
 
 export class Level0 extends Level {
   activeAgents: Agent[]
@@ -57,6 +57,6 @@ export class Level0 extends Level {
 
   move(agent: Agent) {
     const targetAction = dirFromTo(agent.velocity, agent.targetVelocity)
-    agent.action = roundVector(targetAction)
+    agent.action = roundDir(targetAction)
   }
 }
