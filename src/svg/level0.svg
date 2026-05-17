@@ -24,14 +24,14 @@
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
      inkscape:zoom="2"
-     inkscape:cx="-3"
+     inkscape:cx="-2.75"
      inkscape:cy="142.75"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="wallLayer"
+     inkscape:current-layer="doorLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -192,8 +192,8 @@
     <path
        id="door-1"
        style="fill:#322000;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m -117.90201,112.00297 16.69241,-21.4508 36.482862,21.7006 12.5512,40.12756 -15.961512,21.0084 -20.62862,-1.14637 z"
-       sodipodi:nodetypes="ccccccc"
+       d="m -117.90201,105.50297 42.175272,-13.2502 24.5512,64.12756 -37.590132,15.86203 z"
+       sodipodi:nodetypes="ccccc"
        role="door" />
   </g>
   <g

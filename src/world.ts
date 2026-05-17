@@ -6,9 +6,11 @@ import { Level0 } from './level/level0'
 import { Input } from './input'
 import { Level1 } from './level/level1'
 import { Level2 } from './level/level2'
+import { EvadeBladeBrain } from './brain/evadeBladeBrain'
 
 export class World {
   input = new Input()
+  evadeBladeBrain = new EvadeBladeBrain()
   levels: Level[] = []
   game: Game
   level: Level

@@ -4,13 +4,13 @@ import { CircleBody } from '../circleBody'
 import { Agent } from './agent'
 
 export class Monster extends Agent {
-  movePower = 10
-  drag = 0.2
+  movePower = 20
+  drag = 0.7
   align = 3
   targetVelocity = [0, 0]
 
   constructor(simulation: Simulation, position: number[]) {
-    super(simulation, position, 7)
+    super(simulation, position, 5)
     this.simulation.monsters.push(this)
   }
 

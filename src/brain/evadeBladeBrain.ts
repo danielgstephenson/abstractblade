@@ -20,8 +20,13 @@ export class EvadeBladeBrain {
 
   async setup(): Promise<void> {
     ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@latest/dist/'
-    const session = await ort.InferenceSession.create('onnx/dodge.onnx')
+    const session = await ort.InferenceSession.create('onnx/evadeBlade.onnx')
     this.session = session
+    const testData = new Float32Array(range(26))
+    const testDims = [1, 26]
+    const testTensor = new ort.Tensor('float32', testData, testDims)
+    const testFeeds = { state: testTensor }
+    this.session.run(testFeeds)
   }
 
   getVision(agent: Agent): number[] {

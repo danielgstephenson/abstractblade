@@ -10,4 +10,5 @@ export class Colors {
   starColor = new Color(`hsl(60,100%,45%)`)
   transporterColor = new Color('hsl(120, 0%, 70%)')
   wallColor = new Color('hsl(0, 0%, 15%)')
+  doorColor = new Color('hsl(38,100%,8%)')
 }
