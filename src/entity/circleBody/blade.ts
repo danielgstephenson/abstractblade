@@ -1,12 +1,12 @@
-import { clampVec, sub } from '../../math'
+import { clampVec, mul, sub } from '../../math'
 import { Simulation } from '../../simulation/simulation'
 import { EntityState } from '../entity'
 import { Agent } from './agent/agent'
 import { CircleBody } from './circleBody'
 
 export class Blade extends CircleBody {
-  drag = 0.3
-  movePower = 2
+  drag = 0.2
+  movePower = 0.5
   align: number
   agent?: Agent
 
@@ -19,7 +19,7 @@ export class Blade extends CircleBody {
   preStep(dt: number): void {
     super.preStep(dt)
     if (this.agent == null) return
-    const vector = sub(this.agent.position, this.position)
+    const vector = mul(this.movePower, sub(this.agent.position, this.position))
     this.action = clampVec(vector, 50)
   }
 
