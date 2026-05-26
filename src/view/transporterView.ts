@@ -41,8 +41,10 @@ export class TransporterView extends Container {
 
   drawChargeRing(): void {
     this.chargeRing.clear()
+    const angleStart = 1.5 * Math.PI
+    const angleEnd = Math.PI * (1.5 + 2 * (this.charge / this.interval))
     this.chargeRing
-      .arc(0, 0, 17, 1.5 * Math.PI, 1.5 * Math.PI + (this.charge / this.interval) * 2 * Math.PI)
+      .arc(0, 0, this.transporter.radius + 5, angleStart, angleEnd)
       .stroke({ color: this.color, join: 'round', cap: 'round', width: 1 })
   }
 }

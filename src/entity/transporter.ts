@@ -8,7 +8,7 @@ export class Transporter extends Entity {
   target: number[]
   radius = 13
   charge = 0
-  interval = 2
+  interval = 4
   exit = false
   targetLevel = 1
   targetEntrance = 0
@@ -23,10 +23,14 @@ export class Transporter extends Entity {
   preStep(dt: number): void {
     const player = this.simulation.player
     const distance = getDistance(this.position, player.position)
-    const sign = distance < this.radius ? 1 : -1
-    this.charge = clamp(0, this.interval, this.charge + sign * dt)
-    if (this.charge < this.interval) return
-    this.transport(player)
+    if (distance > this.radius - player.radius) {
+      this.charge = 0
+      return
+    }
+    this.charge += dt
+    if (this.charge > this.interval) {
+      this.transport(player)
+    }
   }
 
   transport(player: Player): void {

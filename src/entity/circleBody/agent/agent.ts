@@ -5,6 +5,7 @@ import { CircleBody } from '../circleBody'
 
 export class Agent extends CircleBody {
   movePower = 20
+  drag = 0.7
   align = 1
   action = [0, 0]
   targetVelocity = [0, 0]

@@ -31,6 +31,11 @@ export class Player extends Agent {
     this.historyTimer = 1
     this.history.unshift(structuredClone(this.position))
     this.history.pop()
+    // if (this.blade != null) {
+    //   const distance = getDistance(this.position, this.blade.position)
+    //   const speed = getMagnitude(this.blade.velocity)
+    //   console.log('blade', distance.toFixed(2), speed.toFixed(2))
+    // }
   }
 
   handleInput(input: Input) {

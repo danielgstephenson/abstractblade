@@ -5,8 +5,7 @@ import { Agent } from './agent/agent'
 import { CircleBody } from './circleBody'
 
 export class Blade extends CircleBody {
-  drag = 0.2
-  movePower = 0.5
+  drag = 0.1
   align: number
   agent?: Agent
 
@@ -19,7 +18,7 @@ export class Blade extends CircleBody {
   preStep(dt: number): void {
     super.preStep(dt)
     if (this.agent == null) return
-    const vector = mul(this.movePower, sub(this.agent.position, this.position))
+    const vector = mul(1, sub(this.agent.position, this.position))
     this.action = clampVec(vector, 50)
   }
 

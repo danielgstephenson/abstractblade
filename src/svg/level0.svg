@@ -24,14 +24,14 @@
      inkscape:deskcolor="#3a3a3a"
      inkscape:document-units="px"
      inkscape:zoom="2"
-     inkscape:cx="-2.75"
-     inkscape:cy="142.75"
+     inkscape:cx="-14"
+     inkscape:cy="91.25"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="doorLayer"
+     inkscape:current-layer="agentLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -120,8 +120,8 @@
     <path
        id="boundary-1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 110.23483,37.532868 -17.824785,86.828272 -75.912609,2.73099 -33.82552,-58.579502 29.3533,-83.57111 66.664404,-0.531041 z"
-       sodipodi:nodetypes="ccccccc"
+       d="m 543.23483,205.53287 -450.824785,-81.17173 -75.912609,2.73099 -33.82552,-58.579502 29.3533,-83.57111 89.664404,-335.531038 406.49962,37.9734 z"
+       sodipodi:nodetypes="cccccccc"
        role="boundary" />
     <path
        id="boundary-2"
@@ -236,8 +236,8 @@
     <circle
        style="fill:#00d4ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="playerBlade-1"
-       cx="-191.54993"
-       cy="243.72867"
+       cx="117.77554"
+       cy="37.46669"
        role="blade"
        r="10"
        align="0" />
@@ -259,7 +259,7 @@
        cx="-72.966705"
        cy="-17.939697"
        role="monster"
-       r="10" />
+       r="5" />
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player"
