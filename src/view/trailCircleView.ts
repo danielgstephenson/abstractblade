@@ -18,7 +18,7 @@ export class TrailCircleView extends CircleView {
       trailCircle.blendMode = 'max'
       trailCircle.x = p[0]
       trailCircle.x = p[1]
-      trailCircle.scale = 0.9
+      trailCircle.scale = 1 * (i / L)
       trailCircle.cullable = true
       this.trail.addChild(trailCircle)
       return trailCircle
