@@ -17,6 +17,7 @@ export class CircleBody extends Entity {
   drag = 0.7
   static = false
   destroyed = false
+  trailCount = 200
   trail: number[][]
 
   constructor(simulation: Simulation, position: number[], radius: number) {
@@ -25,7 +26,7 @@ export class CircleBody extends Entity {
     this.radius = radius
     this.mass = 1
     this.simulation.circleBodies.push(this)
-    this.trail = range(50).map(_ => structuredClone(this.position))
+    this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
   }
 
   preStep(_dt: number): void {
@@ -65,6 +66,6 @@ export class CircleBody extends Entity {
     if (state.vy != null) this.velocity[1] = state.vy
     if (state.star != null) this.star = Boolean(state.star)
     if (state.dead != null) this.destroyed = Boolean(state.dead)
-    this.trail = range(50).map(_ => structuredClone(this.position))
+    this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
   }
 }

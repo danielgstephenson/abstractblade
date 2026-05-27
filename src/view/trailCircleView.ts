@@ -14,9 +14,11 @@ export class TrailCircleView extends CircleView {
     const L = this.body.trail.length
     this.trailCircles = this.body.trail.map((p, i) => {
       const trailCircle = new Graphics(this.torsoGraphicsContext)
-      trailCircle.alpha = 0.05 * (i / L)
+      trailCircle.alpha = 0.1 * (i / L)
+      trailCircle.blendMode = 'max'
       trailCircle.x = p[0]
       trailCircle.x = p[1]
+      trailCircle.scale = 0.9
       trailCircle.cullable = true
       this.trail.addChild(trailCircle)
       return trailCircle

@@ -1,4 +1,4 @@
-import { clamp, getDistance } from '../math'
+import { getDistance } from '../math'
 import { Simulation } from '../simulation/simulation'
 import { Player } from './circleBody/agent/player'
 import { Entity, EntityState } from './entity'
