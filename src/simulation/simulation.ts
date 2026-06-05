@@ -104,12 +104,12 @@ export class Simulation {
     return new Wall(this, points)
   }
 
-  addTransporter(position: number[], target: number[]): Transporter {
-    return new Transporter(this, position, target)
+  addTransporter(position: number[], radius: number, target: number[]): Transporter {
+    return new Transporter(this, position, radius, target)
   }
 
-  addExit(position: number[], targetLevel: number, targetEntrance: number): Transporter {
-    const transporter = new Transporter(this, position, position)
+  addExit(position: number[], radius: number, targetLevel: number, targetEntrance: number): Transporter {
+    const transporter = new Transporter(this, position, radius, position)
     transporter.exit = true
     transporter.targetLevel = targetLevel
     transporter.targetEntrance = targetEntrance

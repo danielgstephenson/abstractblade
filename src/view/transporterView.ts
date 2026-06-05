@@ -7,22 +7,22 @@ export class TransporterView extends Container {
   transporter: Transporter
   baseRing: Graphics
   chargeRing: Graphics
-  interval: number
   charge: number
+  radius: number
   color: Color
 
   constructor(levelView: LevelView, transporter: Transporter) {
     super()
-    this.color = transporter.exit ? levelView.colors.starColor : levelView.colors.transporterColor
+    this.color = levelView.colors.transporterColor
     this.levelView = levelView
     this.transporter = transporter
-    this.interval = transporter.interval
     this.charge = transporter.charge
+    this.radius = transporter.radius
     this.cullable = true
     this.x = transporter.position[0]
     this.y = transporter.position[1]
     this.levelView.addChild(this)
-    const graphicsContext = new GraphicsContext().circle(0, 0, 13).stroke({
+    const graphicsContext = new GraphicsContext().circle(0, 0, this.radius).stroke({
       color: this.color,
       width: 1,
     })
@@ -42,7 +42,7 @@ export class TransporterView extends Container {
   drawChargeRing(): void {
     this.chargeRing.clear()
     const angleStart = 1.5 * Math.PI
-    const angleEnd = Math.PI * (1.5 + 2 * (this.charge / this.interval))
+    const angleEnd = Math.PI * (1.5 + 2 * this.charge)
     this.chargeRing
       .arc(0, 0, this.transporter.radius + 5, angleStart, angleEnd)
       .stroke({ color: this.color, join: 'round', cap: 'round', width: 1 })

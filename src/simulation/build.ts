@@ -133,11 +133,11 @@ function addTransporters(simulation: Simulation, layer: INode, arrows: number[][
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    const r = Number(node.attributes.r)
+    const radius = Number(node.attributes.r)
     const position = [x, y]
-    const insideArrows = arrows.filter(a => getDistance(a[0], position) < r)
+    const insideArrows = arrows.filter(a => getDistance(a[0], position) < radius)
     const target = insideArrows.length > 0 ? insideArrows[0][1] : position
-    const transporter = simulation.addTransporter(position, target)
+    const transporter = simulation.addTransporter(position, radius, target)
     transporter.id = node.attributes.id
   })
 }
@@ -147,10 +147,11 @@ function addExits(simulation: Simulation, layer: INode): void {
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
+    const radius = Number(node.attributes.r)
     const position = [x, y]
     const targetLevel = Number(node.attributes.targetLevel)
     const targetEntrance = Number(node.attributes.targetEntrance)
-    const exit = simulation.addExit(position, targetLevel, targetEntrance)
+    const exit = simulation.addExit(position, radius, targetLevel, targetEntrance)
     exit.id = node.attributes.id
   })
 }

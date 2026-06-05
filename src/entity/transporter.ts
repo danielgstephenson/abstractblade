@@ -1,4 +1,4 @@
-import { getDistance } from '../math'
+import { clamp, getDistance } from '../math'
 import { Simulation } from '../simulation/simulation'
 import { Player } from './circleBody/agent/player'
 import { Entity, EntityState } from './entity'
@@ -7,30 +7,41 @@ export class Transporter extends Entity {
   position: number[]
   target: number[]
   radius = 13
+  charging = false
   charge = 0
-  interval = 4
   exit = false
   targetLevel = 1
   targetEntrance = 0
+  chargeRate: number
 
-  constructor(simulation: Simulation, position: number[], target: number[]) {
+  constructor(simulation: Simulation, position: number[], radius: number, target: number[]) {
     super(simulation)
     this.position = structuredClone(position)
+    this.radius = radius
     this.target = structuredClone(target)
     this.simulation.transporters.push(this)
+    this.chargeRate = 4 / this.radius
   }
 
   preStep(dt: number): void {
     const player = this.simulation.player
     const distance = getDistance(this.position, player.position)
-    if (distance > this.radius - player.radius) {
-      this.charge = 0
-      return
+    let charging = distance < this.radius + player.radius
+    this.simulation.agents.forEach(agent => {
+      if (agent.index === player.index) return
+      const distance = getDistance(this.position, agent.position)
+      const outside = distance > this.radius + agent.radius
+      charging = charging && outside
+    })
+    if (charging) {
+      this.charge += dt * this.chargeRate
+    } else {
+      this.charge -= dt * this.chargeRate
     }
-    this.charge += dt
-    if (this.charge > this.interval) {
+    if (this.charge > 1) {
       this.transport(player)
     }
+    this.charge = clamp(0, 1, this.charge)
   }
 
   transport(player: Player): void {

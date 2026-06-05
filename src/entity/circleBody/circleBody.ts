@@ -17,7 +17,7 @@ export class CircleBody extends Entity {
   drag = 0.7
   static = false
   destroyed = false
-  trailCount = 200
+  trailCount = 100
   trail: number[][]
 
   constructor(simulation: Simulation, position: number[], radius: number) {
