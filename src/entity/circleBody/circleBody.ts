@@ -15,6 +15,7 @@ export class CircleBody extends Entity {
   impulse = [0, 0]
   shift = [0, 0]
   drag = 0.7
+  bounce = 0
   static = false
   destroyed = false
   trailCount = 100

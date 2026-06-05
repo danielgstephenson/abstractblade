@@ -15,9 +15,6 @@ export class Level1 extends Level {
     this.activeAgents.forEach(rover => {
       rover.targetVelocity = mul(30, getRandomDir())
     })
-    this.transporters.forEach(t => {
-      t.interval *= 1.1
-    })
   }
 
   update(time: Ticker): void {

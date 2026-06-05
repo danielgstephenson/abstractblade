@@ -36,6 +36,7 @@ export class Simulation {
   transporters: Transporter[] = []
   entrances: Entrance[] = []
   timeStep = 1 / 60
+  maxSpeed = 50
   timeScale = 1.5
   time = 0
   accumulator = 0

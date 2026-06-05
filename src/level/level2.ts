@@ -2,19 +2,7 @@ import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level2.svg?raw'
 import { Ticker } from 'pixi.js'
-import {
-  clamp,
-  combine,
-  dirFromTo,
-  dot,
-  find,
-  getDistance,
-  getRandomDir,
-  mean,
-  mul,
-  normalize,
-  randomDir,
-} from '../math'
+import { clamp, combine, dirFromTo, dot, find, getDistance, mean, mul, normalize, getRandomDir } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundDir } from '../simulation/actionVectors'
 import { Player } from '../entity/circleBody/agent/player'
@@ -35,9 +23,6 @@ export class Level2 extends Level {
     this.chasers2.push(find(this.monsters, m => m.id == 'monster-6'))
     this.chasers0.push(find(this.monsters, m => m.id == 'monster-7'))
     this.wanderers.push(find(this.rovers, m => m.id == 'rover-1'))
-    this.transporters.forEach(t => {
-      t.interval *= 1.2
-    })
   }
 
   update(time: Ticker): void {
@@ -113,7 +98,7 @@ export class Level2 extends Level {
       if (distance > 100) return
       const blocked = this.segmentCast([agent.position, blade.position]).length > 0
       if (blocked) return
-      const dir = randomDir()
+      const dir = getRandomDir()
       const away = dirFromTo(blade.position, agent.position)
       const fleeDir = dot(dir, away) > 0 ? dir : mul(-1, dir)
       const fleePoint = combine(1, agent.position, 100, fleeDir)

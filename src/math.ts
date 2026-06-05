@@ -120,10 +120,6 @@ export function cross(v: number[], w: number[]): number {
   return v[0] * w[1] - v[1] * w[0]
 }
 
-export function randomDir(): number[] {
-  return angleToDir(2 * Math.PI * Math.random())
-}
-
 export function sortBy<T>(array: T[], priorities: number[]): T[] {
   const pairs: Array<[T, number]> = array.map((x, i) => [x, priorities[i]])
   pairs.sort((a, b) => a[1] - b[1])

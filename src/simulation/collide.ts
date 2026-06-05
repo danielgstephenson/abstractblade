@@ -1,4 +1,4 @@
-import { add, clamp, combine, dirFromTo, dot, getMagnitude, mul, normalize, range, sub, sum } from '../math'
+import { clamp, combine, dirFromTo, dot, getMagnitude, mul, range, sub, sum } from '../math'
 import { CircleBody } from '../entity/circleBody/circleBody'
 import { Boundary } from '../entity/polygonBody/boundary'
 import { Door } from '../entity/polygonBody/door'
@@ -66,13 +66,12 @@ export function collideCircleSegment(circle: CircleBody, segment: number[][]): b
   const segmentVector = sub(segmentEnd, segmentStart)
   const startToBody = sub(circle.position, segmentStart)
   const segmentFactor = clamp(0, 1, dot(startToBody, segmentVector) / (dot(segmentVector, segmentVector) + 1e-9))
-  const closestPoint = combine(1, segmentStart, segmentFactor, segmentVector)
-  const pointToCircle = sub(circle.position, closestPoint)
+  const nearestPoint = combine(1, segmentStart, segmentFactor, segmentVector)
+  const pointToCircle = sub(circle.position, nearestPoint)
   const distance = getMagnitude(pointToCircle)
   const overlap = circle.radius - distance
   if (overlap < 0) return false
-  const normal = normalize(pointToCircle)
-  circle.collisions.push(new Collision(normal, overlap))
+  collideCirclePoint(circle, nearestPoint)
   return true
 }
 
@@ -86,10 +85,13 @@ export function collideCirclePoint(circle: CircleBody, point: number[]): boolean
   const overlap = circle.radius - distance
   if (overlap <= 0) return false
   const normal = dirFromTo(point, circle.position)
-  const impactSpeed = -dot(circle.velocity, normal)
-  const impulse = mul(1.2 * impactSpeed * circle.mass, normal)
-  circle.impulse = add(circle.impulse, impulse)
-  const shift = mul(overlap, normal)
-  circle.shift = add(circle.shift, shift)
+  circle.collisions.push(new Collision(normal, overlap))
   return true
+
+  // const impactSpeed = -dot(circle.velocity, normal)
+  // const impulse = mul(impactSpeed * circle.mass, normal)
+  // circle.impulse = add(circle.impulse, impulse)
+  // const shift = mul(overlap, normal)
+  // circle.shift = add(circle.shift, shift)
+  // return true
 }

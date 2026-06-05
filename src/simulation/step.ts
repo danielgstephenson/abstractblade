@@ -1,4 +1,4 @@
-import { add, combine, dot, mean, mul, normalize } from '../math'
+import { add, clampVec, combine, dot, mean, mul, normalize } from '../math'
 import { collideCircleCircle, collideCirclePolygon } from './collide'
 import { Simulation } from './simulation'
 
@@ -60,8 +60,8 @@ function resolve(simulation: Simulation, dt: number): void {
     const xMean = mean(normals.map(v => v[0]))
     const yMean = mean(normals.map(v => v[1]))
     const normalMean = normalize([xMean, yMean])
-    const impactSpeed = -Math.max(0, dot(circle.velocity, normalMean))
-    circle.impulse = combine(1, circle.impulse, impactSpeed, normalMean)
+    const impactFactor = -(1 + circle.bounce) * circle.mass * dot(circle.velocity, normalMean)
+    circle.impulse = combine(1, circle.impulse, impactFactor, normalMean)
     const overlaps = circle.collisions.map(c => c.overlap)
     if (overlaps.length === 0) return
     const maxOverlap = Math.max(...overlaps)
@@ -74,6 +74,7 @@ function resolve(simulation: Simulation, dt: number): void {
     circle.velocity = mul(1 - circle.drag * dt, circle.velocity)
     circle.velocity = combine(1, circle.velocity, dt / circle.mass, circle.force)
     circle.velocity = combine(1, circle.velocity, 1 / circle.mass, circle.impulse)
+    circle.velocity = clampVec(circle.velocity, simulation.maxSpeed)
     circle.position = combine(1, circle.position, dt, circle.velocity)
     circle.position = combine(1, circle.position, 1, circle.shift)
   })
