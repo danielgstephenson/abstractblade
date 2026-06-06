@@ -35,13 +35,13 @@ export class Simulation {
   doors: Door[] = []
   transporters: Transporter[] = []
   entrances: Entrance[] = []
-  timeStep = 1 / 60
+  timeStep = 0.02
   maxSpeed = 50
   timeScale = 1.5
   time = 0
   accumulator = 0
   leaving = false
-  targetLevel = 1
+  targetLevel = 2
   targetEntrance = 0
   busy = false
   backup: SimulationState
@@ -52,7 +52,7 @@ export class Simulation {
   }
 
   update(time: Ticker): void {
-    this.accumulator += 0.001 * time.deltaMS
+    this.accumulator += 0.001 * time.deltaMS * this.timeScale
     while (this.accumulator > this.timeStep) {
       this.accumulator -= this.timeStep
       step(this)

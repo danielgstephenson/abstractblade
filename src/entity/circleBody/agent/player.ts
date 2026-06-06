@@ -9,6 +9,7 @@ export class Player extends Agent {
   align = 0
   spawnPoint: number[]
   history: number[][]
+  wallPoints: number[][]
   historyTimer = 1
   id = 'player'
 
@@ -16,6 +17,7 @@ export class Player extends Agent {
     super(simulation, position, 5)
     this.spawnPoint = structuredClone(position)
     this.history = range(20).map(_ => structuredClone(this.position))
+    this.wallPoints = this.getWallPoints()
     this.simulation.player = this
   }
 
@@ -26,16 +28,12 @@ export class Player extends Agent {
 
   preStep(dt: number): void {
     super.preStep(dt)
+    this.wallPoints = this.getWallPoints()
     this.historyTimer -= dt
     if (this.historyTimer > 0) return
     this.historyTimer = 1
     this.history.unshift(structuredClone(this.position))
     this.history.pop()
-    // if (this.blade != null) {
-    //   const distance = getDistance(this.position, this.blade.position)
-    //   const speed = getMagnitude(this.blade.velocity)
-    //   console.log('blade', distance.toFixed(2), speed.toFixed(2))
-    // }
   }
 
   handleInput(input: Input) {

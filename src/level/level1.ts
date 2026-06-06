@@ -7,7 +7,7 @@ import { Agent } from '../entity/circleBody/agent/agent'
 import { roundDir } from '../simulation/actionVectors'
 
 export class Level1 extends Level {
-  activeAgents: Agent[]
+  activeAgents: Agent[] = []
 
   constructor(world: World) {
     super(world, 1, svgString)

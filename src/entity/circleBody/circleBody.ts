@@ -1,4 +1,4 @@
-import { range } from '../../math'
+import { combine, range } from '../../math'
 import { Collision } from '../../simulation/collision'
 import { Simulation } from '../../simulation/simulation'
 import { Entity, EntityState } from '../entity'
@@ -69,4 +69,21 @@ export class CircleBody extends Entity {
     if (state.dead != null) this.destroyed = Boolean(state.dead)
     this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
   }
+
+  getWallPoints(): number[][] {
+    const wallPoints = visionDirs.map(visionDir => {
+      const lookPoint = combine(1, this.position, visionReach, visionDir)
+      const segment = [this.position, lookPoint]
+      return this.simulation.segmentCastPoint(segment)
+    })
+    return wallPoints
+  }
 }
+
+const visionReach = 200
+const visionDirs: number[][] = []
+range(8).forEach(i => {
+  const angle = (2 * Math.PI * i) / 8
+  const dir = [Math.cos(angle), Math.sin(angle)]
+  visionDirs.push(dir)
+})

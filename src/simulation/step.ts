@@ -8,7 +8,7 @@ export function step(simulation: Simulation): void {
     return
   }
   if (simulation.player.destroyed) return
-  const dt = simulation.timeStep * simulation.timeScale
+  const dt = simulation.timeStep
   simulation.time += dt
   simulation.entities.forEach(entity => entity.preStep(dt))
   clear(simulation)

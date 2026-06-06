@@ -2,23 +2,30 @@ import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level0.svg?raw'
 import { Ticker } from 'pixi.js'
-import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
+import { combine, dirFromTo, dot, find, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { roundDir } from '../simulation/actionVectors'
+import { Rover } from '../entity/circleBody/agent/rover'
+import { Transporter } from '../entity/transporter'
 
 export class Level0 extends Level {
-  activeAgents: Agent[]
+  activeAgents: Agent[] = []
+  rover2: Rover
+  transporter3: Transporter
 
   constructor(world: World) {
     super(world, 0, svgString)
-    this.activeAgents = [...this.rovers, ...this.monsters]
-    this.activeAgents.forEach(rover => {
-      rover.targetVelocity = mul(30, getRandomDir())
-    })
+    // this.activeAgents = [...this.rovers, ...this.monsters]
+    // this.activeAgents.forEach(rover => {
+    //   rover.targetVelocity = mul(30, getRandomDir())
+    // })
+    this.rover2 = find(this.rovers, m => m.id == 'rover-2')
+    this.transporter3 = find(this.transporters, m => m.id == 'transporter-3')
   }
 
   update(time: Ticker): void {
     super.update(time)
+    this.world.guardBrain.act([this.rover2], this.player, this.transporter3.position)
     this.activeAgents.forEach(agent => {
       this.think(agent, time)
       this.move(agent)
