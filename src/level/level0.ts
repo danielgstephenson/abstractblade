@@ -14,7 +14,7 @@ export class Level0 extends Level {
   transporter3: Transporter
 
   constructor(world: World) {
-    super(world, 0, svgString)
+    super(world, svgString)
     // this.activeAgents = [...this.rovers, ...this.monsters]
     // this.activeAgents.forEach(rover => {
     //   rover.targetVelocity = mul(30, getRandomDir())

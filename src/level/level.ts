@@ -23,7 +23,6 @@ export type LevelState = EntityState[]
 
 export class Level {
   world: World
-  index: number
   boundaries: Boundary[] = []
   entities: Entity[] = []
   circleBodies: CircleBody[] = []
@@ -50,9 +49,8 @@ export class Level {
   busy = false
   backup: LevelState
 
-  constructor(world: World, index: number, svgString: string) {
+  constructor(world: World, svgString: string) {
     this.world = world
-    this.index = index
     build(this, svgString)
     this.backup = this.getState()
   }

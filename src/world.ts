@@ -22,6 +22,7 @@ export class World {
     this.game = game
     this.buildLevels()
     this.level = this.levels[0]
+    console.log('this.levels', this.levels)
     this.levelView = new LevelView(this)
     window.addEventListener('keydown', event => {
       if (event.repeat) return
@@ -58,9 +59,9 @@ export class World {
   }
 
   buildLevels(): void {
-    void new Level0(this)
-    void new Level1(this)
-    void new Level2(this)
+    this.levels[0] = new Level0(this)
+    this.levels[1] = new Level1(this)
+    this.levels[2] = new Level2(this)
   }
 
   proceed(): void {

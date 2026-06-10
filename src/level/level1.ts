@@ -10,7 +10,7 @@ export class Level1 extends Level {
   activeAgents: Agent[] = []
 
   constructor(world: World) {
-    super(world, 1, svgString)
+    super(world, svgString)
     this.activeAgents = [...this.rovers, ...this.monsters]
     this.activeAgents.forEach(rover => {
       rover.targetVelocity = mul(30, getRandomDir())

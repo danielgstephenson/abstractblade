@@ -9,8 +9,8 @@ import { SpawnView } from './spawnView'
 import { SpringView } from './springView'
 import { Colors } from '../colors'
 import { World } from '../world'
-import { Level } from '../level/level'
 import { WallView } from './wallView'
+import { Level } from '../level/level'
 
 export class LevelView extends Container {
   level: Level

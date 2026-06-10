@@ -14,7 +14,7 @@ export class Level2 extends Level {
   wanderers: Agent[] = []
 
   constructor(world: World) {
-    super(world, 2, svgString)
+    super(world, svgString)
     this.wanderers.push(find(this.monsters, m => m.id == 'monster-1'))
     this.chasers0.push(find(this.monsters, m => m.id == 'monster-2'))
     this.chasers1.push(find(this.monsters, m => m.id == 'monster-3'))
