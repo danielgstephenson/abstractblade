@@ -29,7 +29,7 @@ export class LevelView extends Container {
     super()
     this.world = world
     this.level = world.level
-    this.world.game.app.stage.addChild(this)
+    this.world.view.addChild(this)
     this.trailContainer = new Container()
     this.colors = this.world.game.colors
     this.build()

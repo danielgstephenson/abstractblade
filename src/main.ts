@@ -12,7 +12,8 @@ async function start(): Promise<void> {
     antialias: true,
   })
   appDiv.appendChild(app.canvas)
-  new Game(app)
+  const game = new Game(app)
+  game.init()
 }
 
 console.log('start')

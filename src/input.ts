@@ -2,15 +2,11 @@ import { KeyboardDevice, GamepadDevice, InputDevice, GamepadCode } from 'pixijs-
 import { Ticker } from 'pixi.js'
 import { clamp } from './math'
 
-const gamepadCodes: GamepadCode[] = [
+const continueCodes: GamepadCode[] = [
   'Face1',
   'Face2',
   'Face3',
   'Face4',
-  'LeftShoulder',
-  'RightShoulder',
-  'LeftTrigger',
-  'RightTrigger',
   'Back',
   'Start',
   'LeftStickClick',
@@ -23,7 +19,7 @@ const gamepadCodes: GamepadCode[] = [
 
 declare module 'pixijs-input-devices' {
   interface BindValues {
-    inGame: 'Up' | 'Left' | 'Right' | 'Down' | 'ZoomIn' | 'ZoomOut' | 'AnyKey'
+    inGame: 'Up' | 'Left' | 'Right' | 'Down' | 'ZoomIn' | 'ZoomOut' | 'Continue'
   }
 }
 
@@ -39,9 +35,9 @@ GamepadDevice.configureDefaultBinds({
   Down: ['LeftStickDown', 'RightStickDown', 'DpadDown'],
   Left: ['LeftStickLeft', 'RightStickLeft', 'DpadLeft'],
   Right: ['LeftStickRight', 'RightStickRight', 'DpadRight'],
-  ZoomIn: ['LeftShoulder', 'LeftTrigger'],
-  ZoomOut: ['RightShoulder', 'RightTrigger'],
-  AnyKey: gamepadCodes,
+  ZoomIn: ['RightShoulder', 'RightTrigger'],
+  ZoomOut: ['LeftShoulder', 'LeftTrigger'],
+  Continue: continueCodes,
 })
 
 Ticker.shared.add(() => InputDevice.update())
@@ -52,7 +48,7 @@ export class Input {
   maxZoom = 20
   minZoom = -40
   zoom = 0
-  paused = false
+  paused = true
 
   constructor() {
     window.addEventListener('wheel', (event: WheelEvent) => this.onwheel(event))

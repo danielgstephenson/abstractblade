@@ -40,7 +40,6 @@ export class Player extends Agent {
   handleInput(input: Input) {
     let x = 0
     let y = 0
-    console.log('Gamepads detected:', InputDevice.gamepads.length)
     for (const device of InputDevice.devices) {
       if (device.bindDown('Up')) y -= 1
       if (device.bindDown('Down')) y += 1

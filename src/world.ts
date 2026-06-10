@@ -1,4 +1,4 @@
-import { Ticker } from 'pixi.js'
+import { Container, Graphics, Ticker } from 'pixi.js'
 import { Game } from './game'
 import { LevelView } from './view/levelView'
 import { Level0 } from './level/level0'
@@ -16,16 +16,22 @@ export class World {
   guardBrain = new GuardBrain()
   levels: Level[] = []
   game: Game
+  view: Container
+  background: Graphics
   level: Level
   levelView: LevelView
 
   constructor(game: Game) {
     this.game = game
+    this.view = new Container()
+    this.view.visible = false
+    this.game.app.stage.addChild(this.view)
+    this.background = new Graphics().rect(0, 0, 1, 1).fill(this.game.colors.wallColor)
+    this.view.addChild(this.background)
     this.buildLevels()
     this.level = this.levels[0]
-    console.log('this.levels', this.levels)
     this.levelView = new LevelView(this)
-    InputDevice.onBindDown('AnyKey', () => {
+    InputDevice.onBindDown('Continue', () => {
       this.proceed()
     })
     window.addEventListener('keydown', event => {
@@ -44,6 +50,12 @@ export class World {
     this.level.player.handleInput(this.input)
     this.level.update(time)
     this.levelView.update()
+    this.updateBackground()
+  }
+
+  updateBackground(): void {
+    this.background.width = window.innerWidth
+    this.background.height = window.innerHeight
   }
 
   changeLevel(levelIndex: number, entranceIndex: number): void {
