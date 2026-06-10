@@ -1,7 +1,52 @@
+import { KeyboardDevice, GamepadDevice, InputDevice, GamepadCode } from 'pixijs-input-devices'
+import { Ticker } from 'pixi.js'
 import { clamp } from './math'
 
+const gamepadCodes: GamepadCode[] = [
+  'Face1',
+  'Face2',
+  'Face3',
+  'Face4',
+  'LeftShoulder',
+  'RightShoulder',
+  'LeftTrigger',
+  'RightTrigger',
+  'Back',
+  'Start',
+  'LeftStickClick',
+  'RightStickClick',
+  'DpadUp',
+  'DpadDown',
+  'DpadLeft',
+  'DpadRight',
+]
+
+declare module 'pixijs-input-devices' {
+  interface BindValues {
+    inGame: 'Up' | 'Left' | 'Right' | 'Down' | 'ZoomIn' | 'ZoomOut' | 'AnyKey'
+  }
+}
+
+KeyboardDevice.configureBinds({
+  Up: ['KeyW', 'ArrowUp'],
+  Down: ['KeyS', 'ArrowDown'],
+  Left: ['KeyA', 'ArrowLeft'],
+  Right: ['KeyD', 'ArrowRight'],
+})
+
+GamepadDevice.configureDefaultBinds({
+  Up: ['LeftStickUp', 'RightStickUp', 'DpadUp'],
+  Down: ['LeftStickDown', 'RightStickDown', 'DpadDown'],
+  Left: ['LeftStickLeft', 'RightStickLeft', 'DpadLeft'],
+  Right: ['LeftStickRight', 'RightStickRight', 'DpadRight'],
+  ZoomIn: ['LeftShoulder', 'LeftTrigger'],
+  ZoomOut: ['RightShoulder', 'RightTrigger'],
+  AnyKey: gamepadCodes,
+})
+
+Ticker.shared.add(() => InputDevice.update())
+
 export class Input {
-  keyboard = new Map<string, boolean>()
   mousePosition: number[] = [0, 0]
   mouseButtons = new Map<number, boolean>()
   maxZoom = 20
@@ -10,8 +55,6 @@ export class Input {
   paused = false
 
   constructor() {
-    window.addEventListener('keydown', (event: KeyboardEvent) => this.onkeydown(event))
-    window.addEventListener('keyup', (event: KeyboardEvent) => this.onkeyup(event))
     window.addEventListener('wheel', (event: WheelEvent) => this.onwheel(event))
     window.addEventListener('mousemove', (event: MouseEvent) => this.onmousemove(event))
     window.addEventListener('mousedown', (event: MouseEvent) => this.onmousedown(event))
@@ -20,21 +63,6 @@ export class Input {
     window.addEventListener('touchstart', (event: TouchEvent) => this.ontouchstart(event))
     window.addEventListener('touchend', (event: TouchEvent) => this.ontouchend(event))
     window.oncontextmenu = () => {}
-  }
-
-  onkeydown(event: KeyboardEvent): void {
-    this.keyboard.set(event.code, true)
-    if (event.key === ' ') {
-      this.paused = !this.paused
-    }
-  }
-
-  onkeyup(event: KeyboardEvent): void {
-    this.keyboard.set(event.code, false)
-  }
-
-  isKeyDown(key: string): boolean {
-    return this.keyboard.get(key) ?? false
   }
 
   onwheel(event: WheelEvent): void {

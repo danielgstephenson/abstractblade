@@ -8,6 +8,7 @@ import { Level2 } from './level/level2'
 import { EvadeBladeBrain } from './brain/evadeBladeBrain'
 import { GuardBrain } from './brain/guardBrain'
 import { Level } from './level/level'
+import { InputDevice } from 'pixijs-input-devices'
 
 export class World {
   input = new Input()
@@ -24,6 +25,9 @@ export class World {
     this.level = this.levels[0]
     console.log('this.levels', this.levels)
     this.levelView = new LevelView(this)
+    InputDevice.onBindDown('AnyKey', () => {
+      this.proceed()
+    })
     window.addEventListener('keydown', event => {
       if (event.repeat) return
       this.proceed()

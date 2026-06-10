@@ -8,7 +8,7 @@ export class Rock extends CircleBody {
 
   constructor(level: Level, position: number[], radius: number) {
     super(level, position, radius)
-    this.mass = 0.001 * Math.PI * this.radius ** 2
+    this.mass = 0.0001 * Math.PI * this.radius ** 2
     this.velocity = mul(10 + 30 * Math.random(), getRandomDir())
     this.level.rocks.push(this)
   }

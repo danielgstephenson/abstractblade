@@ -3,6 +3,7 @@ import { getDistance, normalize, range } from '../../../math'
 import { Level } from '../../../level/level'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
+import { InputDevice } from 'pixijs-input-devices'
 
 export class Player extends Agent {
   drag = 0.7
@@ -39,10 +40,19 @@ export class Player extends Agent {
   handleInput(input: Input) {
     let x = 0
     let y = 0
-    if (input.isKeyDown('KeyW') || input.isKeyDown('ArrowUp')) y -= 1
-    if (input.isKeyDown('KeyS') || input.isKeyDown('ArrowDown')) y += 1
-    if (input.isKeyDown('KeyA') || input.isKeyDown('ArrowLeft')) x -= 1
-    if (input.isKeyDown('KeyD') || input.isKeyDown('ArrowRight')) x += 1
+    console.log('Gamepads detected:', InputDevice.gamepads.length)
+    for (const device of InputDevice.devices) {
+      if (device.bindDown('Up')) y -= 1
+      if (device.bindDown('Down')) y += 1
+      if (device.bindDown('Left')) x -= 1
+      if (device.bindDown('Right')) x += 1
+      if (device.bindDown('ZoomIn')) {
+        input.zoom += 0.1
+      }
+      if (device.bindDown('ZoomOut')) {
+        input.zoom -= 0.1
+      }
+    }
     this.action = normalize([x, y])
     if (input.isMouseButtonDown(0)) this.action = normalize(input.mousePosition)
   }
