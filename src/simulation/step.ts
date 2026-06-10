@@ -7,6 +7,7 @@ export function step(simulation: Simulation): void {
     console.log('simulation busy')
     return
   }
+  if (simulation.paused) return
   if (simulation.player.destroyed) return
   const dt = simulation.timeStep
   simulation.time += dt
@@ -21,8 +22,6 @@ export function step(simulation: Simulation): void {
     if (blade.destroyed) return
     blade.force = add(blade.force, blade.action)
   })
-  resolve(simulation, dt)
-  clear(simulation)
   simulation.circleBodies.forEach(circle => {
     if (circle.destroyed) return
     simulation.boundaries.forEach(boundary => {

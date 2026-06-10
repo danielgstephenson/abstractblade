@@ -7,6 +7,7 @@ export class Input {
   maxZoom = 20
   minZoom = -40
   zoom = 0
+  paused = false
 
   constructor() {
     window.addEventListener('keydown', (event: KeyboardEvent) => this.onkeydown(event))
@@ -23,6 +24,9 @@ export class Input {
 
   onkeydown(event: KeyboardEvent): void {
     this.keyboard.set(event.code, true)
+    if (event.key === ' ') {
+      this.paused = !this.paused
+    }
   }
 
   onkeyup(event: KeyboardEvent): void {

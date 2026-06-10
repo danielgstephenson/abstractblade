@@ -35,6 +35,7 @@ export class World {
       this.level.leaving = false
       this.changeLevel(this.level.targetLevel, this.level.targetEntrance)
     }
+    this.level.paused = this.input.paused
     this.level.player.handleInput(this.input)
     this.level.update(time)
     this.levelView.update()

@@ -80,7 +80,7 @@ export class CircleBody extends Entity {
   }
 }
 
-const visionReach = 200
+const visionReach = 400
 const visionDirs: number[][] = []
 range(8).forEach(i => {
   const angle = (2 * Math.PI * i) / 8

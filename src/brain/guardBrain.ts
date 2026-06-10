@@ -51,7 +51,7 @@ export class GuardBrain {
       states.push(...wallPoints.flat())
     })
     if (states.length > 0) {
-      console.log('state:', Array.from(states))
+      // console.log('state:', Array.from(states))
       const data = new Float32Array(states)
       const dims = [agents.length, this.inputSize]
       const stateTensor = new ort.Tensor('float32', data, dims)
@@ -59,7 +59,7 @@ export class GuardBrain {
       const results = await this.session.run(feeds)
       const output = Array.from(results['grad'].data as Float32Array)
       const grads = toMatrix(output, [agents.length, 2])
-      console.log('grad:', output.slice(0, 2))
+      // console.log('grad:', output.slice(0, 2))
       range(agents.length).forEach(i => {
         agents[i].action = roundDir(grads[i])
       })

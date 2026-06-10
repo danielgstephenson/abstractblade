@@ -34,6 +34,10 @@ export class Player extends Agent {
     this.historyTimer = 1
     this.history.unshift(structuredClone(this.position))
     this.history.pop()
+    if (this.blade != null) {
+      const stretch = getDistance(this.position, this.blade.position)
+      console.log('stretch', stretch)
+    }
   }
 
   handleInput(input: Input) {

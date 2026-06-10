@@ -19,7 +19,7 @@ export function collideCircleCircle(body1: CircleBody, body2: CircleBody): boole
   if (!doesCollide1 || !doesCollide2) return false
   const normal = mul(1 / distance, vector)
   const relativeVelocity = sub(body1.velocity, body2.velocity)
-  const impactSpeed = dot(relativeVelocity, normal)
+  const impactSpeed = Math.max(0, dot(relativeVelocity, normal))
   const massFactor = 1 / (1 / body1.mass + 1 / body2.mass)
   const impulse = mul(impactSpeed * massFactor, normal)
   const shift = mul(0.5 * overlap, normal)

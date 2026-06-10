@@ -43,6 +43,7 @@ export class Simulation {
   leaving = false
   targetLevel = 2
   targetEntrance = 0
+  paused = false
   busy = false
   backup: SimulationState
 
