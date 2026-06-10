@@ -1,5 +1,7 @@
-import { Application } from 'pixi.js'
+import { Application, GraphicsContextSystem } from 'pixi.js'
 import { Game } from './game'
+
+GraphicsContextSystem.defaultOptions.bezierSmoothness = Math.max(0.2)
 
 const appDiv = document.getElementById('app')!
 

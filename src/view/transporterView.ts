@@ -8,6 +8,7 @@ export class TransporterView extends Container {
   baseRing: Graphics
   chargeRing: Graphics
   charge: number
+  chargeScale: number
   radius: number
   color: Color
 
@@ -29,6 +30,8 @@ export class TransporterView extends Container {
     this.baseRing = new Graphics(graphicsContext)
     this.addChild(this.baseRing)
     this.chargeRing = new Graphics()
+    this.chargeScale = 10
+    this.chargeRing.scale.set(1 / this.chargeScale)
     this.addChild(this.chargeRing)
     this.drawChargeRing()
   }
@@ -44,7 +47,7 @@ export class TransporterView extends Container {
     const angleStart = 1.5 * Math.PI
     const angleEnd = Math.PI * (1.5 + 2 * this.charge)
     this.chargeRing
-      .arc(0, 0, this.transporter.radius + 5, angleStart, angleEnd)
-      .stroke({ color: this.color, join: 'round', cap: 'round', width: 1 })
+      .arc(0, 0, (this.transporter.radius + 5) * this.chargeScale, angleStart, angleEnd)
+      .stroke({ color: this.color, join: 'round', cap: 'round', width: this.chargeScale })
   }
 }
