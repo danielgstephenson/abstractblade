@@ -1,13 +1,13 @@
 import * as ort from 'onnxruntime-web'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { range, toMatrix, sub } from '../math'
-import { roundDir } from '../simulation/actionVectors'
+import { roundDir } from '../physics/actionVectors'
 import { Player } from '../entity/circleBody/agent/player'
 
 export class GuardBrain {
   session?: ort.InferenceSession
   busy = false
-  inputSize = 34
+  inputSize = 18
 
   constructor() {
     this.setup()
@@ -31,7 +31,6 @@ export class GuardBrain {
       return
     }
     this.busy = true
-    const wallPoints = player.wallPoints.map(point => sub(point, guardPoint))
     const states: number[] = []
     agents.forEach(agent => {
       if (agent.destroyed) return
@@ -48,7 +47,6 @@ export class GuardBrain {
       states.push(...sub(agent.blade.position, guardPoint))
       states.push(...sub(player.blade.position, guardPoint))
       states.push(...[1, 1])
-      states.push(...wallPoints.flat())
     })
     if (states.length > 0) {
       // console.log('state:', Array.from(states))

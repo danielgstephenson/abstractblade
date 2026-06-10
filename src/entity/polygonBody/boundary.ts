@@ -1,12 +1,12 @@
-import { Simulation } from '../../simulation/simulation'
+import { Level } from '../../level/level'
 import { Entity } from '../entity'
 
 export class Boundary extends Entity {
   polygon: number[][]
 
-  constructor(simulation: Simulation, polygon: number[][]) {
-    super(simulation)
-    this.simulation.boundaries.push(this)
+  constructor(level: Level, polygon: number[][]) {
+    super(level)
+    this.level.boundaries.push(this)
     this.polygon = structuredClone(polygon)
   }
 }

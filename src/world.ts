@@ -1,13 +1,13 @@
 import { Ticker } from 'pixi.js'
 import { Game } from './game'
 import { LevelView } from './view/levelView'
-import { Level } from './level/level'
 import { Level0 } from './level/level0'
 import { Input } from './input'
 import { Level1 } from './level/level1'
 import { Level2 } from './level/level2'
 import { EvadeBladeBrain } from './brain/evadeBladeBrain'
 import { GuardBrain } from './brain/guardBrain'
+import { Level } from './level/level'
 
 export class World {
   input = new Input()

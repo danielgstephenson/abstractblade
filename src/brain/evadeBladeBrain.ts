@@ -1,7 +1,7 @@
 import * as ort from 'onnxruntime-web'
 import { Agent } from '../entity/circleBody/agent/agent'
 import { combine, range, toMatrix, sub } from '../math'
-import { roundDir } from '../simulation/actionVectors'
+import { roundDir } from '../physics/actionVectors'
 
 export class EvadeBladeBrain {
   session?: ort.InferenceSession
@@ -33,7 +33,7 @@ export class EvadeBladeBrain {
     const visionPoints = this.visionDirs.map(visionDir => {
       const lookPoint = combine(1, agent.position, this.visionReach, visionDir)
       const segment = [agent.position, lookPoint]
-      const hitPoint = agent.simulation.segmentCastPoint(segment)
+      const hitPoint = agent.level.segmentCastPoint(segment)
       return sub(hitPoint, agent.position)
     })
     return visionPoints.flat()

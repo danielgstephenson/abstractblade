@@ -1,10 +1,10 @@
-import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level1.svg?raw'
 import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
-import { roundDir } from '../simulation/actionVectors'
+import { roundDir } from '../physics/actionVectors'
+import { Level } from './level'
 
 export class Level1 extends Level {
   activeAgents: Agent[] = []

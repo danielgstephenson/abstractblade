@@ -1,6 +1,6 @@
 import { combine, range } from '../../math'
-import { Collision } from '../../simulation/collision'
-import { Simulation } from '../../simulation/simulation'
+import { Collision } from '../../physics/collision'
+import { Level } from '../../level/level'
 import { Entity, EntityState } from '../entity'
 
 export class CircleBody extends Entity {
@@ -21,12 +21,12 @@ export class CircleBody extends Entity {
   trailCount = 100
   trail: number[][]
 
-  constructor(simulation: Simulation, position: number[], radius: number) {
-    super(simulation)
+  constructor(level: Level, position: number[], radius: number) {
+    super(level)
     this.position = structuredClone(position)
     this.radius = radius
     this.mass = 1
-    this.simulation.circleBodies.push(this)
+    this.level.circleBodies.push(this)
     this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
   }
 
@@ -74,7 +74,7 @@ export class CircleBody extends Entity {
     const wallPoints = visionDirs.map(visionDir => {
       const lookPoint = combine(1, this.position, visionReach, visionDir)
       const segment = [this.position, lookPoint]
-      return this.simulation.segmentCastPoint(segment)
+      return this.level.segmentCastPoint(segment)
     })
     return wallPoints
   }

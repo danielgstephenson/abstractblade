@@ -1,5 +1,5 @@
 import { sum } from '../../../math'
-import { Simulation } from '../../../simulation/simulation'
+import { Level } from '../../../level/level'
 import { Blade } from '../blade'
 import { CircleBody } from '../circleBody'
 
@@ -14,11 +14,11 @@ export class Agent extends CircleBody {
   agentIndex: number
   actionTimer = 0
 
-  constructor(simulation: Simulation, position: number[], radius: number) {
-    super(simulation, position, radius)
+  constructor(level: Level, position: number[], radius: number) {
+    super(level, position, radius)
     this.mass = 1
-    this.agentIndex = this.simulation.agents.length
-    this.simulation.agents.push(this)
+    this.agentIndex = this.level.agents.length
+    this.level.agents.push(this)
   }
 
   preStep(dt: number): void {

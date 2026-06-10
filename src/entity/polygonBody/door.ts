@@ -1,5 +1,5 @@
 import { add, combine, dirFromTo, getDistance, mean } from '../../math'
-import { Simulation } from '../../simulation/simulation'
+import { Level } from '../../level/level'
 import { CircleBody } from '../circleBody/circleBody'
 import { Entity, EntityState } from '../entity'
 
@@ -12,8 +12,8 @@ export class Door extends Entity {
   speed = 10
   star = false
 
-  constructor(simulation: Simulation, points: number[][], vector: number[]) {
-    super(simulation)
+  constructor(level: Level, points: number[][], vector: number[]) {
+    super(level)
     this.polygon = structuredClone(points)
     const xs = points.map(p => p[0])
     const ys = points.map(p => p[1])
@@ -23,7 +23,7 @@ export class Door extends Entity {
     this.startPosition = structuredClone(this.position)
     this.openPosition = add(this.startPosition, vector)
     this.localPoints = points.map(p => [p[0] - x, p[1] - y])
-    this.simulation.doors.push(this)
+    this.level.doors.push(this)
   }
 
   knock(body: CircleBody): void {

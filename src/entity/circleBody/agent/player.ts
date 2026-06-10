@@ -1,6 +1,6 @@
 import { Input } from '../../../input'
 import { getDistance, normalize, range } from '../../../math'
-import { Simulation } from '../../../simulation/simulation'
+import { Level } from '../../../level/level'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
 
@@ -13,12 +13,12 @@ export class Player extends Agent {
   historyTimer = 1
   id = 'player'
 
-  constructor(simulation: Simulation, position: number[]) {
-    super(simulation, position, 5)
+  constructor(level: Level, position: number[]) {
+    super(level, position, 5)
     this.spawnPoint = structuredClone(position)
     this.history = range(20).map(_ => structuredClone(this.position))
     this.wallPoints = this.getWallPoints()
-    this.simulation.player = this
+    this.level.player = this
   }
 
   invincible(): boolean {
@@ -34,10 +34,6 @@ export class Player extends Agent {
     this.historyTimer = 1
     this.history.unshift(structuredClone(this.position))
     this.history.pop()
-    if (this.blade != null) {
-      const stretch = getDistance(this.position, this.blade.position)
-      console.log('stretch', stretch)
-    }
   }
 
   handleInput(input: Input) {

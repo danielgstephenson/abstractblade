@@ -1,4 +1,4 @@
-import { Simulation } from '../../../simulation/simulation'
+import { Level } from '../../../level/level'
 import { EntityState } from '../../entity'
 import { CircleBody } from '../circleBody'
 import { Agent } from './agent'
@@ -7,9 +7,9 @@ export class Monster extends Agent {
   align = 3
   targetVelocity = [0, 0]
 
-  constructor(simulation: Simulation, position: number[]) {
-    super(simulation, position, 5)
-    this.simulation.monsters.push(this)
+  constructor(level: Level, position: number[]) {
+    super(level, position, 5)
+    this.level.monsters.push(this)
   }
 
   preStep(dt: number): void {

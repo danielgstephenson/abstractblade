@@ -1,4 +1,4 @@
-import { Simulation } from '../../../simulation/simulation'
+import { Level } from '../../../level/level'
 import { EntityState } from '../../entity'
 import { Agent } from './agent'
 
@@ -7,9 +7,9 @@ export class Rover extends Agent {
   drag = 0.7
   align = 1
 
-  constructor(simulation: Simulation, position: number[]) {
-    super(simulation, position, 5)
-    this.simulation.rovers.push(this)
+  constructor(level: Level, position: number[]) {
+    super(level, position, 5)
+    this.level.rovers.push(this)
   }
 
   getState(): EntityState {

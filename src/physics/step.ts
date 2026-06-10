@@ -1,50 +1,50 @@
 import { add, clampVec, combine, dot, mean, mul, normalize } from '../math'
 import { collideCircleCircle, collideCirclePolygon } from './collide'
-import { Simulation } from './simulation'
+import { Level } from '../level/level'
 
-export function step(simulation: Simulation): void {
-  if (simulation.busy) {
-    console.log('simulation busy')
+export function step(level: Level): void {
+  if (level.busy) {
+    console.log('level busy')
     return
   }
-  if (simulation.paused) return
-  if (simulation.player.destroyed) return
-  const dt = simulation.timeStep
-  simulation.time += dt
-  simulation.entities.forEach(entity => entity.preStep(dt))
-  clear(simulation)
-  simulation.agents.forEach(agent => {
+  if (level.paused) return
+  if (level.player.destroyed) return
+  const dt = level.timeStep
+  level.time += dt
+  level.entities.forEach(entity => entity.preStep(dt))
+  clear(level)
+  level.agents.forEach(agent => {
     if (agent.destroyed) return
     const dir = normalize(agent.action)
     agent.force = combine(1, agent.force, agent.movePower, dir)
   })
-  simulation.blades.forEach(blade => {
+  level.blades.forEach(blade => {
     if (blade.destroyed) return
     blade.force = add(blade.force, blade.action)
   })
-  simulation.circleBodies.forEach(circle => {
+  level.circleBodies.forEach(circle => {
     if (circle.destroyed) return
-    simulation.boundaries.forEach(boundary => {
+    level.boundaries.forEach(boundary => {
       collideCirclePolygon(circle, boundary)
     })
-    simulation.walls.forEach(wall => {
+    level.walls.forEach(wall => {
       collideCirclePolygon(circle, wall)
     })
-    simulation.doors.forEach(door => {
+    level.doors.forEach(door => {
       const hit = collideCirclePolygon(circle, door)
       if (hit) door.knock(circle)
     })
-    simulation.circleBodies.forEach(other => {
+    level.circleBodies.forEach(other => {
       if (other.destroyed) return
       if (circle.index <= other.index) return
       collideCircleCircle(circle, other)
     })
   })
-  resolve(simulation, dt)
+  resolve(level, dt)
 }
 
-function clear(simulation: Simulation): void {
-  simulation.circleBodies.forEach(circle => {
+function clear(level: Level): void {
+  level.circleBodies.forEach(circle => {
     circle.force = [0, 0]
     circle.impulse = [0, 0]
     circle.shift = [0, 0]
@@ -52,8 +52,8 @@ function clear(simulation: Simulation): void {
   })
 }
 
-function resolve(simulation: Simulation, dt: number): void {
-  simulation.circleBodies.forEach(circle => {
+function resolve(level: Level, dt: number): void {
+  level.circleBodies.forEach(circle => {
     if (circle.destroyed || circle.static) return
     const normals = circle.collisions.map(c => c.normal)
     const xMean = mean(normals.map(v => v[0]))
@@ -68,12 +68,12 @@ function resolve(simulation: Simulation, dt: number): void {
     const shift = mul(maxOverlap, normalMean)
     circle.shift = combine(1, circle.shift, factor, shift)
   })
-  simulation.circleBodies.forEach(circle => {
+  level.circleBodies.forEach(circle => {
     if (circle.destroyed || circle.static) return
     circle.velocity = mul(1 - circle.drag * dt, circle.velocity)
     circle.velocity = combine(1, circle.velocity, dt / circle.mass, circle.force)
     circle.velocity = combine(1, circle.velocity, 1 / circle.mass, circle.impulse)
-    circle.velocity = clampVec(circle.velocity, simulation.maxSpeed)
+    circle.velocity = clampVec(circle.velocity, level.maxSpeed)
     circle.position = combine(1, circle.position, dt, circle.velocity)
     circle.position = combine(1, circle.position, 1, circle.shift)
   })

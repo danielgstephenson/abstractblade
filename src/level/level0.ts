@@ -1,12 +1,12 @@
-import { Level } from './level'
 import { World } from '../world'
 import svgString from '../svg/level0.svg?raw'
 import { Ticker } from 'pixi.js'
 import { combine, dirFromTo, dot, find, getDistance, getRandomDir, mean, mul, normalize } from '../math'
 import { Agent } from '../entity/circleBody/agent/agent'
-import { roundDir } from '../simulation/actionVectors'
+import { roundDir } from '../physics/actionVectors'
 import { Rover } from '../entity/circleBody/agent/rover'
 import { Transporter } from '../entity/transporter'
+import { Level } from './level'
 
 export class Level0 extends Level {
   activeAgents: Agent[] = []
@@ -25,11 +25,19 @@ export class Level0 extends Level {
 
   update(time: Ticker): void {
     super.update(time)
-    this.world.guardBrain.act([this.rover2], this.player, this.transporter3.position)
-    this.activeAgents.forEach(agent => {
-      this.think(agent, time)
-      this.move(agent)
-    })
+    const playerDist = getDistance(this.player.position, this.transporter3.position)
+    const guardDist = getDistance(this.rover2.position, this.transporter3.position)
+    if (playerDist < 150 && guardDist < 150) {
+      this.world.guardBrain.act([this.rover2], this.player, this.transporter3.position)
+    } else {
+      const targetVelocity = mul(20, dirFromTo(this.rover2.position, this.transporter3.position))
+      const targetAction = dirFromTo(this.rover2.velocity, targetVelocity)
+      this.rover2.action = roundDir(targetAction)
+    }
+    // this.activeAgents.forEach(agent => {
+    //   this.think(agent, time)
+    //   this.move(agent)
+    // })
   }
 
   think(agent: Agent, time: Ticker): void {

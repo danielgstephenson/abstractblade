@@ -1,11 +1,11 @@
 import { INode, parseSync } from 'svgson'
-import { Simulation } from './simulation'
+import { Level } from '../level/level'
 import { pointsOnPath } from 'points-on-path'
 import { getDistance, mean, sub } from '../math'
 import { getChildById } from '../svg/svg'
 import { insidePolygon } from './rayCast'
 
-export function build(simulation: Simulation, svgString: string): void {
+export function build(level: Level, svgString: string): void {
   const svgNode = parseSync(svgString)
   const boundaryLayer = getChildById(svgNode, 'boundaryLayer')
   const starLayer = getChildById(svgNode, 'starLayer')
@@ -18,83 +18,83 @@ export function build(simulation: Simulation, svgString: string): void {
   const entranceLayer = getChildById(svgNode, 'entranceLayer')
   const arrowLayer = getChildById(svgNode, 'arrowLayer')
   const arrows = getArrows(arrowLayer)
-  addBoundaries(simulation, boundaryLayer)
-  addStars(simulation, starLayer)
-  addTransporters(simulation, transportLayer, arrows)
-  addExits(simulation, transportLayer)
-  addWalls(simulation, wallLayer)
-  addDoors(simulation, doorLayer, arrows)
-  addRocks(simulation, rockLayer)
-  addBlades(simulation, bladeLayer)
-  addPlayer(simulation, agentLayer)
-  addRovers(simulation, agentLayer)
-  addMonsters(simulation, agentLayer)
-  addEntrances(simulation, entranceLayer)
+  addBoundaries(level, boundaryLayer)
+  addStars(level, starLayer)
+  addTransporters(level, transportLayer, arrows)
+  addExits(level, transportLayer)
+  addWalls(level, wallLayer)
+  addDoors(level, doorLayer, arrows)
+  addRocks(level, rockLayer)
+  addBlades(level, bladeLayer)
+  addPlayer(level, agentLayer)
+  addRovers(level, agentLayer)
+  addMonsters(level, agentLayer)
+  addEntrances(level, entranceLayer)
 }
 
-function addBoundaries(simulation: Simulation, layer: INode): void {
+function addBoundaries(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'boundary')
   nodes.forEach(node => {
     const points = getPathPoints(node)
-    const boundary = simulation.addBoundary(points)
+    const boundary = level.addBoundary(points)
     boundary.id = node.attributes.id
   })
 }
 
-function addPlayer(simulation: Simulation, layer: INode): void {
+function addPlayer(level: Level, layer: INode): void {
   const node = layer.children.filter(child => child.attributes.role === 'player')[0]
   const x = Number(node.attributes.cx)
   const y = Number(node.attributes.cy)
   const position = [x, y]
-  const player = simulation.addPlayer(position)
+  const player = level.addPlayer(position)
   player.id = 'player'
 }
 
-function addRovers(simulation: Simulation, layer: INode): void {
+function addRovers(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'rover')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    const rover = simulation.addRover([x, y])
+    const rover = level.addRover([x, y])
     rover.id = node.attributes.id
   })
 }
 
-function addMonsters(simulation: Simulation, layer: INode): void {
+function addMonsters(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'monster')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
-    const monster = simulation.addMonster([x, y])
+    const monster = level.addMonster([x, y])
     monster.id = node.attributes.id
   })
 }
 
-function addBlades(simulation: Simulation, layer: INode): void {
+function addBlades(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'blade')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const align = Number(node.attributes.align)
-    const blade = simulation.addBlade(position, align)
+    const blade = level.addBlade(position, align)
     blade.id = node.attributes.id
   })
 }
 
-function addRocks(simulation: Simulation, layer: INode): void {
+function addRocks(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'rock')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
     const radius = Number(node.attributes.r)
-    const rock = simulation.addRock(position, radius)
+    const rock = level.addRock(position, radius)
     rock.id = node.attributes.id
   })
 }
 
-function addStars(simulation: Simulation, layer: INode): void {
+function addStars(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'star')
   nodes.forEach(node => {
     const points = getPathPoints(node)
@@ -103,32 +103,32 @@ function addStars(simulation: Simulation, layer: INode): void {
     const x = mean(xs)
     const y = mean(ys)
     const position = [x, y]
-    const star = simulation.addStar(position)
+    const star = level.addStar(position)
     star.id = node.attributes.id
   })
 }
 
-function addDoors(simulation: Simulation, layer: INode, arrows: number[][][]): void {
+function addDoors(level: Level, layer: INode, arrows: number[][][]): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'door')
   nodes.forEach(node => {
     const polygon = getPathPoints(node)
     const insideArrow = arrows.filter(a => insidePolygon(a[0], polygon))[0]
     const vector = sub(insideArrow[1], insideArrow[0])
-    const door = simulation.addDoor(polygon, vector)
+    const door = level.addDoor(polygon, vector)
     door.id = node.attributes.id
   })
 }
 
-function addWalls(simulation: Simulation, layer: INode): void {
+function addWalls(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'wall')
   nodes.forEach(node => {
     const polygon = getPathPoints(node)
-    const wall = simulation.addWall(polygon)
+    const wall = level.addWall(polygon)
     wall.id = node.attributes.id
   })
 }
 
-function addTransporters(simulation: Simulation, layer: INode, arrows: number[][][]): void {
+function addTransporters(level: Level, layer: INode, arrows: number[][][]): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'transporter')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
@@ -137,12 +137,12 @@ function addTransporters(simulation: Simulation, layer: INode, arrows: number[][
     const position = [x, y]
     const insideArrows = arrows.filter(a => getDistance(a[0], position) < radius)
     const target = insideArrows.length > 0 ? insideArrows[0][1] : position
-    const transporter = simulation.addTransporter(position, radius, target)
+    const transporter = level.addTransporter(position, radius, target)
     transporter.id = node.attributes.id
   })
 }
 
-function addExits(simulation: Simulation, layer: INode): void {
+function addExits(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'exit')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
@@ -151,18 +151,18 @@ function addExits(simulation: Simulation, layer: INode): void {
     const position = [x, y]
     const targetLevel = Number(node.attributes.targetLevel)
     const targetEntrance = Number(node.attributes.targetEntrance)
-    const exit = simulation.addExit(position, radius, targetLevel, targetEntrance)
+    const exit = level.addExit(position, radius, targetLevel, targetEntrance)
     exit.id = node.attributes.id
   })
 }
 
-function addEntrances(simulation: Simulation, layer: INode): void {
+function addEntrances(level: Level, layer: INode): void {
   const nodes = layer.children.filter(child => child.attributes.role === 'entrance')
   nodes.forEach(node => {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const position = [x, y]
-    const entrance = simulation.addEntrance(position)
+    const entrance = level.addEntrance(position)
     entrance.id = node.attributes.id
   })
 }

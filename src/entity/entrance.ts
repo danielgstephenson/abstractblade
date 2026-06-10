@@ -1,16 +1,16 @@
-import { Simulation } from '../simulation/simulation'
+import { Level } from '../level/level'
 import { Entity } from './entity'
 
 export class Entrance extends Entity {
-  simulation: Simulation
+  level: Level
   position: number[]
   entranceIndex: number
 
-  constructor(simulation: Simulation, position: number[]) {
-    super(simulation)
-    this.simulation = simulation
+  constructor(level: Level, position: number[]) {
+    super(level)
+    this.level = level
     this.position = structuredClone(position)
-    this.entranceIndex = this.simulation.entrances.length
-    this.simulation.entrances.push(this)
+    this.entranceIndex = this.level.entrances.length
+    this.level.entrances.push(this)
   }
 }

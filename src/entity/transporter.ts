@@ -1,5 +1,5 @@
 import { clamp, getDistance } from '../math'
-import { Simulation } from '../simulation/simulation'
+import { Level } from '../level/level'
 import { Player } from './circleBody/agent/player'
 import { Entity, EntityState } from './entity'
 
@@ -14,20 +14,20 @@ export class Transporter extends Entity {
   targetEntrance = 0
   chargeRate: number
 
-  constructor(simulation: Simulation, position: number[], radius: number, target: number[]) {
-    super(simulation)
+  constructor(level: Level, position: number[], radius: number, target: number[]) {
+    super(level)
     this.position = structuredClone(position)
     this.radius = radius
     this.target = structuredClone(target)
-    this.simulation.transporters.push(this)
-    this.chargeRate = 4 / this.radius
+    this.level.transporters.push(this)
+    this.chargeRate = 2 / this.radius
   }
 
   preStep(dt: number): void {
-    const player = this.simulation.player
+    const player = this.level.player
     const distance = getDistance(this.position, player.position)
     let charging = distance < this.radius + player.radius
-    this.simulation.agents.forEach(agent => {
+    this.level.agents.forEach(agent => {
       if (agent.index === player.index) return
       const distance = getDistance(this.position, agent.position)
       const outside = distance > this.radius + agent.radius
@@ -48,15 +48,15 @@ export class Transporter extends Entity {
     this.charge = 0
     if (this.exit) {
       if (player.blade != null) player.blade.detach()
-      this.simulation.leaving = true
-      this.simulation.targetLevel = this.targetLevel
-      this.simulation.targetEntrance = this.targetEntrance
+      this.level.leaving = true
+      this.level.targetLevel = this.targetLevel
+      this.level.targetEntrance = this.targetEntrance
     } else {
       player.position = structuredClone(this.target)
       player.spawnPoint = structuredClone(this.target)
       player.history = player.history.map(_ => structuredClone(this.target))
       if (player.blade != null) player.blade.detach()
-      this.simulation.saveBackup()
+      this.level.saveBackup()
     }
   }
 

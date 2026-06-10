@@ -1,18 +1,18 @@
 import { Container, Graphics } from 'pixi.js'
-import { Simulation } from '../simulation/simulation'
+import { Level } from '../level/level'
 import { LevelView } from './levelView'
 import { Boundary } from '../entity/polygonBody/boundary'
 
 export class BoundaryView extends Container {
   levelView: LevelView
-  simulation: Simulation
+  level: Level
   boundary: Boundary
   floor: Container
 
   constructor(levelView: LevelView, boundary: Boundary) {
     super()
     this.levelView = levelView
-    this.simulation = this.levelView.level
+    this.level = this.levelView.level
     this.boundary = boundary
     this.floor = this.buildFloor()
     this.addChild(this.floor)
