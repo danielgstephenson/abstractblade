@@ -1,0 +1,31 @@
+{
+  "name": "abstractblade",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.1",
+    "globals": "^17.11.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.67.0",
+    "vite": "^8.2.0",
+    "vite-plugin-singlefile": "^2.3.3"
+  },
+  "dependencies": {
+    "@pixi/devtools": "^2.0.1",
+    "@types/node": "^26.2.0",
+    "@types/opentype.js": "^1.3.10",
+    "onnxruntime-web": "^1.27.0",
+    "opentype.js": "^2.0.0",
+    "pixi.js": "^8.19.0"
+  },
+  "allowScripts": {
+    "protobufjs@7.6.5": true
+  }
+}
