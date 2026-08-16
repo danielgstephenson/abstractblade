@@ -1,20 +1,22 @@
 import { Container, Graphics, Ticker } from "pixi.js"
 import type { Game } from "./game"
 import { Entity } from "./entity/entity"
-import { arenaRadius, guideColor, timeScale, timeStep, wallColor } from "./parameters"
+import { arenaRadius, guideColor, ringRadius, timeScale, timeStep, wallColor } from "./parameters"
 import { step } from "./step"
 import { Player } from "./entity/player"
 import { Bot } from "./entity/bot"
 import type { Agent } from "./entity/agent"
 
-export class Level extends Container{
+export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
   graphics: Graphics
   player: Player
   entities: Entity[] = []
   agents: Agent[] = []
-  accumulator = 0
+  trailContainer: Container
+  stepAccumulator = 0
+  charge = 0
   paused = false
 
   constructor(game: Game) {
@@ -22,7 +24,9 @@ export class Level extends Container{
     this.graphics = new Graphics()
     this.game = game
     this.addChild(this.graphics)
-    this.setup()
+    this.setupGraphics()
+    this.trailContainer = new Container()
+    this.addChild(this.trailContainer)
     this.player = new Player(this,[0,-100])
     void new Bot(this,[0,0])
     this.layout()
@@ -31,9 +35,9 @@ export class Level extends Container{
   }
 
   update(time: Ticker): void {
-    this.accumulator += 0.001 * time.deltaMS * timeScale
-    while (this.accumulator > timeStep) {
-      this.accumulator -= timeStep
+    this.stepAccumulator += 0.001 * time.deltaMS * timeScale
+    while (this.stepAccumulator > timeStep) {
+      this.stepAccumulator -= timeStep
       step(this)
     }
     this.layout()
@@ -43,7 +47,7 @@ export class Level extends Container{
     })
   }
 
-  setup(): void {
+  setupGraphics(): void {
     this.graphics.circle(0,0,arenaRadius)
     this.graphics.stroke({width: 20, color: wallColor})
     this.graphics.fill('black')
@@ -56,7 +60,7 @@ export class Level extends Container{
     this.graphics.circle(0,0,0.5*arenaRadius)
     this.graphics.stroke({width: 4, color: guideColor})
     this.graphics.strokeStyle = {width: 8, color: guideColor }
-    this.graphics.circle(0,0,25)
+    this.graphics.circle(0,0,ringRadius)
     this.graphics.stroke({width: 8, color: guideColor})
     this.graphics.fill('black')
   }

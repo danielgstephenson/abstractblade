@@ -6,6 +6,9 @@ export const botColor = 'hsl(120 100% 32%)'
 
 export const timeStep = 0.02
 export const timeScale = 1
+export const chargeInterval = 6
+export const chargeStep = timeStep / chargeInterval
 
 export const arenaRadius = 500
 export const agentRadius = 15
+export const ringRadius = 30
