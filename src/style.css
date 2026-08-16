@@ -22,7 +22,7 @@ body {
   width: 98vmin;
   height: 98vmin;
   aspect-ratio: 1 / 1;
-  background-color: black;
+  background-color: hsla(0 0% 0% / 0);
 }
 .corner {
   display: flex;
@@ -34,7 +34,6 @@ body {
   height: 13vmin;
 }
 .cornerLabel {
-  color: hsl(0 0% 20%);
   font-family: 'Lekton-Bold';
   font-size: 10vmin;
   text-align: center;
@@ -59,6 +58,6 @@ body {
   position: absolute;
   width: 98vmin;
   height: 98vmin;
-  border: 1vmin solid hsl(0 0% 20%);
+  border: 1vmin solid;
   border-radius: 50%;
 }
