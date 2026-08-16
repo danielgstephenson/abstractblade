@@ -1,7 +1,7 @@
 import { Container, Graphics, Ticker } from "pixi.js"
 import type { Game } from "./game"
 import { Entity } from "./entity/entity"
-import { guideColor, timeScale, timeStep, wallColor } from "./parameters"
+import { arenaRadius, guideColor, timeScale, timeStep, wallColor } from "./parameters"
 import { step } from "./step"
 import { Player } from "./entity/player"
 
@@ -36,16 +36,16 @@ export class Level extends Container{
   }
 
   setup(): void {
-    this.graphics.circle(0,0,500)
+    this.graphics.circle(0,0,arenaRadius)
     this.graphics.stroke({width: 20, color: wallColor})
     this.graphics.fill('black')
-    this.graphics.moveTo(0, 500)
-    this.graphics.lineTo(0,-500)
+    this.graphics.moveTo(0, arenaRadius)
+    this.graphics.lineTo(0,-arenaRadius)
     this.graphics.stroke({width: 4, color: guideColor})
-    this.graphics.moveTo(-500,0)
-    this.graphics.lineTo( 500,0)
+    this.graphics.moveTo(-arenaRadius,0)
+    this.graphics.lineTo( arenaRadius,0)
     this.graphics.stroke({width: 4, color: guideColor})
-    this.graphics.circle(0,0,250)
+    this.graphics.circle(0,0,0.5*arenaRadius)
     this.graphics.stroke({width: 4, color: guideColor})
     this.graphics.strokeStyle = {width: 8, color: guideColor }
     this.graphics.circle(0,0,35)

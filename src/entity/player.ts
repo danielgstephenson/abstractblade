@@ -32,8 +32,8 @@ export class Player extends Entity {
     }
     let action = normalize([x, y])
     if (input.isMouseButtonDown(0)) action = normalize(input.mousePosition)
-    this.ax = action[0]
-    this.ay = action[1]
+    this.ax = action[0] * this.movePower
+    this.ay = action[1] * this.movePower
     // console.log(this.ax, this.ay)
   }
 }

@@ -5,3 +5,5 @@ export const playerColor = 'hsl(215 100% 50%)'
 
 export const timeStep = 0.02
 export const timeScale = 1
+
+export const arenaRadius = 500

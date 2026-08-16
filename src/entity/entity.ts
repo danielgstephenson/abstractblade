@@ -5,7 +5,9 @@ export class Entity extends Container {
   level: Level
   radius: number
   graphics: Graphics
-  movePower = 10
+  mass = 1
+  movePower = 50
+  drag = 0.3
   vx = 0
   vy = 0
   ax = 0
