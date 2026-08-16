@@ -1,5 +1,5 @@
-import type { Application, Ticker } from "pixi.js";
-import { Level } from "./level";
+import type { Application, Ticker } from "pixi.js"
+import { Level } from "./level"
 
 export class Game {
   app: Application

@@ -1,5 +1,5 @@
-import { Container, Graphics, type ColorSource } from "pixi.js";
-import type { Level } from "../level";
+import { Container, Graphics, type ColorSource } from "pixi.js"
+import type { Level } from "../level"
 
 export class Entity extends Container {
   level: Level

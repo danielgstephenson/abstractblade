@@ -1,0 +1,166 @@
+export function range(a: number, b?: number): number[] {
+  if (b == null) return [...Array(a).keys()]
+  return [...Array(b - a + 1).keys()].map(i => a + i)
+}
+
+export function sample<T>(options: T[]): T {
+  return options[Math.floor(Math.random() * options.length)]
+}
+
+export function sum(array: number[]): number {
+  let total = 0
+  array.forEach(x => {
+    total = total + x
+  })
+  return total
+}
+
+export function mean(array: number[]): number {
+  if (array.length === 0) return 0
+  return sum(array) / array.length
+}
+
+export function meanPoint(points: number[][]): number[] {
+  const xs = points.map(p => p[0])
+  const ys = points.map(p => p[1])
+  return [mean(xs), mean(ys)]
+}
+
+export function dot(x: number[], y: number[]): number {
+  if (x.length !== y.length) {
+    throw new Error('x and y must have the same length')
+  }
+  const products = x.map((_, i) => x[i] * y[i])
+  return sum(products)
+}
+
+export function clamp(a: number, b: number, x: number): number {
+  return Math.max(a, Math.min(x, b))
+}
+
+export function vecToAngle(vector: number[]): number {
+  const x = vector[0]
+  const y = vector[1]
+  return Math.atan2(y, x)
+}
+
+export function angleToDir(angle: number): number[] {
+  return [Math.cos(angle), Math.sin(angle)]
+}
+
+export function getRandomDir(): number[] {
+  const angle = Math.random() * 2 * Math.PI
+  return angleToDir(angle)
+}
+
+export function sub(a: number[], b: number[]): number[] {
+  return range(a.length).map(i => a[i] - b[i])
+}
+
+export function add(a: number[], b: number[]): number[] {
+  return range(a.length).map(i => a[i] + b[i])
+}
+
+export function combine(a: number, v: number[], b: number, w: number[]): number[] {
+  return add(mul(a, v), mul(b, w))
+}
+
+export function mul(a: number, v: number[]): number[] {
+  return v.map(x => a * x)
+}
+
+export function getMagnitude(v: number[]): number {
+  const squares = v.map(x => x ** 2)
+  return Math.sqrt(sum(squares))
+}
+
+export function getDistance(v: number[], w: number[]): number {
+  return getMagnitude(sub(v, w))
+}
+
+export function normalize(v: number[]): number[] {
+  const length = getMagnitude(v)
+  if (length === 0) return [0, 0]
+  return mul(1 / length, v)
+}
+
+export function dirToFrom(to: number[], from: number[]): number[] {
+  return normalize(sub(from, to))
+}
+
+export function dirFromTo(from: number[], to: number[]): number[] {
+  return normalize(sub(to, from))
+}
+
+export function whichMax(array: number[]): number {
+  let indexMax = 0
+  let valueMax = array[0]
+  array.forEach((value, index) => {
+    if (value > valueMax) {
+      indexMax = index
+      valueMax = value
+    }
+  })
+  return indexMax
+}
+
+export function whichMin(array: number[]): number {
+  const negArray = array.map(x => -x)
+  return whichMax(negArray)
+}
+
+export function clampVec(vector: number[], maxLength: number): number[] {
+  const length = getMagnitude(vector)
+  if (length < maxLength) return vector
+  const direction = normalize(vector)
+  return mul(maxLength, direction)
+}
+
+export function cross(v: number[], w: number[]): number {
+  return v[0] * w[1] - v[1] * w[0]
+}
+
+export function sortBy<T>(array: T[], priorities: number[]): T[] {
+  const pairs: Array<[T, number]> = array.map((x, i) => [x, priorities[i]])
+  pairs.sort((a, b) => a[1] - b[1])
+  const sorted = pairs.map(pair => pair[0])
+  return sorted
+}
+
+export function shuffle<T>(array: T[]): T[] {
+  const priorities = array.map(_ => Math.random())
+  return sortBy(array, priorities)
+}
+
+export function find<T>(array: T[], predicate: (item: T) => boolean): T {
+  const found = array.find(predicate)
+  if (found == null) throw new Error('item not found')
+  return found
+}
+
+export function prod(array: number[]): number {
+  let product = 1
+  array.forEach(x => {
+    product = product * x
+  })
+  return product
+}
+
+export function toMatrix<T>(flatArray: T[], dims: number[]): T[][] {
+  if (flatArray.length !== prod(dims)) {
+    throw new Error(`Total elements (${flatArray.length}) does not match dimensions (${dims.join('x')})`)
+  }
+  if (dims.length != 2) {
+    throw new Error(`Dimensions (${dims.join('x')}) must have length 2.`)
+  }
+  const [currentDim, ...remainingDims] = dims
+  const stride = prod(remainingDims)
+  const result = []
+  for (let i = 0; i < currentDim; i++) {
+    const start = i * stride
+    const end = start + stride
+    const row = flatArray.slice(start, end)
+    result.push(row)
+  }
+  return result
+}
