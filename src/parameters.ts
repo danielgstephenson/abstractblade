@@ -11,4 +11,4 @@ export const chargeStep = timeStep / chargeInterval
 
 export const arenaRadius = 500
 export const agentRadius = 15
-export const ringRadius = 30
+export const targetRadius = 30

@@ -1,5 +1,5 @@
 import type { Level } from "../level"
-import { chargeStep, playerColor, ringRadius } from "../parameters"
+import { chargeStep, playerColor, targetRadius } from "../parameters"
 import { InputDevice } from "pixijs-input-devices"
 import { clamp, getMagnitude, mul, normalize } from "../math"
 import { Agent } from "./agent"
@@ -18,7 +18,7 @@ export class Player extends Agent {
 
   checkRing(): void {
     const dist = getMagnitude(this.position)
-    const insideRing = dist < ringRadius - this.radius
+    const insideRing = dist < targetRadius - this.radius
     const dCharge = insideRing ? chargeStep : -2*chargeStep 
     this.level.charge = clamp(0, 1, this.level.charge + dCharge)
   }
