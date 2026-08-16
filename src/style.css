@@ -19,8 +19,8 @@ body {
 }
 #arena {
   position: relative;
-  width: 98vmin;
-  height: 98vmin;
+  width: 100vw;
+  height: 100vh;
   aspect-ratio: 1 / 1;
   background-color: hsla(0 0% 0% / 0);
 }

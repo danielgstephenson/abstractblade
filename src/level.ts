@@ -1,7 +1,7 @@
 import { Container, Graphics, Ticker } from "pixi.js"
 import type { Game } from "./game"
 import { Entity } from "./entity/entity"
-import { guideColor, timeScale, timeStep } from "./parameters"
+import { guideColor, timeScale, timeStep, wallColor } from "./parameters"
 import { step } from "./step"
 import { Player } from "./entity/player"
 
@@ -9,9 +9,10 @@ export class Level extends Container{
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
   graphics: Graphics
-  accumulator = 0
-  entities: Entity[] = []
   player: Player
+  entities: Entity[] = []
+  accumulator = 0
+  paused = false
 
   constructor(game: Game) {
     super()
@@ -20,39 +21,43 @@ export class Level extends Container{
     this.addChild(this.graphics)
     this.setup()
     this.player = new Player(this,0,0)
-    this.player.vx = 10
     this.layout()
     this.game.app.stage.addChild(this)
     window.addEventListener('resize',() => this.layout())
   }
 
   update(time: Ticker): void {
-    this.layout()
     this.accumulator += 0.001 * time.deltaMS * timeScale
     while (this.accumulator > timeStep) {
       this.accumulator -= timeStep
       step(this)
     }
+    this.layout()
   }
 
   setup(): void {
-    this.graphics.strokeStyle = {width: 7, color: guideColor }
+    this.graphics.circle(0,0,500)
+    this.graphics.stroke({width: 20, color: wallColor})
+    this.graphics.fill('black')
     this.graphics.moveTo(0, 500)
     this.graphics.lineTo(0,-500)
-    this.graphics.stroke()
+    this.graphics.stroke({width: 4, color: guideColor})
     this.graphics.moveTo(-500,0)
     this.graphics.lineTo( 500,0)
-    this.graphics.stroke()
+    this.graphics.stroke({width: 4, color: guideColor})
     this.graphics.circle(0,0,250)
-    this.graphics.stroke()
+    this.graphics.stroke({width: 4, color: guideColor})
+    this.graphics.strokeStyle = {width: 8, color: guideColor }
     this.graphics.circle(0,0,35)
-    this.graphics.stroke()
+    this.graphics.stroke({width: 8, color: guideColor})
     this.graphics.fill('black')
   }
 
   layout(): void {
     const { width, height } = this.game.app.screen
-    this.game.app.stage.position.set(width / 2 - this.player.x, height / 2 - this.player.y)
+    const scale = 1.5
+    this.scale.set(scale)
+    this.game.app.stage.position.set(width / 2 - this.player.x * scale, height / 2 - this.player.y * scale)
     this.scale.set(1.5)
   }
 }
