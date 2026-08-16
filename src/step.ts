@@ -1,28 +1,28 @@
 import type { Level } from "./level";
-import { clampVec, getMagnitude, project } from "./math";
+import { clampVec, combine, getMagnitude, mul, project } from "./math";
 import { arenaRadius, timeStep } from "./parameters";
 
 export function step(level: Level) {
   level.entities.forEach(entity => entity.preStep())
   level.entities.forEach(entity => {
-    entity.vx *= 1 - entity.drag * timeStep
-    entity.vy *= 1 - entity.drag * timeStep
-    entity.vx += entity.ax * timeStep / entity.mass
-    entity.vy += entity.ay * timeStep / entity.mass
-    entity.x += entity.vx * timeStep
-    entity.y += entity.vy * timeStep
+    entity.velocity = mul(1-entity.drag*timeStep,entity.velocity)
+    entity.velocity = combine(1,entity.velocity,timeStep/entity.mass,entity.force)
+    entity.position = combine(1,entity.position,timeStep,entity.velocity)
   })
   level.entities.forEach(entity => {
-    const pos = [entity.x, entity.y]
-    const dist = getMagnitude(pos)
+    const dist = getMagnitude(entity.position)
     const maxDist = arenaRadius - entity.radius
     if (dist < maxDist) return
-    const clampPos = clampVec(pos,maxDist)
-    entity.x = clampPos[0]
-    entity.y = clampPos[1]
-    const vel = [entity.vx, entity.vy]
-    const impact = project(vel, pos)
-    entity.vx = vel[0] - 2*impact[0]
-    entity.vy = vel[1] - 2*impact[1]
+    entity.position = clampVec(entity.position,maxDist)
+    const impact = project(entity.velocity, entity.position)
+    entity.velocity = combine(1, entity.velocity, -2, impact)
   })
 }
+
+// export function collideAgents(level: Level): void {
+//   level.entities.forEach(entity0 => {
+//     level.entities.forEach(entity1 => {
+
+//     })
+//   })
+// }

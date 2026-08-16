@@ -1,13 +1,13 @@
 import type { Level } from "../level"
-import { Entity } from "./entity"
 import { playerColor } from "../parameters"
 import { InputDevice } from "pixijs-input-devices"
-import { normalize } from "../math"
+import { mul, normalize } from "../math"
+import { Agent } from "./agent"
 
-export class Player extends Entity {
+export class Player extends Agent {
 
-  constructor(level: Level, x: number, y: number) {
-    super(level, x, y, 20, playerColor)
+  constructor(level: Level, position: number[]) {
+    super(level, position, playerColor)
   }
 
   preStep(): void {
@@ -32,8 +32,6 @@ export class Player extends Entity {
     }
     let action = normalize([x, y])
     if (input.isMouseButtonDown(0)) action = normalize(input.mousePosition)
-    this.ax = action[0] * this.movePower
-    this.ay = action[1] * this.movePower
-    // console.log(this.ax, this.ay)
+    this.force = mul(this.movePower, action)
   }
 }

@@ -56,7 +56,7 @@ export class Input {
   mousePosition: number[] = [0, 0]
   mouseButtons = new Map<number, boolean>()
   maxZoom = 20
-  minZoom = -40
+  minZoom = -10
   zoom = 0
 
   constructor() {

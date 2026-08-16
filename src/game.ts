@@ -9,8 +9,8 @@ export class Game {
 
   constructor(app: Application) {
     this.app = app
-    this.level = new Level(this)
     this.input = new Input()
+    this.level = new Level(this)
     this.app.ticker.add(time => this.update(time))
   }
 
