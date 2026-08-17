@@ -16,7 +16,6 @@ export class Blade extends Entity {
     this.agent = agent
     this.align = agent.align
     this.color = color
-    console.log('blade',this.position,this.color)
     this.level.bladeContainer.addChild(this.container)
     this.level.blades.push(this)
     this.level.springContainer.addChild(this.spring)

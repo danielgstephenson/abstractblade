@@ -3,6 +3,7 @@ import { Level } from "./level"
 import { Input } from "./input"
 
 export class Game {
+  cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
   app: Application
   level: Level
   input: Input
@@ -27,5 +28,6 @@ export class Game {
     const x = width / 2 - this.level.player.position[0] * scale
     const y = height / 2 - this.level.player.position[1] * scale
     this.app.stage.position.set(x,y)
+    this.cornerLabels.forEach(cornerLabel => {cornerLabel.innerHTML = `${this.level.index}`})
   }
 }

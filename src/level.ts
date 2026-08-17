@@ -9,7 +9,6 @@ import type { Agent } from "./entity/agent"
 import { Bot } from "./entity/bot"
 
 export class Level extends Container {
-  cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
   arena = new Graphics()
@@ -25,6 +24,7 @@ export class Level extends Container {
   stepAccumulator = 0
   charge = 0
   paused = false
+  index = 0
 
   constructor(game: Game) {
     super()
@@ -42,11 +42,9 @@ export class Level extends Container {
       startDist * Math.cos(startAngle),
       startDist * Math.sin(startAngle),
     ]
-    console.log(startPosition)
     this.player = new Player(this,startPosition)
     void new Bot(this,[0,0])
     this.game.app.stage.addChild(this)
-    this.cornerLabels.forEach(cornerLabel => {cornerLabel.innerHTML = '0'})
   }
 
   update(time: Ticker): void {
@@ -92,7 +90,7 @@ export class Level extends Container {
   onComplete(): void {
     this.destroy()
     const newLevel = new Level(this.game)
+    newLevel.index = this.index + 1
     this.game.level = newLevel
-    console.log(newLevel)
   }
 }
