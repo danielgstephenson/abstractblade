@@ -3,7 +3,7 @@ import type { ColorSource } from "pixi.js"
 import { Entity } from "./entity"
 import type { Level } from "../level"
 import { agentRadius, bladeRadius } from "../parameters"
-import { add, combine, getDistance, mul, normalize } from "../math"
+import { combine, getDistance, mul, normalize } from "../math"
 import type { Blade } from "./blade"
 
 export class Agent extends Entity {
@@ -19,10 +19,10 @@ export class Agent extends Entity {
 
   preStep(): void {
     super.preStep()
-    this.checkDeath()
+    this.checkBlades()
   }
 
-  checkDeath(): void {
+  checkBlades(): void {
     this.level.blades.forEach(blade => {
       if(blade.align === this.align) return
       const dist = getDistance(blade.position, this.position)

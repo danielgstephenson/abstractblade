@@ -26,6 +26,8 @@ export class Player extends Agent {
     const insideRing = dist < targetRadius - this.radius
     const dCharge = insideRing ? chargeStep : -2*chargeStep 
     this.level.charge = clamp(0, 1, this.level.charge + dCharge)
+    if (this.level.charge < 1) return
+    this.level.onComplete()
   }
 
   handleInput(): void {

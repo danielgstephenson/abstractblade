@@ -9,6 +9,7 @@ import type { Agent } from "./entity/agent"
 import { Bot } from "./entity/bot"
 
 export class Level extends Container {
+  cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
   arena = new Graphics()
@@ -44,9 +45,8 @@ export class Level extends Container {
     console.log(startPosition)
     this.player = new Player(this,startPosition)
     void new Bot(this,[0,0])
-    this.layout()
     this.game.app.stage.addChild(this)
-    window.addEventListener('resize',() => this.layout())
+    this.cornerLabels.forEach(cornerLabel => {cornerLabel.innerHTML = '0'})
   }
 
   update(time: Ticker): void {
@@ -55,7 +55,6 @@ export class Level extends Container {
       this.stepAccumulator -= timeStep
       step(this)
     }
-    this.layout()
     this.entities.forEach(entity => {
       entity.container.x = entity.position[0]
       entity.container.y = entity.position[1]
@@ -90,12 +89,10 @@ export class Level extends Container {
     this.arena.fill('black')
   }
 
-  layout(): void {
-    const { width, height } = this.game.app.screen
-    const scale = 1.6*Math.exp(0.1 * this.game.input.zoom)
-    this.scale.set(scale)
-    const x = width / 2 - this.player.position[0] * scale
-    const y = height / 2 - this.player.position[1] * scale
-    this.game.app.stage.position.set(x,y)
+  onComplete(): void {
+    this.destroy()
+    const newLevel = new Level(this.game)
+    this.game.level = newLevel
+    console.log(newLevel)
   }
 }
