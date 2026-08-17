@@ -54,7 +54,7 @@ export class Entity {
   }
 
   preStep(): void {
-    this.trail.push(this.position)
+    this.trail.push(structuredClone(this.position))
     this.trail.shift()
     this.trailCircles.forEach((circle,i) => {
       const h = this.trail[i]
