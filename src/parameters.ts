@@ -4,7 +4,7 @@ export const levelColor = 'hsl(60 0% 100% / 30%)'
 export const playerColor = 'hsl(220 100% 40%)'
 export const botColor = 'hsl(120 100% 27%)'
 export const playerBladeColor = 'hsl(195 100% 50%)'
-export const botBladeColor = 'hsl(120 100% 45%)'
+export const botBladeColor = 'hsl(140 100% 45%)'
 
 export const timeStep = 0.02
 export const timeScale = 1

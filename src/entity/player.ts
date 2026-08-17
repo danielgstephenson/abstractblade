@@ -1,14 +1,18 @@
-import type { Level } from "../../level"
-import { chargeStep, playerColor, targetRadius } from "../../parameters"
+
 import { InputDevice } from "pixijs-input-devices"
-import { clamp, getMagnitude, mul, normalize } from "../../math"
 import { Agent } from "./agent"
+import { chargeStep, playerBladeColor, playerColor, targetRadius } from "../parameters"
+import { clamp, getMagnitude, mul, normalize } from "../math"
+import type { Level } from "../level"
+import { Blade } from "./blade"
 
 export class Player extends Agent {
   align = 0
+  blade: Blade
 
   constructor(level: Level, position: number[]) {
     super(level, position, playerColor)
+    this.blade = new Blade(this, playerBladeColor)
   }
 
   preStep(): void {

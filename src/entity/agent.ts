@@ -1,8 +1,8 @@
 
 import type { ColorSource } from "pixi.js"
-import { Entity } from "../entity"
-import { agentRadius } from "../../parameters"
-import type { Level } from "../../level"
+import { Entity } from "./entity"
+import type { Level } from "../level"
+import { agentRadius } from "../parameters"
 
 export class Agent extends Entity {
   movePower = 50

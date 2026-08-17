@@ -1,13 +1,12 @@
 import { Container, Graphics, Ticker } from "pixi.js"
 import type { Game } from "./game"
 import { Entity } from "./entity/entity"
-import { arenaRadius, bladeRadius, guideColor, playerBladeColor, playerColor, targetRadius, timeScale, timeStep } from "./parameters"
+import { arenaRadius, bladeRadius, guideColor, playerColor, targetRadius, timeScale, timeStep } from "./parameters"
 import { step } from "./step"
-import { Player } from "./entity/agent/player"
-import { Bot } from "./entity/agent/bot"
-import type { Agent } from "./entity/agent/agent"
-import { Blade } from "./entity/blade/blade"
-import { PlayerBlade } from "./entity/blade/playerBlade"
+import { Blade } from "./entity/blade"
+import { Player } from "./entity/player"
+import type { Agent } from "./entity/agent"
+import { Bot } from "./entity/bot"
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -33,6 +32,7 @@ export class Level extends Container {
     this.setupArena()
     this.addChild(this.chargeRing)
     this.addChild(this.trailContainer)
+    this.addChild(this.springContainer)
     this.addChild(this.bladeContainer)
     this.addChild(this.agentContainer)
     const startDist = 500-bladeRadius
@@ -43,9 +43,6 @@ export class Level extends Container {
     ]
     console.log(startPosition)
     this.player = new Player(this,startPosition)
-    console.log(this.player)
-    void new PlayerBlade(this,startPosition,this.player)
-    // console.log(blade)
     void new Bot(this,[0,0])
     this.layout()
     this.game.app.stage.addChild(this)
