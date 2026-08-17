@@ -1,3 +1,4 @@
+import type { Entity } from "./entity/entity";
 import type { Level } from "./level";
 import { clampVec, combine, dot, getMagnitude, mul, project, sub } from "./math";
 import { arenaRadius, timeStep } from "./parameters";
@@ -9,7 +10,7 @@ export function step(level: Level) {
     entity.velocity = combine(1,entity.velocity,timeStep/entity.mass,entity.force)
     entity.position = combine(1,entity.position,timeStep,entity.velocity)
   })
-  collideAgents(level)
+  collideEntities(level.agents)
   level.entities.forEach(entity => {
     const dist = getMagnitude(entity.position)
     const maxDist = arenaRadius - entity.radius
@@ -20,9 +21,9 @@ export function step(level: Level) {
   })
 }
 
-export function collideAgents(level: Level): void {
-  level.entities.forEach(entity0 => {
-    level.entities.forEach(entity1 => {
+export function collideEntities(entities: Entity[]): void {
+  entities.forEach(entity0 => {
+    entities.forEach(entity1 => {
       if(entity0.index >= entity1.index) return
       const minDist = entity0.radius + entity1.radius
       const vector = sub(entity1.position, entity0.position)

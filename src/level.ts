@@ -1,21 +1,24 @@
 import { Container, Graphics, Ticker } from "pixi.js"
 import type { Game } from "./game"
 import { Entity } from "./entity/entity"
-import { arenaRadius, guideColor, playerColor, targetRadius, timeScale, timeStep } from "./parameters"
+import { arenaRadius, bladeRadius, guideColor, playerColor, targetRadius, timeScale, timeStep } from "./parameters"
 import { step } from "./step"
-import { Player } from "./entity/player"
-import { Bot } from "./entity/bot"
-import type { Agent } from "./entity/agent"
+import { Player } from "./entity/agent/player"
+import { Bot } from "./entity/agent/bot"
+import type { Agent } from "./entity/agent/agent"
+import { PlayerBlade } from "./entity/blade/playerBlade"
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
-  arena: Graphics
-  chargeRing: Graphics
+  arena = new Graphics()
+  chargeRing = new Graphics()
+  trailContainer = new Container()
+  bladeContainer = new Container()
+  agentContainer = new Container()
   player: Player
   entities: Entity[] = []
   agents: Agent[] = []
-  trailContainer: Container
   stepAccumulator = 0
   charge = 0
   paused = false
@@ -23,14 +26,20 @@ export class Level extends Container {
   constructor(game: Game) {
     super()
     this.game = game
-    this.arena = new Graphics()
     this.addChild(this.arena)
     this.setupArena()
-    this.chargeRing = new Graphics()
     this.addChild(this.chargeRing)
-    this.trailContainer = new Container()
     this.addChild(this.trailContainer)
-    this.player = new Player(this,[0,-100])
+    this.addChild(this.bladeContainer)
+    this.addChild(this.agentContainer)
+    const startDist = 500-bladeRadius
+    const startAngle = 2*Math.PI*Math.random()
+    const startPosition = [
+      startDist * Math.cos(startAngle),
+      startDist * Math.sin(startAngle),
+    ]
+    this.player = new Player(this,startPosition)
+    void new PlayerBlade(this,startPosition)
     void new Bot(this,[0,0])
     this.layout()
     this.game.app.stage.addChild(this)
@@ -72,7 +81,7 @@ export class Level extends Container {
     this.arena.circle(0,0,0.5*arenaRadius)
     this.arena.stroke({width: 4, color: guideColor})
     this.arena.strokeStyle = {width: 8, color: guideColor }
-    this.arena.circle(0,0,targetRadius)
+    this.arena.circle(0,0,targetRadius-4)
     this.arena.stroke({width: 8, color: guideColor})
     this.arena.fill('black')
   }

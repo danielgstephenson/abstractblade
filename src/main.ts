@@ -1,6 +1,7 @@
 import { Application } from 'pixi.js'
 import { Game } from './game'
 import { levelColor, wallColor } from './parameters'
+import { initDiscTexture } from './disc'
 
 const arenaDiv = document.getElementById('arena') as HTMLDivElement
 const app = new Application()
@@ -13,6 +14,7 @@ await app.init({
   antialias: true,
 })
 arenaDiv.appendChild(app.canvas)
+initDiscTexture(app.renderer)
 
 const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
 cornerLabels.forEach(cornerLabel => {

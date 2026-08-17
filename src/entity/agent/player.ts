@@ -1,10 +1,11 @@
-import type { Level } from "../level"
-import { chargeStep, playerColor, targetRadius } from "../parameters"
+import type { Level } from "../../level"
+import { chargeStep, playerColor, targetRadius } from "../../parameters"
 import { InputDevice } from "pixijs-input-devices"
-import { clamp, getMagnitude, mul, normalize } from "../math"
+import { clamp, getMagnitude, mul, normalize } from "../../math"
 import { Agent } from "./agent"
 
 export class Player extends Agent {
+  align = 0
 
   constructor(level: Level, position: number[]) {
     super(level, position, playerColor)

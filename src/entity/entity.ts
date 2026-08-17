@@ -1,17 +1,18 @@
-import { Container, Graphics, GraphicsContext, type ColorSource } from "pixi.js"
+import { Container, Sprite, type ColorSource } from "pixi.js"
 import type { Level } from "../level"
 import { range } from "../math"
+import { discRadius, makeDisc } from "../disc"
 
 export class Entity {
   level: Level
   radius: number
   container: Container
-  graphicsContext: GraphicsContext
-  graphics: Graphics
+  color: ColorSource
+  graphics: Sprite
   trailCount: number
   trail: number[][] = []
   trailContainer: Container
-  trailCircles: Graphics[] = []
+  trailCircles: Sprite[] = []
   index: number
   mass = 1
   drag = 0.4
@@ -22,11 +23,10 @@ export class Entity {
   constructor(level: Level, position: number[], radius:number, color: ColorSource, trailCount = 100) {
     this.level = level
     this.container = new Container()
-    level.addChild(this.container)
     this.index = level.entities.length
     level.entities.push(this)
-    this.graphicsContext = new GraphicsContext().circle(0,0,radius).fill(color)
-    this.graphics = new Graphics(this.graphicsContext)
+    this.color = color
+    this.graphics = makeDisc(radius,color)
     this.container.addChild(this.graphics)
     this.trailCount = trailCount
     this.trailContainer = new Container()
@@ -41,12 +41,12 @@ export class Entity {
   setupTrail(): void {
     this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
     this.trailCircles = range(this.trailCount).map(i => {
-      const trailCircle = new Graphics(this.graphicsContext)
+      const trailCircle = makeDisc(this.radius, this.color)
       trailCircle.alpha = 0.2 * (i / this.trailCount)
       trailCircle.blendMode = 'max'
       trailCircle.x = this.position[0]
       trailCircle.y = this.position[1]
-      trailCircle.scale = 1 * (i / this.trailCount)
+      trailCircle.scale.set((this.radius/discRadius)*(i/this.trailCount))
       trailCircle.cullable = true
       this.trailContainer.addChild(trailCircle)
       return trailCircle
