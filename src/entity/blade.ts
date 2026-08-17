@@ -2,7 +2,7 @@ import { Graphics, type ColorSource } from "pixi.js";
 import { agentRadius, bladeRadius } from "../parameters";
 import { Entity } from "./entity";
 import type { Agent } from "./agent";
-import { getMagnitude, mul, sub } from "../math";
+import { mul, sub } from "../math";
 
 export class Blade extends Entity {
   align: number
