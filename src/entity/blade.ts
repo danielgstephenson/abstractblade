@@ -9,7 +9,7 @@ export class Blade extends Entity {
   color: ColorSource
   spring = new Graphics()
   agent: Agent
-  drag = 0.2
+  drag = 0.1
 
   constructor(agent: Agent, color: ColorSource) {
     super(agent.level,agent.position,bladeRadius,color)
