@@ -14,6 +14,7 @@ export class Level extends Container {
   arena = new Graphics()
   chargeRing = new Graphics()
   trailContainer = new Container()
+  springContainer = new Container()
   bladeContainer = new Container()
   agentContainer = new Container()
   player: Player

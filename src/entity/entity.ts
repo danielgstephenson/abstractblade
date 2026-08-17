@@ -1,7 +1,7 @@
 import { Container, Sprite, type ColorSource } from "pixi.js"
 import type { Level } from "../level"
 import { range } from "../math"
-import { discRadius, makeDisc } from "../disc"
+import { circleTextureRadius, makeCircleSprite } from "../texture"
 
 export class Entity {
   level: Level
@@ -26,7 +26,7 @@ export class Entity {
     this.index = level.entities.length
     level.entities.push(this)
     this.color = color
-    this.graphics = makeDisc(radius,color)
+    this.graphics = makeCircleSprite(radius,color)
     this.container.addChild(this.graphics)
     this.trailCount = trailCount
     this.trailContainer = new Container()
@@ -41,12 +41,12 @@ export class Entity {
   setupTrail(): void {
     this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
     this.trailCircles = range(this.trailCount).map(i => {
-      const trailCircle = makeDisc(this.radius, this.color)
+      const trailCircle = makeCircleSprite(this.radius, this.color)
       trailCircle.alpha = 0.2 * (i / this.trailCount)
       trailCircle.blendMode = 'max'
       trailCircle.x = this.position[0]
       trailCircle.y = this.position[1]
-      trailCircle.scale.set((this.radius/discRadius)*(i/this.trailCount))
+      trailCircle.scale.set((this.radius/circleTextureRadius)*(i/this.trailCount))
       trailCircle.cullable = true
       this.trailContainer.addChild(trailCircle)
       return trailCircle
@@ -62,4 +62,6 @@ export class Entity {
       circle.y = h[1]
     })
   }
+
+  preRender(): void {}
 }

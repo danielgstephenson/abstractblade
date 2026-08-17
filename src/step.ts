@@ -10,7 +10,7 @@ export function step(level: Level) {
     entity.velocity = combine(1,entity.velocity,timeStep/entity.mass,entity.force)
     entity.position = combine(1,entity.position,timeStep,entity.velocity)
   })
-  collideEntities(level.agents)
+  collideEntities(level.entities)
   level.entities.forEach(entity => {
     const dist = getMagnitude(entity.position)
     const maxDist = arenaRadius - entity.radius
