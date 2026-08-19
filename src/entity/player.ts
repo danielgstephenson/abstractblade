@@ -1,7 +1,7 @@
 
 import { InputDevice } from "pixijs-input-devices"
 import { Agent } from "./agent"
-import { chargeStep, playerBladeColor, playerColor, targetRadius } from "../parameters"
+import { chargeStep, movePower, playerBladeColor, playerColor, targetRadius } from "../parameters"
 import { clamp, getMagnitude, mul, normalize } from "../math"
 import type { Level } from "../level"
 import { Blade } from "./blade"
@@ -24,7 +24,7 @@ export class Player extends Agent {
   checkRing(): void {
     const dist = getMagnitude(this.position)
     const insideRing = dist < targetRadius - this.radius
-    const dCharge = insideRing ? chargeStep : -2*chargeStep 
+    const dCharge = insideRing ? chargeStep : -chargeStep 
     this.level.charge = clamp(0, 1, this.level.charge + dCharge)
     if (this.level.charge < 1) return
     this.level.onComplete()
@@ -48,6 +48,6 @@ export class Player extends Agent {
     }
     let action = normalize([x, y])
     if (input.isMouseButtonDown(0)) action = normalize(input.mousePosition)
-    this.force = mul(this.movePower, action)
+    this.force = mul(movePower, action)
   }
 }

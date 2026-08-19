@@ -13,5 +13,11 @@ export const chargeStep = timeStep / chargeInterval
 
 export const arenaRadius = 500
 export const agentRadius = 15
-export const targetRadius = 30
+export const targetRadius = 40
 export const bladeRadius = 25
+
+export const agentDrag = 0.4
+export const bladeDrag = 0.1
+export const springPower = 2
+export const movePower = 50
+

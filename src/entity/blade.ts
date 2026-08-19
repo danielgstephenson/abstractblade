@@ -1,5 +1,5 @@
 import { Graphics, type ColorSource } from "pixi.js";
-import { agentRadius, bladeRadius } from "../parameters";
+import { agentRadius, bladeDrag, bladeRadius, springPower } from "../parameters";
 import { Entity } from "./entity";
 import type { Agent } from "./agent";
 import { mul, sub } from "../math";
@@ -9,7 +9,7 @@ export class Blade extends Entity {
   color: ColorSource
   spring = new Graphics()
   agent: Agent
-  drag = 0.1
+  drag = bladeDrag
 
   constructor(agent: Agent, color: ColorSource) {
     super(agent.level,agent.position,bladeRadius,color)
@@ -24,7 +24,7 @@ export class Blade extends Entity {
   preStep(): void {
     super.preStep()
     const vector = sub(this.agent.position, this.position)
-    this.force = mul(2, vector)
+    this.force = mul(springPower, vector)
   }
 
   preRender(): void {

@@ -2,13 +2,13 @@
 import type { ColorSource } from "pixi.js"
 import { Entity } from "./entity"
 import type { Level } from "../level"
-import { agentRadius, bladeRadius } from "../parameters"
+import { agentDrag, agentRadius, bladeRadius } from "../parameters"
 import { combine, getDistance, mul, normalize } from "../math"
 import type { Blade } from "./blade"
 
 export class Agent extends Entity {
-  movePower = 50
   align = 0
+  drag = agentDrag
   blade?: Blade
 
   constructor(level: Level, position: number[], color: ColorSource) {
