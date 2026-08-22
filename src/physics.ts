@@ -18,7 +18,7 @@ export function step(level: Level) {
     if (dist < maxDist) return
     entity.position = clampVec(entity.position,maxDist)
     const impact = project(entity.velocity, entity.position)
-    entity.velocity = combine(1, entity.velocity, -2, impact)
+    entity.velocity = combine(1, entity.velocity, -1, impact)
   })
 }
 
