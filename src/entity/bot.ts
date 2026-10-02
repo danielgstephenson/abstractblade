@@ -12,7 +12,6 @@ export class Bot extends Agent {
   constructor(level: Level, position: number[]) {
     super(level, position, botColor)
     this.blade = new Blade(this,botBladeColor)
-    this.blade.position = add(this.position,clampVec(mul(arenaRadius,getRandomDir()),arenaRadius-bladeRadius))
   }
 
   preStep(): void {

@@ -7,6 +7,7 @@ import { Blade } from "./entity/blade"
 import { Player } from "./entity/player"
 import type { Agent } from "./entity/agent"
 import { Bot } from "./entity/bot"
+import { add, getRandomDir, mul } from "./math"
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -36,14 +37,11 @@ export class Level extends Container {
     this.addChild(this.springContainer)
     this.addChild(this.bladeContainer)
     this.addChild(this.agentContainer)
-    const startDist = 500-bladeRadius
-    const startAngle = 2*Math.PI*Math.random()
-    const startPosition = [
-      startDist * Math.cos(startAngle),
-      startDist * Math.sin(startAngle),
-    ]
-    this.player = new Player(this,startPosition)
-    void new Bot(this,[0,0])
+    const playerPosition = mul(10*bladeRadius, getRandomDir())
+    this.player = new Player(this,playerPosition)
+    const botPosition = mul(10*bladeRadius, getRandomDir())
+    const bot = new Bot(this,botPosition)
+    bot.blade.position = add(bot.position, mul(6*bladeRadius, getRandomDir()) )
     this.game.app.stage.addChild(this)
   }
 
@@ -79,7 +77,7 @@ export class Level extends Container {
     this.arena.moveTo(-arenaRadius,0)
     this.arena.lineTo( arenaRadius,0)
     this.arena.stroke({width: 4, color: guideColor})
-    this.arena.circle(0,0,0.5*arenaRadius)
+    this.arena.circle(0,0,6*targetRadius)
     this.arena.stroke({width: 4, color: guideColor})
     this.arena.strokeStyle = {width: 8, color: guideColor }
     this.arena.circle(0,0,targetRadius-4)
