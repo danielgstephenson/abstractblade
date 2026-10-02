@@ -87,10 +87,17 @@ export class Level extends Container {
     this.arena.fill('black')
   }
 
-  onComplete(): void {
+  onVictory(): void {
     this.destroy()
     const newLevel = new Level(this.game)
     newLevel.index = this.index + 1
+    this.game.level = newLevel
+  }
+
+  onDefeat(): void {
+    this.destroy()
+    const newLevel = new Level(this.game)
+    newLevel.index = Math.max(0, this.index - 1)
     this.game.level = newLevel
   }
 }

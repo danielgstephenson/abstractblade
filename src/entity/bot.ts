@@ -14,4 +14,15 @@ export class Bot extends Agent {
     this.blade = new Blade(this,botBladeColor)
     this.blade.position = add(this.position,clampVec(mul(arenaRadius,getRandomDir()),arenaRadius-bladeRadius))
   }
+
+  preStep(): void {
+    super.preStep()
+    this.check_hit()
+  }
+
+  check_hit(): void {
+    if(this.is_hit()) {
+      this.level.onVictory()
+    }
+  }
 }

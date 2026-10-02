@@ -1,13 +1,17 @@
 import type { Entity } from "./entity/entity";
 import type { Level } from "./level";
 import { clampVec, combine, dot, getMagnitude, mul, project, sub } from "./math";
-import { arenaRadius, timeStep } from "./parameters";
+import { arenaRadius, maxSpeed, timeStep } from "./parameters";
 
-export function step(level: Level) {
+export function step(level: Level): void {
   level.entities.forEach(entity => entity.preStep())
+  for(const agent of level.agents) {
+    if (agent.is_hit()) return
+  }
   level.entities.forEach(entity => {
     entity.velocity = mul(1-entity.drag*timeStep,entity.velocity)
     entity.velocity = combine(1,entity.velocity,timeStep/entity.mass,entity.force)
+    entity.velocity = clampVec(entity.velocity, maxSpeed)
     entity.position = combine(1,entity.position,timeStep,entity.velocity)
   })
   collideEntities(level.agents)

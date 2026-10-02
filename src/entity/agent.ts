@@ -17,17 +17,13 @@ export class Agent extends Entity {
     level.agentContainer.addChild(this.container)
   }
 
-  preStep(): void {
-    super.preStep()
-    this.checkBlades()
-  }
-
-  checkBlades(): void {
-    this.level.blades.forEach(blade => {
-      if(blade.align === this.align) return
+  is_hit(): boolean {
+    return this.level.blades.some(blade => {
+      if(blade.align === this.align) return false
       const dist = getDistance(blade.position, this.position)
       const minDist  = this.radius + blade.radius
-      if(dist < minDist) this.respawn()
+      if(dist < minDist) return true
+      return false
     })
   }
 
@@ -39,5 +35,13 @@ export class Agent extends Entity {
     if(this.blade == null) return
     this.blade.velocity = [0,0]
     this.blade.position = structuredClone(this.position)
+  }
+
+  preStep(): void {
+    super.preStep()
+  }
+
+  postStep(): void {
+    super.preStep()
   }
 }

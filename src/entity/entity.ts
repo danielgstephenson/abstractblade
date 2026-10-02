@@ -63,5 +63,7 @@ export class Entity {
     })
   }
 
+  postStep(): void {}
+
   preRender(): void {}
 }

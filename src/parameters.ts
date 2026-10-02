@@ -21,3 +21,5 @@ export const bladeDrag = 0.1
 export const springPower = 2
 export const movePower = 50
 
+export const maxSpeed = 200
+

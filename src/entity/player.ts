@@ -18,7 +18,18 @@ export class Player extends Agent {
   preStep(): void {
     super.preStep()
     this.handleInput()
+    this.check_hit()
+  }
+
+  postStep(): void {
+    super.postStep()
     this.checkRing()
+  }
+
+  check_hit(): void {
+    if(this.is_hit()) {
+      this.level.onDefeat()
+    }
   }
 
   checkRing(): void {
@@ -27,7 +38,7 @@ export class Player extends Agent {
     const dCharge = insideRing ? chargeStep : -chargeStep 
     this.level.charge = clamp(0, 1, this.level.charge + dCharge)
     if (this.level.charge < 1) return
-    this.level.onComplete()
+    this.level.onVictory()
   }
 
   handleInput(): void {
