@@ -31,7 +31,7 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="doorLayer"
+     inkscape:current-layer="wallLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -181,13 +181,15 @@
        d="m 464.52968,-822.82747 -2.05111,108.62105"
        id="arrow-2-2-1"
        sodipodi:nodetypes="cc"
-       role="arrow" />
+       role="arrow"
+       inkscape:label="arrow-2" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
        d="m 287.16547,-484.06968 99.05603,-14.46645"
        id="arrow-3-4"
        sodipodi:nodetypes="cc"
-       role="arrow" />
+       role="arrow"
+       inkscape:label="arrow-1" />
   </g>
   <g
      inkscape:groupmode="layer"

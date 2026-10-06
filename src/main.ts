@@ -1,6 +1,6 @@
 import { Application } from 'pixi.js'
 import { Game } from './game'
-import { levelColor, wallColor } from './parameters'
+import { hudColor, wallColor } from './parameters'
 import { initCircleTexture } from './texture'
 
 const arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -18,7 +18,7 @@ initCircleTexture(app.renderer)
 
 const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
 cornerLabels.forEach(cornerLabel => {
-  cornerLabel.style.color = levelColor
+  cornerLabel.style.color = hudColor
 })
 
 void new Game(app)

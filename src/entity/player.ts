@@ -35,6 +35,7 @@ export class Player extends Agent {
   checkRing(): void {
     const dist = getMagnitude(this.position)
     const insideRing = dist < targetRadius - this.radius
+    console.log('insideRing',insideRing)
     const dCharge = insideRing ? chargeStep : -chargeStep 
     this.level.charge = clamp(0, 1, this.level.charge + dCharge)
     if (this.level.charge < 1) return

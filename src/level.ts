@@ -10,10 +10,6 @@ import { Bot } from "./entity/bot"
 import { add, getDistance, getMagnitude, getRandomDir, mul } from "./math"
 import type { Orb } from "./entity/orb"
 
-let as = 0
-let bs = 0
-let gap = 0
-
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
@@ -54,23 +50,13 @@ export class Level extends Container {
   update(time: Ticker): void {
     this.stepAccumulator += 0.001 * time.deltaMS * timeScale
     while (this.stepAccumulator > timeStep) {
-      this.stepAccumulator -= timeStep
+      this.stepAccumulator -= timeStep    
+      this.entities.forEach(entity => entity.preStep())
       step(this)
+      this.entities.forEach(entity => entity.postStep())
     }
-    this.orbs.forEach(ball => {
-      ball.container.x = ball.position[0]
-      ball.container.y = ball.position[1]
-    })
     this.updateChargeRing()
     this.entities.forEach(entity => entity.preRender())
-    const ap = this.player.position
-    const bp = this.player.blade.position
-    const av = this.player.velocity
-    const bv = this.player.blade.velocity
-    as = Math.max(as,getMagnitude(av))
-    bs = Math.max(bs,getMagnitude(bv))
-    gap = Math.max(gap,getDistance(ap,bp))
-    console.log(gap.toFixed(1),as.toFixed(1),bs.toFixed(1))
   }
 
   updateChargeRing(): void {
