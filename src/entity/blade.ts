@@ -1,10 +1,10 @@
 import { Graphics, type ColorSource } from "pixi.js";
 import { agentRadius, bladeDrag, bladeRadius, springPower } from "../parameters";
-import { Entity } from "./entity";
 import type { Agent } from "./agent";
 import { mul, sub } from "../math";
+import { Orb } from "./orb";
 
-export class Blade extends Entity {
+export class Blade extends Orb {
   align: number
   color: ColorSource
   spring = new Graphics()

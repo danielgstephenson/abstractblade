@@ -1,12 +1,12 @@
 
 import type { ColorSource } from "pixi.js"
-import { Entity } from "./entity"
 import type { Level } from "../level"
 import { agentDrag, agentRadius, bladeRadius } from "../parameters"
 import { combine, getDistance, mul, normalize } from "../math"
 import type { Blade } from "./blade"
+import { Orb } from "./orb"
 
-export class Agent extends Entity {
+export class Agent extends Orb {
   align = 0
   drag = agentDrag
   blade?: Blade

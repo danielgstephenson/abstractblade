@@ -1,7 +1,6 @@
 
 import type { Level } from "../level"
-import { add, clampVec, getRandomDir, mul } from "../math"
-import { arenaRadius, bladeRadius, botBladeColor, botColor } from "../parameters"
+import { botBladeColor, botColor } from "../parameters"
 import { Agent } from "./agent"
 import { Blade } from "./blade"
 

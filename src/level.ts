@@ -7,7 +7,12 @@ import { Blade } from "./entity/blade"
 import { Player } from "./entity/player"
 import type { Agent } from "./entity/agent"
 import { Bot } from "./entity/bot"
-import { add, getRandomDir, mul } from "./math"
+import { add, getDistance, getMagnitude, getRandomDir, mul } from "./math"
+import type { Orb } from "./entity/orb"
+
+let as = 0
+let bs = 0
+let gap = 0
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -20,6 +25,7 @@ export class Level extends Container {
   agentContainer = new Container()
   player: Player
   entities: Entity[] = []
+  orbs: Orb[] = []
   agents: Agent[] = []
   blades: Blade[] = []
   stepAccumulator = 0
@@ -51,12 +57,20 @@ export class Level extends Container {
       this.stepAccumulator -= timeStep
       step(this)
     }
-    this.entities.forEach(entity => {
-      entity.container.x = entity.position[0]
-      entity.container.y = entity.position[1]
+    this.orbs.forEach(ball => {
+      ball.container.x = ball.position[0]
+      ball.container.y = ball.position[1]
     })
     this.updateChargeRing()
     this.entities.forEach(entity => entity.preRender())
+    const ap = this.player.position
+    const bp = this.player.blade.position
+    const av = this.player.velocity
+    const bv = this.player.blade.velocity
+    as = Math.max(as,getMagnitude(av))
+    bs = Math.max(bs,getMagnitude(bv))
+    gap = Math.max(gap,getDistance(ap,bp))
+    console.log(gap.toFixed(1),as.toFixed(1),bs.toFixed(1))
   }
 
   updateChargeRing(): void {

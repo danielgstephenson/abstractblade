@@ -24,7 +24,8 @@
     "onnxruntime-web": "^1.27.0",
     "opentype.js": "^2.0.0",
     "pixi.js": "^8.19.0",
-    "pixijs-input-devices": "^0.10.0"
+    "pixijs-input-devices": "^0.10.0",
+    "svgson": "^5.3.1"
   },
   "allowScripts": {
     "protobufjs@7.6.5": true
