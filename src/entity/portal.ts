@@ -1,68 +1,48 @@
-import { Container, Sprite, type ColorSource } from "pixi.js";
+import { Container, Graphics, Sprite } from "pixi.js";
 import { Entity } from "./entity";
 import type { Level } from "../level";
-import { circleTextureRadius, makeCircleSprite } from "../texture";
-import { range } from "../math";
+import { makeRingSprite } from "../textures";
+import { agentRadius, chargeStep, playerColor, portalColor, portalRadius } from "../parameters";
+import { clamp, getDistance } from "../math";
 
-export class Orb extends Entity {
-  radius: number
+export class Portal extends Entity {
   container: Container 
-  color: ColorSource
   graphics: Sprite
-  trailCount: number
-  trail: number[][] = []
-  trailContainer: Container
-  trailCircles: Sprite[] = []
-  mass = 1
-  drag = 0.4
+  chargeRing = new Graphics()
   position = [0,0]
-  velocity = [0,0]
-  force = [0,0]
+  charge = 0
 
-  constructor(level: Level, position: number[], radius:number, color: ColorSource, trailCount = 100) {
+  constructor(level: Level, position: number[]) {
     super(level)
-    level.orbs.push(this)
+    level.portals.push(this)
     this.container = new Container()
-    this.color = color
-    this.graphics = makeCircleSprite(radius,color)
+    this.graphics = makeRingSprite(portalRadius,portalColor)
     this.container.addChild(this.graphics)
-    this.trailCount = trailCount
-    this.trailContainer = new Container()
-    this.level.trailContainer.addChild(this.trailContainer)
+    this.container.addChild(this.chargeRing)
+    this.level.portalContainer.addChild(this.container)
     this.position = structuredClone(position)
     this.container.x = position[0]
     this.container.y = position[1]
-    this.radius = radius
-    this.setupTrail()
   }
 
-    setupTrail(): void {
-      this.trail = range(this.trailCount).map(_ => structuredClone(this.position))
-      this.trailCircles = range(this.trailCount).map(i => {
-        const trailCircle = makeCircleSprite(this.radius, this.color)
-        trailCircle.alpha = 0.2 * (i / this.trailCount)
-        trailCircle.blendMode = 'max'
-        trailCircle.x = this.position[0]
-        trailCircle.y = this.position[1]
-        trailCircle.scale.set((this.radius/circleTextureRadius)*(i/this.trailCount))
-        trailCircle.cullable = true
-        this.trailContainer.addChild(trailCircle)
-        return trailCircle
-      })
-    }
-  
-    preStep(): void {
-      this.trail.push(structuredClone(this.position))
-      this.trail.shift()
-      this.trailCircles.forEach((circle,i) => {
-        const h = this.trail[i]
-        circle.x = h[0]
-        circle.y = h[1]
-      })
-    }
+  preStep(): void {
+    const dist = getDistance(this.position,this.level.player.position)
+    const insideRing = dist < portalRadius - agentRadius
+    console.log('insideRing',insideRing,this.charge.toFixed(2))
+    const dCharge = insideRing ? chargeStep : -chargeStep 
+    this.charge = clamp(0, 1, this.charge + dCharge)
+  }
 
-    preRender(): void {
-      this.container.x = this.position[0]
-      this.container.y = this.position[1]
-    }
+  preRender(): void {
+    this.updateChargeRing()
+  }
+
+  updateChargeRing(): void {
+    this.chargeRing.clear()
+    const angleStart = 1.5 * Math.PI
+    const angleEnd = Math.PI * (1.5 + 2 * this.charge)
+    this.chargeRing
+      .arc(0, 0, 1.5*portalRadius, angleStart, angleEnd)
+      .stroke({ color: playerColor, join: 'round', cap: 'round', width: 4 })
+  }
 }

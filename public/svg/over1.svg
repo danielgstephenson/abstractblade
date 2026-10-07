@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      inkscape:zoom="1"
      inkscape:cx="134"
-     inkscape:cy="-571.49998"
+     inkscape:cy="-571.5"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="wallLayer"
+     inkscape:current-layer="transportLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -136,7 +136,7 @@
        cx="283.44586"
        cy="-485.15195"
        role="transporter"
-       r="40" />
+       r="50" />
   </g>
   <g
      inkscape:groupmode="layer"

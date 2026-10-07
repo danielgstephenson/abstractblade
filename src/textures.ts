@@ -2,6 +2,7 @@ import { Graphics, Sprite, Texture, type ColorSource, type Renderer } from 'pixi
 
 export const circleTextureRadius = 512
 let circleTexture: Texture
+let ringTexture: Texture
 
 export function initCircleTexture(renderer: Renderer): void {
   const graphics = new Graphics()
@@ -15,8 +16,28 @@ export function initCircleTexture(renderer: Renderer): void {
   graphics.destroy()
 }
 
+export function initRingTexture(renderer: Renderer): void {
+  const graphics = new Graphics()
+    .circle(circleTextureRadius, circleTextureRadius, circleTextureRadius)
+    .stroke({color: 0xffffff, width: 50})
+  ringTexture = renderer.generateTexture({
+    target: graphics,
+    antialias: true,
+    textureSourceOptions: { scaleMode: 'linear', autoGenerateMipmaps: true },
+  })
+  graphics.destroy()
+}
+
 export function makeCircleSprite(radius: number, color: ColorSource): Sprite {
   const sprite = new Sprite(circleTexture)
+  sprite.anchor.set(0.5)
+  sprite.scale.set(radius / circleTextureRadius)
+  sprite.tint = color
+  return sprite
+}
+
+export function makeRingSprite(radius: number, color: ColorSource): Sprite {
+  const sprite = new Sprite(ringTexture)
   sprite.anchor.set(0.5)
   sprite.scale.set(radius / circleTextureRadius)
   sprite.tint = color
