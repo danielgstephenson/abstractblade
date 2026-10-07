@@ -5,9 +5,6 @@ import { collideOrbs, collideOrbsWalls } from './collide'
 
 export function step(level: Level): void {
   level.entities.forEach(entity => entity.preStep())
-  for (const agent of level.agents) {
-    if (agent.is_hit()) return
-  }
   level.orbs.forEach(orb => {
     orb.velocity = mul(1 - orb.drag * timeStep, orb.velocity)
     orb.velocity = combine(1, orb.velocity, timeStep / orb.mass, orb.force)

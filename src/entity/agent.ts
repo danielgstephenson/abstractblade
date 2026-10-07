@@ -2,7 +2,7 @@ import type { ColorSource } from 'pixi.js'
 import type { Level } from '../level/level'
 import { agentDrag, agentRadius, bladeRadius } from '../parameters'
 import { combine, getDistance, mul, normalize } from '../math'
-import type { Blade } from './blade'
+import { Blade } from './blade'
 import { Orb } from './orb'
 
 export class Agent extends Orb {
@@ -42,5 +42,8 @@ export class Agent extends Orb {
 
   postStep(): void {
     super.postStep()
+    if (this.is_hit()) {
+      this.level.reset()
+    }
   }
 }

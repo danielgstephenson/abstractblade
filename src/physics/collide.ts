@@ -22,6 +22,8 @@ export function collideOrbs(orbs: Orb[]): void {
       orb1.position = combine(1, orb1.position, +1, shift)
       orb0.velocity = combine(1, orb0.velocity, -1, impulse)
       orb1.velocity = combine(1, orb1.velocity, +1, impulse)
+      orb0.onCollide(orb1)
+      orb1.onCollide(orb0)
     })
   })
 }

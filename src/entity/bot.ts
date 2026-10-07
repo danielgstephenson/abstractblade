@@ -14,12 +14,5 @@ export class Bot extends Agent {
 
   preStep(): void {
     super.preStep()
-    this.check_hit()
-  }
-
-  check_hit(): void {
-    if (this.is_hit()) {
-      this.level.reset()
-    }
   }
 }

@@ -17,13 +17,6 @@ export class Player extends Agent {
   preStep(): void {
     super.preStep()
     this.handleInput()
-    this.check_hit()
-  }
-
-  check_hit(): void {
-    if (this.is_hit()) {
-      this.level.reset()
-    }
   }
 
   handleInput(): void {
