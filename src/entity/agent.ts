@@ -41,6 +41,6 @@ export class Agent extends Orb {
   }
 
   postStep(): void {
-    super.preStep()
+    super.postStep()
   }
 }

@@ -11,7 +11,7 @@ export function initCircleTexture(renderer: Renderer): void {
     antialias: true,
     textureSourceOptions: { scaleMode: 'linear', autoGenerateMipmaps: true },
   })
-  graphics.destroy()
+  graphics.destroy({ children: true })
 }
 
 export function initRingTexture(renderer: Renderer): void {
@@ -21,7 +21,7 @@ export function initRingTexture(renderer: Renderer): void {
     antialias: true,
     textureSourceOptions: { scaleMode: 'linear', autoGenerateMipmaps: true },
   })
-  graphics.destroy()
+  graphics.destroy({ children: true })
 }
 
 export function makeCircleSprite(radius: number, color: ColorSource): Sprite {

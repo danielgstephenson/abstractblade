@@ -1,6 +1,7 @@
 import type { Application, Ticker } from 'pixi.js'
 import { Level } from './level/level'
 import { Input } from './input'
+import over1 from './svg/over1.svg?raw'
 
 export class Game {
   cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
@@ -11,7 +12,7 @@ export class Game {
   constructor(app: Application) {
     this.app = app
     this.input = new Input()
-    this.level = new Level(this)
+    this.level = new Level(this, over1)
     this.app.ticker.add(time => this.update(time))
     window.addEventListener('resize', () => this.layout())
   }

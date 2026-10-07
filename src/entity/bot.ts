@@ -19,7 +19,7 @@ export class Bot extends Agent {
 
   check_hit(): void {
     if (this.is_hit()) {
-      this.level.onVictory()
+      this.level.reset()
     }
   }
 }

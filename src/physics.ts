@@ -16,14 +16,6 @@ export function step(level: Level): void {
   })
   collideOrbs(level.agents)
   collideOrbs(level.blades)
-  // level.orbs.forEach(orb => {
-  //   const dist = getMagnitude(orb.position)
-  //   const maxDist = arenaRadius - orb.radius
-  //   if (dist < maxDist) return
-  //   orb.position = clampVec(orb.position,maxDist)
-  //   const impact = project(orb.velocity, orb.position)
-  //   orb.velocity = combine(1, orb.velocity, -1, impact)
-  // })
 }
 
 export function collideOrbs(orbs: Orb[]): void {
