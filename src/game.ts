@@ -1,9 +1,9 @@
-import type { Application, Ticker } from "pixi.js"
-import { Level } from "./level"
-import { Input } from "./input"
+import type { Application, Ticker } from 'pixi.js'
+import { Level } from './level/level'
+import { Input } from './input'
 
 export class Game {
-  cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
+  cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
   app: Application
   level: Level
   input: Input
@@ -13,7 +13,7 @@ export class Game {
     this.input = new Input()
     this.level = new Level(this)
     this.app.ticker.add(time => this.update(time))
-    window.addEventListener('resize',() => this.layout())
+    window.addEventListener('resize', () => this.layout())
   }
 
   update(time: Ticker): void {
@@ -23,11 +23,13 @@ export class Game {
 
   layout(): void {
     const { width, height } = this.app.screen
-    const scale = 1.6*Math.exp(0.1 * this.input.zoom)
+    const scale = 1.6 * Math.exp(0.1 * this.input.zoom)
     this.level.scale.set(scale)
     const x = width / 2 - this.level.player.position[0] * scale
     const y = height / 2 - this.level.player.position[1] * scale
-    this.app.stage.position.set(x,y)
-    this.cornerLabels.forEach(cornerLabel => {cornerLabel.innerHTML = `${this.level.index}`})
+    this.app.stage.position.set(x, y)
+    this.cornerLabels.forEach(cornerLabel => {
+      cornerLabel.innerHTML = `${this.level.index}`
+    })
   }
 }

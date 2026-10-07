@@ -35,13 +35,13 @@ export function dot(x: number[], y: number[]): number {
 }
 
 export function project(x: number[], y: number[]): number[] {
-  if (y[0] === 0 && y[1] === 0) return [0,0]
-  const factor = dot(x,y) / dot(y,y)
+  if (y[0] === 0 && y[1] === 0) return [0, 0]
+  const factor = dot(x, y) / dot(y, y)
   return mul(factor, y)
 }
 
 export function reject(x: number[], y: number[]): number[] {
-  const projection = project(x,y)
+  const projection = project(x, y)
   return sub(x, projection)
 }
 

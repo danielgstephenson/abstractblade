@@ -1,8 +1,7 @@
-
-import type { Level } from "../level"
-import { botBladeColor, botColor } from "../parameters"
-import { Agent } from "./agent"
-import { Blade } from "./blade"
+import type { Level } from '../level/level'
+import { botBladeColor, botColor } from '../parameters'
+import { Agent } from './agent'
+import { Blade } from './blade'
 
 export class Bot extends Agent {
   align = 1
@@ -10,7 +9,7 @@ export class Bot extends Agent {
 
   constructor(level: Level, position: number[]) {
     super(level, position, botColor)
-    this.blade = new Blade(this,botBladeColor)
+    this.blade = new Blade(this, botBladeColor)
   }
 
   preStep(): void {
@@ -19,7 +18,7 @@ export class Bot extends Agent {
   }
 
   check_hit(): void {
-    if(this.is_hit()) {
+    if (this.is_hit()) {
       this.level.onVictory()
     }
   }

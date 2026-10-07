@@ -1,10 +1,4 @@
-import {
-  KeyboardDevice,
-  GamepadDevice,
-  InputDevice,
-  UINavigation,
-  registerPixiJSNavigationMixin,
-} from 'pixijs-input-devices'
+import { KeyboardDevice, GamepadDevice, InputDevice, UINavigation, registerPixiJSNavigationMixin } from 'pixijs-input-devices'
 import { Container, isMobile, Ticker } from 'pixi.js'
 import { clamp } from './math'
 

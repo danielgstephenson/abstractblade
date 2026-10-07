@@ -17,7 +17,7 @@ arenaDiv.appendChild(app.canvas)
 initCircleTexture(app.renderer)
 initRingTexture(app.renderer)
 
-const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement> 
+const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
 cornerLabels.forEach(cornerLabel => {
   cornerLabel.style.color = hudColor
 })

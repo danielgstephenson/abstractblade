@@ -1,10 +1,9 @@
-
-import type { ColorSource } from "pixi.js"
-import type { Level } from "../level"
-import { agentDrag, agentRadius, bladeRadius } from "../parameters"
-import { combine, getDistance, mul, normalize } from "../math"
-import type { Blade } from "./blade"
-import { Orb } from "./orb"
+import type { ColorSource } from 'pixi.js'
+import type { Level } from '../level/level'
+import { agentDrag, agentRadius, bladeRadius } from '../parameters'
+import { combine, getDistance, mul, normalize } from '../math'
+import type { Blade } from './blade'
+import { Orb } from './orb'
 
 export class Agent extends Orb {
   align = 0
@@ -19,21 +18,21 @@ export class Agent extends Orb {
 
   is_hit(): boolean {
     return this.level.blades.some(blade => {
-      if(blade.align === this.align) return false
+      if (blade.align === this.align) return false
       const dist = getDistance(blade.position, this.position)
-      const minDist  = this.radius + blade.radius
-      if(dist < minDist) return true
+      const minDist = this.radius + blade.radius
+      if (dist < minDist) return true
       return false
     })
   }
 
   respawn(): void {
-    const noise = [Math.random(),Math.random()]
-    this.position = combine(1,this.position,0.0001,noise)
-    this.velocity = [0,0]
-    this.position = mul(bladeRadius-500,normalize(this.position))
-    if(this.blade == null) return
-    this.blade.velocity = [0,0]
+    const noise = [Math.random(), Math.random()]
+    this.position = combine(1, this.position, 0.0001, noise)
+    this.velocity = [0, 0]
+    this.position = mul(bladeRadius - 500, normalize(this.position))
+    if (this.blade == null) return
+    this.blade.velocity = [0, 0]
     this.blade.position = structuredClone(this.position)
   }
 

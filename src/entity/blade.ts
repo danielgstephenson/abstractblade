@@ -1,8 +1,8 @@
-import { Graphics, type ColorSource } from "pixi.js";
-import { agentRadius, bladeDrag, bladeRadius, springPower } from "../parameters";
-import type { Agent } from "./agent";
-import { mul, sub } from "../math";
-import { Orb } from "./orb";
+import { Graphics, type ColorSource } from 'pixi.js'
+import { agentRadius, bladeDrag, bladeRadius, springPower } from '../parameters'
+import type { Agent } from './agent'
+import { mul, sub } from '../math'
+import { Orb } from './orb'
 
 export class Blade extends Orb {
   align: number
@@ -12,7 +12,7 @@ export class Blade extends Orb {
   drag = bladeDrag
 
   constructor(agent: Agent, color: ColorSource) {
-    super(agent.level,agent.position,bladeRadius,color)
+    super(agent.level, agent.position, bladeRadius, color)
     this.agent = agent
     this.align = agent.align
     this.color = color
@@ -30,12 +30,11 @@ export class Blade extends Orb {
   preRender(): void {
     super.preRender()
     this.spring.clear()
-    if(this.agent==null) return
+    if (this.agent == null) return
     const a = this.position
     const b = this.agent.position
     this.spring.moveTo(a[0], a[1])
     this.spring.lineTo(b[0], b[1])
-    this.spring.stroke({color: this.color, width: 0.1*agentRadius})
+    this.spring.stroke({ color: this.color, width: 0.1 * agentRadius })
   }
-
 }

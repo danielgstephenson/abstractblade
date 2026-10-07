@@ -1,4 +1,4 @@
-import type { Level } from "../level"
+import type { Level } from '../level/level'
 
 export class Entity {
   level: Level

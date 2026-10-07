@@ -1,10 +1,9 @@
-
-import { InputDevice } from "pixijs-input-devices"
-import { Agent } from "./agent"
-import { chargeStep, movePower, playerBladeColor, playerColor, portalRadius } from "../parameters"
-import { clamp, getMagnitude, mul, normalize } from "../math"
-import type { Level } from "../level"
-import { Blade } from "./blade"
+import { InputDevice } from 'pixijs-input-devices'
+import { Agent } from './agent'
+import { chargeStep, movePower, playerBladeColor, playerColor, portalRadius } from '../parameters'
+import { clamp, getMagnitude, mul, normalize } from '../math'
+import type { Level } from '../level/level'
+import { Blade } from './blade'
 
 export class Player extends Agent {
   align = 0
@@ -22,7 +21,7 @@ export class Player extends Agent {
   }
 
   check_hit(): void {
-    if(this.is_hit()) {
+    if (this.is_hit()) {
       this.level.onDefeat()
     }
   }
@@ -30,7 +29,7 @@ export class Player extends Agent {
   checkRing(): void {
     const dist = getMagnitude(this.position)
     const insideRing = dist < portalRadius - this.radius
-    const dCharge = insideRing ? chargeStep : -chargeStep 
+    const dCharge = insideRing ? chargeStep : -chargeStep
     this.level.charge = clamp(0, 1, this.level.charge + dCharge)
     if (this.level.charge < 1) return
     this.level.onVictory()

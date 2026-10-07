@@ -1,35 +1,35 @@
-import type { Orb } from "./entity/orb";
-import type { Level } from "./level";
-import { clampVec, combine, dot, getMagnitude, mul, project, sub } from "./math";
-import { arenaRadius, maxSpeed, timeStep } from "./parameters";
+import type { Orb } from './entity/orb'
+import type { Level } from './level/level'
+import { clampVec, combine, dot, mul, sub } from './math'
+import { maxSpeed, timeStep } from './parameters'
 
 export function step(level: Level): void {
   level.entities.forEach(entity => entity.preStep())
-  for(const agent of level.agents) {
+  for (const agent of level.agents) {
     if (agent.is_hit()) return
   }
   level.orbs.forEach(orb => {
-    orb.velocity = mul(1-orb.drag*timeStep,orb.velocity)
-    orb.velocity = combine(1,orb.velocity,timeStep/orb.mass,orb.force)
+    orb.velocity = mul(1 - orb.drag * timeStep, orb.velocity)
+    orb.velocity = combine(1, orb.velocity, timeStep / orb.mass, orb.force)
     orb.velocity = clampVec(orb.velocity, maxSpeed)
-    orb.position = combine(1,orb.position,timeStep,orb.velocity)
+    orb.position = combine(1, orb.position, timeStep, orb.velocity)
   })
-  collideEntities(level.agents)
-  collideEntities(level.blades)
-  level.orbs.forEach(orb => {
-    const dist = getMagnitude(orb.position)
-    const maxDist = arenaRadius - orb.radius
-    if (dist < maxDist) return
-    orb.position = clampVec(orb.position,maxDist)
-    const impact = project(orb.velocity, orb.position)
-    orb.velocity = combine(1, orb.velocity, -1, impact)
-  })
+  collideOrbs(level.agents)
+  collideOrbs(level.blades)
+  // level.orbs.forEach(orb => {
+  //   const dist = getMagnitude(orb.position)
+  //   const maxDist = arenaRadius - orb.radius
+  //   if (dist < maxDist) return
+  //   orb.position = clampVec(orb.position,maxDist)
+  //   const impact = project(orb.velocity, orb.position)
+  //   orb.velocity = combine(1, orb.velocity, -1, impact)
+  // })
 }
 
-export function collideEntities(orbs: Orb[]): void {
+export function collideOrbs(orbs: Orb[]): void {
   orbs.forEach(entity0 => {
     orbs.forEach(entity1 => {
-      if(entity0.index >= entity1.index) return
+      if (entity0.index >= entity1.index) return
       const minDist = entity0.radius + entity1.radius
       const vector = sub(entity1.position, entity0.position)
       const squaredDist = dot(vector, vector)

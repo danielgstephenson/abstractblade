@@ -5,9 +5,7 @@ let circleTexture: Texture
 let ringTexture: Texture
 
 export function initCircleTexture(renderer: Renderer): void {
-  const graphics = new Graphics()
-    .circle(circleTextureRadius, circleTextureRadius, circleTextureRadius)
-    .fill(0xffffff)
+  const graphics = new Graphics().circle(circleTextureRadius, circleTextureRadius, circleTextureRadius).fill(0xffffff)
   circleTexture = renderer.generateTexture({
     target: graphics,
     antialias: true,
@@ -17,9 +15,7 @@ export function initCircleTexture(renderer: Renderer): void {
 }
 
 export function initRingTexture(renderer: Renderer): void {
-  const graphics = new Graphics()
-    .circle(circleTextureRadius, circleTextureRadius, circleTextureRadius)
-    .stroke({color: 0xffffff, width: 50})
+  const graphics = new Graphics().circle(circleTextureRadius, circleTextureRadius, circleTextureRadius).stroke({ color: 0xffffff, width: 50 })
   ringTexture = renderer.generateTexture({
     target: graphics,
     antialias: true,
