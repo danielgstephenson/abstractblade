@@ -2,13 +2,11 @@ import { Container, Ticker } from 'pixi.js'
 import { parseSync, type INode } from 'svgson'
 import type { Game } from '../game'
 import { Entity } from '../entity/entity'
-import { bladeRadius, timeScale, timeStep } from '../parameters'
+import { timeScale, timeStep } from '../parameters'
 import { step } from '../physics'
 import { Blade } from '../entity/blade'
 import { Player } from '../entity/player'
 import type { Agent } from '../entity/agent'
-import { Bot } from '../entity/bot'
-import { add, getRandomDir, mul } from '../math'
 import type { Orb } from '../entity/orb'
 import { Portal } from '../entity/portal'
 import type { Wall } from '../entity/wall'
@@ -50,10 +48,6 @@ export class Level extends Container {
     this.addChild(this.bladeContainer)
     this.addChild(this.agentContainer)
     this.player = new Player(this, [0, 0])
-    const botPosition = mul(10 * bladeRadius, getRandomDir())
-    const bot = new Bot(this, botPosition)
-    bot.blade.position = add(bot.position, mul(6 * bladeRadius, getRandomDir()))
-    void new Portal(this, [0, 0])
     build(this)
     this.game.app.stage.addChild(this)
   }
@@ -73,11 +67,6 @@ export class Level extends Container {
     }
     this.entities.forEach(entity => entity.preRender())
   }
-
-  // setupArena(): void {
-  //   this.arena.circle(0, 0, arenaRadius)
-  //   this.arena.fill('black')
-  // }
 
   reset(): void {
     this.resetRequested = true

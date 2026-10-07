@@ -31,7 +31,7 @@
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="transportLayer"
+     inkscape:current-layer="portalLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -129,15 +129,14 @@
   </g>
   <g
      inkscape:groupmode="layer"
-     id="transportLayer"
-     inkscape:label="portalLayer"
+     id="portalLayer"
      inkscape:highlight-color="#808080">
     <circle
        style="fill:#333333;fill-opacity:0;stroke:#333333;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="transporter-2-2"
+       id="portal-1"
        cx="283.44586"
        cy="-485.15195"
-       role="transporter"
+       role="portal"
        r="60" />
   </g>
   <g
@@ -169,14 +168,14 @@
      inkscape:highlight-color="#0053ff">
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="player"
+       id="player-1"
        cx="108.75092"
        cy="-401.33047"
        role="player"
        r="15" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="player-8"
+       id="bot-1"
        cx="429.76093"
        cy="-422.19238"
        role="bot"
@@ -189,17 +188,15 @@
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-4-1-3-4-7)"
        d="m 464.52968,-822.82747 -2.05111,108.62105"
-       id="arrow-2-2-1"
+       id="arrow-2"
        sodipodi:nodetypes="cc"
-       role="arrow"
-       inkscape:label="arrow-2" />
+       role="arrow" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#4d4d4d;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
        d="m 287.16547,-484.06968 184.61595,-27.19437"
-       id="arrow-3-4"
+       id="arrow-3"
        sodipodi:nodetypes="cc"
-       role="arrow"
-       inkscape:label="arrow-1" />
+       role="arrow" />
   </g>
   <g
      inkscape:groupmode="layer"
