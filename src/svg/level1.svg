@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#1a1a1a"
      inkscape:document-units="px"
-     inkscape:zoom="1"
-     inkscape:cx="151"
-     inkscape:cy="-497.49999"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="171.82694"
+     inkscape:cy="-585.83795"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="rockLayer"
+     inkscape:current-layer="portalLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -110,26 +110,25 @@
   <g
      inkscape:groupmode="layer"
      id="portalLayer"
-     inkscape:highlight-color="#808080">
+     inkscape:highlight-color="#b29500">
     <circle
-       style="fill:none;fill-opacity:0;stroke:#4d4d4d;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#b29500;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal1"
        cx="283.44586"
        cy="-485.15195"
        role="portal"
        r="60" />
+    <path
+       style="fill:none;fill-opacity:0.119048;stroke:#b29500;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
+       d="m 287.16547,-484.06968 49.28248,-261.02027"
+       id="arrow2"
+       sodipodi:nodetypes="cc"
+       role="arrow" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="doorLayer"
-     inkscape:highlight-color="#603d00">
-    <path
-       id="door1"
-       style="fill:#1a1a1a;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m 582.24799,-800.52608 13.26153,-52.74278 30.19705,-6.0319 7.22863,61.52319 4.0638,46.81927 -13.82439,71.56462 -32.75055,-6.4973 -14.04343,-56.64947 z"
-       sodipodi:nodetypes="ccccccccc"
-       role="door" />
-  </g>
+     inkscape:highlight-color="#603d00" />
   <g
      inkscape:groupmode="layer"
      id="rockLayer"
@@ -206,14 +205,7 @@
   <g
      inkscape:groupmode="layer"
      id="arrowLayer"
-     inkscape:highlight-color="#ffffff">
-    <path
-       style="fill:none;fill-opacity:0.119048;stroke:#4d4d4d;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
-       d="m 287.16547,-484.06968 49.28248,-261.02027"
-       id="arrow2"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
-  </g>
+     inkscape:highlight-color="#ffffff" />
   <g
      inkscape:groupmode="layer"
      id="savePointLayer"

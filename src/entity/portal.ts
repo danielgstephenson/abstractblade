@@ -50,5 +50,6 @@ export class Portal extends Entity {
     this.level.player.blade.position = structuredClone(this.target)
     this.level.player.velocity = [0, 0]
     this.level.player.blade.velocity = [0, 0]
+    this.charge = 0
   }
 }
