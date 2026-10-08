@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="over1.svg"
+   sodipodi:docname="level1.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#1a1a1a"
      inkscape:document-units="px"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="337.28993"
-     inkscape:cy="-612.70801"
+     inkscape:zoom="1"
+     inkscape:cx="151"
+     inkscape:cy="-497.49999"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="portalLayer"
+     inkscape:current-layer="rockLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -72,26 +72,6 @@
          sodipodi:nodetypes="ccc"
          id="path1-6-36-2-1-8" />
     </marker>
-    <marker
-       style="overflow:visible"
-       id="ArrowWide-4-1-3-4-7"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path1-8-5-1-2-5" />
-    </marker>
   </defs>
   <g
      inkscape:groupmode="layer"
@@ -99,10 +79,10 @@
      inkscape:highlight-color="#3e67e3"
      sodipodi:insensitive="true">
     <path
-       id="boundary-1"
+       id="boundary1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="M -30.563544,-913.76168 842.12917,-870.36163 580.92525,-220.44208 413.5642,-177.58825 6.20556,-233.85895 Z"
-       sodipodi:nodetypes="cccccc"
+       d="m -30.563544,-913.76168 486.608074,-32.97054 386.08464,76.37059 -261.20392,649.91955 -167.36105,42.85383 -407.35864,-56.2707 z"
+       sodipodi:nodetypes="ccccccc"
        role="boundary" />
   </g>
   <g
@@ -110,7 +90,7 @@
      id="wallLayer"
      inkscape:highlight-color="#808080">
     <path
-       id="wall-1"
+       id="wall1"
        style="fill:#1a1a1a;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
        d="m 70.330257,-711.93204 -3.11477,-97.19718 87.306593,-32.88431 67.50755,66.27161 -31.61821,104.65254 z"
        role="wall"
@@ -121,9 +101,9 @@
      id="starLayer"
      inkscape:highlight-color="#ffff00">
     <path
-       id="star-1-8-2"
+       id="star1"
        style="fill:#ffff00;stroke-width:2.72604;stroke-linejoin:round"
-       d="m 298.72174,-635.55384 -9.339,-6.15096 -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
+       d="m 273.2659,-812.33053 -9.339,-6.15096 -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>
@@ -132,8 +112,8 @@
      id="portalLayer"
      inkscape:highlight-color="#808080">
     <circle
-       style="fill:#333333;fill-opacity:0;stroke:#333333;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="portal-1"
+       style="fill:none;fill-opacity:0;stroke:#4d4d4d;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="portal1"
        cx="283.44586"
        cy="-485.15195"
        role="portal"
@@ -144,9 +124,9 @@
      id="doorLayer"
      inkscape:highlight-color="#603d00">
     <path
-       id="door-1-9-2"
-       style="fill:#261700;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
-       d="m 439.41242,-796.99055 13.26153,-52.74278 30.19705,-6.0319 7.22863,61.52319 4.0638,46.81927 -13.82439,71.56462 -32.75055,-6.4973 -14.04343,-56.64947 z"
+       id="door1"
+       style="fill:#1a1a1a;fill-opacity:1;stroke-width:0.1;stroke-linejoin:round"
+       d="m 582.24799,-800.52608 13.26153,-52.74278 30.19705,-6.0319 7.22863,61.52319 4.0638,46.81927 -13.82439,71.56462 -32.75055,-6.4973 -14.04343,-56.64947 z"
        sodipodi:nodetypes="ccccccccc"
        role="door" />
   </g>
@@ -156,11 +136,53 @@
      inkscape:highlight-color="#8a8a8a">
     <circle
        style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
-       id="rock-2"
-       cx="390.91595"
-       cy="-594.34552"
+       id="rock1"
+       cx="452.91974"
+       cy="-900.33484"
        role="rock"
-       r="10" />
+       r="5" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock2"
+       cx="446.97458"
+       cy="-629.8446"
+       role="rock"
+       r="5" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock3"
+       cx="145.90349"
+       cy="-331.0343"
+       role="rock"
+       r="5" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock4"
+       cx="264.58517"
+       cy="-251.43948"
+       role="rock"
+       r="5" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock5"
+       cx="547.46326"
+       cy="-528.80078"
+       role="rock"
+       r="5" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock6"
+       cx="73.265541"
+       cy="-869.82843"
+       role="rock"
+       r="5" />
+    <circle
+       style="fill:#808080;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
+       id="rock4-1"
+       cx="381.02972"
+       cy="-825.30688"
+       role="rock"
+       r="5" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -168,16 +190,16 @@
      inkscape:highlight-color="#0053ff">
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="player-1"
-       cx="108.75092"
-       cy="-401.33047"
+       id="player1"
+       cx="443.25092"
+       cy="-408.83047"
        role="player"
        r="15" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot-1"
-       cx="429.76093"
-       cy="-422.19238"
+       id="bot1"
+       cx="83.760933"
+       cy="-618.19238"
        role="bot"
        r="15" />
   </g>
@@ -186,29 +208,23 @@
      id="arrowLayer"
      inkscape:highlight-color="#ffffff">
     <path
-       style="fill:none;fill-opacity:0.119048;stroke:#ffffff;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-4-1-3-4-7)"
-       d="m 464.52968,-822.82747 -2.05111,108.62105"
-       id="arrow-2"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
-    <path
        style="fill:none;fill-opacity:0.119048;stroke:#4d4d4d;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
-       d="m 287.16547,-484.06968 184.61595,-27.19437"
-       id="arrow-3"
+       d="m 287.16547,-484.06968 49.28248,-261.02027"
+       id="arrow2"
        sodipodi:nodetypes="cc"
        role="arrow" />
   </g>
   <g
      inkscape:groupmode="layer"
-     id="entranceLayer"
+     id="savePointLayer"
      inkscape:highlight-color="#227eff"
      style="fill:none">
     <circle
        style="fill:none;fill-opacity:0.0421246;stroke:#003b7a;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="entrance-0"
+       id="savePoint1"
        cx="108.84314"
        cy="-400.62967"
        r="25"
-       role="entrance" />
+       role="savePoint" />
   </g>
 </svg>

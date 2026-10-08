@@ -2,30 +2,43 @@ import type { Orb } from '../entity/orb'
 import type { Wall } from '../entity/wall'
 import { clamp, combine, dirFromTo, dot, getMagnitude, mul, range, sub, sum } from '../math'
 
+export function collideOrbsOrbs(orbs0: Orb[], orbs1: Orb[]): void {
+  orbs0.forEach(orb0 => {
+    orbs1.forEach(orb1 => {
+      collideOrbOrb(orb0, orb1)
+    })
+  })
+}
+
 export function collideOrbs(orbs: Orb[]): void {
   orbs.forEach(orb0 => {
     orbs.forEach(orb1 => {
       if (orb0.index >= orb1.index) return
-      const minDist = orb0.radius + orb1.radius
-      const vector = sub(orb1.position, orb0.position)
-      const squaredDist = dot(vector, vector)
-      if (squaredDist >= minDist * minDist) return
-      const dist = Math.sqrt(squaredDist)
-      const overlap = minDist - dist
-      const normal = mul(1 / dist, vector)
-      const relativeVelocity = sub(orb0.velocity, orb1.velocity)
-      const impactSpeed = Math.max(0, dot(relativeVelocity, normal))
-      const massFactor = 1 / (1 / orb0.mass + 1 / orb1.mass)
-      const impulse = mul(impactSpeed * massFactor, normal)
-      const shift = mul(0.5 * overlap, normal)
-      orb0.position = combine(1, orb0.position, -1, shift)
-      orb1.position = combine(1, orb1.position, +1, shift)
-      orb0.velocity = combine(1, orb0.velocity, -1, impulse)
-      orb1.velocity = combine(1, orb1.velocity, +1, impulse)
-      orb0.onCollide(orb1)
-      orb1.onCollide(orb0)
+      collideOrbOrb(orb0, orb1)
     })
   })
+}
+
+export function collideOrbOrb(orb0: Orb, orb1: Orb): void {
+  const minDist = orb0.radius + orb1.radius
+  const vector = sub(orb1.position, orb0.position)
+  const squaredDist = dot(vector, vector)
+  if (squaredDist >= minDist * minDist) return
+  const dist = Math.sqrt(squaredDist)
+  const overlap = minDist - dist
+  const normal = mul(1 / dist, vector)
+  const relativeVelocity = sub(orb0.velocity, orb1.velocity)
+  const impactSpeed = Math.max(0, dot(relativeVelocity, normal))
+  const massFactor = 1 / (1 / orb0.mass + 1 / orb1.mass)
+  const impulse = mul(impactSpeed * massFactor, normal)
+  const shift = mul(0.5 * overlap, normal)
+  const totalMass = orb0.mass + orb1.mass
+  orb0.position = combine(1, orb0.position, -orb1.mass / totalMass, shift)
+  orb1.position = combine(1, orb1.position, +orb0.mass / totalMass, shift)
+  orb0.velocity = combine(1, orb0.velocity, -(1 + orb0.bounce) / orb0.mass, impulse)
+  orb1.velocity = combine(1, orb1.velocity, +(1 + orb1.bounce) / orb1.mass, impulse)
+  orb0.onCollide(orb1)
+  orb1.onCollide(orb0)
 }
 
 export function collideOrbsWalls(orbs: Orb[], walls: Wall[]): void {
@@ -86,7 +99,7 @@ export function collideOrbPoint(orb: Orb, point: number[]): boolean {
   if (overlap <= 0) return false
   const normal = dirFromTo(point, orb.position)
   const impactSpeed = -dot(orb.velocity, normal)
-  const impulse = mul(impactSpeed * orb.mass, normal)
+  const impulse = mul(impactSpeed * (1 + orb.bounce), normal)
   const shift = mul(overlap, normal)
   orb.position = combine(1, orb.position, 1, shift)
   orb.velocity = combine(1, orb.velocity, 1, impulse)

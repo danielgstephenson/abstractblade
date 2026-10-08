@@ -1,5 +1,6 @@
 export const wallColor = 'hsl(0 0% 15%)'
-export const portalColor = 'hsl(0 0% 40%)'
+export const portalColor = 'hsl(0 0% 30%)'
+export const rockColor = 'hsl(0 0% 50%)'
 export const hudColor = 'hsl(60 0% 100% / 30%)'
 export const playerColor = 'hsl(220 100% 40%)'
 export const botColor = 'hsl(120 100% 27%)'

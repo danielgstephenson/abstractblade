@@ -13,6 +13,7 @@ export class Orb extends Entity {
   trail: number[][] = []
   trailContainer: Container
   trailCircles: Sprite[] = []
+  bounce = 0
   mass = 1
   drag = 0.4
   position = [0, 0]
