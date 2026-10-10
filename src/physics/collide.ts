@@ -35,8 +35,8 @@ export function collideOrbOrb(orb0: Orb, orb1: Orb): void {
   const totalMass = orb0.mass + orb1.mass
   orb0.position = combine(1, orb0.position, -orb1.mass / totalMass, shift)
   orb1.position = combine(1, orb1.position, +orb0.mass / totalMass, shift)
-  orb0.velocity = combine(1, orb0.velocity, -(1 + orb0.bounce) / orb0.mass, impulse)
-  orb1.velocity = combine(1, orb1.velocity, +(1 + orb1.bounce) / orb1.mass, impulse)
+  orb0.velocity = combine(1, orb0.velocity, -1 / orb0.mass, impulse)
+  orb1.velocity = combine(1, orb1.velocity, +1 / orb1.mass, impulse)
   orb0.onCollide(orb1)
   orb1.onCollide(orb0)
 }
@@ -50,6 +50,7 @@ export function collideOrbsWalls(orbs: Orb[], walls: Wall[]): void {
 }
 
 export function collideOrbWall(orb: Orb, wall: Wall): void {
+  if (wall.active == false) return
   const polygon = wall.polygon
   for (const i of range(polygon.length)) {
     const j = i > 0 ? i - 1 : polygon.length - 1

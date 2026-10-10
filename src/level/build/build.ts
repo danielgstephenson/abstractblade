@@ -5,6 +5,7 @@ import { setupPlayer } from './setupPlayer'
 import { addBots } from './addBots'
 import { addPortals } from './addPortals'
 import { addRocks } from './addRocks'
+import { addTriggers } from './addTriggers'
 
 export function build(level: Level): void {
   setupPlayer(level)
@@ -13,4 +14,5 @@ export function build(level: Level): void {
   addRocks(level)
   addBots(level)
   addPortals(level)
+  addTriggers(level)
 }

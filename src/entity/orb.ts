@@ -1,7 +1,7 @@
 import { Container, Sprite, type ColorSource } from 'pixi.js'
 import { Entity } from './entity'
 import type { Level } from '../level/level'
-import { circleTextureRadius, makeCircleSprite } from '../textures'
+import { textureRadius, makeCircleSprite } from '../textures'
 import { range } from '../math'
 
 export class Orb extends Entity {
@@ -45,7 +45,7 @@ export class Orb extends Entity {
       trailCircle.blendMode = 'max'
       trailCircle.x = this.position[0]
       trailCircle.y = this.position[1]
-      trailCircle.scale.set((this.radius / circleTextureRadius) * (i / this.trailCount))
+      trailCircle.scale.set((this.radius / textureRadius) * (i / this.trailCount))
       trailCircle.cullable = true
       this.trailContainer.addChild(trailCircle)
       return trailCircle

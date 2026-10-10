@@ -1,7 +1,7 @@
 import type { Application, Ticker } from 'pixi.js'
 import { Level } from './level/level'
 import { Input } from './input'
-import level1 from './svg/level1.svg?raw'
+import level1 from './svg/level0.svg?raw'
 
 export class Game {
   cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>

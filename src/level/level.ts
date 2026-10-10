@@ -3,7 +3,7 @@ import { parseSync, type INode } from 'svgson'
 import type { Game } from '../game'
 import { Entity } from '../entity/entity'
 import { timeScale, timeStep } from '../parameters'
-import { step } from '../physics/physics'
+import { step } from '../physics/step'
 import { Blade } from '../entity/blade'
 import { Player } from '../entity/player'
 import type { Agent } from '../entity/agent'
@@ -12,6 +12,7 @@ import { Portal } from '../entity/portal'
 import type { Wall } from '../entity/wall'
 import { build } from './build/build'
 import type { Rock } from '../entity/rock'
+import type { Trigger } from '../entity/trigger'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -20,6 +21,7 @@ export class Level extends Container {
   svgNode: INode
   wallContainer = new Container()
   portalContainer = new Container()
+  triggerContainer = new Container()
   trailContainer = new Container()
   rockContainer = new Container()
   springContainer = new Container()
@@ -29,6 +31,7 @@ export class Level extends Container {
   entities: Entity[] = []
   walls: Wall[] = []
   portals: Portal[] = []
+  triggers: Trigger[] = []
   orbs: Orb[] = []
   rocks: Rock[] = []
   agents: Agent[] = []
@@ -46,6 +49,7 @@ export class Level extends Container {
     this.svgNode = parseSync(this.svgString)
     this.addChild(this.wallContainer)
     this.addChild(this.portalContainer)
+    this.addChild(this.triggerContainer)
     this.addChild(this.trailContainer)
     this.addChild(this.rockContainer)
     this.addChild(this.springContainer)

@@ -12,7 +12,7 @@ export class Rock extends Orb {
     super(level, position, radius, rockColor, 0)
     level.rocks.push(this)
     level.rockContainer.addChild(this.container)
-    const speed = maxSpeed * Math.random()
+    const speed = 0.5 * maxSpeed * Math.random()
     this.velocity = mul(speed, getRandomDir())
   }
 }
