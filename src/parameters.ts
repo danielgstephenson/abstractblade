@@ -4,6 +4,7 @@ export const portalColor = 'hsl(0 0% 60%)'
 export const triggerColor = 'hsl(280, 100%, 60%)'
 export const starColor = 'hsl(60, 100%, 50%)'
 export const hudColor = 'hsl(60 0% 100% / 30%)'
+export const savePointColor = 'hsl(220 70% 40%)'
 export const playerColor = 'hsl(220 100% 40%)'
 export const botColor = 'hsl(120 100% 27%)'
 export const playerBladeColor = 'hsl(195 100% 50%)'
@@ -15,6 +16,7 @@ export const chargeInterval = 6
 export const chargeStep = timeStep / chargeInterval
 
 export const agentRadius = 15
+export const savePointRadius = 40
 export const portalRadius = 40
 export const bladeRadius = 25
 export const starRadius = 20

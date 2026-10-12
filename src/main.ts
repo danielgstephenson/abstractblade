@@ -3,8 +3,9 @@ import { Game } from './game'
 import { hudColor, wallColor } from './parameters'
 import { initTriggerTexture } from './texture/triggerTexture'
 import { initCircleTexture } from './texture/circleTexture'
-import { initRingTexture } from './texture/ringTexture'
+import { initPortalTexture } from './texture/portalTexture'
 import { initStarTexture } from './texture/starTexture'
+import { initSavePointTexture } from './texture/savePointTexture'
 
 const arenaDiv = document.getElementById('arena') as HTMLDivElement
 const app = new Application()
@@ -18,9 +19,10 @@ await app.init({
 })
 arenaDiv.appendChild(app.canvas)
 initCircleTexture(app.renderer)
-initRingTexture(app.renderer)
+initPortalTexture(app.renderer)
 initTriggerTexture(app.renderer)
 initStarTexture(app.renderer)
+initSavePointTexture(app.renderer)
 
 const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
 cornerLabels.forEach(cornerLabel => {

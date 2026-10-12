@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="level0.svg"
+   sodipodi:docname="level1.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="5.6568544"
-     inkscape:cx="477.12029"
-     inkscape:cy="-390.41132"
+     inkscape:zoom="1"
+     inkscape:cx="578.99998"
+     inkscape:cy="-514.49999"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
@@ -129,7 +129,7 @@
     <path
        id="star1"
        style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="m 500,-390 -9.339,-6.15096 -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
+       d="m 204.47248,-761.81892 -9.339,-6.15096 -9.20206,6.37338 2.69838,-11.20506 L 180,-780 l 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>

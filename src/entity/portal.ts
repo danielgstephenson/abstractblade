@@ -3,7 +3,7 @@ import { Entity } from './entity'
 import type { Level } from '../level/level'
 import { agentRadius, chargeStep, portalColor, portalRadius } from '../parameters'
 import { clamp, getDistance } from '../math'
-import { makeRingSprite } from '../texture/ringTexture'
+import { makePortalSprite } from '../texture/portalTexture'
 
 export class Portal extends Entity {
   container: Container
@@ -17,7 +17,7 @@ export class Portal extends Entity {
     super(level)
     level.portals.push(this)
     this.container = new Container()
-    this.graphics = makeRingSprite(portalRadius, portalColor)
+    this.graphics = makePortalSprite(portalRadius, portalColor)
     this.container.addChild(this.graphics)
     this.container.addChild(this.chargeRing)
     this.level.portalContainer.addChild(this.container)

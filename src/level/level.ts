@@ -14,6 +14,7 @@ import { build } from './build/build'
 import type { Rock } from '../entity/rock'
 import type { Trigger } from '../entity/trigger'
 import type { Star } from '../entity/star'
+import { SavePoint } from '../entity/savePoint'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -30,6 +31,7 @@ export class Level extends Container {
   bladeContainer = new Container()
   agentContainer = new Container()
   player: Player
+  savePoint: SavePoint
   entities: Entity[] = []
   walls: Wall[] = []
   portals: Portal[] = []
@@ -62,8 +64,10 @@ export class Level extends Container {
     this.addChild(this.agentContainer)
     this.addChild(this.starContainer)
     this.player = new Player(this, [0, 0])
+    this.savePoint = new SavePoint(this, [0, 0])
     build(this)
     this.load()
+    this.save()
     this.game.app.stage.addChild(this)
   }
 
@@ -93,14 +97,17 @@ export class Level extends Container {
   }
 
   save(): void {
+    this.savePoint.position = this.player.position
     const levelSummary = {
       id: this.id,
       stars: this.stars.map(star => star.removed),
       triggers: this.triggers.map(trigger => trigger.removed),
       walls: this.walls.map(wall => wall.removed),
+      savePoint: this.player.position,
     }
     console.log('save')
     console.log(levelSummary)
+    console.log(this.savePoint.position)
     this.game.summary.set(this.id, levelSummary)
   }
 
@@ -118,6 +125,9 @@ export class Level extends Container {
     summary.walls.forEach((removed, i) => {
       if (removed) this.walls[i].remove()
     })
+    this.savePoint.position = summary.savePoint
+    this.player.position = summary.savePoint
+    this.player.blade.position = summary.savePoint
   }
 }
 
@@ -126,4 +136,5 @@ export interface LevelSummary {
   stars: boolean[]
   triggers: boolean[]
   walls: boolean[]
+  savePoint: number[]
 }
