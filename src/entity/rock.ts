@@ -9,7 +9,7 @@ export class Rock extends Orb {
   mass = 0.0000001
 
   constructor(level: Level, position: number[], radius: number) {
-    super(level, position, radius, rockColor, 0)
+    super(level, position, radius, rockColor, 100)
     level.rocks.push(this)
     level.rockContainer.addChild(this.container)
     const speed = 0.5 * maxSpeed * Math.random()

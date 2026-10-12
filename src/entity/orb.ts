@@ -1,8 +1,8 @@
 import { Container, Sprite, type ColorSource } from 'pixi.js'
 import { Entity } from './entity'
 import type { Level } from '../level/level'
-import { textureRadius, makeCircleSprite } from '../textures'
 import { range } from '../math'
+import { makeCircleSprite, textureRadius } from '../texture/circleTexture'
 
 export class Orb extends Entity {
   radius: number

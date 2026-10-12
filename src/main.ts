@@ -1,7 +1,10 @@
 import { Application } from 'pixi.js'
 import { Game } from './game'
 import { hudColor, wallColor } from './parameters'
-import { initCircleTexture, initTriggerTexture, initRingTexture } from './textures'
+import { initTriggerTexture } from './texture/triggerTexture'
+import { initCircleTexture } from './texture/circleTexture'
+import { initRingTexture } from './texture/ringTexture'
+import { initStarTexture } from './texture/starTexture'
 
 const arenaDiv = document.getElementById('arena') as HTMLDivElement
 const app = new Application()
@@ -17,6 +20,7 @@ arenaDiv.appendChild(app.canvas)
 initCircleTexture(app.renderer)
 initRingTexture(app.renderer)
 initTriggerTexture(app.renderer)
+initStarTexture(app.renderer)
 
 const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
 cornerLabels.forEach(cornerLabel => {

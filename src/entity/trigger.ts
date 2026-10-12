@@ -1,8 +1,8 @@
 import { Container, Graphics, Sprite } from 'pixi.js'
 import { Entity } from './entity'
 import type { Level } from '../level/level'
-import { makeTriggerSprite } from '../textures'
-import { agentRadius, chargeStep, portalColor, portalRadius, triggerColor } from '../parameters'
+import { makeTriggerSprite } from '../texture/triggerTexture'
+import { agentRadius, chargeStep, portalRadius, triggerColor } from '../parameters'
 import { clamp, getDistance } from '../math'
 import type { Wall } from './wall'
 

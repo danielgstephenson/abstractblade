@@ -13,6 +13,7 @@ import type { Wall } from '../entity/wall'
 import { build } from './build/build'
 import type { Rock } from '../entity/rock'
 import type { Trigger } from '../entity/trigger'
+import type { Star } from '../entity/star'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -22,6 +23,7 @@ export class Level extends Container {
   wallContainer = new Container()
   portalContainer = new Container()
   triggerContainer = new Container()
+  starContainer = new Container()
   trailContainer = new Container()
   rockContainer = new Container()
   springContainer = new Container()
@@ -32,6 +34,7 @@ export class Level extends Container {
   walls: Wall[] = []
   portals: Portal[] = []
   triggers: Trigger[] = []
+  stars: Star[] = []
   orbs: Orb[] = []
   rocks: Rock[] = []
   agents: Agent[] = []
@@ -50,6 +53,7 @@ export class Level extends Container {
     this.addChild(this.wallContainer)
     this.addChild(this.portalContainer)
     this.addChild(this.triggerContainer)
+    this.addChild(this.starContainer)
     this.addChild(this.trailContainer)
     this.addChild(this.rockContainer)
     this.addChild(this.springContainer)

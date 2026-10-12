@@ -1,9 +1,9 @@
 import { Container, Graphics, Sprite } from 'pixi.js'
 import { Entity } from './entity'
 import type { Level } from '../level/level'
-import { makeRingSprite } from '../textures'
 import { agentRadius, chargeStep, portalColor, portalRadius } from '../parameters'
 import { clamp, getDistance } from '../math'
+import { makeRingSprite } from '../texture/ringTexture'
 
 export class Portal extends Entity {
   container: Container
