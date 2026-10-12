@@ -1,25 +1,52 @@
 import type { Application, Ticker } from 'pixi.js'
-import { Level } from './level/level'
+import { Level, type LevelSummary } from './level/level'
 import { Input } from './input'
-import level1 from './svg/level0.svg?raw'
+import svg1 from './svg/level1.svg?raw'
+import { InputDevice } from 'pixijs-input-devices'
 
 export class Game {
   cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
   app: Application
   level: Level
   input: Input
+  summary = new Map<string, LevelSummary>()
 
   constructor(app: Application) {
     this.app = app
     this.input = new Input()
-    this.level = new Level(this, level1)
+    this.level = new Level(this, 'level1', svg1)
     this.app.ticker.add(time => this.update(time))
     window.addEventListener('resize', () => this.layout())
+    window.addEventListener('keydown', event => {
+      if (event.repeat) return
+      this.level.continue()
+    })
+    window.addEventListener('mousedown', () => {
+      this.level.continue()
+    })
+    InputDevice.onBindDown('Continue', () => this.level.continue())
   }
 
   update(time: Ticker): void {
+    this.countStars()
     this.level.update(time)
     this.layout()
+  }
+
+  countStars(): void {
+    let starCount = 0
+    this.level.stars.forEach(star => {
+      if (star.removed) starCount += 1
+    })
+    this.summary.forEach(levelSummary => {
+      if (levelSummary.id === this.level.id) return
+      levelSummary.stars.forEach(removed => {
+        if (removed) starCount += 1
+      })
+    })
+    this.cornerLabels.forEach(cornerLabel => {
+      cornerLabel.innerHTML = `${starCount}`
+    })
   }
 
   layout(): void {
@@ -29,8 +56,5 @@ export class Game {
     const x = width / 2 - this.level.player.position[0] * scale
     const y = height / 2 - this.level.player.position[1] * scale
     this.app.stage.position.set(x, y)
-    this.cornerLabels.forEach(cornerLabel => {
-      cornerLabel.innerHTML = `${this.level.index}`
-    })
   }
 }

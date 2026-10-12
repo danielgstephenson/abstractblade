@@ -36,6 +36,15 @@ export class Agent extends Orb {
     this.blade.position = structuredClone(this.position)
   }
 
+  die(): void {
+    this.removed = true
+    this.container.visible = false
+    this.trailContainer.visible = false
+    if (this.blade != null) {
+      this.blade.spring.visible = false
+    }
+  }
+
   preStep(): void {
     super.preStep()
   }
@@ -43,7 +52,7 @@ export class Agent extends Orb {
   postStep(): void {
     super.postStep()
     if (this.is_hit()) {
-      this.level.reset()
+      this.die()
     }
   }
 }

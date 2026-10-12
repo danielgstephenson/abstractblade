@@ -8,10 +8,17 @@ import { Blade } from './blade'
 export class Player extends Agent {
   align = 0
   blade: Blade
+  dead = false
 
   constructor(level: Level, position: number[]) {
     super(level, position, playerColor)
     this.blade = new Blade(this, playerBladeColor)
+  }
+
+  die(): void {
+    this.dead = true
+    this.level.paused = true
+    // this.level.reset()
   }
 
   preStep(): void {

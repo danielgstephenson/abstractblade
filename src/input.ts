@@ -1,4 +1,4 @@
-import { KeyboardDevice, GamepadDevice, InputDevice, UINavigation, registerPixiJSNavigationMixin } from 'pixijs-input-devices'
+import { KeyboardDevice, GamepadDevice, InputDevice, UINavigation, registerPixiJSNavigationMixin, type GamepadCode } from 'pixijs-input-devices'
 import { Container, isMobile, Ticker } from 'pixi.js'
 import { clamp } from './math'
 
@@ -11,7 +11,7 @@ export type InGameBind = 'North' | 'South' | 'East' | 'West' | 'ZoomIn' | 'ZoomO
 
 declare module 'pixijs-input-devices' {
   interface BindValues {
-    inGame: InGameBind
+    inGame: InGameBind | 'Continue'
   }
 }
 
@@ -25,6 +25,21 @@ KeyboardDevice.configureBinds({
   Pause: ['Escape'],
 })
 
+const gamepadContinueCodes: GamepadCode[] = [
+  'Face1',
+  'Face2',
+  'Face3',
+  'Face4',
+  'Back',
+  'Start',
+  'LeftStickClick',
+  'RightStickClick',
+  'DpadUp',
+  'DpadDown',
+  'DpadLeft',
+  'DpadRight',
+]
+
 GamepadDevice.configureDefaultBinds({
   North: ['LeftStickUp', 'RightStickUp', 'DpadUp'],
   South: ['LeftStickDown', 'RightStickDown', 'DpadDown'],
@@ -33,6 +48,7 @@ GamepadDevice.configureDefaultBinds({
   ZoomIn: ['RightShoulder', 'RightTrigger'],
   ZoomOut: ['LeftShoulder', 'LeftTrigger'],
   Pause: ['Start'],
+  Continue: gamepadContinueCodes,
 })
 
 Ticker.shared.add(() => InputDevice.update())

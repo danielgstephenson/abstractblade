@@ -23,6 +23,10 @@ export class Blade extends Orb {
 
   preStep(): void {
     super.preStep()
+    if (this.agent.removed) {
+      this.force = [0, 0]
+      return
+    }
     const vector = sub(this.agent.position, this.position)
     this.force = mul(springPower, vector)
   }

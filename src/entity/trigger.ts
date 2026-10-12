@@ -13,7 +13,7 @@ export class Trigger extends Entity {
   position = [0, 0]
   wall?: Wall
   charge = 0
-  active = true
+  removed = false
 
   constructor(level: Level, position: number[]) {
     super(level)
@@ -29,7 +29,7 @@ export class Trigger extends Entity {
   }
 
   preStep(): void {
-    if (!this.active) return
+    if (this.removed) return
     const dist = getDistance(this.position, this.level.player.position)
     const insideRing = dist < portalRadius - agentRadius
     const dCharge = insideRing ? chargeStep : -chargeStep
@@ -48,11 +48,15 @@ export class Trigger extends Entity {
     this.chargeRing.arc(0, 0, 1.5 * portalRadius, angleStart, angleEnd).stroke({ color: triggerColor, join: 'round', cap: 'round', width: 4 })
   }
 
+  remove() {
+    this.removed = true
+    this.graphics.visible = false
+  }
+
   fire(): void {
     this.charge = 0
+    this.remove()
     if (this.wall == null) return
     this.wall.remove()
-    this.active = false
-    this.graphics.visible = false
   }
 }

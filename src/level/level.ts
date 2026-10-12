@@ -39,32 +39,41 @@ export class Level extends Container {
   rocks: Rock[] = []
   agents: Agent[] = []
   blades: Blade[] = []
+  id: string
   resetRequested = false
   stepAccumulator = 0
   charge = 0
   paused = false
   index = 0
 
-  constructor(game: Game, svgString: string) {
+  constructor(game: Game, id: string, svgString: string) {
     super()
     this.game = game
+    this.id = id
     this.svgString = svgString
     this.svgNode = parseSync(this.svgString)
     this.addChild(this.wallContainer)
     this.addChild(this.portalContainer)
     this.addChild(this.triggerContainer)
-    this.addChild(this.starContainer)
     this.addChild(this.trailContainer)
     this.addChild(this.rockContainer)
     this.addChild(this.springContainer)
     this.addChild(this.bladeContainer)
     this.addChild(this.agentContainer)
+    this.addChild(this.starContainer)
     this.player = new Player(this, [0, 0])
     build(this)
+    this.load()
     this.game.app.stage.addChild(this)
   }
 
   update(time: Ticker): void {
+    if (this.resetRequested) {
+      this.destroy({ children: true })
+      this.game.level = new Level(this.game, this.id, this.svgString)
+      return
+    }
+    if (this.paused) return
     this.stepAccumulator += 0.001 * time.deltaMS * timeScale
     while (this.stepAccumulator > timeStep) {
       this.stepAccumulator -= timeStep
@@ -72,15 +81,49 @@ export class Level extends Container {
       step(this)
       this.entities.forEach(entity => entity.postStep())
     }
-    if (this.resetRequested) {
-      this.destroy({ children: true })
-      this.game.level = new Level(this.game, this.svgString)
-      return
-    }
     this.entities.forEach(entity => entity.preRender())
   }
 
   reset(): void {
     this.resetRequested = true
   }
+
+  continue(): void {
+    if (this.player.dead) this.reset()
+  }
+
+  save(): void {
+    const levelSummary = {
+      id: this.id,
+      stars: this.stars.map(star => star.removed),
+      triggers: this.triggers.map(trigger => trigger.removed),
+      walls: this.walls.map(wall => wall.removed),
+    }
+    console.log('save')
+    console.log(levelSummary)
+    this.game.summary.set(this.id, levelSummary)
+  }
+
+  load(): void {
+    console.log('load')
+    const summary = this.game.summary.get(this.id)
+    if (summary == null) return
+    console.log(summary)
+    summary.stars.forEach((removed, i) => {
+      if (removed) this.stars[i].remove()
+    })
+    summary.triggers.forEach((removed, i) => {
+      if (removed) this.triggers[i].remove()
+    })
+    summary.walls.forEach((removed, i) => {
+      if (removed) this.walls[i].remove()
+    })
+  }
+}
+
+export interface LevelSummary {
+  id: string
+  stars: boolean[]
+  triggers: boolean[]
+  walls: boolean[]
 }

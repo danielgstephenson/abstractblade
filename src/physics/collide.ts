@@ -20,6 +20,8 @@ export function collideOrbs(orbs: Orb[]): void {
 }
 
 export function collideOrbOrb(orb0: Orb, orb1: Orb): void {
+  if (orb0.removed) return
+  if (orb1.removed) return
   const minDist = orb0.radius + orb1.radius
   const vector = sub(orb1.position, orb0.position)
   const squaredDist = dot(vector, vector)
@@ -50,7 +52,7 @@ export function collideOrbsWalls(orbs: Orb[], walls: Wall[]): void {
 }
 
 export function collideOrbWall(orb: Orb, wall: Wall): void {
-  if (wall.active == false) return
+  if (wall.removed) return
   const polygon = wall.polygon
   for (const i of range(polygon.length)) {
     const j = i > 0 ? i - 1 : polygon.length - 1

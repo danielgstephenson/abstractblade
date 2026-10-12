@@ -5,7 +5,7 @@ import { Entity } from './entity'
 export class Wall extends Entity {
   graphics = new Graphics()
   polygon: number[][]
-  active = true
+  removed = false
 
   constructor(level: Level, polygon: number[][], fillColor: ColorSource) {
     super(level)
@@ -21,7 +21,7 @@ export class Wall extends Entity {
   }
 
   remove(): void {
-    this.active = false
+    this.removed = true
     this.graphics.visible = false
   }
 }
