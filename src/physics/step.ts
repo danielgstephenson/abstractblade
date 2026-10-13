@@ -15,6 +15,7 @@ export function step(level: Level): void {
   collideOrbs(level.blades)
   collideOrbs(level.rocks)
   collideOrbsOrbs(level.rocks, level.agents)
+  collideOrbsWalls(level.rocks, level.walls)
   collideOrbsOrbs(level.rocks, level.blades)
   collideOrbsWalls(level.orbs, level.walls)
 }

@@ -1,6 +1,7 @@
 import { Portal } from '../../entity/portal'
 import { getDistance } from '../../math'
 import { portalRadius } from '../../parameters'
+import { isLevelName } from '../../svg/svgs'
 import type { Level } from '../level'
 import { getArrows } from './getArrows'
 import { getChildById } from './getChildById'
@@ -17,5 +18,10 @@ export function addPortals(level: Level): void {
     insideArrows.forEach(arrow => {
       portal.target = arrow[1]
     })
+    const targetLevel = node.attributes.level as string
+    if (isLevelName(targetLevel)) {
+      portal.targetLevel = targetLevel
+      portal.targetEntrance = node.attributes.entrance as string
+    }
   })
 }

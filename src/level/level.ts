@@ -15,6 +15,8 @@ import type { Rock } from '../entity/rock'
 import type { Trigger } from '../entity/trigger'
 import type { Star } from '../entity/star'
 import { SavePoint } from '../entity/savePoint'
+import { svgs } from '../svg/svgs'
+import type { Entrance } from '../entity/entrance'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -33,6 +35,7 @@ export class Level extends Container {
   player: Player
   savePoint: SavePoint
   entities: Entity[] = []
+  entrances: Entrance[] = []
   walls: Wall[] = []
   portals: Portal[] = []
   triggers: Trigger[] = []
@@ -41,18 +44,20 @@ export class Level extends Container {
   rocks: Rock[] = []
   agents: Agent[] = []
   blades: Blade[] = []
-  id: string
+  activePortal?: Portal
+  transportRequested = false
+  id: keyof typeof svgs
   resetRequested = false
   stepAccumulator = 0
   charge = 0
   paused = false
   index = 0
 
-  constructor(game: Game, id: string, svgString: string) {
+  constructor(game: Game, id: keyof typeof svgs, entrance?: string) {
     super()
     this.game = game
     this.id = id
-    this.svgString = svgString
+    this.svgString = svgs[id]
     this.svgNode = parseSync(this.svgString)
     this.addChild(this.wallContainer)
     this.addChild(this.portalContainer)
@@ -67,6 +72,14 @@ export class Level extends Container {
     this.savePoint = new SavePoint(this, [0, 0])
     build(this)
     this.load()
+    console.log('entrance', entrance)
+    this.entrances.forEach(e => {
+      if (e.id === entrance) {
+        this.player.position = structuredClone(e.position)
+        this.player.blade.position = structuredClone(e.position)
+      }
+    })
+    console.log('this.player.position', this.player.position)
     this.save()
     this.game.app.stage.addChild(this)
   }
@@ -74,7 +87,17 @@ export class Level extends Container {
   update(time: Ticker): void {
     if (this.resetRequested) {
       this.destroy({ children: true })
-      this.game.level = new Level(this.game, this.id, this.svgString)
+      this.game.level = new Level(this.game, this.id)
+      return
+    }
+    if (this.transportRequested) {
+      this.transportRequested = false
+      if (this.activePortal == null) return
+      if (this.activePortal.targetLevel == null) return
+      if (this.activePortal.targetEntrance == null) return
+      this.save()
+      this.destroy({ children: true })
+      this.game.level = new Level(this.game, this.activePortal.targetLevel, this.activePortal.targetEntrance)
       return
     }
     if (this.paused) return
@@ -97,7 +120,7 @@ export class Level extends Container {
   }
 
   save(): void {
-    this.savePoint.position = this.player.position
+    this.savePoint.position = structuredClone(this.player.position)
     const levelSummary = {
       id: this.id,
       stars: this.stars.map(star => star.removed),
@@ -107,7 +130,6 @@ export class Level extends Container {
     }
     console.log('save')
     console.log(levelSummary)
-    console.log(this.savePoint.position)
     this.game.summary.set(this.id, levelSummary)
   }
 

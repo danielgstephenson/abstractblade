@@ -1,7 +1,6 @@
 import type { Application, Ticker } from 'pixi.js'
 import { Level, type LevelSummary } from './level/level'
 import { Input } from './input'
-import svg1 from './svg/level1.svg?raw'
 import { InputDevice } from 'pixijs-input-devices'
 
 export class Game {
@@ -14,7 +13,7 @@ export class Game {
   constructor(app: Application) {
     this.app = app
     this.input = new Input()
-    this.level = new Level(this, 'level1', svg1)
+    this.level = new Level(this, 'level1')
     this.app.ticker.add(time => this.update(time))
     window.addEventListener('resize', () => this.layout())
     window.addEventListener('keydown', event => {

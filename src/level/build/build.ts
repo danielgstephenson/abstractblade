@@ -7,6 +7,7 @@ import { addPortals } from './addPortals'
 import { addRocks } from './addRocks'
 import { addTriggers } from './addTriggers'
 import { addStars } from './addStars'
+import { addEntrances } from './addEntrances'
 
 export function build(level: Level): void {
   setupPlayer(level)
@@ -17,4 +18,5 @@ export function build(level: Level): void {
   addPortals(level)
   addTriggers(level)
   addStars(level)
+  addEntrances(level)
 }

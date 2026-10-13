@@ -4,11 +4,14 @@ import type { Level } from '../level/level'
 import { agentRadius, chargeStep, portalColor, portalRadius } from '../parameters'
 import { clamp, getDistance } from '../math'
 import { makePortalSprite } from '../texture/portalTexture'
+import type { svgs } from '../svg/svgs'
 
 export class Portal extends Entity {
   container: Container
   graphics: Sprite
   chargeRing = new Graphics()
+  targetLevel?: keyof typeof svgs
+  targetEntrance?: string
   position = [0, 0]
   target = [0, 0]
   charge = 0
@@ -46,6 +49,11 @@ export class Portal extends Entity {
   }
 
   transport(): void {
+    if (this.targetLevel != null) {
+      this.level.activePortal = this
+      this.level.transportRequested = true
+      return
+    } 
     this.level.player.position = structuredClone(this.target)
     this.level.player.blade.position = structuredClone(this.target)
     this.level.player.velocity = [0, 0]
