@@ -67,5 +67,5 @@ export class Orb extends Entity {
     this.container.y = this.position[1]
   }
 
-  onCollide(entity: Entity) {}
+  onCollide(_entity: Entity) {}
 }
