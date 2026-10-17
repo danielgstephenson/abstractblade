@@ -1,4 +1,4 @@
-import { Container, Ticker } from 'pixi.js'
+import { Container, Graphics, Ticker } from 'pixi.js'
 import { parseSync, type INode } from 'svgson'
 import type { Game } from '../game'
 import { Entity } from '../entity/entity'
@@ -18,12 +18,14 @@ import { SavePoint } from '../entity/savePoint'
 import { svgs } from '../svg/svgs'
 import type { Entrance } from '../entity/entrance'
 import type { Gate } from '../entity/gate'
+import type { Room } from '../entity/room'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
   game: Game
   svgString: string
   svgNode: INode
+  reveal = new Graphics()
   wallContainer = new Container()
   gateContainer = new Container()
   portalContainer = new Container()
@@ -40,6 +42,7 @@ export class Level extends Container {
   entrances: Entrance[] = []
   walls: Wall[] = []
   innerWalls: Wall[] = []
+  rooms: Room[] = []
   gates: Gate[] = []
   portals: Portal[] = []
   triggers: Trigger[] = []
@@ -73,6 +76,8 @@ export class Level extends Container {
     this.addChild(this.bladeContainer)
     this.addChild(this.agentContainer)
     this.addChild(this.starContainer)
+    this.addChild(this.reveal)
+    this.mask = this.reveal
     this.player = new Player(this, [0, 0])
     this.savePoint = new SavePoint(this, [0, 0])
     build(this)
@@ -84,7 +89,7 @@ export class Level extends Container {
         this.player.blade.position = structuredClone(e.position)
       }
     })
-    console.log('this.player.position', this.player.position)
+    this.rooms.forEach(room => room.check())
     this.save()
     this.game.app.stage.addChild(this)
   }
@@ -128,6 +133,7 @@ export class Level extends Container {
     this.savePoint.position = structuredClone(this.player.position)
     const levelSummary = {
       id: this.id,
+      rooms: this.rooms.map(room => room.visited),
       stars: this.stars.map(star => star.removed),
       triggers: this.triggers.map(trigger => trigger.removed),
       walls: this.walls.map(wall => wall.removed),
@@ -143,6 +149,9 @@ export class Level extends Container {
     const summary = this.game.summary.get(this.id)
     if (summary == null) return
     console.log(summary)
+    summary.rooms.forEach((visited, i) => {
+      if (visited) this.rooms[i].visit()
+    })
     summary.stars.forEach((removed, i) => {
       if (removed) this.stars[i].remove()
     })
@@ -160,6 +169,7 @@ export class Level extends Container {
 
 export interface LevelSummary {
   id: string
+  rooms: boolean[]
   stars: boolean[]
   triggers: boolean[]
   walls: boolean[]
