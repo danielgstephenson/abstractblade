@@ -16,7 +16,7 @@ export function addTriggers(level: Level): void {
     const trigger = new Trigger(level, [x, y])
     const insideArrows = arrows.filter(a => getDistance(a[0], trigger.position) < portalRadius)
     insideArrows.forEach(arrow => {
-      level.walls.forEach(wall => {
+      level.innerWalls.forEach(wall => {
         if (insidePolygon(arrow[1], wall.polygon)) {
           trigger.wall = wall
         }

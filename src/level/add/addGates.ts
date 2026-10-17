@@ -1,4 +1,3 @@
-// src/level/build/addLocks.ts
 import { Gate } from '../../entity/gate'
 import { insidePolygon } from '../../physics/raycast'
 import type { Level } from '../level'
@@ -11,7 +10,11 @@ export function addGates(level: Level): void {
     const x = parseFloat(node.attributes.x)
     const y = parseFloat(node.attributes.y)
     const gate = new Gate(level, [x, y])
-    level.walls.forEach(wall => {
+    if (node.attributes.quota == null) {
+      throw new Error(`${level.id} gate ${node.attributes.id} has no quota.`)
+    }
+    gate.quota = parseFloat(node.attributes.quota)
+    level.innerWalls.forEach(wall => {
       if (insidePolygon([x, y], wall.polygon)) {
         gate.wall = wall
       }

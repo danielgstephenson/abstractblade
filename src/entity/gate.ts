@@ -1,4 +1,3 @@
-// src/entity/lock.ts
 import { CanvasTextMetrics, Container, Text, TextStyle } from 'pixi.js'
 import { Entity } from './entity'
 import type { Level } from '../level/level'
@@ -17,7 +16,7 @@ export class Gate extends Entity {
   label: Text
   ascent: number
   wall?: Wall
-  quota = 2
+  quota = 0
   removed = false
 
   constructor(level: Level, position: number[]) {

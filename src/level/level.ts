@@ -39,6 +39,7 @@ export class Level extends Container {
   entities: Entity[] = []
   entrances: Entrance[] = []
   walls: Wall[] = []
+  innerWalls: Wall[] = []
   gates: Gate[] = []
   portals: Portal[] = []
   triggers: Trigger[] = []
