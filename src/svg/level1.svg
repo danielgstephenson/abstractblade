@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="538.81537"
-     inkscape:cy="-702.15703"
+     inkscape:zoom="1.2609375"
+     inkscape:cx="422.70136"
+     inkscape:cy="-1041.6853"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="entranceLayer"
+     inkscape:current-layer="wallLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -138,9 +138,25 @@
     <path
        id="wall1-2"
        style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 120,-920 -40,-80 180,-40 h 160 l 20,100 z"
+       d="m 150,-890 10,-90 110,10 110,20 -10,70 -110,10 z"
        role="wall"
-       sodipodi:nodetypes="cccccc" />
+       sodipodi:nodetypes="ccccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="gateLayer">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
+       x="270.0325"
+       y="-898.64752"
+       id="gate1"
+       quota="2"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="270.0325"
+         y="-898.64752"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">00/00</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

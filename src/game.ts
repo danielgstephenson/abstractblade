@@ -8,6 +8,7 @@ export class Game {
   app: Application
   level: Level
   input: Input
+  starCount = 0
   summary = new Map<string, LevelSummary>()
 
   constructor(app: Application) {
@@ -43,8 +44,9 @@ export class Game {
         if (removed) starCount += 1
       })
     })
+    this.starCount = starCount
     this.cornerLabels.forEach(cornerLabel => {
-      cornerLabel.innerHTML = `${starCount}`
+      cornerLabel.innerHTML = `${this.starCount}`
     })
   }
 

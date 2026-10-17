@@ -31,7 +31,7 @@
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="portalLayer"
+     inkscape:current-layer="gateLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -141,6 +141,9 @@
        role="wall"
        sodipodi:nodetypes="cccccc" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="gateLayer" />
   <g
      inkscape:groupmode="layer"
      id="portalLayer"

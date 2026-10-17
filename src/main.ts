@@ -1,4 +1,4 @@
-import { Application } from 'pixi.js'
+import { Application, Assets } from 'pixi.js'
 import { Game } from './game'
 import { hudColor, wallColor } from './parameters'
 import { initTriggerTexture } from './texture/triggerTexture'
@@ -6,6 +6,8 @@ import { initCircleTexture } from './texture/circleTexture'
 import { initPortalTexture } from './texture/portalTexture'
 import { initStarTexture } from './texture/starTexture'
 import { initSavePointTexture } from './texture/savePointTexture'
+
+await Assets.load({ src: '/Lekton-Bold.ttf', data: { family: 'Lekton-Bold', weights: ['bold'] } })
 
 const arenaDiv = document.getElementById('arena') as HTMLDivElement
 const app = new Application()
