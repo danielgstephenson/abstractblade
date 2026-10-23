@@ -19,6 +19,9 @@ import { svgs } from '../svg/svgs'
 import type { Entrance } from '../entity/entrance'
 import type { Gate } from '../entity/gate'
 import type { Room } from '../entity/room'
+import type { Bot } from '../entity/bot'
+import { sub } from '../math'
+import { rayCastPolygon } from '../physics/raycast'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -50,6 +53,7 @@ export class Level extends Container {
   orbs: Orb[] = []
   rocks: Rock[] = []
   agents: Agent[] = []
+  bots: Bot[] = []
   blades: Blade[] = []
   activePortal?: Portal
   transportRequested = false
@@ -82,7 +86,6 @@ export class Level extends Container {
     this.savePoint = new SavePoint(this, [0, 0])
     build(this)
     this.load()
-    console.log('entrance', entrance)
     this.entrances.forEach(e => {
       if (e.id === entrance) {
         this.player.position = structuredClone(e.position)
@@ -139,16 +142,12 @@ export class Level extends Container {
       walls: this.walls.map(wall => wall.removed),
       savePoint: this.player.position,
     }
-    console.log('save')
-    console.log(levelSummary)
     this.game.summary.set(this.id, levelSummary)
   }
 
   load(): void {
-    console.log('load')
     const summary = this.game.summary.get(this.id)
     if (summary == null) return
-    console.log(summary)
     summary.rooms.forEach((visited, i) => {
       if (visited) this.rooms[i].visit()
     })
@@ -164,6 +163,19 @@ export class Level extends Container {
     this.savePoint.position = summary.savePoint
     this.player.position = summary.savePoint
     this.player.blade.position = summary.savePoint
+  }
+
+  segmentCast(segmentStart: number[], segmentEnd: number[]): number[] {
+    const rayStart = segmentStart
+    const rayVector = sub(segmentEnd, segmentStart)
+    const hits: number[] = []
+    this.walls.forEach(wall => {
+      if (wall.removed) return
+      const rayHits = rayCastPolygon(rayStart, rayVector, wall.polygon)
+      const segmentHits = rayHits.filter(t => t <= 1)
+      hits.push(...segmentHits)
+    })
+    return hits
   }
 }
 

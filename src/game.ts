@@ -4,7 +4,7 @@ import { Input } from './input'
 import { InputDevice } from 'pixijs-input-devices'
 
 export class Game {
-  cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
+  cornerLabels = document.querySelectorAll('.cornerLabel')
   app: Application
   level: Level
   input: Input
@@ -52,7 +52,7 @@ export class Game {
 
   layout(): void {
     const { width, height } = this.app.screen
-    const scale = 1.6 * Math.exp(0.1 * this.input.zoom)
+    const scale = 1.4 * Math.exp(0.1 * this.input.zoom)
     this.level.scale.set(scale)
     const x = width / 2 - this.level.player.position[0] * scale
     const y = height / 2 - this.level.player.position[1] * scale

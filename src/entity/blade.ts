@@ -34,7 +34,6 @@ export class Blade extends Orb {
   preRender(): void {
     super.preRender()
     this.spring.clear()
-    if (this.agent == null) return
     const a = this.position
     const b = this.agent.position
     this.spring.moveTo(a[0], a[1])

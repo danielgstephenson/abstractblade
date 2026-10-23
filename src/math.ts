@@ -132,7 +132,7 @@ export function cross(v: number[], w: number[]): number {
 }
 
 export function sortBy<T>(array: T[], priorities: number[]): T[] {
-  const pairs: Array<[T, number]> = array.map((x, i) => [x, priorities[i]])
+  const pairs: [T, number][] = array.map((x, i) => [x, priorities[i]])
   pairs.sort((a, b) => a[1] - b[1])
   const sorted = pairs.map(pair => pair[0])
   return sorted
@@ -174,4 +174,17 @@ export function toMatrix<T>(flatArray: T[], dims: number[]): T[][] {
     result.push(row)
   }
   return result
+}
+
+export const actionVectors: number[][] = []
+actionVectors.push([0, 0])
+range(8).forEach(i => {
+  const angle = (2 * Math.PI * i) / 8
+  const dir = angleToDir(angle)
+  actionVectors.push(dir)
+})
+
+export function roundDir(vector: number[]): number[] {
+  const dots = actionVectors.map(actionVector => dot(vector, actionVector))
+  return actionVectors[whichMax(dots)]
 }

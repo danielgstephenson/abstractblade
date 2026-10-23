@@ -11,7 +11,6 @@ export class SavePoint extends Entity {
 
   constructor(level: Level, position: number[]) {
     super(level)
-    console.log('savePoint')
     level.savePoint = this
     this.container = new Container()
     this.graphics = makeSavePointSprite(savePointRadius, savePointColor)

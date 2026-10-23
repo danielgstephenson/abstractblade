@@ -9,6 +9,7 @@ export class Bot extends Agent {
 
   constructor(level: Level, position: number[]) {
     super(level, position, botColor)
+    level.bots.push(this)
     this.blade = new Blade(this, botBladeColor)
   }
 
