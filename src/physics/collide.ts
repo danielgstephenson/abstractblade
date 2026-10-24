@@ -35,9 +35,9 @@ export function collideOrbOrb(orb0: Orb, orb1: Orb): void {
   const impulse = mul(impactSpeed * massFactor, normal)
   const shift = mul(0.5 * overlap, normal)
   orb0.position = combine(1, orb0.position, -0.5, shift)
-  orb1.position = combine(1, orb1.position, +0.5, shift)
+  orb1.position = combine(1, orb1.position, 0.5, shift)
   orb0.velocity = combine(1, orb0.velocity, -1 / orb0.mass, impulse)
-  orb1.velocity = combine(1, orb1.velocity, +1 / orb1.mass, impulse)
+  orb1.velocity = combine(1, orb1.velocity, 1 / orb1.mass, impulse)
   orb0.onCollide(orb1)
   orb1.onCollide(orb0)
 }
