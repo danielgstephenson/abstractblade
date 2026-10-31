@@ -6,12 +6,15 @@ import { Blade } from './blade'
 export class Bot extends Agent {
   align = 1
   skill = 1
+  goal = 'attack'
   blade: Blade
+  wanderPoint: number[]
 
   constructor(level: Level, position: number[]) {
     super(level, position, botColor)
     level.bots.push(this)
     this.blade = new Blade(this, botBladeColor)
+    this.wanderPoint = position
   }
 
   preStep(): void {

@@ -1,4 +1,4 @@
-import { direct1 } from '../direct/direct1'
+import { direct } from '../level/direct'
 import type { Level } from '../level/level'
 import { clampVec, combine, mul } from '../math'
 import { maxSpeed, timeStep } from '../parameters'
@@ -19,9 +19,5 @@ export function step(level: Level): void {
   collideOrbsWalls(level.rocks, level.walls)
   collideOrbsOrbs(level.rocks, level.blades)
   collideOrbsWalls(level.orbs, level.walls)
-  takeAction(level)
-}
-
-function takeAction(level: Level): void {
-  if (level.id === 'level1') direct1(level)
+  direct(level)
 }

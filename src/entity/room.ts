@@ -6,25 +6,25 @@ import { Wall } from './wall'
 export class Room extends Entity {
   polygon: number[][]
   wall: Wall
-  visited = false
+  revealed = false
 
   constructor(level: Level, polygon: number[][]) {
     super(level)
     level.rooms.push(this)
     this.polygon = structuredClone(polygon)
     this.wall = new Wall(level, polygon, 'black')
-    this.visit()
+    this.reveal()
   }
 
-  visit(): void {
-    this.visited = true
+  reveal(): void {
+    this.revealed = true
     this.level.reveal.poly(this.polygon.flat()).fill(0xffffff)
   }
 
   check(): void {
-    if (this.visited) return
+    if (this.revealed) return
     if (insidePolygon(this.level.player.position, this.polygon)) {
-      this.visit()
+      this.reveal()
     }
   }
 

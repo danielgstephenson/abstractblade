@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="0.89161746"
-     inkscape:cx="200.75874"
-     inkscape:cy="452.54834"
+     inkscape:zoom="0.63046875"
+     inkscape:cx="-377.4969"
+     inkscape:cy="-1406.0967"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="rockLayer"
+     inkscape:current-layer="agentLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -156,12 +156,13 @@
   <g
      inkscape:groupmode="layer"
      id="roomLayer"
-     inkscape:highlight-color="#3e67e3">
+     inkscape:highlight-color="#3e67e3"
+     sodipodi:insensitive="true">
     <path
        id="room1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 160,-820 -600,-40 v -420 H 40 l 400,-80 120,80 260,240 v 280 l -260,60 -20,-120 H 400 l 20,140 120,20 50,320 L 560,340 360,380 -40,320 0,-680 h 200 z"
-       sodipodi:nodetypes="cccccccccccccccccccc"
+       d="m 160,-940 -580,-60 -20,-280 H 40 l 400,-80 120,80 260,240 v 280 l -260,60 -20,-120 -140,50 -320,-20 10,70 450,60 50,320 -30,140 -200,40 -550,-80 60,-470 -30,-190 h 320 z"
+       sodipodi:nodetypes="cccccccccccccccccccccc"
        role="room" />
     <path
        id="room2"
@@ -172,13 +173,13 @@
     <path
        id="room3"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -130,-2400 390,160 60,560 80,-40 200,-160 480,40 140,520 -400,240 -380,-320 -400,90 -440,-10 h -560 l 40,-560 360,-160 360,180 240,240 45,-64.953 L -410,-2080 Z"
+       d="m -130,-2400 390,160 60,560 80,-40 200,-160 480,40 140,520 -400,240 -380,-320 -400,90 -440,-10 -500,-40 v -280 l 320,-120 340,-40 280,180 45,-64.953 L -410,-2080 Z"
        sodipodi:nodetypes="ccccccccccccccccccc"
        role="room" />
     <path
        id="room4"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -43.364672,506.54131 10,-180 410.000002,60 180,-40 L 540,560 90,550 Z"
+       d="m -210,-60 30,-160 540,80 180,-40 -16.63533,213.45869 -450,-10 z"
        sodipodi:nodetypes="ccccccc"
        role="room" />
   </g>
@@ -201,7 +202,7 @@
     <path
        id="wall1-2"
        style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 210,-680 -20,-60 110,-20 100,10 10,70 -100,20 z"
+       d="m -120,-720 -10,-60 100,-20 100,10 10,70 -100,20 z"
        role="wall"
        sodipodi:nodetypes="ccccccc" />
   </g>
@@ -211,14 +212,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
-       x="310.0325"
-       y="-688.64752"
+       x="-19.967501"
+       y="-728.64752"
        id="gate1"
        quota="2"><tspan
          sodipodi:role="line"
          id="tspan1"
-         x="310.0325"
-         y="-688.64752"
+         x="-19.967501"
+         y="-728.64752"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">00/00</tspan></text>
     <text
        xml:space="preserve"
@@ -238,18 +239,18 @@
      id="savePointLayer"
      inkscape:highlight-color="#0053ff">
     <path
-       style="fill:none;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linejoin:miter;stroke-opacity:1;stroke-linecap:square"
-       d="m 410,480 50,-50 50,50 -50,50 -50,-50"
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 393.36467,-46.54131 50,-50 50,50 -50,50 -50,-50"
        id="savePoint1"
        role="savePoint" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 240,470 50,-50 50,50 -50,50 -50,-50"
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 223.36467,-56.54131 50,-50 50,50 -50,50 -50,-50"
        id="savePoint7"
        role="savePoint" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 60,260 50,-50 50,50 -50,50 -50,-50"
+       style="fill:#000000;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 210,-880 50,-50 50,50 -50,50 -50,-50"
        id="savePoint2"
        role="savePoint" />
     <path
@@ -259,7 +260,7 @@
        role="savePoint" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 600,-1760 50,-50 50,50 -50,50 -50,-50"
+       d="m 770,-1180 50,-50 50,50 -50,50 -50,-50"
        id="savePoint5"
        role="savePoint" />
     <path
@@ -275,8 +276,8 @@
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal1"
-       cx="90"
-       cy="440"
+       cx="100"
+       cy="-90"
        role="portal"
        r="62.5" />
     <circle
@@ -305,8 +306,8 @@
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal5"
-       cx="830"
-       cy="-1210"
+       cx="660"
+       cy="-1320"
        role="portal"
        r="62.5" />
     <circle
@@ -330,13 +331,13 @@
        role="arrow" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-4)"
-       d="M 820.69853,-1201.2675 670,-1070"
+       d="m 660,-1320 -120,100"
        id="arrow3"
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
-       d="M 90,440 110,260"
+       d="m 116.14281,-88.655944 20,-179.999996"
        id="arrow2"
        sodipodi:nodetypes="cc"
        role="arrow" />
@@ -354,15 +355,15 @@
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock1"
-       cx="180"
-       cy="500"
+       cx="163.36467"
+       cy="-26.541309"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock1-1"
-       cx="375.35315"
-       cy="503.43246"
+       cx="358.71783"
+       cy="-23.108845"
        role="rock"
        r="5" />
     <circle
@@ -396,22 +397,15 @@
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock12"
-       cx="170"
-       cy="-510"
-       role="rock"
-       r="5" />
-    <circle
-       style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
-       id="rock13"
-       cx="500"
-       cy="-150"
+       cx="-40"
+       cy="-620"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-8"
        cx="260"
-       cy="10"
+       cy="-450"
        role="rock"
        r="5" />
     <circle
@@ -438,36 +432,36 @@
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-8-16"
-       cx="-660"
-       cy="-1350"
+       cx="-600"
+       cy="-1380"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-5"
-       cx="90"
-       cy="130"
+       cx="370"
+       cy="-280"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-1"
-       cx="470"
-       cy="190"
+       cx="160"
+       cy="-1160"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-7"
-       cx="340"
-       cy="-230"
+       cx="30"
+       cy="-1120"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-2"
-       cx="270"
-       cy="290"
+       cx="420"
+       cy="-460"
        role="rock"
        r="5" />
     <circle
@@ -480,15 +474,15 @@
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock4"
-       cx="140"
-       cy="-230"
+       cx="32.330505"
+       cy="-296.45227"
        role="rock"
        r="5" />
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock5"
-       cx="220"
-       cy="-870"
+       cx="540"
+       cy="-1040"
        role="rock"
        r="5" />
     <circle
@@ -522,8 +516,8 @@
     <circle
        style="fill:#4d4d4d;fill-opacity:1;stroke-width:4.53255;stroke-linejoin:round;stroke-dasharray:9.06513, 9.06513"
        id="rock13-8-3"
-       cx="-180"
-       cy="-910"
+       cx="280"
+       cy="-1220"
        role="rock"
        r="5" />
     <circle
@@ -549,39 +543,55 @@
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player1"
-       cx="460"
-       cy="480"
+       cx="443.36469"
+       cy="-46.541309"
        role="player"
        r="15" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="bot1"
-       cx="310"
-       cy="-530"
+       cx="320"
+       cy="-400"
+       role="bot"
+       r="15"
+       goal="evade"
+       skill="50" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot2"
+       cx="-340"
+       cy="-1160"
+       role="bot"
+       r="15"
+       goal="charge"
+       skill="1" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot2-1"
+       cx="-400"
+       cy="-1600"
+       role="bot"
+       r="15"
+       goal="charge"
+       skill="1" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot2-3"
+       cx="-240"
+       cy="-1400"
+       role="bot"
+       r="15"
+       goal="charge"
+       skill="1" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot3"
+       cx="-620"
+       cy="-1640"
        role="bot"
        r="15"
        goal="attack"
        skill="1" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot1-8"
-       cx="-360"
-       cy="-920"
-       role="bot"
-       r="15"
-       goal="attack"
-       skill="1"
-       inkscape:label="bot2" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot1-5"
-       cx="-560"
-       cy="-1980"
-       role="bot"
-       r="15"
-       goal="attack"
-       skill="1"
-       inkscape:label="bot3" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -590,19 +600,19 @@
     <path
        id="star1"
        style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="m 222.94266,-588.86265 -9.339,-6.15096 -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 L 220,-600 Z"
+       d="m -74.15732,-639.01736 -9.339,-6.15096 -9.20206,6.37338 L -90,-650 l -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
     <path
        id="star2"
        style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 409.339,-573.84904 400,-580 l -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
+       d="m 174.47248,-641.81892 -9.339,-6.15096 -9.20206,6.37338 2.69838,-11.20506 L 150,-660 l 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
     <path
        id="star3"
        style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="m -850.52752,-1765.2224 -9.339,-6.151 -9.20206,6.3734 2.69838,-11.2051 -8.6298,-7.1984 11.00664,-0.7743 3.86856,-10.8222 4.10408,10.7266 11.02072,0.51 -8.47018,7.4036 z"
+       d="m -765.52752,-1461.459 -9.339,-6.151 -9.20206,6.3734 2.69838,-11.2051 -8.6298,-7.1984 11.00664,-0.7743 3.86856,-10.8222 4.10408,10.7266 11.02072,0.51 -8.47018,7.4036 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>

@@ -2,19 +2,33 @@ import * as ort from 'onnxruntime-web'
 import { actionVectors, mul, range, sub, toMatrix, whichMax } from '../math'
 import type { Agent } from '../entity/agent'
 import { movePower } from '../parameters'
+import type { Bot } from '../entity/bot'
 
 const inputSize = 22
 
+let busy = true
 export const chargeSession = await ort.InferenceSession.create('onnx/charge.onnx')
 export const attackSession = await ort.InferenceSession.create('onnx/attack.onnx')
 export const defendSession = await ort.InferenceSession.create('onnx/defend.onnx')
 export const evadeSession = await ort.InferenceSession.create('onnx/evade.onnx')
+busy = false
 
-const running = new Set<ort.InferenceSession>()
+export async function act(chargers: Bot[], attackers: Bot[], defenders: Bot[], evaders: Bot[], target: Agent) {
+  if (busy) return
+  busy = true
+  try {
+    await actSession(chargeSession, chargers, target)
+    await actSession(attackSession, attackers, target)
+    await actSession(defendSession, defenders, target)
+    await actSession(evadeSession, evaders, target)
+  } catch (error) {
+    console.error('act failed', error)
+  } finally {
+    busy = false
+  }
+}
 
-export async function act(session: ort.InferenceSession, bots: Agent[], target: Agent) {
-  if (running.has(session)) return
-  running.add(session)
+export async function actSession(session: ort.InferenceSession, bots: Agent[], target: Agent) {
   try {
     const actors: Agent[] = []
     const states: number[] = []
@@ -47,7 +61,5 @@ export async function act(session: ort.InferenceSession, bots: Agent[], target: 
     }
   } catch (error) {
     console.error('act failed', error)
-  } finally {
-    running.delete(session)
   }
 }

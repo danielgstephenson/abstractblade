@@ -135,7 +135,7 @@ export class Level extends Container {
   save(): void {
     const levelSummary = {
       id: this.id,
-      rooms: this.rooms.map(room => room.visited),
+      rooms: this.rooms.map(room => room.revealed),
       stars: this.stars.map(star => star.removed),
       triggers: this.triggers.map(trigger => trigger.removed),
       walls: this.walls.map(wall => wall.removed),
@@ -148,7 +148,7 @@ export class Level extends Container {
     const summary = this.game.summary.get(this.id)
     if (summary == null) return
     summary.rooms.forEach((visited, i) => {
-      if (visited) this.rooms[i].visit()
+      if (visited) this.rooms[i].reveal()
     })
     summary.stars.forEach((removed, i) => {
       if (removed) this.stars[i].remove()
@@ -161,6 +161,17 @@ export class Level extends Container {
     })
     this.player.position = summary.savePoint
     this.player.blade.position = summary.savePoint
+  }
+
+  rayCast(origin: number[], vector: number[]): number[] {
+    const hits: number[] = []
+    this.walls.forEach(wall => {
+      if (wall.removed) return
+      const rayHits = rayCastPolygon(origin, vector, wall.polygon)
+      const segmentHits = rayHits.filter(t => t <= 1)
+      hits.push(...segmentHits)
+    })
+    return hits
   }
 
   segmentCast(segmentStart: number[], segmentEnd: number[]): number[] {
