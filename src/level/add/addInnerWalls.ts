@@ -4,7 +4,7 @@ import type { Level } from '../level'
 import { getChildById } from './getChildById'
 import { getPathPoints } from './getPathPoints'
 
-export function addWalls(level: Level) {
+export function addInnerWalls(level: Level) {
   const layer = getChildById(level.svgNode, 'wallLayer')
   const nodes = layer.children.filter(child => child.attributes.role === 'wall')
   nodes.forEach(node => {

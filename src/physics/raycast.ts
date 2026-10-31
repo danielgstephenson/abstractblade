@@ -27,6 +27,14 @@ export function rayCastPolygon(rayStart: number[], rayVector: number[], polygon:
 }
 
 export function insidePolygon(point: number[], polygon: number[][]): boolean {
-  const hitFactors = rayCastPolygon(point, [1, 0], polygon)
-  return hitFactors.length % 2 === 1
+  const [px, py] = point
+  const crossings = range(polygon.length).filter(i => {
+    const j = i > 0 ? i - 1 : polygon.length - 1
+    const [xi, yi] = polygon[i]
+    const [xj, yj] = polygon[j]
+    if (yi > py === yj > py) return false
+    const x = xi + ((py - yi) / (yj - yi)) * (xj - xi)
+    return px < x
+  })
+  return crossings.length % 2 === 1
 }

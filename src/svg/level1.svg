@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="1.2609375"
-     inkscape:cx="121.33829"
-     inkscape:cy="31.325898"
+     inkscape:zoom="0.63046875"
+     inkscape:cx="589.24411"
+     inkscape:cy="-2226.1214"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="rockLayer"
+     inkscape:current-layer="savePointLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -155,32 +155,32 @@
   </defs>
   <g
      inkscape:groupmode="layer"
-     id="boundaryLayer"
+     id="roomLayer"
      inkscape:highlight-color="#3e67e3">
     <path
-       id="boundary1"
+       id="room1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 100,-1060 240,-80 -20,-400 500,500 v 280 l -260,60 -20,-120 -160,-80 40,220 120,20 50,320 L 560,340 360,380 -40,320 0,-680 h 200 z"
+       d="m 100,-1060 -20,-300 240,-180 500,500 v 280 l -260,60 -20,-120 H 400 l 20,140 120,20 50,320 L 560,340 360,380 -40,320 0,-680 h 200 z"
        sodipodi:nodetypes="ccccccccccccccccc"
-       role="boundary" />
+       role="room" />
     <path
-       id="boundary2"
+       id="room2"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
        d="m 560,-680 280,-40 20,-340 380,-240 140,700 -300,280 -460,280 v -300 z"
        sodipodi:nodetypes="ccccccccc"
-       role="boundary" />
+       role="room" />
     <path
-       id="boundary2-2"
+       id="room3"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -130,-2400 410,140 20,480 780,-80 400,160 -260,380 -400,240 -520,-500 v 360 l -240,120 -480,-300 280,-340 160,100 120,80 30,-50 -580,-470 z"
+       d="m -130,-2400 390,160 60,560 760,-180 400,160 -260,380 -400,240 -520,-500 -240,200 -160,140 -460,-340 320,-300 200,180 80,80 45,-64.953 L -410,-2080 Z"
        sodipodi:nodetypes="ccccccccccccccccc"
-       role="boundary" />
+       role="room" />
     <path
-       id="boundary2-8"
+       id="room4"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
        d="m -40,520 10,-180 410,60 180,-40 20,200 -360,60 z"
        sodipodi:nodetypes="ccccccc"
-       role="boundary" />
+       role="room" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -195,15 +195,15 @@
     <path
        id="wall1-1"
        style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="M 85,-1684.953 V -1770 l 150,-30 60,20 -10,80 -120,20 z"
+       d="m 90,-1690 -60,-50 80,-20 190,-10 10,90 -130,20 z"
        role="wall"
        sodipodi:nodetypes="ccccccc" />
     <path
        id="wall1-2"
        style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 210,-670 v -40 l 30,-20 160,10 10,30 -10,40 -40,10 H 240 Z"
+       d="m 210,-680 -20,-60 110,-20 100,10 10,70 -100,20 z"
        role="wall"
-       sodipodi:nodetypes="ccccccccc" />
+       sodipodi:nodetypes="ccccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -212,26 +212,61 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
        x="310.0325"
-       y="-658.64752"
+       y="-688.64752"
        id="gate1"
        quota="2"><tspan
          sodipodi:role="line"
          id="tspan1"
          x="310.0325"
-         y="-658.64752"
+         y="-688.64752"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">00/00</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
        x="190.0325"
-       y="-1718.6475"
+       y="-1698.6475"
        id="gate2"
        quota="3"><tspan
          sodipodi:role="line"
          id="tspan1-4"
          x="190.0325"
-         y="-1718.6475"
+         y="-1698.6475"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">00/00</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="savePointLayer"
+     inkscape:highlight-color="#0053ff">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linejoin:miter;stroke-opacity:1;stroke-linecap:square"
+       d="m 410,480 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint1"
+       role="savePoint" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60,260 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint2"
+       role="savePoint" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 710,-600 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint3"
+       role="savePoint" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 620,-1070 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint4"
+       role="savePoint" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1000,-1320 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint5"
+       role="savePoint" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1f4ead;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,-2210 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint6"
+       role="savePoint" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -252,7 +287,7 @@
        role="portal"
        r="62.5"
        level="level2"
-       entrance="entrance1" />
+       entrance="savePoint1" />
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal3"
@@ -260,25 +295,6 @@
        cy="-800"
        role="portal"
        r="62.5" />
-    <circle
-       style="fill:#1a1a1a;fill-opacity:1;stroke:#bb33ff;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="trigger1"
-       cx="820"
-       cy="-430"
-       role="trigger"
-       r="62.5" />
-    <path
-       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
-       d="M 81.53664,434.23042 111.14011,248.36921"
-       id="arrow2"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
-    <path
-       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-71)"
-       d="m 810,-430 190,-100"
-       id="arrow2-7"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal4"
@@ -293,37 +309,43 @@
        cy="-1210"
        role="portal"
        r="62.5" />
+    <circle
+       style="fill:#1a1a1a;fill-opacity:1;stroke:#bb33ff;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="trigger1"
+       cx="820"
+       cy="-430"
+       role="trigger"
+       r="62.5" />
+    <path
+       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-71)"
+       d="m 810,-430 190,-100"
+       id="arrow6"
+       sodipodi:nodetypes="cc"
+       role="arrow" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-71-2)"
-       d="M 1148.8752,-1127.0761 1050,-1330"
-       id="arrow2-7-5"
+       d="M 1148.8752,-1127.0761 1050,-1320"
+       id="arrow4"
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
        style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-4)"
-       d="m 820.69853,-1201.2675 -160,120"
+       d="M 820.69853,-1201.2675 670,-1070"
        id="arrow3"
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
+       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
+       d="M 90,440 110,260"
+       id="arrow2"
+       sodipodi:nodetypes="cc"
+       role="arrow" />
+    <path
        style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-7)"
-       d="m 677.27977,-806.07461 80,210"
+       d="M 677.27977,-806.07461 760,-600"
        id="arrow1"
        sodipodi:nodetypes="cc"
        role="arrow" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="entranceLayer"
-     inkscape:highlight-color="#227eff"
-     style="fill:none">
-    <circle
-       style="fill:#1a1a1a;fill-opacity:1;stroke:#003b7a;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="entrance1"
-       cx="70"
-       cy="-2260"
-       role="entrance"
-       r="50" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -451,6 +473,47 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="agentLayer"
+     inkscape:highlight-color="#0053ff"
+     style="fill:none">
+    <circle
+       style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="player1"
+       cx="460"
+       cy="480"
+       role="player"
+       r="15" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot1"
+       cx="310"
+       cy="-530"
+       role="bot"
+       r="15" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot4"
+       cx="220"
+       cy="-1400"
+       role="bot"
+       r="15" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot2"
+       cx="1280"
+       cy="-1660"
+       role="bot"
+       r="15" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot3"
+       cx="-40"
+       cy="-1620"
+       role="bot"
+       r="15" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="starLayer"
      inkscape:highlight-color="#ffff00">
     <path
@@ -468,49 +531,8 @@
     <path
        id="star3"
        style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="m 5.4932,-1590.949 -9.339,-6.151 -9.20206,6.3734 2.69838,-11.2051 -8.6298,-7.1984 11.00664,-0.7743 3.86856,-10.8222 L 0,-1610 l 11.02072,0.51 -8.47018,7.4036 z"
+       d="m -241.45894,-1620.2224 -9.339,-6.151 L -260,-1620 l 2.69838,-11.2051 -8.6298,-7.1984 11.00664,-0.7743 3.86856,-10.8222 4.10408,10.7266 11.02072,0.51 -8.47018,7.4036 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="agentLayer"
-     inkscape:highlight-color="#0053ff"
-     style="fill:none">
-    <circle
-       style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="player1"
-       cx="450"
-       cy="480"
-       role="player"
-       r="15" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot1"
-       cx="290"
-       cy="-520"
-       role="bot"
-       r="15" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot4"
-       cx="390"
-       cy="-1410"
-       role="bot"
-       r="15" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot2"
-       cx="1280"
-       cy="-1660"
-       role="bot"
-       r="15" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot3"
-       cx="-120"
-       cy="-1680"
-       role="bot"
-       r="15" />
   </g>
 </svg>

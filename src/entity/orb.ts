@@ -19,6 +19,7 @@ export class Orb extends Entity {
   position = [0, 0]
   velocity = [0, 0]
   force = [0, 0]
+  spawnPoint = [0, 0]
 
   constructor(level: Level, position: number[], radius: number, color: ColorSource, trailCount = 100) {
     super(level)
@@ -31,6 +32,7 @@ export class Orb extends Entity {
     this.trailContainer = new Container()
     this.level.trailContainer.addChild(this.trailContainer)
     this.position = structuredClone(position)
+    this.spawnPoint = structuredClone(position)
     this.container.x = position[0]
     this.container.y = position[1]
     this.radius = radius

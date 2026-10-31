@@ -24,14 +24,14 @@
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
      inkscape:zoom="1"
-     inkscape:cx="669"
-     inkscape:cy="-310.5"
+     inkscape:cx="330.5"
+     inkscape:cy="-630.5"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="gateLayer"
+     inkscape:current-layer="savePointLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -92,37 +92,18 @@
          sodipodi:nodetypes="ccc"
          id="path1-6-36-2-1-8-1" />
     </marker>
-    <marker
-       style="overflow:visible"
-       id="ArrowWide-3-76-7-6-4-2"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path1-6-36-2-1-8-7" />
-    </marker>
   </defs>
   <g
      inkscape:groupmode="layer"
-     id="boundaryLayer"
-     inkscape:highlight-color="#3e67e3">
+     id="roomLayer"
+     inkscape:highlight-color="#3e67e3"
+     sodipodi:insensitive="true">
     <path
-       id="boundary1"
+       id="room1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
        d="m -80,-620 40,-840 640,260 160,480 -80,440 -673.79444,46.14105 z"
        sodipodi:nodetypes="ccccccc"
-       role="boundary" />
+       role="room" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -146,6 +127,22 @@
      id="gateLayer" />
   <g
      inkscape:groupmode="layer"
+     id="savePointLayer"
+     inkscape:highlight-color="#227eff"
+     style="fill:none">
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 140,-340 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint1"
+       role="savePoint" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 200,-820 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint2"
+       role="savePoint" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="portalLayer"
      inkscape:highlight-color="#999999">
     <circle
@@ -163,7 +160,7 @@
        role="portal"
        r="62.5"
        level="level1"
-       entrance="entrance1" />
+       entrance="savePoint6" />
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#bb33ff;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="trigger1"
@@ -178,30 +175,11 @@
        sodipodi:nodetypes="cc"
        role="arrow" />
     <path
-       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-2)"
-       d="m 460,-360 v 220"
-       id="arrow2-5"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
-    <path
        style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-7)"
        d="m 120,-980 49.28248,-211.0203"
        id="arrow1"
        sodipodi:nodetypes="cc"
        role="arrow" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="entranceLayer"
-     inkscape:highlight-color="#227eff"
-     style="fill:none">
-    <circle
-       style="fill:#1a1a1a;fill-opacity:1;stroke:#003b7a;stroke-width:5;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="entrance1"
-       cx="190"
-       cy="-340"
-       role="entrance"
-       r="50" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -280,17 +258,6 @@
   </g>
   <g
      inkscape:groupmode="layer"
-     id="starLayer"
-     inkscape:highlight-color="#ffff00">
-    <path
-       id="star1"
-       style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 629.339,-413.84904 620,-420 l -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
-       role="star"
-       sodipodi:nodetypes="ccccccccccc" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
      id="agentLayer"
      inkscape:highlight-color="#0053ff"
      style="fill:none">
@@ -308,5 +275,16 @@
        cy="-740"
        role="bot"
        r="15" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="starLayer"
+     inkscape:highlight-color="#ffff00">
+    <path
+       id="star1"
+       style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
+       d="M 629.339,-413.84904 620,-420 l -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
+       role="star"
+       sodipodi:nodetypes="ccccccccccc" />
   </g>
 </svg>

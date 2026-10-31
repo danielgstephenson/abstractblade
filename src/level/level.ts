@@ -14,7 +14,6 @@ import { build } from './build'
 import type { Rock } from '../entity/rock'
 import type { Trigger } from '../entity/trigger'
 import type { Star } from '../entity/star'
-import { SavePoint } from '../entity/savePoint'
 import { svgs } from '../svg/svgs'
 import type { Entrance } from '../entity/entrance'
 import type { Gate } from '../entity/gate'
@@ -22,6 +21,7 @@ import type { Room } from '../entity/room'
 import type { Bot } from '../entity/bot'
 import { sub } from '../math'
 import { rayCastPolygon } from '../physics/raycast'
+import type { SavePoint } from '../entity/savePoint'
 
 export class Level extends Container {
   arenaDiv = document.getElementById('arena') as HTMLDivElement
@@ -40,11 +40,11 @@ export class Level extends Container {
   bladeContainer = new Container()
   agentContainer = new Container()
   player: Player
-  savePoint: SavePoint
   entities: Entity[] = []
   entrances: Entrance[] = []
   walls: Wall[] = []
   innerWalls: Wall[] = []
+  savePoints: SavePoint[] = []
   rooms: Room[] = []
   gates: Gate[] = []
   portals: Portal[] = []
@@ -55,6 +55,7 @@ export class Level extends Container {
   agents: Agent[] = []
   bots: Bot[] = []
   blades: Blade[] = []
+  nonPlayerOrbs: Orb[] = []
   activePortal?: Portal
   transportRequested = false
   id: keyof typeof svgs
@@ -83,13 +84,12 @@ export class Level extends Container {
     this.addChild(this.reveal)
     this.mask = this.reveal
     this.player = new Player(this, [0, 0])
-    this.savePoint = new SavePoint(this, [0, 0])
     build(this)
     this.load()
-    this.entrances.forEach(e => {
-      if (e.id === entrance) {
-        this.player.position = structuredClone(e.position)
-        this.player.blade.position = structuredClone(e.position)
+    this.savePoints.forEach(savePoint => {
+      if (savePoint.id === entrance) {
+        this.player.position = structuredClone(savePoint.center)
+        this.player.blade.position = structuredClone(savePoint.center)
       }
     })
     this.rooms.forEach(room => room.check())
@@ -133,14 +133,13 @@ export class Level extends Container {
   }
 
   save(): void {
-    this.savePoint.position = structuredClone(this.player.position)
     const levelSummary = {
       id: this.id,
       rooms: this.rooms.map(room => room.visited),
       stars: this.stars.map(star => star.removed),
       triggers: this.triggers.map(trigger => trigger.removed),
       walls: this.walls.map(wall => wall.removed),
-      savePoint: this.player.position,
+      savePoint: this.player.spawnPoint,
     }
     this.game.summary.set(this.id, levelSummary)
   }
@@ -160,7 +159,6 @@ export class Level extends Container {
     summary.walls.forEach((removed, i) => {
       if (removed) this.walls[i].remove()
     })
-    this.savePoint.position = summary.savePoint
     this.player.position = summary.savePoint
     this.player.blade.position = summary.savePoint
   }

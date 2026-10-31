@@ -1,4 +1,5 @@
 import type { Orb } from '../entity/orb'
+import type { SavePoint } from '../entity/savePoint'
 import type { Wall } from '../entity/wall'
 import { clamp, combine, dirFromTo, dot, getMagnitude, mul, range, sub, sum } from '../math'
 
@@ -42,7 +43,7 @@ export function collideOrbOrb(orb0: Orb, orb1: Orb): void {
   orb1.onCollide(orb0)
 }
 
-export function collideOrbsWalls(orbs: Orb[], walls: Wall[]): void {
+export function collideOrbsWalls(orbs: Orb[], walls: (Wall | SavePoint)[]): void {
   orbs.forEach(orb => {
     walls.forEach(wall => {
       collideOrbWall(orb, wall)

@@ -5,7 +5,6 @@ import { initTriggerTexture } from './texture/triggerTexture'
 import { initCircleTexture } from './texture/circleTexture'
 import { initPortalTexture } from './texture/portalTexture'
 import { initStarTexture } from './texture/starTexture'
-import { initSavePointTexture } from './texture/savePointTexture'
 
 await Assets.load({ src: '/Lekton-Bold.ttf', data: { family: 'Lekton-Bold', weights: ['bold'] } })
 
@@ -24,9 +23,8 @@ initCircleTexture(app.renderer)
 initPortalTexture(app.renderer)
 initTriggerTexture(app.renderer)
 initStarTexture(app.renderer)
-initSavePointTexture(app.renderer)
 
-const cornerLabels = document.querySelectorAll('.cornerLabel') as NodeListOf<HTMLDivElement>
+const cornerLabels = document.querySelectorAll<HTMLDivElement>('.cornerLabel')
 cornerLabels.forEach(cornerLabel => {
   cornerLabel.style.color = hudColor
 })
