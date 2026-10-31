@@ -24,14 +24,14 @@
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
      inkscape:zoom="1"
-     inkscape:cx="330.5"
-     inkscape:cy="-630.5"
+     inkscape:cx="331"
+     inkscape:cy="-631.5"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="savePointLayer"
+     inkscape:current-layer="agentLayer"
      showborder="false"
      showgrid="true"
      showguides="false">
@@ -274,7 +274,9 @@
        cx="600"
        cy="-740"
        role="bot"
-       r="15" />
+       r="15"
+       goal="attack"
+       skill="1" />
   </g>
   <g
      inkscape:groupmode="layer"

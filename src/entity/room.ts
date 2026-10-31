@@ -13,6 +13,7 @@ export class Room extends Entity {
     level.rooms.push(this)
     this.polygon = structuredClone(polygon)
     this.wall = new Wall(level, polygon, 'black')
+    this.visit()
   }
 
   visit(): void {

@@ -2,7 +2,7 @@ import { Container, Graphics, Ticker } from 'pixi.js'
 import { parseSync, type INode } from 'svgson'
 import type { Game } from '../game'
 import { Entity } from '../entity/entity'
-import { timeScale, timeStep } from '../parameters'
+import { timeScale, timeStep, visionRange } from '../parameters'
 import { step } from '../physics/step'
 import { Blade } from '../entity/blade'
 import { Player } from '../entity/player'
@@ -19,7 +19,7 @@ import type { Entrance } from '../entity/entrance'
 import type { Gate } from '../entity/gate'
 import type { Room } from '../entity/room'
 import type { Bot } from '../entity/bot'
-import { sub } from '../math'
+import { combine, sub, visionVectors } from '../math'
 import { rayCastPolygon } from '../physics/raycast'
 import type { SavePoint } from '../entity/savePoint'
 
@@ -174,6 +174,15 @@ export class Level extends Container {
       hits.push(...segmentHits)
     })
     return hits
+  }
+
+  visionCast(origin: number[]) {
+    const ends = visionVectors.map(v => combine(1, origin, visionRange, v))
+    return ends.map(end => {
+      const hits = this.segmentCast(origin, end)
+      hits.push(1)
+      return Math.min(...hits)
+    })
   }
 }
 

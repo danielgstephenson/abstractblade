@@ -177,11 +177,13 @@ export function toMatrix<T>(flatArray: T[], dims: number[]): T[][] {
 }
 
 export const actionVectors: number[][] = []
+export const visionVectors: number[][] = []
 actionVectors.push([0, 0])
 range(8).forEach(i => {
   const angle = (2 * Math.PI * i) / 8
   const dir = angleToDir(angle)
   actionVectors.push(dir)
+  visionVectors.push(dir)
 })
 
 export function roundDir(vector: number[]): number[] {

@@ -5,6 +5,7 @@ import { Blade } from './blade'
 
 export class Bot extends Agent {
   align = 1
+  skill = 1
   blade: Blade
 
   constructor(level: Level, position: number[]) {
