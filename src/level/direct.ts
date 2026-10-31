@@ -2,7 +2,7 @@ import { act } from './brain'
 import type { Bot } from '../entity/bot'
 import { Level } from './level'
 import { agentRadius, movePower, timeStep, visionRange } from '../parameters'
-import { combine, dirFromTo, getDistance, getRandomDir, mul } from '../math'
+import { combine, dirFromTo, getDistance, getRandomDir, mul, roundDir } from '../math'
 
 export function direct(level: Level): void {
   const player = level.player
@@ -18,7 +18,11 @@ export function direct(level: Level): void {
       wander(bot)
       return
     }
-    if (Math.random() > bot.skill * timeStep) return
+    if (Math.random() > bot.frequency * timeStep) return
+    if (Math.random() < bot.noise) {
+      bot.force = mul(movePower, roundDir(getRandomDir()))
+      return
+    }
     if (bot.goal === 'charge') chargers.push(bot)
     if (bot.goal === 'attack') attackers.push(bot)
     if (bot.goal === 'defend') defenders.push(bot)

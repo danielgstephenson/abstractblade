@@ -5,7 +5,8 @@ import { Blade } from './blade'
 
 export class Bot extends Agent {
   align = 1
-  skill = 1
+  frequency = 1
+  noise = 0
   goal = 'attack'
   blade: Blade
   wanderPoint: number[]

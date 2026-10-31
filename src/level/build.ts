@@ -4,7 +4,7 @@ import { addRooms } from './add/addRooms'
 import { setupPlayer } from './add/setupPlayer'
 import { addBots } from './add/addBots'
 import { addPortals } from './add/addPortals'
-import { addRocks } from './add/addRocks'
+// import { addRocks } from './add/addRocks'
 import { addTriggers } from './add/addTriggers'
 import { addStars } from './add/addStars'
 import { addGates } from './add/addGates'
@@ -16,7 +16,7 @@ export function build(level: Level): void {
   addInnerWalls(level)
   addSavePoints(level)
   addGates(level)
-  addRocks(level)
+  // addRocks(level)
   addBots(level)
   addPortals(level)
   addTriggers(level)

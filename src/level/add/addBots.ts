@@ -9,7 +9,8 @@ export function addBots(level: Level): void {
     const x = Number(node.attributes.cx)
     const y = Number(node.attributes.cy)
     const bot = new Bot(level, [x, y])
-    bot.skill = Number(node.attributes.skill)
+    bot.frequency = Number(node.attributes.frequency)
+    bot.noise = Number(node.attributes.noise)
     bot.goal = node.attributes.goal
   })
 }
