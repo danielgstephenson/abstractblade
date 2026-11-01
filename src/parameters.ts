@@ -23,9 +23,9 @@ export const bladeRadius = 25
 export const starRadius = 20
 export const visionRange = 200
 
-export const agentDrag = 0.4
-export const bladeDrag = 0.1
-export const springPower = 2
-export const movePower = 50
+export const agentDrag = 2.0 // 0.4
+export const bladeDrag = 0.4 // 0.1
+export const springPower = 4 // 2
+export const movePower = 150 // 50
 
 export const maxSpeed = 200

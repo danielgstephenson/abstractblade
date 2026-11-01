@@ -1,9 +1,9 @@
 import { InputDevice } from 'pixijs-input-devices'
 import { Agent } from './agent'
 import { movePower, playerBladeColor, playerColor } from '../parameters'
-import { mul, normalize } from '../math'
 import type { Level } from '../level/level'
 import { Blade } from './blade'
+import { mul, normalize } from '../math'
 
 export class Player extends Agent {
   align = 0
@@ -18,7 +18,6 @@ export class Player extends Agent {
   die(): void {
     this.dead = true
     this.level.paused = true
-    // this.level.reset()
   }
 
   preStep(): void {
