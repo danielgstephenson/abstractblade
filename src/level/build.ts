@@ -9,14 +9,15 @@ import { addTriggers } from './add/addTriggers'
 import { addStars } from './add/addStars'
 import { addGates } from './add/addGates'
 import { addSavePoints } from './add/addSavePoints'
+import { addRocks } from './add/addRocks'
 
 export function build(level: Level): void {
   setupPlayer(level)
   addRooms(level)
   addInnerWalls(level)
+  addRocks(level)
   addSavePoints(level)
   addGates(level)
-  // addRocks(level)
   addBots(level)
   addPortals(level)
   addTriggers(level)

@@ -40,6 +40,7 @@ export class Level extends Container {
   bladeContainer = new Container()
   agentContainer = new Container()
   player: Player
+  rockPoints: number[][] = []
   entities: Entity[] = []
   entrances: Entrance[] = []
   walls: Wall[] = []

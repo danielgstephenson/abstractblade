@@ -10,6 +10,7 @@ export function addInnerWalls(level: Level) {
   nodes.forEach(node => {
     const polygon = getPathPoints(node)
     const wall = new Wall(level, polygon, wallColor)
+    wall.clearRockPoints()
     level.innerWalls.push(wall)
   })
 }

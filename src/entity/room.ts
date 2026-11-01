@@ -3,7 +3,6 @@ import type { Level } from '../level/level'
 import { insidePolygon } from '../physics/raycast'
 import { Wall } from './wall'
 import { range } from '../math'
-import { Rock } from './rock'
 
 export class Room extends Entity {
   polygon: number[][]
@@ -16,7 +15,7 @@ export class Room extends Entity {
     this.polygon = structuredClone(polygon)
     this.wall = new Wall(level, polygon, 'black')
     this.reveal()
-    this.addRocks()
+    this.addRockPoints()
   }
 
   reveal(): void {
@@ -35,7 +34,7 @@ export class Room extends Entity {
     this.check()
   }
 
-  addRocks(): void {
+  addRockPoints(): void {
     const xMin = Math.min(...this.polygon.map(p => p[0]))
     const xMax = Math.max(...this.polygon.map(p => p[0]))
     const yMin = Math.min(...this.polygon.map(p => p[1]))
@@ -47,9 +46,8 @@ export class Room extends Entity {
     range(count).forEach(_ => {
       const x = xMin + dx * Math.random()
       const y = yMin + dy * Math.random()
-      const r = 3 + 4 * Math.random()
       if (insidePolygon([x, y], this.polygon)) {
-        void new Rock(this.level, [x, y], r)
+        this.level.rockPoints.push([x, y])
       }
     })
   }

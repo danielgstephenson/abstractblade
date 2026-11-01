@@ -1,6 +1,7 @@
 import { Graphics, type ColorSource } from 'pixi.js'
 import type { Level } from '../level/level'
 import { Entity } from './entity'
+import { insidePolygon } from '../physics/raycast'
 
 export class Wall extends Entity {
   graphics = new Graphics()
@@ -23,5 +24,11 @@ export class Wall extends Entity {
   remove(): void {
     this.removed = true
     this.graphics.visible = false
+  }
+
+  clearRockPoints(): void {
+    this.level.rockPoints = this.level.rockPoints.filter(point => {
+      return !insidePolygon(point, this.polygon)
+    })
   }
 }
