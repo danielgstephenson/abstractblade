@@ -79,8 +79,8 @@ export class Level extends Container {
     this.addChild(this.trailContainer)
     this.addChild(this.rockContainer)
     this.addChild(this.springContainer)
-    this.addChild(this.bladeContainer)
     this.addChild(this.agentContainer)
+    this.addChild(this.bladeContainer)
     this.addChild(this.starContainer)
     this.addChild(this.reveal)
     this.mask = this.reveal
