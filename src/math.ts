@@ -3,8 +3,28 @@ export function range(a: number, b?: number): number[] {
   return [...Array(b - a + 1).keys()].map(i => a + i)
 }
 
-export function sample<T>(options: T[]): T {
-  return options[Math.floor(Math.random() * options.length)]
+export function sample<T>(items: T[], weights?: number[]): T {
+  if (weights == null) {
+    return items[Math.floor(Math.random() * items.length)]
+  }
+  const totalWeight = sum(weights)
+  if (weights.length != items.length) {
+    throw new Error(`weights.length != items.length`)
+  }
+  if (totalWeight <= 0) {
+    throw new Error('Total weight must be greater than zero.')
+  }
+  const randomPoint = Math.random() * totalWeight
+  let cumulativeWeight = 0
+  for (const i of range(items.length)) {
+    const item = items[i]
+    const weight = weights[i]
+    cumulativeWeight += weight
+    if (randomPoint <= cumulativeWeight) {
+      return item
+    }
+  }
+  return items[items.length - 1]
 }
 
 export function sum(array: number[]): number {
