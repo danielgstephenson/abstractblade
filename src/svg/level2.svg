@@ -23,18 +23,18 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="0.5"
-     inkscape:cx="79"
-     inkscape:cy="-577"
+     inkscape:zoom="0.89161746"
+     inkscape:cx="-218.70366"
+     inkscape:cy="238.33091"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg1"
+     inkscape:current-layer="savePointLayer"
      showborder="false"
      showgrid="true"
-     showguides="false">
+     showguides="true">
     <inkscape:grid
        id="grid1"
        units="px"
@@ -47,62 +47,20 @@
        color="#0099e5"
        opacity="0.10196078"
        empspacing="1"
-       enabled="true"
+       enabled="false"
        visible="true" />
   </sodipodi:namedview>
   <defs
-     id="defs1">
-    <marker
-       style="overflow:visible"
-       id="ArrowWide-3-76-7-6-4"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path1-6-36-2-1-8" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="ArrowWide-3-76-7-6-4-7"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Wide arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc"
-         id="path1-6-36-2-1-8-1" />
-    </marker>
-  </defs>
+     id="defs1" />
   <g
      inkscape:groupmode="layer"
      id="roomLayer"
-     inkscape:highlight-color="#3e67e3"
-     sodipodi:insensitive="true">
+     inkscape:highlight-color="#3e67e3">
     <path
-       id="room1"
+       id="room2"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -80,-620 40,-840 640,260 160,480 -80,440 -673.79444,46.14105 z"
-       sodipodi:nodetypes="ccccccc"
+       d="m -214.46773,-110.6383 30.94384,-28.6771 -8.02062,-38.49952 43.12355,12.07794 -18.18315,-85.78925 94.732037,18.28306 83.866865,-28.33697 54.995083,2.02835 -19.503641,23.31861 -4.336506,56.26108 37.251165,6.63691 27.071857,-29.12316 27.05753,38.7672 -55.630861,59.11976 -15.318086,92.898774 45.444427,38.072726 66.43476,-22.049526 18.36226,34.457052 52.72396,19.359945 -43.77772,47.453439 31.96094,74.59359 -110.13713,1.27756 -92.007049,-35.35812 -66.010743,26.01714 52.178812,34.24603 -11.6966243,71.26297 -31.7438717,-48.85196 -30.9964,15.99109 -94.920474,-14.69627 -39.78838,71.75527 77.19882,-23.05362 75.991863,31.19375 9.187969,95.5697 -76.979752,18.92483 -53.4726,51.55626 -57.47521,-19.50774 54.90235,-24.67112 -1.71881,-29.5137 -115.22639,-30.76307 -61.85833,42.28377 11.07703,-63.62469 -44.14533,-29.48797 -7.38552,-45.35652 -79.54712,-21.37611 87.01452,-32.20373 56.97948,29.14593 -0.52792,52.37912 32.68094,-39.48965 -4.89254,-37.04099 -39.9907,-15.82677 33.79093,-31.11113 46.70404,-24.0662 -62.08418,-57.341746 -81.76217,3.413556 -126.23623,-24.5024 -42.29843,-121.666211 91.52297,28.00646 56.70288,-45.834057 36.48891,47.795494 88.35194,-4.089631 55.74936,64.583803 8.06208,-66.903553 48.47223,4.112036 -15.95809,34.422684 17.1506,20.1612 22.2952,-31.9673913 -29.51114,-76.4047027 z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
        role="room" />
   </g>
   <g
@@ -110,35 +68,46 @@
      id="wallLayer"
      inkscape:highlight-color="#808080">
     <path
-       id="wall1"
+       id="wall3"
        style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="M 103.11477,-1142.8028 100,-1240 l 87.30659,-32.8843 67.50755,66.2716 -31.61821,104.6526 z"
+       d="m -68.023045,71.85174 -23.389093,-29.784199 -47.566042,-10.753543 -21.88874,-76.826704 62.733292,-22.550045 76.39019,22.301887 25.2387908,-27.614986 51.9018922,-2.546263 0.791627,65.790102 22.872426,20.185098 -40.287559,38.10376 -56.181453,-1.420574 z"
        role="wall"
-       sodipodi:nodetypes="cccccc" />
-    <path
-       id="wall1-2"
-       style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -15,-500 -10,-150 250,-30 280,50 -140,190 z"
-       role="wall"
-       sodipodi:nodetypes="cccccc" />
+       sodipodi:nodetypes="ccccccccccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
-     id="gateLayer" />
+     id="gateLayer">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
+       x="-49.62326"
+       y="19.852118"
+       id="gate1"
+       quota="5"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="-49.62326"
+         y="19.852118"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">00/00</tspan></text>
+  </g>
   <g
      inkscape:groupmode="layer"
      id="savePointLayer"
-     inkscape:highlight-color="#227eff"
-     style="fill:none">
+     inkscape:highlight-color="#0053ff">
     <path
        style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 140,-340 50,-50 50,50 -50,50 -50,-50"
+       d="m 81.720143,103.2625 49.999997,-49.999996 50,49.999996 -50,50 -49.999997,-50"
        id="savePoint1"
        role="savePoint" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 200,-820 50,-50 50,50 -50,50 -50,-50"
+       d="m -347.85708,45.651861 50,-49.9999964 50,49.9999964 -50,50 -50,-50"
        id="savePoint2"
+       role="savePoint" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -279.62972,324.95238 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint3"
        role="savePoint" />
   </g>
   <g
@@ -148,38 +117,30 @@
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal1"
-       cx="520"
-       cy="-900"
+       cx="-62.469814"
+       cy="-168.60776"
        role="portal"
-       r="62.5" />
+       r="45"
+       level="level3"
+       entrance="savePoint1" />
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="portal1-1"
-       cx="460"
-       cy="-360"
+       id="portal2"
+       cx="-426.66171"
+       cy="31.372437"
        role="portal"
-       r="62.5"
-       level="level1"
-       entrance="savePoint6" />
+       r="45"
+       level="level2A"
+       entrance="savePoint1" />
     <circle
-       style="fill:#1a1a1a;fill-opacity:1;stroke:#bb33ff;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="trigger1"
-       cx="120"
-       cy="-980"
-       role="trigger"
-       r="62.5" />
-    <path
-       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4)"
-       d="M 520,-900 380,-1080"
-       id="arrow2"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
-    <path
-       style="fill:none;fill-opacity:0.119048;stroke:#999999;stroke-width:3;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWide-3-76-7-6-4-7)"
-       d="m 120,-980 49.28248,-211.0203"
-       id="arrow1"
-       sodipodi:nodetypes="cc"
-       role="arrow" />
+       style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="portal2-7"
+       cx="-110.24674"
+       cy="354.04337"
+       role="portal"
+       r="45"
+       level="level2B"
+       entrance="savePoint1" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -189,29 +150,19 @@
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player1"
-       cx="190"
-       cy="-340"
+       cx="133.07396"
+       cy="103.07009"
        role="player"
        r="15" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
-       id="bot1"
-       cx="600"
-       cy="-740"
-       role="bot"
-       r="15"
-       goal="attack"
-       frequency="1"
-       noise="0.5" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="starLayer"
      inkscape:highlight-color="#ffff00">
     <path
-       id="star1"
+       id="star3"
        style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 629.339,-413.84904 620,-420 l -9.20206,6.37338 2.69838,-11.20506 -8.6298,-7.19844 11.00664,-0.77427 3.86856,-10.82223 4.10408,10.72659 11.02072,0.51003 -8.47018,7.40361 z"
+       d="m -178.09553,78.978768 -9.33899,-6.151 -9.20206,6.3734 2.69838,-11.2051 -8.6298,-7.1984 11.00664,-0.7743 3.86856,-10.8222 4.10407,10.7266 11.02072,0.51 -8.47018,7.4036 z"
        role="star"
        sodipodi:nodetypes="ccccccccccc" />
   </g>

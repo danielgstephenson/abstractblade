@@ -76,12 +76,12 @@ export class Level extends Container {
     this.addChild(this.gateContainer)
     this.addChild(this.portalContainer)
     this.addChild(this.triggerContainer)
+    this.addChild(this.starContainer)
     this.addChild(this.trailContainer)
     this.addChild(this.rockContainer)
     this.addChild(this.springContainer)
     this.addChild(this.agentContainer)
     this.addChild(this.bladeContainer)
-    this.addChild(this.starContainer)
     this.addChild(this.reveal)
     this.mask = this.reveal
     this.player = new Player(this, [0, 0])

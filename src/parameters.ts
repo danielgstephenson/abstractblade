@@ -17,8 +17,7 @@ export const chargeInterval = 6
 export const chargeStep = timeStep / chargeInterval
 
 export const agentRadius = 15
-export const savePointRadius = 50
-export const portalRadius = 40
+export const portalRadius = 30
 export const bladeRadius = 10
 export const starRadius = 20
 export const visionRange = 200

@@ -42,7 +42,7 @@ export class Room extends Entity {
     const dx = xMax - xMin
     const dy = yMax - yMin
     const area = dx * dy
-    const count = Math.ceil(area / 300 ** 2)
+    const count = Math.ceil(area / 200 ** 2)
     range(count).forEach(_ => {
       const x = xMin + dx * Math.random()
       const y = yMin + dy * Math.random()

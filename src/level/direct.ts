@@ -34,7 +34,7 @@ export function direct(level: Level): void {
 export function wander(bot: Bot) {
   const dist = getDistance(bot.position, bot.wanderPoint)
   bot.force = mul(movePower, dirFromTo(bot.position, bot.wanderPoint))
-  if (Math.random() > 0.1 * timeStep && dist > 2 * agentRadius) return
+  if (Math.random() > 0.1 * timeStep && dist > 3 * agentRadius) return
   const vector = mul(visionRange, getRandomDir())
   const hits = bot.level.rayCast(bot.position, vector)
   const reach = Math.min(1, ...hits)
