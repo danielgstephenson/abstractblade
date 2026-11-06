@@ -39,7 +39,6 @@ export class SavePoint extends Entity {
     if (this.active) return
     const player = this.level.player
     if (insidePolygon(player.position, this.polygon)) {
-      console.log('savePoint.save')
       player.spawnPoint = this.center
       this.level.save()
       this.level.savePoints.forEach(s => {
