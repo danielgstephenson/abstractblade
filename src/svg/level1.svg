@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      inkscape:zoom="1.2609375"
      inkscape:cx="-135.61338"
-     inkscape:cy="-224.03965"
+     inkscape:cy="-160.5948"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="portalLayer"
+     inkscape:current-layer="agentLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -146,7 +146,7 @@
     <path
        id="room2"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -166.16379,-260.80114 12.26015,-23.67853 44.67083,-37.95438 56.733722,-7.72447 47.3992145,11.33886 31.6749095,16.86346 10.529688,26.71543 0.161216,36.73576 3.629059,23.23127 3.089462,27.55898 23.566578,75.66831 14.434153,59.408647 3.196571,26.898183 -1.412394,61.172407 -26.072353,128.178923 69.964654,102.04396 -156.497658,59.23982 -151.634732,-100.78414 -49.38789,-97.04377 -11.59106,-83.143034 40.66216,-57.113222 21.12147,-49.217401 9.62999,-94.929583 5.781,-40.90285 2.38672,-30.54696 z"
+       d="m -166.16379,-262.80114 12.26015,-23.67853 44.67083,-37.95438 56.733722,-7.72447 47.3992145,11.33886 31.6749095,16.86346 10.529688,26.71543 0.161216,36.73576 3.629059,23.23127 3.089462,27.55898 23.566578,75.66831 14.434153,59.408647 3.196571,26.898183 -1.412394,61.172407 -26.072353,128.178923 69.964654,102.04396 -156.497658,59.23982 -151.634732,-100.78414 -49.38789,-97.04377 -11.59106,-83.143034 40.66216,-57.113222 21.12147,-49.217401 9.62999,-94.929583 5.781,-40.90285 2.38672,-30.54696 z"
        sodipodi:nodetypes="cccccccccccccccccccccccccc"
        role="room" />
   </g>
@@ -284,9 +284,9 @@
        cy="-270.33026"
        role="bot"
        r="15"
-       goal="charge"
        frequency="20"
-       noise="0.2" />
+       noise="0.2"
+       goals="charge,4,defend,2" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="bot4"
@@ -294,9 +294,9 @@
        cy="-148.11943"
        role="bot"
        r="15"
-       goal="evade"
        frequency="50"
-       noise="0" />
+       noise="0"
+       goals="evade" />
   </g>
   <g
      inkscape:groupmode="layer"

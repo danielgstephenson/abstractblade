@@ -18,6 +18,7 @@ export function direct(level: Level): void {
       wander(bot)
       return
     }
+    bot.timer = Math.max(0, bot.timer - timeStep)
     if (Math.random() > bot.frequency * timeStep) return
     if (Math.random() < bot.noise) {
       bot.force = mul(movePower, roundDir(getRandomDir()))

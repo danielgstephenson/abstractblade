@@ -7,7 +7,10 @@ export class Bot extends Agent {
   align = 1
   frequency = 1
   noise = 0
-  goal = 'attack'
+  state = 0
+  pattern: [string, number][] = []
+  goal = 'evade'
+  timer = 1
   blade: Blade
   wanderPoint: number[]
 
@@ -20,5 +23,10 @@ export class Bot extends Agent {
 
   preStep(): void {
     super.preStep()
+    if (this.timer === 0) {
+      this.state = (this.state + 1) % this.pattern.length
+      this.goal = this.pattern[this.state][0]
+      this.timer = this.pattern[this.state][1]
+    }
   }
 }

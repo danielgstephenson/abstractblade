@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      inkscape:zoom="1.2609375"
      inkscape:cx="-135.61338"
-     inkscape:cy="-224.03965"
+     inkscape:cy="-160.5948"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="roomLayer"
+     inkscape:current-layer="agentLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -284,9 +284,9 @@
        cy="-270.33026"
        role="bot"
        r="15"
-       goal="charge"
        frequency="20"
-       noise="0.2" />
+       noise="0.2"
+       goals="charge" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="bot4"
@@ -294,9 +294,9 @@
        cy="-148.11943"
        role="bot"
        r="15"
-       goal="evade"
        frequency="50"
-       noise="0" />
+       noise="0"
+       goals="evade" />
   </g>
   <g
      inkscape:groupmode="layer"
