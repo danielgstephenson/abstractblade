@@ -1,7 +1,7 @@
 import { Graphics } from 'pixi.js'
 import type { Level } from '../level/level'
 import { Entity } from './entity'
-import { saveColor, savePointColor } from '../parameters'
+import { saveColor as activeSaveColor, savePointColor as inactiveSaveColor } from '../parameters'
 import { mean } from '../math'
 import { insidePolygon } from '../physics/raycast'
 
@@ -10,6 +10,7 @@ export class SavePoint extends Entity {
   polygon: number[][]
   center: number[]
   id: string
+  active = false
 
   constructor(level: Level, polygon: number[][], id: string) {
     super(level)
@@ -26,7 +27,7 @@ export class SavePoint extends Entity {
       width: 5,
       alignment: 1,
     })
-    this.graphics.tint = savePointColor
+    this.graphics.tint = inactiveSaveColor
     this.level.wallContainer.addChild(this.graphics)
     const x = mean(this.polygon.map(p => p[0]))
     const y = mean(this.polygon.map(p => p[1]))
@@ -35,12 +36,18 @@ export class SavePoint extends Entity {
 
   preStep(): void {
     super.preStep()
+    if (this.active) return
     const player = this.level.player
     if (insidePolygon(player.position, this.polygon)) {
+      console.log('savePoint.save')
       player.spawnPoint = this.center
       this.level.save()
-      this.level.savePoints.forEach(s => (s.graphics.tint = savePointColor))
-      this.graphics.tint = saveColor
+      this.level.savePoints.forEach(s => {
+        s.graphics.tint = inactiveSaveColor
+        s.active = false
+      })
+      this.graphics.tint = activeSaveColor
+      this.active = true
     }
   }
 

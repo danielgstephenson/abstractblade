@@ -285,8 +285,8 @@
        role="bot"
        r="15"
        frequency="20"
-       noise="0.2"
-       goals="charge,4,defend,2" />
+       noise="0"
+       goals="attack,2,defend,2" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="bot4"

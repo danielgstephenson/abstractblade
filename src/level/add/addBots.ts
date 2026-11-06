@@ -19,7 +19,6 @@ export function addBots(level: Level): void {
     })
     if (intervals.length === 0) intervals.push(100)
     bot.pattern = goals.map((goal, i) => [goal, intervals[i]])
-    console.log('pattern', bot.pattern)
     bot.goal = goals[0]
     if (intervals.length > 0) bot.timer = intervals[0]
   })
