@@ -70,24 +70,42 @@ export function collideOrbWall(orb: Orb, wall: Wall): void {
 }
 
 export function collideOrbSegment(orb: Orb, segment: number[][]): boolean {
+  const hitPoint = checkCircleSegment(orb.position, orb.radius, segment)
+  if (hitPoint == null) return false
+  collideOrbPoint(orb, hitPoint)
+  return true
+}
+
+export function checkCircleSegment(center: number[], radius: number, segment: number[][]): number[] | null {
   const xs = segment.map(p => p[0])
-  if (Math.max(...xs) < orb.position[0] - orb.radius) return false
-  if (Math.min(...xs) > orb.position[0] + orb.radius) return false
+  if (Math.max(...xs) < center[0] - radius) return null
+  if (Math.min(...xs) > center[0] + radius) return null
   const ys = segment.map(p => p[1])
-  if (Math.max(...ys) < orb.position[1] - orb.radius) return false
-  if (Math.min(...ys) > orb.position[1] + orb.radius) return false
+  if (Math.max(...ys) < center[1] - radius) return null
+  if (Math.min(...ys) > center[1] + radius) return null
   const segmentStart = segment[0]
   const segmentEnd = segment[1]
   const segmentVector = sub(segmentEnd, segmentStart)
-  const startToBody = sub(orb.position, segmentStart)
+  const startToBody = sub(center, segmentStart)
   const segmentFactor = clamp(0, 1, dot(startToBody, segmentVector) / (dot(segmentVector, segmentVector) + 1e-9))
   const nearestPoint = combine(1, segmentStart, segmentFactor, segmentVector)
-  const pointToCircle = sub(orb.position, nearestPoint)
+  const pointToCircle = sub(center, nearestPoint)
   const distance = getMagnitude(pointToCircle)
-  const overlap = orb.radius - distance
-  if (overlap < 0) return false
-  collideOrbPoint(orb, nearestPoint)
-  return true
+  const overlap = radius - distance
+  if (overlap <= 0) return null
+  return nearestPoint
+}
+
+export function checkCircleWall(center: number[], radius: number, wall: Wall): boolean {
+  if (wall.removed) return false
+  const polygon = wall.polygon
+  for (const i of range(polygon.length)) {
+    const j = i > 0 ? i - 1 : polygon.length - 1
+    const segment = [polygon[i], polygon[j]]
+    const hitPoint = checkCircleSegment(center, radius, segment)
+    if (hitPoint != null) return true
+  }
+  return false
 }
 
 export function collideOrbPoint(orb: Orb, point: number[]): boolean {

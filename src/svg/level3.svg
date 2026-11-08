@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="10"
+   height="10"
+   viewBox="0 0 10 10"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="level3.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#262626"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#262626"
+     inkscape:document-units="px"
+     inkscape:zoom="0.89161746"
+     inkscape:cx="377.40401"
+     inkscape:cy="177.76682"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="agentLayer"
+     showborder="false"
+     showgrid="true"
+     showguides="true">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="10"
+       spacingy="10"
+       empcolor="#0099e5"
+       empopacity="0.10196078"
+       color="#0099e5"
+       opacity="0.10196078"
+       empspacing="1"
+       enabled="false"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:groupmode="layer"
+     id="roomLayer"
+     inkscape:highlight-color="#3e67e3">
+    <path
+       id="room1"
+       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
+       d="M -58.153199,22.246681 102.12441,-138.3148 306.47957,-136.94072 501.22921,-46.295475 375.7467,120.50435 225.07672,329.01116 63.939878,146.55138 Z"
+       sodipodi:nodetypes="cccccccc"
+       role="room" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="wallLayer"
+     inkscape:highlight-color="#808080" />
+  <g
+     inkscape:groupmode="layer"
+     id="gateLayer" />
+  <g
+     inkscape:groupmode="layer"
+     id="savePointLayer"
+     inkscape:highlight-color="#0053ff">
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 173.71753,242.73414 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint1"
+       role="savePoint" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="portalLayer"
+     inkscape:highlight-color="#999999">
+    <circle
+       style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="circle3"
+       cx="208.21269"
+       cy="-65.772339"
+       role="portal"
+       r="45"
+       level="level1"
+       entrance="savePoint1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="agentLayer"
+     inkscape:highlight-color="#0053ff"
+     style="fill:none">
+    <circle
+       style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="player1"
+       cx="223.48523"
+       cy="242.93825"
+       role="player"
+       r="15" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="bot4"
+       cx="209.56119"
+       cy="34.284538"
+       role="bot"
+       r="15"
+       frequency="50"
+       noise="0"
+       goals="defend,3,attack,4,defend,3,attack,4,defend,3,attack,4,charge,20" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="starLayer"
+     inkscape:highlight-color="#ffff00" />
+</svg>

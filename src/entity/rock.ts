@@ -5,7 +5,7 @@ import { getRandomDir, mul } from '../math'
 
 export class Rock extends Orb {
   drag = 0
-  bounce = 1.01
+  bounce = 1
   mass = 0.0000001
 
   constructor(level: Level, position: number[], radius: number) {
