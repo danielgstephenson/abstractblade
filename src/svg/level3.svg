@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="0.89161746"
-     inkscape:cx="377.40401"
-     inkscape:cy="177.76682"
+     inkscape:zoom="1.7832349"
+     inkscape:cx="210.57237"
+     inkscape:cy="73.181609"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="agentLayer"
+     inkscape:current-layer="portalLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -59,7 +59,7 @@
     <path
        id="room1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="M -58.153199,22.246681 102.12441,-138.3148 306.47957,-136.94072 501.22921,-46.295475 375.7467,120.50435 225.07672,329.01116 63.939878,146.55138 Z"
+       d="m 103.91182,-4.1099138 65.50602,-117.3815262 78.17998,0.8133 83.71547,99.056924 L 358.36256,154.15107 225.07672,315.55247 82.445572,153.28072 Z"
        sodipodi:nodetypes="cccccccc"
        role="room" />
   </g>
@@ -91,7 +91,7 @@
        cy="-65.772339"
        role="portal"
        r="45"
-       level="level1"
+       level="level4"
        entrance="savePoint1" />
   </g>
   <g
@@ -115,7 +115,7 @@
        r="15"
        frequency="50"
        noise="0"
-       goals="defend,3,attack,4,defend,3,attack,4,defend,3,attack,4,charge,20" />
+       goals="defend,3,attack,2,defend,3,attack,2,defend,3,attack,2,defend,3,attack,2,charge,20" />
   </g>
   <g
      inkscape:groupmode="layer"

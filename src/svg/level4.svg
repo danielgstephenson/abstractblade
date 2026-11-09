@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="10"
+   height="10"
+   viewBox="0 0 10 10"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="level4.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#262626"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#262626"
+     inkscape:document-units="px"
+     inkscape:zoom="1.2609375"
+     inkscape:cx="252.58984"
+     inkscape:cy="-65.42751"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="roomLayer"
+     showborder="false"
+     showgrid="true"
+     showguides="true">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="10"
+       spacingy="10"
+       empcolor="#0099e5"
+       empopacity="0.10196078"
+       color="#0099e5"
+       opacity="0.10196078"
+       empspacing="1"
+       enabled="false"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:groupmode="layer"
+     id="roomLayer"
+     inkscape:highlight-color="#3e67e3">
+    <path
+       id="room1"
+       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
+       d="M -64.217053,3.8206907 500.23522,-6.5530601 444.80618,304.03955 29.310503,303.1692 Z"
+       sodipodi:nodetypes="ccccc"
+       role="room" />
+    <path
+       id="room1-3"
+       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
+       d="m 17.456009,-347.0265 397.909531,-11.95987 87.32188,336.763614 -562.211917,6.267197 z"
+       sodipodi:nodetypes="ccccc"
+       role="room" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="wallLayer"
+     inkscape:highlight-color="#808080" />
+  <g
+     inkscape:groupmode="layer"
+     id="gateLayer">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
+       x="224.44429"
+       y="80.877609"
+       id="sign1"
+       role="sign"><tspan
+         sodipodi:role="line"
+         id="tspan1-7"
+         x="224.44429"
+         y="80.877609"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">End of Demo</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="savePointLayer"
+     inkscape:highlight-color="#0053ff">
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 173.71753,242.73414 50,-50 50,50 -50,50 -50,-50"
+       id="savePoint1"
+       role="savePoint" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="portalLayer"
+     inkscape:highlight-color="#999999">
+    <circle
+       style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="circle3"
+       cx="224.05151"
+       cy="-283.60278"
+       role="portal"
+       r="45"
+       level="level1"
+       entrance="savePoint1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="agentLayer"
+     inkscape:highlight-color="#0053ff"
+     style="fill:none">
+    <circle
+       style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
+       id="player1"
+       cx="223.48523"
+       cy="242.93825"
+       role="player"
+       r="15" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
+       id="bot2"
+       cx="67.863693"
+       cy="-139.62454"
+       role="bot"
+       r="15"
+       frequency="20"
+       noise="0"
+       goals="attack,1,charge,2" />
+    <circle
+       style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
+       id="bot2-8"
+       cx="399.30359"
+       cy="-119.4845"
+       role="bot"
+       r="15"
+       frequency="20"
+       noise="0"
+       goals="attack,1,charge,2" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="starLayer"
+     inkscape:highlight-color="#ffff00">
+    <path
+       id="star3-6"
+       style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 242.47247,-74.2224 -9.33899,-6.151 L 223.93142,-74 226.6298,-85.2051 218,-92.4035 229.00664,-93.1778 232.8752,-104 l 4.10407,10.7266 11.02072,0.51 -8.47018,7.4036 z"
+       role="star"
+       sodipodi:nodetypes="ccccccccccc" />
+  </g>
+</svg>

@@ -25,7 +25,7 @@
      inkscape:document-units="px"
      inkscape:zoom="0.89161746"
      inkscape:cx="-402.63904"
-     inkscape:cy="89.163799"
+     inkscape:cy="88.042242"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
@@ -109,23 +109,23 @@
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
        id="bot1"
-       cx="-170.99347"
-       cy="-60.599064"
+       cx="-155.29167"
+       cy="-50.505051"
        role="bot"
        r="15"
        frequency="20"
        noise="0.2"
-       goals="defend,3,charge,3" />
+       goals="attack,2,charge,6" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
        id="bot2"
-       cx="-277.96768"
-       cy="250.38931"
+       cx="-442.83658"
+       cy="207.77014"
        role="bot"
        r="15"
        frequency="20"
        noise="0.2"
-       goals="charge,3,defend,3" />
+       goals="charge,3,attack,3" />
   </g>
   <g
      inkscape:groupmode="layer"

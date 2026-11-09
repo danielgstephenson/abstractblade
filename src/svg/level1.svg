@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      inkscape:zoom="1.7832349"
      inkscape:cx="14.019465"
-     inkscape:cy="77.667838"
+     inkscape:cy="-191.5059"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="portalLayer"
+     inkscape:current-layer="gateLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -194,7 +194,8 @@
        x="156.96906"
        y="-225.20364"
        id="gate1"
-       quota="2"><tspan
+       quota="2"
+       role="gate"><tspan
          sodipodi:role="line"
          id="tspan1"
          x="156.96906"

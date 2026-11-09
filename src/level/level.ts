@@ -19,7 +19,7 @@ import type { Entrance } from '../entity/entrance'
 import type { Gate } from '../entity/gate'
 import type { Room } from '../entity/room'
 import type { Bot } from '../entity/bot'
-import { combine, sub, visionVectors } from '../math'
+import { combine, range, sub, visionVectors } from '../math'
 import { rayCastPolygon } from '../physics/raycast'
 import type { SavePoint } from '../entity/savePoint'
 
@@ -93,6 +93,8 @@ export class Level extends Container {
         this.player.blade.position = structuredClone(savePoint.center)
       }
     })
+    this.player.trail = range(this.player.trailCount).map(_ => structuredClone(this.player.position))
+    this.player.blade.trail = range(this.player.blade.trailCount).map(_ => structuredClone(this.player.blade.position))
     this.rooms.forEach(room => room.check())
     this.save()
     this.game.app.stage.addChild(this)
