@@ -3,7 +3,7 @@ import { Agent } from './agent'
 import { movePower, playerBladeColor, playerColor } from '../parameters'
 import type { Level } from '../level/level'
 import { Blade } from './blade'
-import { mul, normalize } from '../math'
+import { getMagnitude, mul, normalize } from '../math'
 
 export class Player extends Agent {
   align = 0
@@ -43,6 +43,7 @@ export class Player extends Agent {
     }
     let action = normalize([x, y])
     if (input.isMouseButtonDown(0)) action = normalize(input.mousePosition)
+    if (getMagnitude(input.joystick.value) > 0.1) action = input.joystick.value
     this.force = mul(movePower, action)
   }
 }

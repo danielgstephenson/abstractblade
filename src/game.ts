@@ -4,6 +4,7 @@ import { Input } from './input'
 import { InputDevice } from 'pixijs-input-devices'
 
 export class Game {
+  joystick = document.getElementById('joystock') as HTMLDivElement
   cornerLabels = document.querySelectorAll('.cornerLabel')
   app: Application
   level: Level
@@ -52,6 +53,7 @@ export class Game {
 
   layout(): void {
     const { width, height } = this.app.screen
+    //this.joystick.style.display = height > width ? 'block' : 'none'
     const vmin = Math.min(width, height)
     const base = vmin / 500
     const scale = base * Math.exp(0.1 * this.input.zoom)

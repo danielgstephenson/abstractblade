@@ -40,16 +40,47 @@ body {
   display: flex;
   height: 100vh;
   width: 100vw;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 #arena {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100vmin;
   aspect-ratio: 1 / 1;
   background-color: hsla(0 0% 0% / 0);
+}
+@media (orientation: landscape) {
+  #joystick {
+    display: none;
+  }
+}
+@media (orientation: portrait) {
+  #app {
+    flex-direction: column;
+  }
+  #joystick {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+  }
+}
+#joystickBase {
+  position: relative;
+  width: calc(0.5 * (100vh - 100vmin));
+  height: calc(0.5 * (100vh - 100vmin));
+  border-radius: 50%;
+  background: hsl(0 0% 15%);
+}
+#joystickKnob {
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: hsl(0 0% 50%);
+  pointer-events: none;
 }
 .corner {
   display: flex;

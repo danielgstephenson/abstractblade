@@ -1,6 +1,7 @@
 import { KeyboardDevice, GamepadDevice, InputDevice, UINavigation, registerPixiJSNavigationMixin, type GamepadCode } from 'pixijs-input-devices'
 import { Container, isMobile, Ticker } from 'pixi.js'
 import { clamp } from './math'
+import { Joystick } from './joystick'
 
 // window.addEventListener('keydown', event => {
 //   const keyCode = event.code
@@ -63,6 +64,8 @@ if (!isMobile.any) {
 }
 
 export class Input {
+  arena = document.getElementById('arena') as HTMLDivElement
+  joystick: Joystick = new Joystick()
   mousePosition: number[] = [0, 0]
   mouseButtons = new Map<number, boolean>()
   maxZoom = 20
@@ -77,7 +80,7 @@ export class Input {
     window.addEventListener('touchmove', (event: TouchEvent) => this.ontouchmove(event))
     window.addEventListener('touchstart', (event: TouchEvent) => this.ontouchstart(event))
     window.addEventListener('touchend', (event: TouchEvent) => this.ontouchend(event))
-    window.oncontextmenu = () => {}
+    window.addEventListener('contextmenu', event => event.preventDefault())
   }
 
   onwheel(event: WheelEvent): void {
@@ -85,15 +88,19 @@ export class Input {
     this.zoom = clamp(this.minZoom, this.maxZoom, this.zoom + change)
   }
 
+  setMousePosition(clientX: number, clientY: number): void {
+    const rect = this.arena.getBoundingClientRect()
+    this.mousePosition[0] = clientX - (rect.left + 0.5 * rect.width)
+    this.mousePosition[1] = clientY - (rect.top + 0.5 * rect.height)
+  }
+
   onmousemove(event: MouseEvent): void {
-    this.mousePosition[0] = event.clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = event.clientY - 0.5 * window.innerHeight
+    this.setMousePosition(event.clientX, event.clientY)
   }
 
   onmousedown(event: MouseEvent): void {
     this.mouseButtons.set(event.button, true)
-    this.mousePosition[0] = event.clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = event.clientY - 0.5 * window.innerHeight
+    this.setMousePosition(event.clientX, event.clientY)
   }
 
   onmouseup(event: MouseEvent): void {
@@ -101,14 +108,12 @@ export class Input {
   }
 
   ontouchmove(event: TouchEvent): void {
-    this.mousePosition[0] = event.touches[0].clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = event.touches[0].clientY - 0.5 * window.innerHeight
+    this.setMousePosition(event.touches[0].clientX, event.touches[0].clientY)
   }
 
   ontouchstart(event: TouchEvent): void {
     this.mouseButtons.set(0, true)
-    this.mousePosition[0] = event.touches[0].clientX - 0.5 * window.innerWidth
-    this.mousePosition[1] = event.touches[0].clientY - 0.5 * window.innerHeight
+    this.setMousePosition(event.touches[0].clientX, event.touches[0].clientY)
   }
 
   ontouchend(_: TouchEvent): void {
