@@ -9,6 +9,33 @@ body {
   margin: 0;
   overflow: hidden;
 }
+#loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: hsl(0, 0%, 0%);
+  z-index: 10;
+}
+#loadingText {
+  font-family: sans-serif;
+  color: hsl(0, 0%, 50%);
+  font-size: 12vmin;
+}
+#loadingTrack {
+  width: 40vmin;
+  height: 5vmin;
+  margin: 5vmin;
+  background: hsl(0 0% 20%);
+}
+#loadingBar {
+  width: 0;
+  height: 100%;
+  background: hsl(0 0% 85%);
+  transition: width 0.15s linear;
+}
 #app {
   display: flex;
   height: 100vh;

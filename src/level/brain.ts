@@ -1,8 +1,13 @@
 import * as ort from 'onnxruntime-web'
+import wasmUrl from 'onnxruntime-web/ort-wasm-simd-threaded.jsep.wasm?url'
+import { fetchWithProgress, progress } from '../loading.ts'
+
 import { actionVectors, mul, range, sub, toMatrix, whichMax } from '../math'
 import type { Agent } from '../entity/agent'
 import { movePower } from '../parameters'
 import type { Bot } from '../entity/bot'
+
+ort.env.wasm.wasmBinary = await fetchWithProgress(wasmUrl, progress.step('wasm'))
 
 const inputSize = 22
 

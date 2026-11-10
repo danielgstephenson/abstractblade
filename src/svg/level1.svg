@@ -23,15 +23,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
-     inkscape:zoom="1.7832349"
-     inkscape:cx="14.019465"
-     inkscape:cy="-191.5059"
+     inkscape:zoom="0.44580873"
+     inkscape:cx="127.85752"
+     inkscape:cy="214.21743"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="gateLayer"
+     inkscape:current-layer="roomLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -149,12 +149,6 @@
        d="m -166.16379,-262.80114 12.26015,-23.67853 44.67083,-37.95438 56.733722,-7.72447 47.3992145,11.33886 31.6749095,16.86346 10.529688,26.71543 0.161216,36.73576 3.629059,23.23127 3.089462,27.55898 23.566578,75.66831 11.559308,57.326863 6.071416,28.979967 -1.412394,61.172407 -26.072353,128.178923 69.964654,102.04396 -156.497658,59.23982 -151.634732,-100.78414 -49.38789,-97.04377 -11.59106,-83.143034 40.66216,-57.113222 21.12147,-49.217401 9.62999,-94.929583 5.781,-40.90285 2.38672,-30.54696 z"
        sodipodi:nodetypes="cccccccccccccccccccccccccc"
        role="room" />
-    <path
-       id="room2-8"
-       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -803.40754,-621.33457 662.34168,240.52299 -194.56457,630.24353 -538.64836,-62.71722 z"
-       sodipodi:nodetypes="ccccc"
-       role="room" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -166,12 +160,6 @@
        d="m -210.28291,-56.140386 9.42549,-121.133024 46.89889,49.53767 45.32519,9.46079 106.6641763,5.27955 51.5087887,-16.62397 12.250141,-29.40926 20.197259,108.799462 -30.715787,-44.618188 -53.6741509,-10.454644 -107.3995671,-1.94254 -55.04312,6.38497 z"
        role="wall"
        sodipodi:nodetypes="ccccccccccccc" />
-    <path
-       id="wall1-5"
-       style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -356.19331,194.39573 -446.58442,-54.51593 39.79713,-696.30292 557.09935,210.31122 z"
-       role="wall"
-       sodipodi:nodetypes="ccccc" />
     <path
        id="wall2"
        style="fill:#262626;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"

@@ -30,3 +30,5 @@ cornerLabels.forEach(cornerLabel => {
 })
 
 void new Game(app)
+
+document.getElementById('loading')?.remove()
