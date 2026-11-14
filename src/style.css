@@ -95,6 +95,7 @@ body {
   font-family: 'Lekton-Bold';
   font-size: 10vmin;
   text-align: center;
+  user-select: none;
 }
 #cornerTopLeft {
   top: 0;
