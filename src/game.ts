@@ -15,7 +15,7 @@ export class Game {
   constructor(app: Application) {
     this.app = app
     this.input = new Input()
-    this.level = new Level(this, 'level1')
+    this.level = new Level(this, 'level4')
     this.app.ticker.add(time => this.update(time))
     window.addEventListener('resize', () => this.layout())
     window.addEventListener('keydown', event => {

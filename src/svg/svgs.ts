@@ -4,6 +4,8 @@ import svg2A from './level2A.svg?raw'
 import svg2B from './level2B.svg?raw'
 import svg3 from './level3.svg?raw'
 import svg4 from './level4.svg?raw'
+import svg4A from './level4A.svg?raw'
+import svg4B from './level4B.svg?raw'
 
 export const svgs = {
   level1: svg1,
@@ -12,6 +14,8 @@ export const svgs = {
   level2B: svg2B,
   level3: svg3,
   level4: svg4,
+  level4A: svg4A,
+  level4B: svg4B,
 }
 
 export function isLevelName(name: string): name is keyof typeof svgs {
