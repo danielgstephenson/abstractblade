@@ -24,14 +24,14 @@
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
      inkscape:zoom="1.2609375"
-     inkscape:cx="287.08798"
-     inkscape:cy="-707.01363"
+     inkscape:cx="266.4684"
+     inkscape:cy="-615.01859"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="gateLayer"
+     inkscape:current-layer="portalLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -117,16 +117,7 @@
      inkscape:highlight-color="#999999">
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="circle3"
-       cx="148.18982"
-       cy="-947.43561"
-       role="portal"
-       r="45"
-       level="level5"
-       entrance="savePoint1" />
-    <circle
-       style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="circle3-5"
+       id="portal1"
        cx="622.68683"
        cy="-245.66646"
        role="portal"
@@ -135,12 +126,21 @@
        entrance="savePoint1" />
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       id="circle3-5-1"
+       id="portal2"
        cx="583.98907"
        cy="-538.30621"
        role="portal"
        r="45"
        level="level4B"
+       entrance="savePoint1" />
+    <circle
+       style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="portal3"
+       cx="148.18982"
+       cy="-947.43561"
+       role="portal"
+       r="45"
+       level="level5"
        entrance="savePoint1" />
   </g>
   <g
@@ -158,8 +158,8 @@
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
        id="bot1"
-       cx="217.30855"
-       cy="-377.14374"
+       cx="138.92877"
+       cy="-368.90564"
        role="bot"
        r="15"
        frequency="50"

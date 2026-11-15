@@ -30,7 +30,7 @@ export default defineConfig([
       ],
       '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
       '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
-      '@typescript-eslint/no-empty-function': ['error', { allow: ['methods'] }],
+      '@typescript-eslint/no-empty-function': ['error', { allow: ['methods', 'arrowFunctions'] }],
     },
   },
   {

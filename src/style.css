@@ -10,14 +10,13 @@ body {
   overflow: hidden;
 }
 #loading {
-  position: fixed;
+  position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: hsl(0, 0%, 0%);
-  z-index: 10;
 }
 #loadingText {
   font-family: sans-serif;
@@ -36,7 +35,39 @@ body {
   background: hsl(0 0% 85%);
   transition: width 0.15s linear;
 }
+#menu {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: black;
+  color: rgb(255, 255, 255);
+  font-family: 'Lekton-Bold';
+  font-size: 10vmin;
+  text-align: center;
+  user-select: none;
+}
+#menuTitle {
+  width: 100vmin;
+  color: hsl(220, 100%, 50%);
+  font-size: 13vmin;
+  line-height: 1;
+  padding-top: 10vmin;
+  padding-bottom: 1vmin;
+}
+.menuButton {
+  border: 2vmin solid;
+  border-radius: 9vmin;
+  padding-left: 5vmin;
+  padding-right: 5vmin;
+  margin: 2vmin;
+}
 #app {
+  position: absolute;
   display: flex;
   height: 100vh;
   width: 100vw;

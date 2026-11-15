@@ -1,10 +1,10 @@
 import { Application, Assets } from 'pixi.js'
-import { Game } from './game'
 import { hudColor, wallColor } from './parameters'
 import { initTriggerTexture } from './texture/triggerTexture'
 import { initCircleTexture } from './texture/circleTexture'
 import { initPortalTexture } from './texture/portalTexture'
 import { initStarTexture } from './texture/starTexture'
+import { Menu } from './menu/menu'
 
 await Assets.load({ src: '/Lekton-Bold.ttf', data: { family: 'Lekton-Bold', weights: ['bold'] } })
 
@@ -29,6 +29,6 @@ cornerLabels.forEach(cornerLabel => {
   cornerLabel.style.color = hudColor
 })
 
-void new Game(app)
+void new Menu(app)
 
 document.getElementById('loading')?.remove()

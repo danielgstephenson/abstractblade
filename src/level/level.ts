@@ -96,6 +96,7 @@ export class Level extends Container {
     this.player.trail = range(this.player.trailCount).map(_ => structuredClone(this.player.position))
     this.player.blade.trail = range(this.player.blade.trailCount).map(_ => structuredClone(this.player.blade.position))
     this.rooms.forEach(room => room.check())
+    this.player.spawnPoint = structuredClone(this.player.position)
     this.save()
     this.game.app.stage.addChild(this)
   }
@@ -142,9 +143,12 @@ export class Level extends Container {
       stars: this.stars.map(star => star.removed),
       triggers: this.triggers.map(trigger => trigger.removed),
       walls: this.walls.map(wall => wall.removed),
-      savePoint: this.player.spawnPoint,
+      savePosition: this.player.spawnPoint,
     }
     this.game.summary.set(this.id, levelSummary)
+    const levelSummaries = [...this.game.summary.values()]
+    localStorage.setItem('levelSummaries', JSON.stringify(levelSummaries))
+    localStorage.setItem('levelId', this.id)
   }
 
   load(): void {
@@ -162,8 +166,8 @@ export class Level extends Container {
     summary.walls.forEach((removed, i) => {
       if (removed) this.walls[i].remove()
     })
-    this.player.position = summary.savePoint
-    this.player.blade.position = summary.savePoint
+    this.player.position = summary.savePosition
+    this.player.blade.position = summary.savePosition
   }
 
   rayCast(origin: number[], vector: number[]): number[] {
@@ -201,10 +205,10 @@ export class Level extends Container {
 }
 
 export interface LevelSummary {
-  id: string
+  id: keyof typeof svgs
   rooms: boolean[]
   stars: boolean[]
   triggers: boolean[]
   walls: boolean[]
-  savePoint: number[]
+  savePosition: number[]
 }

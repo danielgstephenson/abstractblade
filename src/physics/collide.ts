@@ -1,6 +1,6 @@
 import type { Orb } from '../entity/orb'
 import type { Wall } from '../entity/wall'
-import { clamp, combine, dirFromTo, dot, getMagnitude, mul, range, sub, sum } from '../math'
+import { clamp, combine, dirFromTo, dot, getMagnitude, getRandomDir, mul, range, sub, sum } from '../math'
 
 export function collideOrbsOrbs(orbs0: Orb[], orbs1: Orb[]): void {
   orbs0.forEach(orb0 => {
@@ -26,6 +26,10 @@ export function collideOrbOrb(orb0: Orb, orb1: Orb): void {
   const vector = sub(orb1.position, orb0.position)
   const squaredDist = dot(vector, vector)
   if (squaredDist >= minDist * minDist) return
+  if (squaredDist === 0) {
+    orb1.position = combine(1, orb1.position, 0.01, getRandomDir())
+    return
+  }
   const dist = Math.sqrt(squaredDist)
   const overlap = minDist - dist
   const normal = mul(1 / dist, vector)

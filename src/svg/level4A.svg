@@ -28,10 +28,10 @@
      inkscape:cy="123.93207"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="portalLayer"
+     inkscape:current-layer="agentLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -106,7 +106,7 @@
     <path
        id="room2"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m -198.2565,-289.92613 842.02352,2.31522 7.4345,244.205195 -845.54634,5.244457 z"
+       d="m -196.2565,-287.92613 842.02352,2.31522 7.4345,244.205195 -845.54634,5.244457 z"
        sodipodi:nodetypes="ccccc"
        role="room" />
     <path
@@ -141,7 +141,7 @@
        role="savePoint" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m -178.55797,-106.33681 50,-50 49.999996,50 -49.999996,50.000006 -50,-50.000006"
+       d="m -183.0442,-106.33681 50,-50 49.999997,50 -49.999997,50.000007 -50,-50.000007"
        id="savePoint2"
        role="savePoint" />
     <path
@@ -175,12 +175,12 @@
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal2"
-       cx="-134.88744"
-       cy="-230.2872"
+       cx="-137.13055"
+       cy="-221.31474"
        role="portal"
        r="45"
-       level="level4"
-       entrance="savePoint2" />
+       level="level4B"
+       entrance="savePoint4" />
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="portal3"
@@ -229,7 +229,7 @@
        r="15"
        frequency="20"
        noise="0"
-       goals="attack,1,charge,4" />
+       goals="attack,4,charge,4" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
        id="bot2"
@@ -239,7 +239,7 @@
        r="15"
        frequency="20"
        noise="0"
-       goals="attack,1,charge,4" />
+       goals="attack,3,defend,3" />
   </g>
   <g
      inkscape:groupmode="layer"

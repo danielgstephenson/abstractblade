@@ -8,7 +8,7 @@ import { Joystick } from './joystick'
 //   console.log(`Code: ${keyCode}`)
 // })
 
-export type InGameBind = 'North' | 'South' | 'East' | 'West' | 'ZoomIn' | 'ZoomOut' | 'Pause'
+export type InGameBind = 'North' | 'South' | 'East' | 'West' | 'ZoomIn' | 'ZoomOut' | 'Pause' | 'Select'
 
 declare module 'pixijs-input-devices' {
   interface BindValues {
@@ -24,6 +24,7 @@ KeyboardDevice.configureBinds({
   ZoomIn: ['Equal'],
   ZoomOut: ['Minus'],
   Pause: ['Escape'],
+  Select: ['Enter', 'Space'],
 })
 
 const gamepadContinueCodes: GamepadCode[] = [
@@ -41,6 +42,8 @@ const gamepadContinueCodes: GamepadCode[] = [
   'DpadRight',
 ]
 
+const gamepadSelectCodes: GamepadCode[] = ['Face1', 'Face2', 'Face3', 'Face4']
+
 GamepadDevice.configureDefaultBinds({
   North: ['LeftStickUp', 'RightStickUp', 'DpadUp'],
   South: ['LeftStickDown', 'RightStickDown', 'DpadDown'],
@@ -50,6 +53,7 @@ GamepadDevice.configureDefaultBinds({
   ZoomOut: ['LeftShoulder', 'LeftTrigger'],
   Pause: ['Start'],
   Continue: gamepadContinueCodes,
+  Select: gamepadSelectCodes,
 })
 
 Ticker.shared.add(() => InputDevice.update())
