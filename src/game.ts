@@ -12,7 +12,7 @@ export class Game {
   input: Input
   starCount = 0
   summary = new Map<string, LevelSummary>()
-  startLevelId: keyof typeof svgs = 'level4'
+  startLevelId: keyof typeof svgs = 'level1'
 
   constructor(app: Application) {
     this.app = app
@@ -66,7 +66,7 @@ export class Game {
 
   load(): Level {
     const jsonLevelSummaries = localStorage.getItem('levelSummaries')
-    console.log('jsonLevelSummaries', jsonLevelSummaries)
+    
     if (jsonLevelSummaries == null) return new Level(this, this.startLevelId)
     const levelId = localStorage.getItem('levelId')
     if (levelId == null) return new Level(this, this.startLevelId)

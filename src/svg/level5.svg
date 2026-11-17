@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="level4.svg"
+   sodipodi:docname="level5.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,11 +24,11 @@
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
      inkscape:zoom="1.2609375"
-     inkscape:cx="252.58984"
-     inkscape:cy="-65.42751"
+     inkscape:cx="252.98637"
+     inkscape:cy="124.114"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="roomLayer"
@@ -59,14 +59,8 @@
     <path
        id="room1"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="M -64.217053,3.8206907 500.23522,-6.5530601 444.80618,304.03955 29.310503,303.1692 Z"
-       sodipodi:nodetypes="ccccc"
-       role="room" />
-    <path
-       id="room1-3"
-       style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
-       d="m 17.456009,-347.0265 397.909531,-11.95987 87.32188,336.763614 -562.211917,6.267197 z"
-       sodipodi:nodetypes="ccccc"
+       d="m 24.605749,-134.96494 124.440551,-55.76559 100.83337,-0.19476 121.08665,82.0674 85.40911,79.244091 58.57374,123.783266 2.75511,134.728693 L 423.02346,347.99422 304.43443,457.89333 282.73127,518.19521 183.6354,538.71942 158.72242,477.22264 5.5186778,382.47527 -65.869683,158.51339 -53.19768,-3.1840173 Z"
+       sodipodi:nodetypes="cccccccccccccccc"
        role="room" />
   </g>
   <g
@@ -75,27 +69,14 @@
      inkscape:highlight-color="#808080" />
   <g
      inkscape:groupmode="layer"
-     id="gateLayer">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
-       x="224.44429"
-       y="80.877609"
-       id="sign1"
-       role="sign"><tspan
-         sodipodi:role="line"
-         id="tspan1-7"
-         x="224.44429"
-         y="80.877609"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">End of Demo</tspan></text>
-  </g>
+     id="gateLayer" />
   <g
      inkscape:groupmode="layer"
      id="savePointLayer"
      inkscape:highlight-color="#0053ff">
     <path
        style="fill:#000000;fill-opacity:1;stroke:#1e4eae;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 173.71753,242.73414 50,-50 50,50 -50,50 -50,-50"
+       d="m 178.47589,468.75645 50,-50 50,50 -50,50 -50,-50"
        id="savePoint1"
        role="savePoint" />
   </g>
@@ -106,11 +87,11 @@
     <circle
        style="fill:#1a1a1a;fill-opacity:1;stroke:#999999;stroke-width:5.20833;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="circle3"
-       cx="224.05151"
-       cy="-283.60278"
+       cx="205.01805"
+       cy="-94.854332"
        role="portal"
        r="45"
-       level="level1"
+       level="level6"
        entrance="savePoint1" />
   </g>
   <g
@@ -121,40 +102,23 @@
     <circle
        style="fill:#0053ff;fill-opacity:1;stroke-width:3.77953;stroke-linejoin:round;stroke-dasharray:7.55906, 7.55906"
        id="player1"
-       cx="223.48523"
-       cy="242.93825"
+       cx="228.24359"
+       cy="468.96054"
        role="player"
        r="15" />
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
-       id="bot2"
-       cx="67.863693"
-       cy="-139.62454"
+       id="bot1"
+       cx="200.30482"
+       cy="-165.00249"
        role="bot"
        r="15"
-       frequency="20"
+       frequency="50"
        noise="0"
-       goals="attack,1,charge,2" />
-    <circle
-       style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
-       id="bot2-8"
-       cx="399.30359"
-       cy="-119.4845"
-       role="bot"
-       r="15"
-       frequency="20"
-       noise="0"
-       goals="attack,1,charge,2" />
+       goals="attack" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="starLayer"
-     inkscape:highlight-color="#ffff00">
-    <path
-       id="star3-6"
-       style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="m 242.47247,-74.2224 -9.33899,-6.151 L 223.93142,-74 226.6298,-85.2051 218,-92.4035 229.00664,-93.1778 232.8752,-104 l 4.10407,10.7266 11.02072,0.51 -8.47018,7.4036 z"
-       role="star"
-       sodipodi:nodetypes="ccccccccccc" />
-  </g>
+     inkscape:highlight-color="#ffff00" />
 </svg>

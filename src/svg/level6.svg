@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="level4.svg"
+   sodipodi:docname="level6.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,14 +24,14 @@
      inkscape:deskcolor="#262626"
      inkscape:document-units="px"
      inkscape:zoom="1.2609375"
-     inkscape:cx="252.58984"
-     inkscape:cy="-65.42751"
+     inkscape:cx="252.98637"
+     inkscape:cy="-2.7757125"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="roomLayer"
+     inkscape:current-layer="gateLayer"
      showborder="false"
      showgrid="true"
      showguides="true">
@@ -63,6 +63,12 @@
        sodipodi:nodetypes="ccccc"
        role="room" />
     <path
+       id="star3-6-2"
+       style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 231.09329,106.29805 -9.33899,-6.151 -9.20206,6.3734 2.69838,-11.205104 -8.6298,-7.1984 11.00664,-0.7743 3.86856,-10.8222 4.10407,10.7266 11.02072,0.51 -8.47018,7.4036 z"
+       role="star"
+       sodipodi:nodetypes="ccccccccccc" />
+    <path
        id="room1-3"
        style="fill:#000000;fill-opacity:1;stroke-width:5.969;stroke-linejoin:round"
        d="m 17.456009,-347.0265 397.909531,-11.95987 87.32188,336.763614 -562.211917,6.267197 z"
@@ -79,14 +85,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linejoin:round"
-       x="224.44429"
-       y="80.877609"
+       x="218.89287"
+       y="-41.253738"
        id="sign1"
        role="sign"><tspan
          sodipodi:role="line"
          id="tspan1-7"
-         x="224.44429"
-         y="80.877609"
+         x="218.89287"
+         y="-41.253738"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65px;font-family:Lekton;-inkscape-font-specification:'Lekton Bold'">End of Demo</tspan></text>
   </g>
   <g
@@ -128,8 +134,8 @@
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
        id="bot2"
-       cx="67.863693"
-       cy="-139.62454"
+       cx="78.966545"
+       cy="-234.79182"
        role="bot"
        r="15"
        frequency="20"
@@ -138,8 +144,8 @@
     <circle
        style="fill:#008a00;fill-opacity:1;stroke-width:3.78;stroke-linejoin:round;stroke-dasharray:7.56, 7.56;stroke-dashoffset:0"
        id="bot2-8"
-       cx="399.30359"
-       cy="-119.4845"
+       cx="380.27014"
+       cy="-237.65054"
        role="bot"
        r="15"
        frequency="20"
@@ -149,12 +155,5 @@
   <g
      inkscape:groupmode="layer"
      id="starLayer"
-     inkscape:highlight-color="#ffff00">
-    <path
-       id="star3-6"
-       style="fill:#ffff00;stroke-width:2.726;stroke-linejoin:round;stroke-dasharray:none"
-       d="m 242.47247,-74.2224 -9.33899,-6.151 L 223.93142,-74 226.6298,-85.2051 218,-92.4035 229.00664,-93.1778 232.8752,-104 l 4.10407,10.7266 11.02072,0.51 -8.47018,7.4036 z"
-       role="star"
-       sodipodi:nodetypes="ccccccccccc" />
-  </g>
+     inkscape:highlight-color="#ffff00" />
 </svg>

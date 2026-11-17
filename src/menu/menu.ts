@@ -14,8 +14,10 @@ export class Menu {
     this.app = app
     this.continueButton = new MenuButton(this, 'continueButton', () => this.continue())
     this.newGameButton = new MenuButton(this, 'newGameButton', () => this.newGame())
+    this.continueButton.highlight()
     if (localStorage.getItem('levelId') == null) {
       this.continueButton.div.style.display = 'none'
+      this.newGameButton.highlight()
     }
     InputDevice.onBindDown('South', () => {
       this.next()
@@ -29,13 +31,11 @@ export class Menu {
   }
 
   continue(): void {
-    console.log('continue')
     this.div.style.display = 'none'
     void new Game(this.app)
   }
 
   newGame(): void {
-    console.log('new game')
     localStorage.clear()
     void new Game(this.app)
     this.div.style.display = 'none'
