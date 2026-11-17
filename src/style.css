@@ -101,8 +101,8 @@ body {
 }
 #joystickBase {
   position: relative;
-  width: calc(0.5 * (100vh - 100vmin));
-  height: calc(0.5 * (100vh - 100vmin));
+  width: calc(0.3 * (100vh - 100vmin));
+  height: calc(0.3 * (100vh - 100vmin));
   border-radius: 50%;
   background: hsl(0 0% 15%);
 }

@@ -1,4 +1,4 @@
-export const wallColor = 'hsl(0 0% 15%)'
+export const wallColor = 'hsl(0 0% 20%)'
 export const rockColor = 'hsl(0 0% 30%)'
 export const portalColor = 'hsl(0 0% 60%)'
 export const triggerColor = 'hsl(280, 100%, 60%)'

@@ -43,7 +43,7 @@ export class Player extends Agent {
     }
     let action = normalize([x, y])
     if (input.isMouseButtonDown(0)) action = normalize(input.mousePosition)
-    if (getMagnitude(input.joystick.value) > 0.1) action = input.joystick.value
+    if (getMagnitude(input.joystick.value) > 0.2) action = input.joystick.value
     this.force = mul(movePower, action)
   }
 }
